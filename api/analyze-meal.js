@@ -57,9 +57,14 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   // CORS Security: reflect authorized origin or block
   const origin = req.headers?.origin || '';
-  if (origin && (/^https?:\/\/localhost(:\d+)?$/.test(origin) ||
-    /^https?:\/\/127\.0\.0\.1(:\d+)?$/.test(origin) ||
-    /^https:\/\/[a-z0-9-]+\.trycloudflare\.com$/.test(origin))) {
+  const ALLOWED_ORIGINS = [
+    /^https?:\/\/localhost(:\d+)?$/,
+    /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
+    /^https:\/\/[a-z0-9-]+\.trycloudflare\.com$/,
+    /^https:\/\/stoke\.bond$/,
+    /^https:\/\/[a-z0-9-]+\.vercel\.app$/
+  ];
+  if (origin && ALLOWED_ORIGINS.some(r => r.test(origin))) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
   } else if (!origin) {

@@ -48,14 +48,14 @@
   <style>
     :root,
     html[data-theme="light"] {
-      --bg-app: #F5F7F3;
-      --surface-primary: rgba(255, 255, 255, 0.76);
-      --surface-secondary: rgba(240, 244, 238, 0.85);
-      --surface-elevated: rgba(255, 255, 255, 0.90);
+      --bg-app: #EBF0E8;
+      --surface-primary: rgba(255, 255, 255, 0.68);
+      --surface-secondary: rgba(235, 242, 232, 0.74);
+      --surface-elevated: rgba(255, 255, 255, 0.85);
       --text-primary: #172117;
       --text-secondary: #586356;
       --text-muted: #667064;
-      --border-divider: rgba(220, 228, 216, 0.75);
+      --border-divider: rgba(255, 255, 255, 0.75);
       --input-bg: rgba(255, 255, 255, 0.82);
       --surface-disabled: #ECEFEA;
       --text-disabled: #687164;
@@ -65,7 +65,7 @@
       --lime-pressed: #B7E64B;
       --btn-primary-bg: #237547;
       --btn-primary-text: #FFFFFF;
-      --btn-secondary-bg: rgba(238, 242, 234, 0.85);
+      --btn-secondary-bg: rgba(235, 242, 232, 0.85);
       --btn-secondary-text: #172117;
       --focus-ring: #237547;
 
@@ -89,22 +89,22 @@
       --feature-success: #237547;
       --chart-gridlines: #DDE4D8;
 
-      /* Glassmorphism System */
-      --glass-bg: rgba(255, 255, 255, 0.74);
-      --glass-bg-dense: rgba(255, 255, 255, 0.88);
-      --glass-bg-subtle: rgba(255, 255, 255, 0.55);
+      /* Glassmorphism System (Light Theme) */
+      --glass-bg: rgba(255, 255, 255, 0.68);
+      --glass-bg-dense: rgba(255, 255, 255, 0.85);
+      --glass-bg-subtle: rgba(255, 255, 255, 0.50);
       --glass-border: rgba(255, 255, 255, 0.85);
       --glass-border-subtle: rgba(220, 228, 216, 0.65);
-      --glass-blur: blur(20px) saturate(180%);
-      --glass-blur-sm: blur(12px) saturate(170%);
-      --glass-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+      --glass-blur: blur(24px) saturate(190%);
+      --glass-blur-sm: blur(14px) saturate(175%);
+      --glass-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.15) 100%);
 
-      /* Neumorphism Depth & Dual Shadow System */
-      --neu-flat: 6px 6px 16px rgba(185, 195, 180, 0.38), -6px -6px 16px rgba(255, 255, 255, 0.95);
-      --neu-raised: 10px 10px 24px rgba(180, 190, 175, 0.42), -8px -8px 20px rgba(255, 255, 255, 0.98);
-      --neu-pressed: inset 3px 3px 7px rgba(180, 190, 175, 0.45), inset -3px -3px 7px rgba(255, 255, 255, 0.95);
-      --neu-input: inset 2.5px 2.5px 5px rgba(185, 195, 180, 0.35), inset -2.5px -2.5px 5px rgba(255, 255, 255, 0.9);
-      --neu-pill-active: inset 2px 2px 5px rgba(175, 188, 170, 0.42), inset -2px -2px 5px rgba(255, 255, 255, 0.95);
+      /* Neumorphism Depth & Dual Shadow System (Light Theme) */
+      --neu-flat: 7px 7px 18px rgba(155, 170, 150, 0.35), -7px -7px 18px rgba(255, 255, 255, 0.95), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+      --neu-raised: 12px 12px 28px rgba(150, 168, 145, 0.42), -10px -10px 24px rgba(255, 255, 255, 0.98), inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+      --neu-pressed: inset 3.5px 3.5px 7px rgba(150, 168, 145, 0.45), inset -3.5px -3.5px 7px rgba(255, 255, 255, 0.95);
+      --neu-input: inset 3px 3px 6px rgba(155, 170, 150, 0.38), inset -3px -3px 6px rgba(255, 255, 255, 0.92);
+      --neu-pill-active: inset 2.5px 2.5px 5px rgba(145, 165, 140, 0.45), inset -2.5px -2.5px 5px rgba(255, 255, 255, 0.95);
 
       --shadow-subtle: var(--neu-flat);
       --shadow-card: var(--neu-flat);
@@ -122,15 +122,15 @@
     }
 
     html[data-theme="dark"] {
-      --bg-app: #0F130E;
-      --surface-primary: rgba(27, 33, 25, 0.76);
-      --surface-secondary: rgba(36, 45, 33, 0.82);
-      --surface-elevated: rgba(41, 50, 38, 0.88);
+      --bg-app: #0B0E0A;
+      --surface-primary: rgba(20, 26, 18, 0.68);
+      --surface-secondary: rgba(28, 36, 26, 0.72);
+      --surface-elevated: rgba(34, 44, 31, 0.82);
       --text-primary: #F4F7F0;
       --text-secondary: #A8B3A1;
       --text-muted: #929E8B;
-      --border-divider: rgba(53, 64, 48, 0.7);
-      --input-bg: rgba(22, 27, 20, 0.82);
+      --border-divider: rgba(217, 255, 114, 0.12);
+      --input-bg: rgba(16, 22, 15, 0.82);
       --surface-disabled: #252D22;
       --text-disabled: #929E8B;
 
@@ -139,7 +139,7 @@
       --lime-pressed: #C8F45B;
       --btn-primary-bg: #D9FF72;
       --btn-primary-text: #263A0B;
-      --btn-secondary-bg: rgba(37, 45, 34, 0.85);
+      --btn-secondary-bg: rgba(32, 40, 30, 0.85);
       --btn-secondary-text: #F4F7F0;
       --focus-ring: #D9FF72;
 
@@ -163,22 +163,22 @@
       --feature-success: #6EE7A0;
       --chart-gridlines: #354030;
 
-      /* Glassmorphism System */
-      --glass-bg: rgba(27, 33, 25, 0.74);
-      --glass-bg-dense: rgba(33, 41, 30, 0.88);
-      --glass-bg-subtle: rgba(20, 25, 18, 0.6);
-      --glass-border: rgba(217, 255, 114, 0.12);
+      /* Glassmorphism System (Dark Theme) */
+      --glass-bg: rgba(20, 26, 18, 0.68);
+      --glass-bg-dense: rgba(28, 36, 26, 0.85);
+      --glass-bg-subtle: rgba(16, 22, 15, 0.50);
+      --glass-border: rgba(217, 255, 114, 0.15);
       --glass-border-subtle: rgba(65, 78, 60, 0.5);
-      --glass-blur: blur(20px) saturate(180%);
-      --glass-blur-sm: blur(12px) saturate(170%);
-      --glass-sheen: linear-gradient(135deg, rgba(217, 255, 114, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+      --glass-blur: blur(24px) saturate(190%);
+      --glass-blur-sm: blur(14px) saturate(175%);
+      --glass-sheen: linear-gradient(135deg, rgba(217, 255, 114, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
 
-      /* Neumorphism Depth & Dual Shadow System */
-      --neu-flat: 6px 6px 18px rgba(0, 0, 0, 0.55), -5px -5px 15px rgba(45, 55, 42, 0.35);
-      --neu-raised: 10px 10px 26px rgba(0, 0, 0, 0.7), -7px -7px 20px rgba(52, 65, 48, 0.42);
-      --neu-pressed: inset 3px 3px 7px rgba(0, 0, 0, 0.65), inset -3px -3px 7px rgba(45, 55, 42, 0.35);
-      --neu-input: inset 2.5px 2.5px 5px rgba(0, 0, 0, 0.6), inset -2.5px -2.5px 5px rgba(45, 55, 42, 0.25);
-      --neu-pill-active: inset 2px 2px 5px rgba(0, 0, 0, 0.6), inset -2px -2px 5px rgba(55, 68, 50, 0.35);
+      /* Neumorphism Depth & Dual Shadow System (Dark Theme) */
+      --neu-flat: 8px 8px 22px rgba(0, 0, 0, 0.65), -6px -6px 18px rgba(36, 48, 33, 0.45), inset 0 1px 1px 0 rgba(217, 255, 114, 0.12);
+      --neu-raised: 13px 13px 30px rgba(0, 0, 0, 0.80), -8px -8px 24px rgba(42, 56, 39, 0.52), inset 0 1px 1px 0 rgba(217, 255, 114, 0.18);
+      --neu-pressed: inset 3.5px 3.5px 8px rgba(0, 0, 0, 0.75), inset -3.5px -3.5px 8px rgba(36, 48, 33, 0.38);
+      --neu-input: inset 3px 3px 6px rgba(0, 0, 0, 0.70), inset -3px -3px 6px rgba(32, 44, 29, 0.30);
+      --neu-pill-active: inset 2.5px 2.5px 6px rgba(0, 0, 0, 0.72), inset -2.5px -2.5px 6px rgba(42, 56, 39, 0.40);
 
       --shadow-subtle: var(--neu-flat);
       --shadow-card: var(--neu-flat);
@@ -235,37 +235,49 @@
       position: relative;
     }
 
-    /* Ambient Glowing Neon Orbs for Glassmorphism Depth */
+    /* Ambient Glowing Neon Orbs for Glassmorphism Depth (VisionOS / Liquid Glass) */
     body::before {
       content: "";
       position: fixed;
-      top: -12vw;
-      left: -12vw;
-      width: 55vw;
-      height: 55vw;
-      max-width: 520px;
-      max-height: 520px;
-      background: radial-gradient(circle, rgba(217, 255, 114, 0.14) 0%, rgba(35, 117, 71, 0.05) 50%, transparent 75%);
+      top: -10vw;
+      left: -10vw;
+      width: 65vw;
+      height: 65vw;
+      max-width: 600px;
+      max-height: 600px;
+      background: radial-gradient(circle, rgba(217, 255, 114, 0.26) 0%, rgba(35, 117, 71, 0.12) 45%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
       z-index: 0;
-      filter: blur(55px);
+      filter: blur(50px);
+      animation: stokeFloatOrbA 18s ease-in-out infinite alternate;
     }
 
     body::after {
       content: "";
       position: fixed;
-      bottom: 4vh;
-      right: -12vw;
-      width: 60vw;
-      height: 60vw;
-      max-width: 540px;
-      max-height: 540px;
-      background: radial-gradient(circle, rgba(112, 65, 181, 0.11) 0%, rgba(35, 117, 71, 0.04) 50%, transparent 75%);
+      bottom: 2vh;
+      right: -10vw;
+      width: 70vw;
+      height: 70vw;
+      max-width: 620px;
+      max-height: 620px;
+      background: radial-gradient(circle, rgba(112, 65, 181, 0.24) 0%, rgba(35, 117, 71, 0.10) 45%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
       z-index: 0;
-      filter: blur(65px);
+      filter: blur(60px);
+      animation: stokeFloatOrbB 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes stokeFloatOrbA {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(5vw, 7vh) scale(1.14); }
+    }
+
+    @keyframes stokeFloatOrbB {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-7vw, -5vh) scale(1.18); }
     }
 
     #root {
@@ -279,47 +291,73 @@
       background: transparent;
     }
 
+    /* ============================================================
+       UNIVERSAL GLASSMORPHISM & NEUMORPHISM ENGINE
+       Matches all primary surfaces across the entire application
+       ============================================================ */
+
+    /* 1. Universal Frosted Glassmorphism for cards, panels, headers */
+    div[style*="var(--surface-primary)"],
+    section[style*="var(--surface-primary)"],
+    header[style*="var(--surface-primary)"],
+    div[style*="var(--surface-elevated)"],
+    div[style*="var(--surface-secondary)"],
+    .glass-card,
+    .neu-card,
+    .glass-modal {
+      backdrop-filter: var(--glass-blur) !important;
+      -webkit-backdrop-filter: var(--glass-blur) !important;
+    }
+
+    /* 2. Universal Neumorphic Soft UI 3D Relieved Shadow */
+    div[style*="var(--surface-primary)"],
+    div[style*="var(--surface-elevated)"],
+    div[style*="var(--shadow-card)"],
+    div[style*="var(--shadow-subtle)"],
+    .glass-card,
+    .neu-card {
+      box-shadow: var(--neu-flat) !important;
+      border: 1px solid var(--glass-border) !important;
+    }
+
+    /* 3. Floating Hover Reaction on all cards */
+    div[style*="var(--surface-primary)"]:hover,
+    div[style*="var(--shadow-card)"]:hover,
+    .glass-card:hover,
+    .neu-card:hover {
+      box-shadow: var(--neu-raised) !important;
+      transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 4. Tactile Debossed / Inset Inputs & Search Fields */
     input,
     select,
-    textarea {
+    textarea,
+    .stoke-auth-input,
+    input[style*="var(--input-bg)"] {
       font-family: inherit;
-      background: var(--input-bg);
-      backdrop-filter: var(--glass-blur-sm);
-      -webkit-backdrop-filter: var(--glass-blur-sm);
+      background: var(--input-bg) !important;
+      backdrop-filter: var(--glass-blur-sm) !important;
+      -webkit-backdrop-filter: var(--glass-blur-sm) !important;
       color: var(--text-primary);
-      border: 1px solid var(--border-divider);
-      box-shadow: var(--neu-input);
+      border: 1px solid var(--border-divider) !important;
+      box-shadow: var(--neu-input) !important;
       font-size: 16px !important;
       touch-action: manipulation;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      border-radius: 14px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      border-radius: 14px !important;
     }
 
     input:focus,
     select:focus,
-    textarea:focus {
+    textarea:focus,
+    .stoke-auth-input:focus {
       outline: none;
       border-color: var(--focus-ring) !important;
-      box-shadow: var(--neu-input), 0 0 0 3px rgba(35, 117, 71, 0.25) !important;
+      box-shadow: var(--neu-input), 0 0 0 3.5px rgba(217, 255, 114, 0.35) !important;
     }
 
-    /* Universal Glassmorphic & Neumorphic Design Classes */
-    .glass-card,
-    .neu-card {
-      background: var(--surface-primary) !important;
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--border-divider) !important;
-      box-shadow: var(--neu-flat) !important;
-      border-radius: 20px;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .glass-card:hover,
-    .neu-card:hover {
-      box-shadow: var(--neu-raised) !important;
-    }
-
+    /* 5. Tactile Neumorphic Buttons with Physical Depression */
     .neu-btn {
       background: var(--surface-primary);
       backdrop-filter: var(--glass-blur-sm);
@@ -344,7 +382,7 @@
 
     .neu-btn:active {
       box-shadow: var(--neu-pressed) !important;
-      transform: translateY(1px) scale(0.98);
+      transform: translateY(1.5px) scale(0.97);
     }
 
     .neu-pill-active {
@@ -356,18 +394,62 @@
       background: var(--surface-primary) !important;
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--border-divider) !important;
+      border: 1px solid var(--glass-border) !important;
       box-shadow: var(--neu-raised), 0 24px 64px rgba(0, 0, 0, 0.35) !important;
       border-radius: 28px !important;
     }
 
     .stoke-btn-primary {
-      background: var(--btn-primary-bg);
-      color: var(--btn-primary-text);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: var(--btn-primary-bg) !important;
+      color: var(--btn-primary-text) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
       border-radius: 14px;
       font-weight: 700;
       transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background 0.18s ease, box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--neu-flat) !important;
+    }
+
+    .stoke-btn-primary:hover {
+      background: var(--lime-hover) !important;
+      color: #263A0B !important;
+      box-shadow: var(--neu-raised) !important;
+      transform: translateY(-1px);
+    }
+
+    html[data-theme="light"] .stoke-btn-primary:hover {
+      background: #446814 !important;
+      color: #FFFFFF !important;
+      box-shadow: var(--neu-raised) !important;
+      transform: translateY(-1px);
+    }
+
+    .stoke-btn-primary:active {
+      transform: translateY(1.5px) scale(0.97) !important;
+      box-shadow: var(--neu-pressed) !important;
+      opacity: 0.95;
+    }
+
+    .stoke-btn-secondary {
+      background: var(--surface-primary) !important;
+      backdrop-filter: var(--glass-blur-sm) !important;
+      -webkit-backdrop-filter: var(--glass-blur-sm) !important;
+      color: var(--text-primary) !important;
+      border: 1px solid var(--border-divider) !important;
+      border-radius: 14px;
+      font-weight: 600;
+      box-shadow: var(--neu-flat) !important;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background 0.18s ease, box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .stoke-btn-secondary:hover {
+      box-shadow: var(--neu-raised) !important;
+      transform: translateY(-1px);
+    }
+
+    .stoke-btn-secondary:active {
+      transform: translateY(1.5px) scale(0.97) !important;
+      box-shadow: var(--neu-pressed) !important;
+    }
       box-shadow: var(--neu-flat);
     }
 

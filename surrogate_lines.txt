@@ -1,0 +1,148 @@
+﻿L748: {[["veg", "🟢 Veg"], ["nonveg", "🟤 Non-veg"]].map(([val, label]) => {
+L1174: <button onClick={startScan} style={actionBtnStyle("#111111", "#FFFFFF")}>📷 Scan</button>
+L1175: <button onClick={startGallery} style={actionBtnStyle(TOKENS.surface2, TOKENS.text)}>🖼️ Gallery</button>
+L1176: <button onClick={() => setMode("search")} style={actionBtnStyle(TOKENS.surface2, TOKENS.text)}>🔎 Search</button>
+L2095: coachTip = "Rest day today 🧘 Focus on active recovery, light stretching, and hitting your hydration goal.";
+L2097: coachTip = `Workout crushed! 💪 ${completedCount}/${workoutDay.exercises.length} exercises logged. Great effort!`;
+L2133: <span style={{ fontSize: 11 }}>🔥</span>
+L2188: <span style={{ fontSize: 18 }}>📷</span>
+L2207: <span style={{ fontSize: 18 }}>🏋️</span>
+L2226: <span style={{ fontSize: 18 }}>🏃</span>
+L2245: <span style={{ fontSize: 18 }}>💧</span>
+L2303: <span style={{ fontSize: 16 }}>💧</span>
+L2345: <IconBadge emoji="🏋️" bg="rgba(0,0,0,0.12)" />
+L2362: <IconBadge emoji="🏃" bg="rgba(37, 107, 253,0.16)" />
+L2418: 🔋
+L2518: <div style={{ fontSize: 13, color: TOKENS.muted, fontWeight: 500 }}>💧 Water</div>
+L3046: label: "🌸 Lily (Super Cute & Sweet)",
+L3050: avatar: "🌸",
+L3051: preview: "Yay! Hi there! I'm Lily! Let's do our best and have lots of fun on our workout! 💖✨",
+L3053: splitMsg: (km, pM, pS, spd, isBike) => isBike ? `Woohoo! ${km} kilometers conquered! You're flying at ${spd.toFixed(1)} km an hour! 🎉` : `Yay! ${km} whole kilometer done! You're doing amazing, keeping pace at ${pM} minutes and ${pS} seconds! 💖`,
+L3054: pauseMsg: "Taking a cute little breather! Press resume when you're ready! 🌸",
+L3059: return `Good try! You logged ${dist.toFixed(2)} kilometers. Every step counts, but don't stop here! Next time, let's push a little further and crush our full goal together! I believe in you, keep going! 💖💪`;
+L3062: return `OMG, incredible! Massive congratulations! You conquered ${dist.toFixed(2)} kilometers and over ${steps ? steps.toLocaleString() : 'thousands of'} steps! You're an unstoppable superstar, I'm so proud of you! 🎉🌟💖`;
+L3065: return `Woohoo! Congratulations! You completed ${dist.toFixed(2)} kilometers and ${steps ? steps.toLocaleString() : ''} steps! You pushed hard and crushed your workout today! Superstar effort! 🎉🌟`;
+L3079: splitMsg: (km, pM, pS, spd, isBike) => isBike ? `Awesome job! That's ${km} km completed on the bike! Keep the pedals spinning!` : `Great rhythm! ${km} kilometer finished at ${pM} minutes and ${pS} seconds! Keep it up! 🌟`,
+L3084: return `Nice warm up! You logged ${dist.toFixed(2)} km. Don't give up early next time — let's aim for more steps and a longer run! You've got so much potential! ✨💪`;
+L3086: return `Congratulations! You smashed ${dist.toFixed(2)} kilometers and ${steps ? steps.toLocaleString() : ''} steps! Incredible stamina and energy, keep shining! 🎉🔥`;
+L3183: icon: "🏃",
+L3190: reward: "🥇 Gold Finisher Badge",
+L3196: icon: "🚴",
+L3203: reward: "👑 Century Rider Crown",
+L3209: icon: "🚶",
+L3216: reward: "🏆 Master Walker Trophy",
+L3222: { rank: 1, name: "Alex Chen", country: "🇺🇸 New York, USA", handle: "@alex_runner", dist: 84.2, badge: "👑", activity: "🏃 8.4 km Central Park Loop" },
+L3223: { rank: 2, name: "Sarah Jenkins", country: "🇬🇧 London, UK", handle: "@sarah_trail", dist: 76.5, badge: "🥈", activity: "🚴 24.1 km along Thames" },
+L3224: { rank: 3, name: "Marcus Vance", country: "🇦🇺 Sydney, Australia", handle: "@marcus_ride", dist: 69.8, badge: "🥉", activity: "🏃 12.0 km Harbour Run" },
+L3225: { rank: 4, name: "Mohd Numan (You)", country: "🌍 Global Athlete", handle: "@mohd_numan", dist: 58.4, isUser: true, badge: "⚡", activity: "🏃 10.0 km logged" },
+L3226: { rank: 5, name: "Kenji Sato", country: "🇯🇵 Tokyo, Japan", handle: "@kenji_tokyo", dist: 55.1, badge: "🔥", activity: "🏃 5.0 km Imperial Palace" },
+L3227: { rank: 6, name: "Fatima Al-Maktoum", country: "🇦🇪 Dubai, UAE", handle: "@fatima_dxb", dist: 53.8, badge: "⭐", activity: "🏃 7.2 km Dubai Marina" },
+L3228: { rank: 7, name: "Lucas Dubois", country: "🇫🇷 Paris, France", handle: "@lucas_run", dist: 49.2, badge: "⚡", activity: "🏃 6.4 km Seine River" },
+L3229: { rank: 8, name: "David Kim", country: "🇰🇷 Seoul, S. Korea", handle: "@david_k", dist: 47.9, badge: "⭐", activity: "🏃 5.2 km Han River Sprint" },
+L3318: 🗺️ Street Map
+L3364: { key: "custom", label: "📸 Upload Photo" },
+L3365: { key: "dark", label: "🌑 OLED Black" },
+L3526: ctx.fillText("👟 STEPS", col2X, gridY + 34);
+L3536: ctx.fillText("🔥 CALORIES", col1X, gridY + 104);
+L3570: ctx.fillText("📍 LIVE GPS ROUTE MAP", mapX + 16, mapY + 26);
+L3618: // Start Marker 🟢
+L3626: // Finish / Current Live Marker 🟡
+L3731: { id: "my_gps", name: "My Live GPS Location", country: "Worldwide Auto-Detect", lat: null, lng: null, flag: "📍", desc: "Auto-detect your real GPS coordinates anywhere" },
+L3732: { id: "dubai", name: "Dubai Marina & Palm", country: "United Arab Emirates", lat: 25.0772, lng: 55.1333, flag: "🇦🇪", desc: "Ultra-modern illuminated waterfront promenade" },
+L3733: { id: "nyc", name: "Central Park Loop", country: "New York, USA", lat: 40.785091, lng: -73.968285, flag: "🇺🇸", desc: "World-famous reservoir & rolling park hills" },
+L3734: { id: "london", name: "Hyde Park & Thames", country: "London, UK", lat: 51.507268, lng: -0.165730, flag: "🇬🇧", desc: "Historic river trail and royal palace grounds" },
+L3735: { id: "singapore", name: "Marina Bay Waterfront", country: "Singapore", lat: 1.283333, lng: 103.860667, flag: "🇸🇬", desc: "Iconic illuminated tropical bay circuit" },
+L3736: { id: "tokyo", name: "Imperial Palace Circuit", country: "Tokyo, Japan", lat: 35.685175, lng: 139.752799, flag: "🇯🇵", desc: "Japan's most iconic 5.0km runner circuit" },
+L3737: { id: "paris", name: "Seine River & Eiffel", country: "Paris, France", lat: 48.858370, lng: 2.294481, flag: "🇫🇷", desc: "Romantic riverside boulevards and monuments" },
+L3738: { id: "sydney", name: "Opera House & Harbour", country: "Sydney, Australia", lat: -33.856784, lng: 151.215297, flag: "🇦🇺", desc: "Coastal ocean breeze along the harbour" },
+L3739: { id: "berlin", name: "Tiergarten Park", country: "Berlin, Germany", lat: 52.5145, lng: 13.3501, flag: "🇩🇪", desc: "Expansive shaded marathon capital parkway" },
+L3740: { id: "hyderabad", name: "Hussain Sagar Loop", country: "Hyderabad, India", lat: 17.4239, lng: 78.4738, flag: "🇮🇳", desc: "Scenic Necklace Road lakefront running track" },
+L3741: { id: "vikarabad", name: "Ananthagiri Hills Trail", country: "Vikarabad, Telangana", lat: 17.3345, lng: 77.9012, flag: "🇮🇳", desc: "Lush forest trails & scenic rolling terrain" },
+L4068: flag: "📍",
+L4108: flag: "📍",
+L4165: flag: "🌍",
+L4530: text: `Crushed a ${distanceKm.toFixed(2)} km ${activityType}! ⚡🔥`,
+L4564: <span style={{ fontSize: 20 }}>🎀</span>
+L4647: <span style={{ fontSize: 24 }}>🌍</span>
+L4684: <span style={{ fontSize: 18 }}>📍</span>
+L4712: 📍
+L4845: <span>{selectedCity?.flag || "🌍"}</span>
+L4886: {simulating ? "⚡ Sim ON" : "📍 Real GPS"}
+L4897: { key: "challenges", label: "🏆 Challenges" },
+L4898: { key: "leaderboard", label: "👑 Leaderboard" },
+L4956: {mapTileType === "dark" ? "🗺️" : mapTileType === "satellite" ? "🛰️" : "⛰️"}
+L4970: 🌍
+L4981: 🎯
+L5052: <div style={{ fontSize: 10, color: TOKENS.mutedFaint, textTransform: "uppercase", fontWeight: 800 }}>{activityType === "walk" ? "👟 STEPS" : activityType === "bike" ? "SPEED" : "AVG PACE"}</div>
+L5214: <span>🏁</span>
+L5230: <span style={{ fontSize: 28 }}>{selectedCity?.flag || "🌤️"}</span>
+L5240: Change City 🌍
+L5252: View All 10+ 🌍
+L5381: <span>🗺️ MAP VIEW</span>
+L5397: {activityType === "walk" ? "👟 LIVE STEPS" : "DISTANCE (KILOMETERS)"}
+L5464: 🏁 FINISH & SAVE
+L5527: <span style={{ fontSize: 24, marginBottom: 2 }}>📸</span>
+L5550: Change Map Type 🗺️
+L5594: <div style={{ fontSize: 72, marginBottom: 16, animation: "bounce 1s infinite" }}>👟</div>
+L5747: <span>👥 {c.participants.toLocaleString()} athletes</span>
+L5801: 🌍 Global
+L5807: 🏙️ Regional
+L5816: <div style={{ fontSize: 20, marginBottom: 4 }}>🥈</div>
+L5823: <div style={{ fontSize: 24, marginBottom: 4 }}>👑</div>
+L5830: <div style={{ fontSize: 20, marginBottom: 4 }}>🥉</div>
+L5857: {isCurrentUser ? "M" : u.badge || "🏃"}
+L5958: <span>📷 Upload Photo</span>
+L5966: 📲 Share / Save
+L6019: content: `**${timeGreet}, ${athleteName}!** 👋 I am your **Coach** — your conversational nutritionist, workout architect, and performance guide.\n\nYou have **${remCal} kcal** and **${remP}g protein** remaining today toward your ${goals ? goals.calories : 2450} kcal target.\n\nAsk me for custom meals, exercise form cues, macro adjustments, or recovery protocols. What are we optimizing right now?`,
+L6323: content: `Got it! Here is the revised formulation for **${targetOption}**, calibrated strictly under **480 calories** while keeping protein above **34g**:\n\n### 🥗 Adjusted Tawa Paneer & Soya Scramble (465 kcal)\nWe reduced the cooking oil from 1 tsp to light olive oil spray, used 150g Low-Fat Paneer combined with 25g boiled Soya Chunks for higher protein density, and swapped 2 rotis for 1 multigrain roti plus a side of crunchy cucumber.\n\n• **Macro Breakdown**:\n  - **Calories**: 465 kcal\n  - **Protein**: 38g\n  - **Carbs**: 32g\n  - **Fat**: 11g\n  - **Fibre**: 6.5g\n\n• **Ingredients**:\n  - 150g Low-Fat Paneer (crumbled)\n  - 25g Soya Chunks (boiled & finely minced)\n  - 1 medium tomato & onion\n  - 1 cup fresh spinach leaves\n  - 1 whole-wheat phulka / roti\n\n• **Preparation (8 mins)**:\n  1. Mist pan with light oil spray; sauté cumin, diced onion, and green chilies.\n  2. Stir in tomatoes, turmeric, and cumin powder.\n  3. Fold in the paneer and soya chunk mince with spinach. Toss for 3 minutes.\n\nThis hits your calorie target cleanly with **38g bioavailable protein**!`,
+L6351: content: `### 📊 Daily Athlete Telemetry Analysis for ${athleteName}\n\nHere is your real-time nutrition performance for today:\n\n| Metric | Consumed | Target | Remaining | Adherence |\n| :--- | :--- | :--- | :--- | :--- |\n| **Calories** | ${consumedCal} kcal | ${targetCal} kcal | **${remCal} kcal** | ${calPercent}% |\n| **Protein** | ${consumedP}g | ${targetP}g | **${remP}g** | ${proteinPercent}% |\n| **Carbs** | ${consumedC}g | ${goals ? goals.carbs : 250}g | **${remC}g** | ${Math.round((consumedC / (goals ? goals.carbs : 250)) * 100)}% |\n| **Fat** | ${consumedF}g | ${goals ? goals.fat : 70}g | **${remF}g** | ${Math.round((consumedF / (goals ? goals.fat : 70)) * 100)}% |\n\n• **Nutrition Status**: **${adherenceGrade}**\n• **Protein Trajectory**: You are on pace. Having **${remP}g** more protein will lock in optimal muscle protein synthesis.\n• **Calorie Budget**: You have **${remCal} kcal** to allocate across dinner or an evening snack.\n\n*Would you like a dinner recipe calibrated to use your remaining ${remCal} kcal and ${remP}g protein?*`,
+L6364: content: `You have **${remCal} kcal**, **${remP}g protein**, **${remC}g carbs**, and **${remF}g fat** remaining today.\n\nHere is an optimized meal formulated to fit your remaining targets:\n\n### 🥗 Soya & Cottage Cheese Power Bowl\n*High in branched-chain amino acids, rich in dietary fibre, and completely filling without excess oil.*\n\n• **Macros**: **${Math.min(remCal, 540)} kcal** · **${Math.min(remP, 42)}g Protein** · **${Math.min(remC, 45)}g Carbs** · **${Math.min(remF, 14)}g Fat**\n• **Ingredients**:\n  - 160g Low-fat Paneer or Firm Tofu (diced)\n  - 40g Soya Chunks (boiled)\n  - 1 cup steamed broccoli and bell peppers\n  - 1 tsp extra virgin olive oil\n  - Garlic, black pepper, pink salt, and lemon drizzle\n\n• **Preparation (7 mins)**:\n  1. Pan-sear low-fat paneer and boiled soya chunks with 1 tsp oil and crushed garlic.\n  2. Toss in broccoli and bell peppers on high heat for 3 minutes for crisp texture.\n  3. Finish with cracked black pepper and freshly squeezed lemon juice.\n\n*Tap **Add to Nutrition** below to log this directly to your diary!*`,
+L6386: content: `### 📋 Daily High-Protein Meal Architecture for ${athleteName}\nTarget: **${goals ? goals.calories : 2450} kcal** · **${goals ? goals.protein : 140}g Protein**\n\n• **Breakfast (450 kcal · 35g P)**:\n  - Greek Yogurt & Whey Oatmeal Bowl or 2 Paneer Moong Dal Chillas\n\n• **Lunch (650 kcal · 45g P)**:\n  - Soya Chunks Curry + 2 Whole-wheat Phulkas + 1 cup Dal & Cucumber Salad\n\n• **Snack (250 kcal · 20g P)**:\n  - Roasted Chana with boiled peanuts or 1 scoop Whey Isolate\n\n• **Dinner (550 kcal · 40g P)**:\n  - Grilled Cottage Cheese Steak with sautéed bell peppers & quinoa\n\n*Total Planned*: ~1,900 kcal and ~140g bioavailable protein. Tap below to log your next meal!`,
+L6410: content: `Here are **2 high-protein vegetarian breakfast choices** designed for sustained morning energy:\n\n### 🥞 Option 1: High-Protein Moong Dal & Paneer Chilla (420 kcal)\n*Savory spiced golden lentil crepes stuffed with cottage cheese.*\n• **Macros**: **420 kcal** · **32g Protein** · **44g Carbs** · **10g Fat** · **8g Fibre**\n• **Ingredients**: ½ cup yellow moong dal (soaked & blended with ginger & green chili), 120g low-fat paneer (crumbled), chopped coriander, pinch of hing and cumin.\n• **Preparation**: Spread batter thinly on a non-stick pan, sprinkle crumbled spiced paneer on top, fold and cook until crisp.\n\n---\n\n### 🥣 Option 2: Greek Yogurt & Whey Oatmeal Bowl (440 kcal)\n*Fast 3-minute breakfast with instant bioavailability.*\n• **Macros**: **440 kcal** · **38g Protein** · **48g Carbs** · **8g Fat** · **7g Fibre**\n• **Ingredients**: 50g rolled oats, 150g Greek yogurt, 1 scoop whey / plant protein, ½ sliced banana, chia seeds.\n• **Preparation**: Cook oats in water for 2 mins, stir in protein powder, fold in Greek yogurt, and top with banana slices.`,
+L6430: content: `Here are **2 high-protein vegetarian recipes** packed with bioavailable amino acids without meat:\n\n### 🥗 Option 1: Tawa Paneer Bhurji with Roti (460 kcal)\n• **Macros**: **460 kcal** · **35g Protein** · **36g Carbs** · **14g Fat** · **7g Fibre**\n• **Ingredients**: 180g Low-Fat Paneer (crumbled), 1 tomato, 1 onion, 1 cup spinach, 2 whole-wheat rotis.\n• **Preparation**: Sauté cumin, onion, and tomatoes in 1 tsp olive oil. Fold in spinach and crumbled paneer. Toss for 3 minutes on high heat. Serve with rotis.\n\n---\n\n### 🌱 Option 2: Soya Chunks & Green Peas Masala (390 kcal)\n• **Macros**: **390 kcal** · **38g Protein** · **38g Carbs** · **6g Fat** · **11g Fibre**\n• **Ingredients**: 60g dry soya chunks (boiled & squeezed), ½ cup peas, ginger-garlic paste, light tomato gravy.\n• **Preparation**: Boil soya chunks, rinse, and squeeze dry. Sauté in aromatic tomato-onion masala with peas for 6 minutes.`,
+L6458: content: `### 🏋️ ${title} Protocol\n\nHere is your structured training plan built with progressive overload and optimal rest intervals:\n\n| Exercise | Sets | Rep Range | Rest | RPE |\n| :--- | :--- | :--- | :--- | :--- |\n| **Barbell Incline Bench Press** | 4 | 8 – 10 reps | 90s | 8.5 |\n| **Dumbbell Flat Press** | 3 | 10 – 12 reps | 75s | 8.0 |\n| **Weighted Dips / Cable Flyes** | 3 | 12 – 15 reps | 60s | 9.0 |\n| **Overhead Rope Tricep Extension** | 3 | 12 – 15 reps | 60s | 8.5 |\n| **Cross-Body Cable Pushdown** | 3 | 15 reps | 45s | 9.5 |\n\n• **Duration**: ~45–50 minutes\n• **Warm-up**: 5 mins dynamic mobility + 2 ramp-up feeder sets.\n• **Form Cue**: Control the eccentric (lowering) phase for 2.5 seconds on every repetition to maximize muscle micro-tears.\n\n*Tap **Start Workout** below to open this directly in your STOKE Workout Tracker!*`,
+L6481: content: `### 💊 Sports Nutrition & Supplement Protocol\n\n• **Creatine Monohydrate (5g daily)**:\n  - **Timing**: Take 5g post-workout or in the morning with a carbohydrate source (enhances cellular uptake by ~20% via insulin spike).\n  - **Loading Phase**: Not mandatory. Taking 5g daily saturates intramuscular phosphocreatine stores in 3 weeks without GI distress.\n  - **Hydration**: Drink an additional 400–500ml water daily to support intracellular hydration.\n\n• **Whey Protein (25–30g)**:\n  - Fast-digesting source with ~2.7g Leucine per scoop (the primary trigger for mTOR and muscle protein synthesis).\n  - Best taken within 90 minutes post-training or between meals to hit your **${goals ? goals.protein : 140}g** daily target.\n\n• **Caffeine & Pre-Workout**:\n  - 3–5mg per kg bodyweight taken 35–45 minutes pre-workout improves maximal voluntary contraction and delays central nervous system fatigue. Avoid within 7 hours of bedtime.`,
+L6493: content: `### 🎯 Coaching Recommendations for ${athleteName}\n\nBased on your active **${userGoal}** phase, current weight of **${userWeight} kg**, and **${remCal} kcal remaining today**:\n\n1. **Nutrition Strategy**: Ensure your next meal provides at least **${Math.min(remP, 35)}g protein** to maintain steady muscle protein synthesis.\n2. **Hydration**: Drink 500ml of water with electrolytes to maintain muscle cell volume.\n3. **Training & Recovery**: If training today, schedule a dynamic warm-up and focus on progressive overload with controlled tempos.\n\n*Feel free to ask for specific meal recipes, macro swaps, or workout adjustments!*`,
+L6735: <span>🕒</span>
+L6841: <span style={{ fontSize: 13, color: active ? BLUE_LIGHT : "rgba(255,255,255,0.4)" }}>💬</span>
+L6989: <span style={{ fontSize: 16 }}>🏋️</span>
+L7049: <span>📋</span> Copy
+L7056: <span>🔊</span> Read
+L7064: <span>🔄</span> Regenerate
+L7215: 🎙️
+L7885: <span>🔐</span> Switch Account
+L7905: <span style={{ display: "inline-block", transform: isSyncing ? "rotate(360deg)" : "none", transition: isSyncing ? "transform 0.8s ease" : "none" }}>🔄</span>
+L7919: <div className="prof-telemetry-val" style={{ color: AMBER }}>{stepsData.steps.toLocaleString()} <span style={{ fontSize: 10 }}>👟</span></div>
+L7998: 👑
+L8019: { id: "profile_login", label: "Profile Login & Account Management", icon: "🔐", sub: `Active: ${username} · 4 Linked Accounts`, badge: "Active", badgeColor: LIME },
+L8020: { id: "profile", label: "My Profile & Biometrics", icon: "👤", sub: `${profile.name || "Mohd Numan"} · ${profile.weightKg || 70}kg · ${profile.heightCm || 167}cm` },
+L8021: { id: "weight", label: "Weight & Body Measurements", icon: "📊", sub: `Current: ${profile.weightKg || 70} kg · ${weightLogs.length} weigh-ins logged` },
+L8022: { id: "goals", label: "Target Goals & Strategy", icon: "🎯", sub: `${profile.goalType === "cut" ? "Fat Loss Cut" : profile.goalType === "gain" ? "Hypertrophy Bulk" : "Maintenance"} · ${goals.calories} kcal` },
+L8057: { id: "sleep", label: "Sleep & Recovery Quality", icon: "🌙", sub: `${sleepData.hours} hrs · ${sleepData.recoveryScore}% Recovery Score (Optimal)` },
+L8058: { id: "steps", label: "Daily Steps & Movement", icon: "👟", sub: `${stepsData.steps.toLocaleString()} steps · ${Math.round((stepsData.steps / stepsData.goal) * 100)}% of ${stepsData.goal.toLocaleString()} target` },
+L8059: { id: "routines", label: "Workout Routines & Splits", icon: "🏋️", sub: "Classic Split (4 days / week active)", nav: "workout" },
+L8060: { id: "nutrition", label: "Nutrition & Recipe Discovery", icon: "🥗", sub: "Browse high-protein meal templates", nav: "nutrition" },
+L8093: icon: "📱",
+L8111: icon: "🔒",
+L8181: {activeModal === "profile_login" && "🔐"}
+L8182: {activeModal === "profile" && "👤"}
+L8183: {activeModal === "weight" && "📊"}
+L8184: {activeModal === "goals" && "🎯"}
+L8186: {activeModal === "sleep" && "🌙"}
+L8187: {activeModal === "steps" && "👟"}
+L8188: {activeModal === "devices" && "📱"}
+L8190: {activeModal === "premium" && "👑"}
+L8192: {activeModal === "privacy" && "🔒"}
+L8323: 🚪 Sign Out of STOKE
+L8689: ? (fastElapsed.hours >= 16 ? "🔥 Deep Autophagy & Cellular Renewal Active" : fastElapsed.hours >= 12 ? "⚡ Peak Fat Oxidation & Ketosis" : "✓ Blood Glucose & Insulin Declining")
+L8728: {fasting.isFasting ? "🛑 Stop & Log Fast" : "▶ Start Fasting Timer"}
+L8860: { key: "appleHealth", name: "Apple Health", desc: "Syncs steps, workouts, heart rate & sleep", icon: "🍎" },
+L8861: { key: "googleFit", name: "Google Fit", desc: "Syncs daily active minutes & distance", icon: "🌐" },
+L8863: { key: "strava", name: "Strava", desc: "Auto-exports outdoor running splits", icon: "🏃" },
+L9047: <span style={{ color: LIME, fontSize: 16 }}>🔒</span>
+L9088: <div style={{ fontSize: 44, marginBottom: 12 }}>👑</div>
+L9112: triggerToast("👑 STOKE Pro Elite Pass unlocked for your account!");
+L10499: {[["🎯 Goal","2,400","#fff"],["🥗 Food","550","#2ED4BF"],["⚡ Exercise","400",LIME]].map(([l,v,c],i)=>(
+L10509: {[["👟","Steps","6,342","63%",LIME],["🔥","Workout","400 cal","42m","rgba(255,255,255,0.35)"]].map(([ic,l,v,s,sc],i)=>(
+L10541: <div style={{ background:"rgba(37, 107, 253,0.12)", color:"#256BFD", fontSize:10, fontWeight:900, padding:"3px 8px", borderRadius:6, letterSpacing:0.5 }}>🔥 7-DAY</div>
+L10570: <span style={{ background:"rgba(255,138,61,0.12)", color:"#FF8A3D", border:"1px solid rgba(255,138,61,0.25)", borderRadius:999, padding:"4px 12px", fontSize:11, fontWeight:800, letterSpacing:0.8, display:"inline-flex", alignItems:"center", gap:6, alignSelf:"flex-start" }}>🥗 MINDFUL FUEL</span>

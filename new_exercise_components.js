@@ -1,0 +1,790 @@
+/* ============================================================
+   STOKE WORKOUT & EXERCISE SECTION - DYNAMIC YOUTUBE SHORTS SYSTEM
+   For every exercise in ALL workout programs:
+   - Dynamic search: `${exercise.name} exercise shorts`
+   - Opens YouTube Shorts in a new tab without placeholder/fake video
+   - Preserves workout progress and state when returning to the app
+   - Retains dark UI and red/orange YouTube styling
+   ============================================================ */
+
+function ExerciseDetailModal({
+  ex,
+  exerciseIndex = 0,
+  allExercises = [],
+  isHomeWorkout,
+  onClose,
+  onNavigateExercise,
+  onLogSet,
+  onToggleComplete,
+  isCompleted
+}) {
+  const [loggedNotification, setLoggedNotification] = useState(false);
+
+  // Retrieve biomechanical details from database if available
+  const ytData = (typeof window !== "undefined" && window.getExerciseYouTubeData)
+    ? window.getExerciseYouTubeData(ex.name)
+    : null;
+
+  const exerciseName = ex.name || "Exercise";
+  const targetMuscle = (ytData && ytData.muscle) || ex.targetMuscle || "Primary Target Muscle";
+  const secondaryMuscle = (ytData && ytData.secondary) || "Supporting Stabilizers";
+  const channelName = (ytData && ytData.channel) || "Verified Fitness Form Guide";
+
+  // Dynamic YouTube Shorts search URL: `${exercise.name} exercise shorts`
+  const youtubeShortsUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(exerciseName + " exercise shorts")}`;
+
+  const steps = (ytData && ytData.steps && ytData.steps.length > 0)
+    ? ytData.steps
+    : [
+        `Assume proper setup position for ${exerciseName} with a neutral spine and engaged core.`,
+        "Execute the repetition through the complete range of motion with controlled tempo.",
+        "Squeeze the target muscle firmly at peak contraction for one second.",
+        "Lower smoothly along the same path under full eccentric control."
+      ];
+
+  const tips = (ytData && ytData.tips && ytData.tips.length > 0)
+    ? ytData.tips
+    : [
+        "Breathe rhythmically: exhale during exertion, inhale during lowering.",
+        "Prioritize strict form over heavy resistance to prevent joint strain.",
+        ex.tips || "Maintain core tension and joint alignment throughout every repetition."
+      ];
+
+  const hasPrev = exerciseIndex > 0;
+  const hasNext = exerciseIndex < allExercises.length - 1;
+
+  const handleStartWorkoutOrLog = () => {
+    if (onLogSet) onLogSet(ex.name);
+    if (onToggleComplete && !isCompleted) onToggleComplete(ex.name);
+    setLoggedNotification(true);
+    setTimeout(() => setLoggedNotification(false), 2200);
+  };
+
+  return (
+    <div style={{
+      position: "fixed",
+      inset: 0,
+      zIndex: 99999,
+      background: "rgba(38, 53, 74, 0.45)",
+      backdropFilter: "blur(20px)",
+      WebkitBackdropFilter: "blur(20px)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 16,
+      boxSizing: "border-box"
+    }}>
+      <div style={{
+        background: "#14171F",
+        border: "1.5px solid rgba(54, 120, 245, 0.4)",
+        borderRadius: 22,
+        maxWidth: 460,
+        width: "100%",
+        padding: "20px 22px",
+        boxShadow: "0 24px 60px rgba(0,0,0,0.95), 0 0 30px rgba(54,120,245,0.2)",
+        position: "relative",
+        maxHeight: "92vh",
+        overflowY: "auto"
+      }}>
+        {/* Modal Header */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+              <span style={{
+                fontSize: 10,
+                fontWeight: 900,
+                background: isHomeWorkout ? "rgba(46,212,191,0.18)" : "rgba(54,120,245,0.18)",
+                color: isHomeWorkout ? "#2ED4BF" : "#3B82F6",
+                padding: "3px 8px",
+                borderRadius: 999,
+                letterSpacing: 0.5,
+                textTransform: "uppercase"
+              }}>
+                {isHomeWorkout ? "Home Bodyweight (No Equipment)" : "Exercise Guide"}
+              </span>
+              <span style={{ fontSize: 10.5, fontWeight: 800, color: "rgba(255,255,255,0.5)" }}>
+                Exercise {exerciseIndex + 1} of {allExercises.length || 1}
+              </span>
+            </div>
+            <h2 style={{ margin: "5px 0 0", fontSize: 22, fontWeight: 900, color: "#FFFFFF", letterSpacing: -0.4 }}>
+              {exerciseName}
+            </h2>
+          </div>
+
+          <button
+            onClick={onClose}
+            style={{
+              background: "rgba(255,255,255,0.08)",
+              border: "none",
+              color: "#FFFFFF",
+              width: 32,
+              height: 32,
+              borderRadius: "50%",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+            aria-label="Close"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        {/* 1. Dynamic YouTube Shorts Showcase (No fake or placeholder video) */}
+        <div style={{
+          background: "#EAF2FF",
+          border: "1.5px solid rgba(255, 30, 0, 0.45)",
+          borderRadius: 16,
+          padding: "16px 18px",
+          marginBottom: 16,
+          boxShadow: "0 10px 30px rgba(0,0,0,0.7), 0 0 20px rgba(255,0,0,0.12)"
+        }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              {/* Official YouTube Red Icon */}
+              <div style={{
+                background: "#FF0000",
+                width: 28,
+                height: 20,
+                borderRadius: 6,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 0 12px rgba(255,0,0,0.6)"
+              }}>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="#FFFFFF">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+              <div>
+                <span style={{ fontSize: 13, fontWeight: 900, color: "#FFFFFF", letterSpacing: 0.2 }}>YouTube Shorts Tutorial</span>
+                <span style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", marginLeft: 6 }}>· Form & Technique</span>
+              </div>
+            </div>
+            <span style={{ fontSize: 10, fontWeight: 800, color: "#FF4D4D", background: "rgba(255,0,0,0.15)", padding: "3px 8px", borderRadius: 999, letterSpacing: 0.3 }}>
+              Shorts Guide
+            </span>
+          </div>
+
+          <p style={{ margin: "0 0 12px", fontSize: 12, color: "rgba(255,255,255,0.7)", lineHeight: 1.45 }}>
+            Watch fast, mobile-friendly tutorial Shorts demonstrating proper setup, range of motion, and injury prevention for <strong style={{ color: "#FFFFFF" }}>{exerciseName}</strong>.
+          </p>
+
+          {/* Primary Action Button: Watch on YouTube Shorts ↗ */}
+          <a
+            href={youtubeShortsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="mat-ripple"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              width: "100%",
+              boxSizing: "border-box",
+              background: "linear-gradient(135deg, #FF1E00 0%, #D40000 100%)",
+              border: "1px solid rgba(255,100,80,0.4)",
+              borderRadius: 12,
+              padding: "12px 16px",
+              color: "#FFFFFF",
+              fontSize: 13.5,
+              fontWeight: 900,
+              cursor: "pointer",
+              textDecoration: "none",
+              boxShadow: "0 6px 20px rgba(255,0,0,0.4)",
+              transition: "transform 0.15s ease"
+            }}
+          >
+            <div style={{ width: 18, height: 14, background: "#14171F", borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="#FF0000">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            </div>
+            <span>▶ Watch on YouTube Shorts ↗</span>
+          </a>
+        </div>
+
+        {/* 2. Sets x Reps / Duration & Rest Time Cards */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 8,
+          marginBottom: 12
+        }}>
+          <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "10px 12px" }}>
+            <div style={{ fontSize: 10, color: "rgba(255,255,255,0.45)", fontWeight: 800 }}>SETS × REPS / DURATION</div>
+            <div style={{ fontSize: 14.5, fontWeight: 900, color: "#FFFFFF", marginTop: 3 }}>
+              {ex.targetSets} Sets × {ex.targetReps || ex.targetDuration || 12} {ex.isDuration ? "sec hold" : "reps"}
+            </div>
+          </div>
+
+          <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "10px 12px" }}>
+            <div style={{ fontSize: 10, color: "rgba(255,255,255,0.45)", fontWeight: 800 }}>REST TIME</div>
+            <div style={{ fontSize: 14.5, fontWeight: 900, color: "#2ED4BF", marginTop: 3, display: "flex", alignItems: "center", gap: 5 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span>{ex.restTime || "45s"}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. Target Muscle Card */}
+        <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "10px 12px", marginBottom: 14 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4, flexWrap: "wrap" }}>
+            <span style={{ fontSize: 10, color: "rgba(255,255,255,0.45)", fontWeight: 800 }}>TARGET MUSCLE:</span>
+            <span style={{ fontSize: 12.5, fontWeight: 800, color: "#FF4D4D" }}>{targetMuscle}</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+            <span style={{ fontSize: 10, color: "rgba(255,255,255,0.45)", fontWeight: 800 }}>SECONDARY:</span>
+            <span style={{ fontSize: 11.5, color: "#38BDF8", fontWeight: 700 }}>{secondaryMuscle}</span>
+          </div>
+        </div>
+
+        {/* 4. How to Perform (Step-by-Step) */}
+        <div style={{ marginBottom: 14 }}>
+          <div style={{ fontSize: 12, fontWeight: 900, color: "#60A5FA", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 11 12 14 22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+            <span>How to Perform</span>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+            {steps.map((step, idx) => (
+              <div key={idx} style={{ display: "flex", alignItems: "flex-start", gap: 9, fontSize: 12, color: "rgba(255,255,255,0.85)", lineHeight: 1.45 }}>
+                <span style={{
+                  width: 18,
+                  height: 18,
+                  borderRadius: "50%",
+                  background: "rgba(54,120,245,0.2)",
+                  color: "#60A5FA",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 10,
+                  fontWeight: 900,
+                  flexShrink: 0,
+                  marginTop: 1
+                }}>
+                  {idx + 1}
+                </span>
+                <span style={{ flex: 1 }}>{step}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 5. Form Tips & Injury Prevention */}
+        <div style={{ marginBottom: 16 }}>
+          <div style={{ fontSize: 12, fontWeight: 900, color: "#F59E0B", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <span>Form Tips & Injury Prevention</span>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {tips.map((tip, idx) => (
+              <div key={idx} style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 8,
+                fontSize: 11.5,
+                color: "rgba(255,255,255,0.75)",
+                lineHeight: 1.4,
+                background: "rgba(245,158,11,0.06)",
+                border: "1px solid rgba(245,158,11,0.15)",
+                padding: "8px 10px",
+                borderRadius: 8
+              }}>
+                <span style={{ color: "#F59E0B", fontWeight: 900, fontSize: 13, lineHeight: 1 }}>•</span>
+                <span style={{ flex: 1 }}>{tip}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 6. Navigation & Start / Log Set Controls */}
+        <div style={{
+          display: "flex",
+          gap: 8,
+          alignItems: "center",
+          paddingTop: 10,
+          borderTop: "1px solid rgba(255,255,255,0.08)"
+        }}>
+          <button
+            onClick={() => onNavigateExercise && onNavigateExercise(exerciseIndex - 1)}
+            disabled={!hasPrev}
+            style={{
+              flex: 1,
+              background: hasPrev ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: 10,
+              padding: "9px 0",
+              color: hasPrev ? "#FFFFFF" : "rgba(255,255,255,0.2)",
+              fontSize: 11.5,
+              fontWeight: 800,
+              cursor: hasPrev ? "pointer" : "not-allowed",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 5
+            }}
+          >
+            <span>← Previous</span>
+          </button>
+
+          <button
+            onClick={handleStartWorkoutOrLog}
+            style={{
+              flex: 2,
+              background: isCompleted ? "linear-gradient(135deg, #10B981 0%, #059669 100%)" : "linear-gradient(135deg, #3678F5 0%, #1A5EE5 100%)",
+              border: "none",
+              borderRadius: 10,
+              padding: "10px 0",
+              color: "#FFFFFF",
+              fontSize: 12.5,
+              fontWeight: 900,
+              cursor: "pointer",
+              boxShadow: "0 4px 14px rgba(54,120,245,0.35)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 6
+            }}
+          >
+            {loggedNotification ? (
+              <span>✓ Set Recorded!</span>
+            ) : isCompleted ? (
+              <span>✓ Exercise Complete</span>
+            ) : (
+              <span>Start Workout / Log Set</span>
+            )}
+          </button>
+
+          <button
+            onClick={() => onNavigateExercise && onNavigateExercise(exerciseIndex + 1)}
+            disabled={!hasNext}
+            style={{
+              flex: 1,
+              background: hasNext ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: 10,
+              padding: "9px 0",
+              color: hasNext ? "#FFFFFF" : "rgba(255,255,255,0.2)",
+              fontSize: 11.5,
+              fontWeight: 800,
+              cursor: hasNext ? "pointer" : "not-allowed",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 5
+            }}
+          >
+            <span>Next →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ExerciseCard({
+  ex,
+  log,
+  onSetChange,
+  onAddSet,
+  onToggleComplete,
+  completed,
+  workoutLabel,
+  allExercises = [],
+  exerciseIndex = 0,
+  programKey,
+  isHomeWorkout,
+  onOpenModal
+}) {
+  const [showModal, setShowModal] = useState(false);
+  const [showFormTips, setShowFormTips] = useState(false);
+
+  const isHome = isHomeWorkout || programKey === "Home Workout" || (programKey && programKey.includes("Home"));
+
+  // Dynamic YouTube Shorts search URL: `${exercise.name} exercise shorts`
+  const youtubeShortsUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(ex.name + " exercise shorts")}`;
+
+  const ytData = (typeof window !== "undefined" && window.getExerciseYouTubeData)
+    ? window.getExerciseYouTubeData(ex.name)
+    : null;
+
+  const handleOpenPage = (e) => {
+    if (e) e.stopPropagation();
+    if (onOpenModal) {
+      onOpenModal(exerciseIndex);
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const handleSpeakVoice = (e) => {
+    if (e) e.stopPropagation();
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const voiceText = ex.voice || `${ex.name}. Target muscle is ${(ytData && ytData.muscle) || "primary muscle"}. Maintain controlled tempo and steady breathing.`;
+      const utterance = new SpeechSynthesisUtterance(voiceText);
+      utterance.rate = 1.0;
+      utterance.pitch = 1.05;
+      utterance.lang = "en-US";
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  return (
+    <div style={{
+      background: TOKENS.surface2,
+      backdropFilter: "blur(16px) saturate(180%)",
+      WebkitBackdropFilter: "blur(16px) saturate(180%)",
+      border: `1px solid ${completed ? "rgba(54, 120, 245, 0.4)" : TOKENS.border}`,
+      borderRadius: 14,
+      padding: 14,
+      marginBottom: 12,
+      opacity: completed ? 0.8 : 1,
+      transition: "all 0.2s ease",
+      boxShadow: completed ? "0 4px 16px rgba(54,120,245,0.15)" : "none"
+    }}>
+      {/* Exercise Card Header */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
+        <div style={{ flex: 1, paddingRight: 8, cursor: "pointer" }} onClick={handleOpenPage}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+            <span style={{ fontSize: 15, fontWeight: 800, color: TOKENS.text, textDecoration: completed ? "line-through" : "none" }}>
+              {ex.name}
+            </span>
+            {isHome && (
+              <span style={{ fontSize: 9.5, fontWeight: 800, background: "rgba(46,212,191,0.15)", color: "#2ED4BF", padding: "2px 7px", borderRadius: 999 }}>
+                Home Bodyweight
+              </span>
+            )}
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}>
+            <span style={{ fontSize: 12, color: TOKENS.mutedFaint }}>
+              Target: {ex.targetSets} × {ex.targetReps || ex.targetDuration || 12} {ex.isDuration ? "sec" : "reps"}
+            </span>
+            <span style={{ fontSize: 11, background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.75)", padding: "2px 7px", borderRadius: 6, fontWeight: 700, display: "inline-flex", alignItems: "center", gap: 4 }}>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span>{ex.restTime || "45s"}</span>
+            </span>
+          </div>
+        </div>
+
+        {/* Complete Checkbox */}
+        <button
+          onClick={onToggleComplete}
+          style={{
+            width: 34,
+            height: 34,
+            borderRadius: "50%",
+            border: `1.5px solid ${completed ? "#3678F5" : TOKENS.border}`,
+            background: completed ? "linear-gradient(135deg, #3678F5 0%, #1A5EE5 100%)" : "transparent",
+            color: completed ? "#FFFFFF" : TOKENS.mutedFaint,
+            cursor: "pointer",
+            flexShrink: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: completed ? "0 0 14px rgba(54,120,245,0.4)" : "none",
+            transition: "all 0.15s ease"
+          }}
+          aria-label="Mark completed"
+        >
+          {completed && (
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      {/* Action Buttons: Watch on YouTube Shorts, Exercise Page, Voice, Form */}
+      <div style={{ display: "flex", gap: 6, marginBottom: 12, flexWrap: "wrap" }}>
+        {/* Dynamic Watch on YouTube Shorts Button (For EVERY exercise) */}
+        <a
+          href={youtubeShortsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="mat-ripple"
+          style={{
+            background: "linear-gradient(135deg, rgba(255, 30, 0, 0.22) 0%, rgba(220, 20, 0, 0.32) 100%)",
+            border: "1px solid rgba(255, 60, 30, 0.5)",
+            borderRadius: 8,
+            padding: "6px 12px",
+            color: "#FFA8A8",
+            fontSize: 11,
+            fontWeight: 800,
+            cursor: "pointer",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+            textDecoration: "none",
+            boxShadow: "0 2px 8px rgba(255,0,0,0.2)",
+            transition: "all 0.15s ease"
+          }}
+          title={`Watch ${ex.name} Shorts on YouTube`}
+        >
+          <div style={{ width: 14, height: 11, background: "#FF0000", borderRadius: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <svg width="6" height="6" viewBox="0 0 24 24" fill="#FFFFFF">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+          </div>
+          <span>▶ Watch on YouTube Shorts ↗</span>
+        </a>
+
+        {/* View Full Exercise Page Button */}
+        <button
+          onClick={handleOpenPage}
+          style={{
+            flex: 1,
+            minWidth: 100,
+            background: "linear-gradient(135deg, rgba(54,120,245,0.15) 0%, rgba(26,94,229,0.25) 100%)",
+            border: "1px solid rgba(54,120,245,0.35)",
+            borderRadius: 8,
+            padding: "6px 10px",
+            color: "#93C5FD",
+            fontSize: 11,
+            fontWeight: 800,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 5
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+          <span>Exercise Page</span>
+        </button>
+
+        {/* Voice Audio Coach Button */}
+        <button
+          onClick={handleSpeakVoice}
+          style={{
+            background: "rgba(255,255,255,0.06)",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: 8,
+            padding: "6px 9px",
+            color: "rgba(255,255,255,0.85)",
+            fontSize: 11,
+            fontWeight: 700,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 4
+          }}
+          title="Listen to audio coach form cue"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+          </svg>
+          <span>Voice</span>
+        </button>
+
+        {/* Form Tips Dropdown Toggle */}
+        <button
+          onClick={(e) => { e.stopPropagation(); setShowFormTips(!showFormTips); }}
+          style={{
+            background: showFormTips ? "rgba(245,158,11,0.2)" : "rgba(255,255,255,0.06)",
+            border: `1px solid ${showFormTips ? "rgba(245,158,11,0.5)" : "rgba(255,255,255,0.12)"}`,
+            borderRadius: 8,
+            padding: "6px 9px",
+            color: showFormTips ? "#F59E0B" : "rgba(255,255,255,0.85)",
+            fontSize: 11,
+            fontWeight: 700,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 4
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          <span>Form</span>
+        </button>
+      </div>
+
+      {/* Expandable Form Tip Card */}
+      {showFormTips && (
+        <div style={{
+          background: "rgba(245,158,11,0.08)",
+          border: "1px solid rgba(245,158,11,0.25)",
+          borderRadius: 10,
+          padding: "10px 12px",
+          marginBottom: 12,
+          fontSize: 11.5,
+          color: "rgba(255,255,255,0.9)",
+          lineHeight: 1.45
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, fontWeight: 800, color: "#F59E0B", marginBottom: 4 }}>
+            <span>Key Technique Cue:</span>
+          </div>
+          <div>{ex.tips || (ytData && ytData.tips && ytData.tips[0]) || "Maintain core tension and controlled tempo throughout every rep."}</div>
+        </div>
+      )}
+
+      {/* Sets Logger Grid */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: isHome ? "36px 1fr 48px" : "36px 1fr 1fr 48px",
+        gap: 6,
+        padding: "0 0 6px",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        marginBottom: 6,
+        fontSize: 10.5,
+        color: TOKENS.mutedFaint,
+        fontWeight: 700,
+        textTransform: "uppercase"
+      }}>
+        <div>Set</div>
+        <div>{ex.isDuration ? "Secs" : "Reps"}</div>
+        {!isHome && <div>Kg</div>}
+        <div style={{ textAlign: "center" }}>Done</div>
+      </div>
+
+      {log.map((set, setIdx) => {
+        const isDone = !!(set.reps || set.completed);
+        return (
+          <div
+            key={setIdx}
+            style={{
+              display: "grid",
+              gridTemplateColumns: isHome ? "36px 1fr 48px" : "36px 1fr 1fr 48px",
+              gap: 6,
+              alignItems: "center",
+              marginBottom: 6
+            }}
+          >
+            <div style={{ fontSize: 12, fontWeight: 700, color: TOKENS.muted }}>
+              {setIdx + 1}
+            </div>
+
+            {/* Reps Input */}
+            <input
+              type="number"
+              placeholder={String(ex.targetReps || ex.targetDuration || 12)}
+              value={set.reps || ""}
+              onChange={(e) => onSetChange && onSetChange(setIdx, "reps", e.target.value)}
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 8,
+                padding: "6px 8px",
+                color: "#FFFFFF",
+                fontSize: 13,
+                fontWeight: 700,
+                textAlign: "center",
+                width: "100%",
+                boxSizing: "border-box"
+              }}
+            />
+
+            {/* Weight Input (Hidden for Home Workouts) */}
+            {!isHome && (
+              <input
+                type="number"
+                placeholder="kg"
+                value={set.weight || ""}
+                onChange={(e) => onSetChange && onSetChange(setIdx, "weight", e.target.value)}
+                style={{
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: 8,
+                  padding: "6px 8px",
+                  color: "#FFFFFF",
+                  fontSize: 13,
+                  fontWeight: 700,
+                  textAlign: "center",
+                  width: "100%",
+                  boxSizing: "border-box"
+                }}
+              />
+            )}
+
+            {/* Checkmark Button */}
+            <button
+              onClick={() => onSetChange && onSetChange(setIdx, "completed", !set.completed)}
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 8,
+                border: `1.5px solid ${isDone ? "#237547" : "var(--border-divider, rgba(255,255,255,0.15))"}`,
+                background: isDone ? "#237547" : "transparent",
+                color: isDone ? "#FFFFFF" : "transparent",
+                cursor: "pointer",
+                margin: "0 auto",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: isDone ? "0 0 10px rgba(35, 117, 71, 0.3)" : "none",
+                transition: "all 0.15s ease"
+              }}
+            >
+              {isDone && (
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              )}
+            </button>
+          </div>
+        );
+      })}
+
+      {/* Add Set Button */}
+      <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 4 }}>
+        <button
+          onClick={onAddSet}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: "#60A5FA",
+            fontSize: 11.5,
+            fontWeight: 800,
+            cursor: "pointer",
+            padding: "4px 8px"
+          }}
+        >
+          + Add Set
+        </button>
+      </div>
+
+      {/* Standalone Modal Fallback */}
+      {showModal && (
+        <ExerciseDetailModal
+          ex={ex}
+          exerciseIndex={exerciseIndex}
+          allExercises={allExercises}
+          isHomeWorkout={isHome}
+          onClose={() => setShowModal(false)}
+          onLogSet={() => onAddSet && onAddSet()}
+          onToggleComplete={onToggleComplete}
+          isCompleted={completed}
+        />
+      )}
+    </div>
+  );
+}

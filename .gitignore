@@ -1,0 +1,34 @@
+# Environment secrets & API keys
+.env
+.env.local
+.env.*.local
+*.secret
+*.key
+
+# Server logs and runtime state
+browser_errors.txt
+ngrok.log
+cf_live.log
+*.log
+active_tunnel.txt
+cloudflared.exe
+
+# Build artifacts, browser profiles & temp
+node_modules/
+.vercel/
+scratch/
+bin/
+obj/
+.browser_test_profile/
+*.pma
+
+# Local test & debug scripts (never push to repo)
+*.ps1
+*.ps1.bak
+*.ps1.private
+tests_private/
+backups_pre_dpdp_fix/
+test_*.png
+screenshot_*.png
+screen_*.png
+*.mp4

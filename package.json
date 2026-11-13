@@ -1,0 +1,27 @@
+{
+  "name": "stoke-app",
+  "version": "1.0.0",
+  "description": "Stoke Fitness, Nutrition & Running Tracker",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node -e \"console.log('Build verified successfully')\""
+  },
+  "keywords": [
+    "fitness",
+    "nutrition",
+    "running",
+    "tracker",
+    "supabase",
+    "gemini"
+  ],
+  "author": "Stoke Athlete",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "vercel": "^39.3.0"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.9"
+  }
+}

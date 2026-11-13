@@ -1,0 +1,66 @@
+Created At: 2026-10-01T01:21:37+05:30
+Completed At: 2026-10-01T01:21:37+05:30
+The following changes were made by the replace_file_content tool to: c:\Users\HOME\.gemini\antigravity-ide\scratch\stoke-app\index.html. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -7385,65 +7385,176 @@
+   const [pHabits, setPHabits] = useState(["Eat more protein", "Track calories", "Drink more water"]);
+   const [pMealFreq, setPMealFreq] = useState("Always");
+   const [pHelpMeal, setPHelpMeal] = useState("Yes, definitely");
+-  const [pActivity, setPActivity] = useState("very");
+-  const [pSex, setPSex] = useState("male");
+-  const [pAge, setPAge] = useState("21");
+-  const [pCountry, setPCountry] = useState("India");
+-  const [pZip, setPZip] = useState("");
+-  const [pHeight, setPHeight] = useState("167");
+-  const [pWeight, setPWeight] = useState("70");
+-  const [pTerms, setPTerms] = useState(true);
+-  const [pReminders, setPReminders] = useState(true);
+-  const [pSteps, setPSteps] = useState(true);
+-  const [pEmails, setPEmails] = useState(true);
+-
+-  const LIME = "#D7FF3E";
+-  const totalQSteps = 14;
+-
+-  const calcCal = (() => {
+-    const w=parseFloat(pWeight)||70, h=parseFloat(pHeight)||167, a=parseInt(pAge)||21;
+-    const bmr = pSex==="female" ? 10*w+6.25*h-5*a-161 : 10*w+6.25*h-5*a+5;
+-    const act = pActivity==="very"?1.725:pActivity==="active"?1.55:1.375;
+-    const isGain = pGoals.includes("Gain Muscle")||pGoals.includes("Gain Weight");
+-    const isLoss = pGoals.includes("Lose Weight");
+-    const t = Math.round(bmr*act+(isGain?400:isLoss?-400:0));
+-    return t>1500?t:2450;
+-  })();
+-
+-  function doManualLogin() {
+-    if (!phone.trim()||!password.trim()) { setError("Enter your email/phone and password."); return; }
+-    setError(""); setLoading(true);
+-    setTimeout(() => {
+-      setLoading(false);
+-      onSignIn(phone, { name:phone.includes("@")?phone.split("@")[0]:"Athlete", weightKg:70, heightCm:175, age:25, sex:"male", goalType:
+<truncated 10410 bytes>
+         </div>
++
++              {/* Material: Forgot password & Change Email — right-aligned Swiss */}
++              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom:14 }}>
++                <span onClick={() => { setPhone(""); setPassword(""); }} style={{ fontSize:11, color:"rgba(255,255,255,0.4)", fontWeight:600, cursor:"pointer" }}>
++                  ✏️ Change Email
++                </span>
++                <span style={{ fontSize:12, color:"rgba(215,255,62,0.7)", fontWeight:700, cursor:"pointer", letterSpacing:0.2 }}>Forgot password?</span>
++              </div>
++
++              {error && (
++                <div style={{ background:"rgba(255,60,60,0.09)", border:"1px solid rgba(255,80,80,0.28)", borderRadius:12, padding:"11px 14px", fontSize:13, color:"#FF7070", fontWeight:600, marginBottom:14, boxShadow:"0 0 14px rgba(255,60,60,0.1)", display:"flex", alignItems:"center", gap:8 }}>
++                  <span style={{ fontSize:16 }}>⚠️</span> {error}
++                </div>
++              )}
++
++              <button className="s3-primary-btn mat-ripple" onClick={e => { addRipple(e); doManualLogin(); }} disabled={loading}>
++                {loading ? <span style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8 }}><NeuSpinner /> Signing in…</span> : "Log In"}
++              </button>
++            </div> {/* Swiss rule lines for visual weight */}
+               <div style={{ display:"flex", alignItems:"center", gap:12, margin:"0 auto 14px", maxWidth:240 }}>
+                 <div style={{ flex:1, height:1, background:"rgba(215,255,62,0.3)" }} />
+                 <span style={{ fontSize:9, color:"rgba(215,255,62,0.7)", fontWeight:800, letterSpacing:3, textTransform:"uppercase" }}>stoke</span>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

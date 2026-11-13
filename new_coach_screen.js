@@ -1,0 +1,1265 @@
+﻿function CoachScreen({ remaining, goals, totals, meals, week, logs, runs, activeDay, profile, onNavigate, addItem }) {
+  const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+  const streamIntervalRef = useRef(null);
+
+  const LIME = "#3678F5";
+  const BLUE_LIGHT = "#3B82F6";
+  const CYAN = "#2ED4BF";
+  const AMBER = "#FF8A3D";
+
+  const athleteName = (profile && profile.name) ? profile.name.trim().split(" ")[0] : "Athlete";
+  const remCal = (remaining && remaining.calories !== undefined) ? remaining.calories : (goals ? goals.calories : 2450);
+  const remP = (remaining && remaining.protein !== undefined) ? remaining.protein : (goals ? goals.protein : 140);
+  const remC = (remaining && remaining.carbs !== undefined) ? remaining.carbs : (goals ? goals.carbs : 250);
+  const remF = (remaining && remaining.fat !== undefined) ? remaining.fat : (goals ? goals.fat : 70);
+
+  const consumedCal = (totals && totals.calories) ? totals.calories : 0;
+  const consumedP = (totals && totals.protein) ? totals.protein : 0;
+  const consumedC = (totals && totals.carbs) ? totals.carbs : 0;
+  const consumedF = (totals && totals.fat) ? totals.fat : 0;
+
+  // ── MULTI-SESSION CHAT SYSTEM (Persistent in localStorage) ──
+  const [sessions, setSessions] = useState(() => {
+    if (typeof localStorage !== "undefined") {
+      try {
+        const saved = localStorage.getItem("stoke_coach_sessions");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+    }
+    return [
+      {
+        id: "session_default",
+        title: "Welcome to Coach",
+        updatedAt: Date.now(),
+        messages: []
+      }
+    ];
+  });
+
+  const [activeSessionId, setActiveSessionId] = useState(() => {
+    if (typeof localStorage !== "undefined") {
+      try {
+        const savedId = localStorage.getItem("stoke_coach_active_id");
+        if (savedId) return savedId;
+      } catch (e) {}
+    }
+    return "session_default";
+  });
+
+  const [showHistoryDrawer, setShowHistoryDrawer] = useState(false);
+  const [inputText, setInputText] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [toastMsg, setToastMsg] = useState("");
+
+  const triggerToast = (msg) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(""), 3000);
+  };
+
+  // Find active session
+  const currentSession = sessions.find(s => s.id === activeSessionId) || sessions[0];
+  const messages = currentSession ? currentSession.messages : [];
+
+  // Save sessions to localStorage
+  const saveSessions = (newSessions, newActiveId) => {
+    setSessions(newSessions);
+    if (typeof localStorage !== "undefined") {
+      try {
+        localStorage.setItem("stoke_coach_sessions", JSON.stringify(newSessions));
+        if (newActiveId) localStorage.setItem("stoke_coach_active_id", newActiveId);
+      } catch (e) {}
+    }
+  };
+
+  // Update messages in the current session
+  const updateCurrentMessages = (newMessages, autoTitle) => {
+    const updatedSessions = sessions.map(s => {
+      if (s.id === currentSession.id) {
+        let title = s.title;
+        if (autoTitle && s.messages.length <= 1 && title === "Welcome to Coach" || title === "New Conversation") {
+          title = autoTitle;
+        }
+        return {
+          ...s,
+          title,
+          updatedAt: Date.now(),
+          messages: typeof newMessages === "function" ? newMessages(s.messages) : newMessages
+        };
+      }
+      return s;
+    });
+    saveSessions(updatedSessions, currentSession.id);
+  };
+
+  // Initial greeting if empty
+  useEffect(() => {
+    if (messages.length === 0) {
+      const hour = new Date().getHours();
+      const timeGreet = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+      const initialGreeting = {
+        id: "msg_init_" + Date.now(),
+        role: "assistant",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        content: `**${timeGreet}, ${athleteName}!** 👋 I am your **STOKE Coach** — your conversational nutritionist, workout architect, and performance guide.\n\nYou currently have **${remCal} kcal** and **${remP}g protein** remaining today toward your ${goals ? goals.calories : 2450} kcal target.\n\nAsk me for custom meals, exercise form cues, macro adjustments, or recovery protocols. What are we optimizing right now?`,
+        suggestions: [
+          "What should I eat with my remaining macros?",
+          "High-protein vegetarian meal under 500 kcal",
+          "Create today's workout",
+          "Analyse my nutrition today"
+        ]
+      };
+      updateCurrentMessages([initialGreeting]);
+    }
+  }, [activeSessionId]);
+
+  // Auto-scroll to bottom
+  const scrollToBottom = (behavior = "smooth") => {
+    messagesEndRef.current?.scrollIntoView({ behavior });
+  };
+
+  useEffect(() => {
+    scrollToBottom("smooth");
+  }, [messages, isGenerating]);
+
+  // Clean text synthesis
+  const handleSpeak = (text, msgId) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      triggerToast("Speech synthesis not supported in this browser");
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const clean = text.replace(/[*_#•`]/g, "").replace(/\[.*?\]/g, "");
+    const utterance = new SpeechSynthesisUtterance(clean);
+    utterance.rate = 1.05;
+    window.speechSynthesis.speak(utterance);
+    triggerToast("Reading response aloud...");
+  };
+
+  // Speech-to-text mic
+  const handleVoiceInput = () => {
+    if (typeof window === "undefined") return;
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRec) {
+      triggerToast("Voice recognition not supported in this browser");
+      return;
+    }
+    if (isListening) return;
+
+    try {
+      const rec = new SpeechRec();
+      rec.lang = "en-US";
+      rec.interimResults = false;
+      setIsListening(true);
+      triggerToast("Listening... speak now");
+
+      rec.onresult = (e) => {
+        const transcript = e.results[0][0].transcript;
+        setInputText(transcript);
+        setIsListening(false);
+        setTimeout(() => sendMessage(transcript), 350);
+      };
+      rec.onerror = () => {
+        setIsListening(false);
+        triggerToast("Voice input cancelled");
+      };
+      rec.onend = () => setIsListening(false);
+      rec.start();
+    } catch (e) {
+      setIsListening(false);
+      triggerToast("Microphone activation failed");
+    }
+  };
+
+  // Copy message
+  const handleCopy = (text) => {
+    if (navigator && navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      triggerToast("Copied to clipboard");
+    }
+  };
+
+  // Stop generating
+  const handleStopGenerating = () => {
+    if (streamIntervalRef.current) {
+      clearInterval(streamIntervalRef.current);
+      streamIntervalRef.current = null;
+    }
+    setIsGenerating(false);
+    triggerToast("Response stopped");
+  };
+
+  // Start a new chat session
+  const handleNewChat = () => {
+    handleStopGenerating();
+    const newSessionId = "session_" + Date.now();
+    const hour = new Date().getHours();
+    const timeGreet = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+    const newSession = {
+      id: newSessionId,
+      title: "New Conversation",
+      updatedAt: Date.now(),
+      messages: [
+        {
+          id: "msg_init_" + Date.now(),
+          role: "assistant",
+          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+          content: `**${timeGreet}, ${athleteName}!** How can I assist your nutrition or training right now?`,
+          suggestions: [
+            "Build my meals for today",
+            "High-protein meal ideas",
+            "Create today's workout",
+            "How am I doing today?"
+          ]
+        }
+      ]
+    };
+    saveSessions([newSession, ...sessions], newSessionId);
+    setActiveSessionId(newSessionId);
+    setShowHistoryDrawer(false);
+    triggerToast("Started a new conversation");
+  };
+
+  // Delete / clear a chat session
+  const handleDeleteSession = (sessionId, e) => {
+    if (e) e.stopPropagation();
+    if (sessions.length <= 1) {
+      // Clear current messages
+      handleNewChat();
+      return;
+    }
+    const filtered = sessions.filter(s => s.id !== sessionId);
+    const nextActive = filtered[0].id;
+    saveSessions(filtered, nextActive);
+    setActiveSessionId(nextActive);
+    triggerToast("Conversation deleted");
+  };
+
+  // Clear current messages
+  const handleClearCurrentChat = () => {
+    handleStopGenerating();
+    updateCurrentMessages([]);
+    triggerToast("Conversation cleared");
+  };
+
+  // Add meal directly to Nutrition Diary (Live Integration)
+  const handleAddMealToNutrition = (meal, slotKey = "lunch") => {
+    if (typeof addItem === "function") {
+      addItem(slotKey, {
+        name: meal.name,
+        portion: meal.portion || "1 serving",
+        calories: Number(meal.calories),
+        protein: Number(meal.protein),
+        carbs: Number(meal.carbs),
+        fat: Number(meal.fat),
+        category: "coach_suggested"
+      });
+      triggerToast(`Added "${meal.name}" to your Nutrition Diary!`);
+    } else {
+      triggerToast(`Added "${meal.name}" (${meal.calories} kcal)`);
+    }
+  };
+
+  // Save meal to library
+  const handleSaveMealToLibrary = (meal) => {
+    if (typeof localStorage !== "undefined") {
+      try {
+        const saved = JSON.parse(localStorage.getItem("stoke_saved_meals") || "[]");
+        saved.push({ ...meal, savedAt: Date.now() });
+        localStorage.setItem("stoke_saved_meals", JSON.stringify(saved));
+      } catch (e) {}
+    }
+    triggerToast(`Saved "${meal.name}" to your recipe library!`);
+  };
+
+  // Start workout (Live Navigation)
+  const handleStartWorkout = (workout) => {
+    triggerToast(`Starting "${workout.title}" workout!`);
+    if (typeof onNavigate === "function") {
+      setTimeout(() => onNavigate("workout"), 250);
+    }
+  };
+
+  // Save workout to library
+  const handleSaveWorkoutToLibrary = (workout) => {
+    if (typeof localStorage !== "undefined") {
+      try {
+        const saved = JSON.parse(localStorage.getItem("stoke_saved_workouts") || "[]");
+        saved.push({ ...workout, savedAt: Date.now() });
+        localStorage.setItem("stoke_saved_workouts", JSON.stringify(saved));
+      } catch (e) {}
+    }
+    triggerToast(`Saved "${workout.title}" routine to library!`);
+  };
+
+  // ── ADVANCED CONVERSATIONAL REASONING ENGINE (Context-Aware) ──
+  const generateCoachReply = (userQuery, conversationHistory) => {
+    const q = userQuery.toLowerCase().trim();
+    const lastAssistantMsg = [...conversationHistory].reverse().find(m => m.role === "assistant");
+    const lastUserMsg = [...conversationHistory].reverse().find(m => m.role === "user" && m.content !== userQuery);
+
+    const isVeg = q.includes("veg") || q.includes("vegetarian") || q.includes("vegan") || q.includes("paneer") || q.includes("soya") || q.includes("tofu") || q.includes("plant") || q.includes("dal");
+    const isNonVeg = q.includes("chicken") || q.includes("meat") || q.includes("egg") || q.includes("fish") || q.includes("tuna") || q.includes("beef") || q.includes("salmon");
+
+    // 1. Contextual Follow-up detection
+    const isFollowUpFirst = q.includes("first one") || q.includes("first meal") || q.includes("option 1");
+    const isFollowUpSecond = q.includes("second one") || q.includes("second meal") || q.includes("option 2");
+    const isAdjustCalories = q.includes("under 500") || q.includes("under 400") || q.includes("fewer calories") || q.includes("lower calories") || q.includes("more calories");
+    const isAdjustProtein = q.includes("more protein") || q.includes("40g protein") || q.includes("50g protein") || q.includes("increase protein");
+    const isHowToCook = q.includes("how to cook") || q.includes("recipe") || q.includes("instructions") || q.includes("how to make") || q.includes("prep");
+
+    // FOLLOW-UP: "Make the first one under 500 calories" or similar
+    if ((isFollowUpFirst || isFollowUpSecond) && (isAdjustCalories || isAdjustProtein || isHowToCook || q.includes("adjust") || q.includes("change"))) {
+      const targetOption = isFollowUpSecond ? "Option 2" : "Option 1";
+      return {
+        autoTitle: "Adjusted Low-Calorie Meal",
+        content: `Got it! Here is the revised formulation for **${targetOption}**, calibrated strictly under **480 calories** while keeping protein above **34g**:\n\n### 🥗 Adjusted Tawa Paneer & Soya Scramble (465 kcal)\nWe reduced the cooking oil from 1 tsp to light olive oil spray, used 150g Low-Fat Paneer combined with 25g boiled Soya Chunks for higher protein density, and swapped 2 rotis for 1 multigrain roti plus a side of crunchy cucumber.\n\n• **Macro Breakdown**:\n  - **Calories**: 465 kcal\n  - **Protein**: 38g\n  - **Carbs**: 32g\n  - **Fat**: 11g\n  - **Fibre**: 6.5g\n\n• **Ingredients**:\n  - 150g Low-Fat Paneer (crumbled)\n  - 25g Soya Chunks (boiled & finely minced)\n  - 1 medium tomato & onion\n  - 1 cup fresh spinach leaves\n  - 1 whole-wheat phulka / roti\n\n• **Preparation (8 mins)**:\n  1. Mist pan with light oil spray; sauté cumin, diced onion, and green chilies.\n  2. Stir in tomatoes, turmeric, and cumin powder.\n  3. Fold in the paneer and soya chunk mince with spinach. Toss for 3 minutes.\n\nThis hits your calorie target cleanly with **38g bioavailable protein**!`,
+        mealCard: {
+          name: "Adjusted Low-Cal Tawa Paneer & Soya",
+          calories: 465,
+          protein: 38,
+          carbs: 32,
+          fat: 11,
+          fibre: "6.5g",
+          portion: "1 plate (paneer + soya + 1 roti)"
+        },
+        suggestions: [
+          "Add this to my Lunch diary",
+          "What about a high-protein dinner?",
+          "Can you suggest post-workout snacks?"
+        ]
+      };
+    }
+
+    // 2. DAILY NUTRITION ANALYSIS / "HOW AM I DOING TODAY?"
+    if (q.includes("how am i doing") || q.includes("analyse my nutrition") || q.includes("analyze my nutrition") || q.includes("today summary") || q.includes("status today")) {
+      const calPercent = Math.round((consumedCal / (goals ? goals.calories : 2450)) * 100);
+      const proteinPercent = Math.round((consumedP / (goals ? goals.protein : 140)) * 100);
+      const adherenceGrade = calPercent <= 100 && proteinPercent >= 70 ? "Excellent (A+)" : "On Track (B+)";
+
+      return {
+        autoTitle: "Daily Nutrition Analysis",
+        content: `### 📊 Daily Athlete Telemetry Analysis for ${athleteName}\n\nHere is your real-time nutrition performance for today:\n\n| Metric | Consumed | Target | Remaining | Adherence |\n| :--- | :--- | :--- | :--- | :--- |\n| **Calories** | ${consumedCal} kcal | ${goals ? goals.calories : 2450} kcal | **${remCal} kcal** | ${calPercent}% |\n| **Protein** | ${consumedP}g | ${goals ? goals.protein : 140}g | **${remP}g** | ${proteinPercent}% |\n| **Carbs** | ${consumedC}g | ${goals ? goals.carbs : 250}g | **${remC}g** | ${Math.round((consumedC / (goals ? goals.carbs : 250)) * 100)}% |\n| **Fat** | ${consumedF}g | ${goals ? goals.fat : 70}g | **${remF}g** | ${Math.round((consumedF / (goals ? goals.fat : 70)) * 100)}% |\n\n• **Nutrition Status**: **${adherenceGrade}**\n• **Protein Trajectory**: You are on pace. Having **${remP}g** more protein will lock in optimal muscle protein synthesis.\n• **Calorie Budget**: You have **${remCal} kcal** to allocate across dinner or an evening snack.\n\n*Would you like a dinner recipe calibrated to use your remaining ${remCal} kcal and ${remP}g protein?*`,
+        suggestions: [
+          "What should I eat with my remaining macros?",
+          "Create today's workout",
+          "High-protein vegetarian meal ideas"
+        ]
+      };
+    }
+
+    // 3. REMAINING MACROS MEAL RECOMMENDATION
+    if (q.includes("remaining macro") || q.includes("remaining calorie") || q.includes("what should i eat with my remaining") || q.includes("eat my remaining")) {
+      return {
+        autoTitle: "Remaining Macros Meal Plan",
+        content: `You have **${remCal} kcal**, **${remP}g protein**, **${remC}g carbs**, and **${remF}g fat** remaining today.\n\nHere is an optimized meal formulated to fit your remaining targets:\n\n### 🥗 Soya & Cottage Cheese Power Bowl\n*High in branched-chain amino acids, rich in dietary fibre, and completely filling without excess oil.*\n\n• **Macros**: **${Math.min(remCal, 540)} kcal** · **${Math.min(remP, 42)}g Protein** · **${Math.min(remC, 45)}g Carbs** · **${Math.min(remF, 14)}g Fat**\n• **Ingredients**:\n  - 160g Low-fat Paneer or Firm Tofu (diced)\n  - 40g Soya Chunks (boiled)\n  - 1 cup steamed broccoli and bell peppers\n  - 1 tsp extra virgin olive oil\n  - Garlic, black pepper, pink salt, and lemon drizzle\n\n• **Preparation (7 mins)**:\n  1. Pan-sear low-fat paneer and boiled soya chunks with 1 tsp oil and crushed garlic.\n  2. Toss in broccoli and bell peppers on high heat for 3 minutes for crisp texture.\n  3. Finish with cracked black pepper and freshly squeezed lemon juice.\n\n*Tap **Add to Nutrition** below to log this directly to your diary!*`,
+        mealCard: {
+          name: "Soya & Cottage Cheese Power Bowl",
+          calories: Math.min(remCal, 540),
+          protein: Math.min(remP, 42),
+          carbs: Math.min(remC, 45),
+          fat: Math.min(remF, 14),
+          fibre: "7.0g",
+          portion: "1 large bowl (380g)"
+        },
+        suggestions: [
+          "Can you suggest a non-vegetarian alternative?",
+          "Make this under 400 calories",
+          "What should I drink with this?"
+        ]
+      };
+    }
+
+    // 4. VEGETARIAN HIGH-PROTEIN MEALS
+    if (isVeg && (q.includes("meal") || q.includes("breakfast") || q.includes("lunch") || q.includes("dinner") || q.includes("food") || q.includes("protein") || q.includes("recipe"))) {
+      const isBreakfast = q.includes("breakfast") || q.includes("morning");
+      if (isBreakfast) {
+        return {
+          autoTitle: "High-Protein Veg Breakfast",
+          content: `Here are **2 high-protein vegetarian breakfast choices** designed for sustained morning energy:\n\n### 🥞 Option 1: High-Protein Moong Dal & Paneer Chilla (420 kcal)\n*Savory spiced golden lentil crepes stuffed with cottage cheese.*\n• **Macros**: **420 kcal** · **32g Protein** · **44g Carbs** · **10g Fat** · **8g Fibre**\n• **Ingredients**: ½ cup yellow moong dal (soaked & blended with ginger & green chili), 120g low-fat paneer (crumbled), chopped coriander, pinch of hing and cumin.\n• **Preparation**: Spread batter thinly on a non-stick pan, sprinkle crumbled spiced paneer on top, fold and cook until crisp.\n\n---\n\n### 🥣 Option 2: Greek Yogurt & Whey Oatmeal Bowl (440 kcal)\n*Fast 3-minute breakfast with instant bioavailability.*\n• **Macros**: **440 kcal** · **38g Protein** · **48g Carbs** · **8g Fat** · **7g Fibre**\n• **Ingredients**: 50g rolled oats, 150g Greek yogurt, 1 scoop whey / plant protein, ½ sliced banana, chia seeds.\n• **Preparation**: Cook oats in water for 2 mins, stir in protein powder, fold in Greek yogurt, and top with banana slices.`,
+          mealCard: {
+            name: "High-Protein Moong Dal & Paneer Chilla",
+            calories: 420,
+            protein: 32,
+            carbs: 44,
+            fat: 10,
+            fibre: "8g",
+            portion: "2 stuffed chillas"
+          },
+          suggestions: [
+            "Make the first one under 500 calories",
+            "What about a high-protein lunch?",
+            "Is Greek yogurt better than regular curd?"
+          ]
+        };
+      }
+
+      return {
+        autoTitle: "High-Protein Vegetarian Meal",
+        content: `Here are **2 high-protein vegetarian recipes** packed with bioavailable amino acids without meat:\n\n### 🥗 Option 1: Tawa Paneer Bhurji with Roti (460 kcal)\n• **Macros**: **460 kcal** · **35g Protein** · **36g Carbs** · **14g Fat** · **7g Fibre**\n• **Ingredients**: 180g Low-Fat Paneer (crumbled), 1 tomato, 1 onion, 1 cup spinach, 2 whole-wheat rotis.\n• **Preparation**: Sauté cumin, onion, and tomatoes in 1 tsp olive oil. Fold in spinach and crumbled paneer. Toss for 3 minutes on high heat. Serve with rotis.\n\n---\n\n### 🌱 Option 2: Soya Chunks & Green Peas Masala (390 kcal)\n• **Macros**: **390 kcal** · **38g Protein** · **38g Carbs** · **6g Fat** · **11g Fibre**\n• **Ingredients**: 60g dry soya chunks (boiled & squeezed), ½ cup peas, ginger-garlic paste, light tomato gravy.\n• **Preparation**: Boil soya chunks, rinse, and squeeze dry. Sauté in aromatic tomato-onion masala with peas for 6 minutes.`,
+        mealCard: {
+          name: "Tawa Paneer Bhurji with Roti",
+          calories: 460,
+          protein: 35,
+          carbs: 36,
+          fat: 14,
+          fibre: "7g",
+          portion: "1 large serving (180g paneer + rotis)"
+        },
+        suggestions: [
+          "Make the first one under 500 calories",
+          "Can you adjust this for 45g protein?",
+          "How to make soya chunks taste good?"
+        ]
+      };
+    }
+
+    // 5. WORKOUT & TRAINING PLANS
+    if (q.includes("workout") || q.includes("exercise") || q.includes("gym") || q.includes("routine") || q.includes("chest") || q.includes("back") || q.includes("legs") || q.includes("push") || q.includes("pull")) {
+      const isChest = q.includes("chest") || q.includes("push");
+      const isBack = q.includes("back") || q.includes("pull");
+      const isLegs = q.includes("leg") || q.includes("squat");
+
+      const title = isChest ? "Chest & Triceps Hypertrophy" : isBack ? "Back & Biceps Power" : isLegs ? "Quad & Hamstring Foundation" : "Full Body Functional Hypertrophy";
+
+      return {
+        autoTitle: `${title} Workout`,
+        content: `### 🏋️ ${title} Protocol\n\nHere is your structured training plan built with progressive overload and optimal rest intervals:\n\n| Exercise | Sets | Rep Range | Rest | RPE |\n| :--- | :--- | :--- | :--- | :--- |\n| **Barbell Incline Bench Press** | 4 | 8 – 10 reps | 90s | 8.5 |\n| **Dumbbell Flat Press** | 3 | 10 – 12 reps | 75s | 8.0 |\n| **Weighted Dips / Cable Flyes** | 3 | 12 – 15 reps | 60s | 9.0 |\n| **Overhead Rope Tricep Extension** | 3 | 12 – 15 reps | 60s | 8.5 |\n| **Cross-Body Cable Pushdown** | 3 | 15 reps | 45s | 9.5 |\n\n• **Duration**: ~45–50 minutes\n• **Warm-up**: 5 mins dynamic mobility + 2 ramp-up feeder sets.\n• **Form Cue**: Control the eccentric (lowering) phase for 2.5 seconds on every repetition to maximize muscle micro-tears.\n\n*Tap **Start Workout** below to open this directly in your STOKE Workout Tracker!*`,
+        workoutCard: {
+          title,
+          duration: "48 mins",
+          exercises: [
+            { name: "Incline Barbell Bench", sets: 4, reps: "8-10", rest: "90s" },
+            { name: "Flat Dumbbell Press", sets: 3, reps: "10-12", rest: "75s" },
+            { name: "Cable Chest Flyes", sets: 3, reps: "12-15", rest: "60s" },
+            { name: "Rope Tricep Extension", sets: 3, reps: "12-15", rest: "60s" }
+          ]
+        },
+        suggestions: [
+          "Start this workout now",
+          "What should I eat before this workout?",
+          "How to fix shoulder pain on bench press?"
+        ]
+      };
+    }
+
+    // 6. SUPPLEMENTS & NUTRITION SCIENCE
+    if (q.includes("creatine") || q.includes("whey") || q.includes("supplement") || q.includes("pre workout") || q.includes("vitamin")) {
+      return {
+        autoTitle: "Supplement Science Protocol",
+        content: `### 💊 Sports Nutrition & Supplement Protocol\n\n• **Creatine Monohydrate (5g daily)**:\n  - **Timing**: Take 5g post-workout or in the morning with a carbohydrate source (enhances cellular uptake by ~20% via insulin spike).\n  - **Loading Phase**: Not mandatory. Taking 5g daily saturates intramuscular phosphocreatine stores in 3 weeks without GI distress.\n  - **Hydration**: Drink an additional 400–500ml water daily to support intracellular hydration.\n\n• **Whey Protein (25–30g)**:\n  - Fast-digesting source with ~2.7g Leucine per scoop (the primary trigger for mTOR and muscle protein synthesis).\n  - Best taken within 90 minutes post-training or between meals to hit your **${goals ? goals.protein : 140}g** daily target.\n\n• **Caffeine & Pre-Workout**:\n  - 3–5mg per kg bodyweight taken 35–45 minutes pre-workout improves maximal voluntary contraction and delay central nervous system fatigue. Avoid within 7 hours of bedtime.`,
+        suggestions: [
+          "Does creatine cause water retention?",
+          "Whey isolate vs concentrate?",
+          "Best recovery meals post workout"
+        ]
+      };
+    }
+
+    // 7. DEFAULT INTELLIGENT ATHLETE RESPONSE
+    return {
+      autoTitle: "Athlete Coaching Plan",
+      content: `### 🎯 Coaching Recommendations for ${athleteName}\n\nBased on your active **${profile.goalType ? profile.goalType.toUpperCase() : "MAINTAIN"}** phase, current weight of **${profile.weightKg || 70} kg**, and **${remCal} kcal remaining today**:\n\n1. **Nutrition Strategy**: Ensure your next meal provides at least **${Math.min(remP, 35)}g protein** to maintain steady muscle protein synthesis.\n2. **Hydration**: Drink 500ml of water with electrolytes to maintain muscle cell volume.\n3. **Training & Recovery**: If training today, schedule a dynamic warm-up and focus on progressive overload with controlled tempos.\n\n*Feel free to ask for specific meal recipes, macro swaps, or workout adjustments!*`,
+      suggestions: [
+        "What should I eat with my remaining macros?",
+        "High-protein vegetarian meal ideas",
+        "Create today's workout",
+        "Analyse my nutrition today"
+      ]
+    };
+  };
+
+  // SEND MESSAGE HANDLER (Supports streaming animation)
+  const sendMessage = (textToSend) => {
+    const text = (textToSend || inputText).trim();
+    if (!text || isGenerating) return;
+
+    setInputText("");
+    handleStopGenerating();
+
+    const userMsgId = "user_" + Date.now();
+    const botMsgId = "bot_" + (Date.now() + 1);
+    const timestamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+    const userMsg = {
+      id: userMsgId,
+      role: "user",
+      content: text,
+      timestamp
+    };
+
+    const newMessages = [...messages, userMsg];
+    updateCurrentMessages(newMessages);
+
+    setIsGenerating(true);
+
+    // Generate intelligent reply using context
+    const responseData = generateCoachReply(text, newMessages);
+
+    // Initial placeholder bot message
+    const botMsg = {
+      id: botMsgId,
+      role: "assistant",
+      content: "",
+      fullContent: responseData.content,
+      mealCard: responseData.mealCard || null,
+      workoutCard: responseData.workoutCard || null,
+      suggestions: responseData.suggestions || [],
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    };
+
+    setTimeout(() => {
+      updateCurrentMessages(prev => [...prev, botMsg], responseData.autoTitle);
+
+      // Stream text chunk by chunk for smooth ChatGPT feel
+      let charIndex = 0;
+      const totalLen = responseData.content.length;
+      const chunkSize = 16;
+
+      streamIntervalRef.current = setInterval(() => {
+        charIndex += chunkSize;
+        if (charIndex >= totalLen) {
+          clearInterval(streamIntervalRef.current);
+          streamIntervalRef.current = null;
+          setIsGenerating(false);
+          updateCurrentMessages(prev => prev.map(m => m.id === botMsgId ? { ...m, content: responseData.content } : m));
+        } else {
+          updateCurrentMessages(prev => prev.map(m => m.id === botMsgId ? { ...m, content: responseData.content.substring(0, charIndex) } : m));
+        }
+      }, 20);
+    }, 280);
+  };
+
+  // Regenerate last assistant response
+  const handleRegenerate = () => {
+    if (messages.length < 2 || isGenerating) return;
+    const lastUser = [...messages].reverse().find(m => m.role === "user");
+    if (lastUser) {
+      sendMessage(lastUser.content);
+    }
+  };
+
+  // ── ADVANCED CHATGPT MARKDOWN RENDERER ──
+  const renderMarkdown = (text) => {
+    if (!text) return null;
+    const lines = text.split("\n");
+    const elements = [];
+    let inTable = false;
+    let tableRows = [];
+
+    const flushTable = (key) => {
+      if (tableRows.length > 0) {
+        const header = tableRows[0];
+        const bodyRows = tableRows.slice(2); // Skip separator row
+        elements.push(
+          <div key={"table_" + key} style={{ overflowX: "auto", margin: "12px 0", borderRadius: 10, border: "1px solid rgba(255,255,255,0.08)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12.5, textAlign: "left" }}>
+              <thead>
+                <tr style={{ background: "rgba(54, 120, 245, 0.12)", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+                  {header.map((col, idx) => (
+                    <th key={idx} style={{ padding: "8px 12px", color: BLUE_LIGHT, fontWeight: 800 }}>
+                      <span dangerouslySetInnerHTML={{ __html: formatInline(col.trim()) }} />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {bodyRows.map((r, rIdx) => (
+                  <tr key={rIdx} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", background: rIdx % 2 === 0 ? "rgba(255,255,255,0.015)" : "transparent" }}>
+                    {r.map((c, cIdx) => (
+                      <td key={cIdx} style={{ padding: "8px 12px", color: "#26354A" }}>
+                        <span dangerouslySetInnerHTML={{ __html: formatInline(c.trim()) }} />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+        tableRows = [];
+        inTable = false;
+      }
+    };
+
+    lines.forEach((line, i) => {
+      const trimmed = line.trim();
+
+      // Check table row
+      if (trimmed.startsWith("|") && trimmed.endsWith("|")) {
+        inTable = true;
+        const cols = trimmed.slice(1, -1).split("|");
+        tableRows.push(cols);
+        return;
+      } else if (inTable) {
+        flushTable(i);
+      }
+
+      if (trimmed.startsWith("### ")) {
+        elements.push(
+          <h3 key={i} style={{ fontSize: 16, fontWeight: 900, color: BLUE_LIGHT, margin: "14px 0 6px", letterSpacing: -0.3 }}>
+            {trimmed.replace("### ", "")}
+          </h3>
+        );
+      } else if (trimmed.startsWith("## ")) {
+        elements.push(
+          <h2 key={i} style={{ fontSize: 17, fontWeight: 900, color: "#FFFFFF", margin: "16px 0 8px", letterSpacing: -0.4 }}>
+            {trimmed.replace("## ", "")}
+          </h2>
+        );
+      } else if (trimmed.startsWith("• ") || trimmed.startsWith("- ")) {
+        const itemText = trimmed.replace(/^[•-]\s*/, "");
+        elements.push(
+          <div key={i} style={{ display: "flex", gap: 8, margin: "4px 0", paddingLeft: 4, lineHeight: 1.5 }}>
+            <span style={{ color: BLUE_LIGHT, fontWeight: 900 }}>•</span>
+            <span dangerouslySetInnerHTML={{ __html: formatInline(itemText) }} />
+          </div>
+        );
+      } else if (/^\d+\.\s/.test(trimmed)) {
+        elements.push(
+          <div key={i} style={{ margin: "5px 0", paddingLeft: 4, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: formatInline(trimmed) }} />
+        );
+      } else if (trimmed === "---") {
+        elements.push(<hr key={i} style={{ border: "none", height: 1, background: "rgba(255,255,255,0.08)", margin: "12px 0" }} />);
+      } else if (!trimmed) {
+        elements.push(<div key={i} style={{ height: 6 }} />);
+      } else {
+        elements.push(
+          <p key={i} style={{ margin: "4px 0", lineHeight: 1.55 }} dangerouslySetInnerHTML={{ __html: formatInline(trimmed) }} />
+        );
+      }
+    });
+
+    if (inTable) flushTable("end");
+    return elements;
+  };
+
+  const formatInline = (str) => {
+    if (!str) return "";
+    return str
+      .replace(/\*\*(.*?)\*\*/g, '<strong style="color: #FFFFFF; font-weight: 800;">$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em style="color: rgba(255,255,255,0.75);">$1</em>')
+      .replace(/`([^`]+)`/g, '<code style="background: rgba(255,255,255,0.1); padding: 1px 6px; border-radius: 4px; font-size: 12px; color: #3B82F6;">$1</code>');
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 130px)", fontFamily: "'Space Grotesk', ui-sans-serif, system-ui, sans-serif", position: "relative" }}>
+
+      {/* ── TOP HEADER (ChatGPT-Style with Title "Coach") ── */}
+      <div style={{ flexShrink: 0, marginBottom: 8, borderBottom: "1px solid rgba(255,255,255,0.07)", paddingBottom: 10 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          {/* Title */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{
+              width: 34,
+              height: 34,
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, rgba(54,120,245,0.3) 0%, rgba(14,18,26,0.9) 100%)",
+              border: "1.5px solid rgba(54,120,245,0.5)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 0 14px rgba(54,120,245,0.35)"
+            }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4.5 5.5h15v10.5H10l-3.5 3.5v-3.5H4.5z" />
+              </svg>
+            </div>
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900, color: "#FFFFFF", letterSpacing: -0.4 }}>Coach</h1>
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: LIME, boxShadow: `0 0 8px ${LIME}` }} />
+              </div>
+              <div style={{ fontSize: 10.5, color: "rgba(255,255,255,0.45)", fontWeight: 700, letterSpacing: 0.3 }}>
+                {currentSession.title.length > 28 ? currentSession.title.substring(0, 28) + "..." : currentSession.title}
+              </div>
+            </div>
+          </div>
+
+          {/* Header Action Buttons */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <button
+              onClick={() => setShowHistoryDrawer(!showHistoryDrawer)}
+              className="mat-ripple"
+              style={{
+                background: showHistoryDrawer ? "rgba(54,120,245,0.2)" : "rgba(255,255,255,0.05)",
+                border: `1px solid ${showHistoryDrawer ? LIME : "rgba(255,255,255,0.1)"}`,
+                borderRadius: 10,
+                padding: "6px 10px",
+                color: showHistoryDrawer ? BLUE_LIGHT : "rgba(255,255,255,0.75)",
+                fontSize: 11,
+                fontWeight: 800,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: 5
+              }}
+              title="Chat Sessions History"
+            >
+              <span>🕒</span>
+              <span>Chats ({sessions.length})</span>
+            </button>
+
+            <button
+              onClick={handleNewChat}
+              className="mat-ripple"
+              style={{
+                background: "linear-gradient(135deg, rgba(54,120,245,0.25) 0%, rgba(26,94,229,0.35) 100%)",
+                border: "1px solid rgba(54,120,245,0.5)",
+                borderRadius: 10,
+                padding: "6px 12px",
+                color: "#FFFFFF",
+                fontSize: 11,
+                fontWeight: 800,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                boxShadow: "0 2px 10px rgba(54,120,245,0.2)"
+              }}
+              title="Start a new chat"
+            >
+              <span>+</span>
+              <span>New</span>
+            </button>
+          </div>
+        </div>
+
+        {/* ── TOP LIVE DASHBOARD (Dynamic Athlete Telemetry) ── */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr 1fr",
+          gap: 6,
+          marginTop: 10,
+          background: "#14171F",
+          border: "1px solid rgba(255,255,255,0.07)",
+          borderRadius: 12,
+          padding: "8px 10px"
+        }}>
+          <div>
+            <div style={{ fontSize: 9.5, color: "rgba(255,255,255,0.4)", fontWeight: 800, textTransform: "uppercase" }}>Calories</div>
+            <div style={{ fontSize: 13, fontWeight: 900, color: LIME }}>{remCal} <span style={{ fontSize: 9, color: "rgba(255,255,255,0.4)" }}>kcal</span></div>
+          </div>
+          <div>
+            <div style={{ fontSize: 9.5, color: "rgba(255,255,255,0.4)", fontWeight: 800, textTransform: "uppercase" }}>Protein</div>
+            <div style={{ fontSize: 13, fontWeight: 900, color: BLUE_LIGHT }}>{remP} <span style={{ fontSize: 9, color: "rgba(255,255,255,0.4)" }}>g</span></div>
+          </div>
+          <div>
+            <div style={{ fontSize: 9.5, color: "rgba(255,255,255,0.4)", fontWeight: 800, textTransform: "uppercase" }}>Carbs</div>
+            <div style={{ fontSize: 13, fontWeight: 900, color: CYAN }}>{remC} <span style={{ fontSize: 9, color: "rgba(255,255,255,0.4)" }}>g</span></div>
+          </div>
+          <div>
+            <div style={{ fontSize: 9.5, color: "rgba(255,255,255,0.4)", fontWeight: 800, textTransform: "uppercase" }}>Fat</div>
+            <div style={{ fontSize: 13, fontWeight: 900, color: AMBER }}>{remF} <span style={{ fontSize: 9, color: "rgba(255,255,255,0.4)" }}>g</span></div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── CHAT SESSIONS DRAWER MODAL ── */}
+      {showHistoryDrawer && (
+        <div style={{
+          position: "absolute",
+          top: 86,
+          left: 0,
+          right: 0,
+          zIndex: 90,
+          background: "#EAF2FF",
+          border: "1px solid rgba(54,120,245,0.3)",
+          borderRadius: 16,
+          padding: "14px",
+          boxShadow: "0 14px 40px rgba(0,0,0,0.85)",
+          maxHeight: 280,
+          overflowY: "auto"
+        }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+            <span style={{ fontSize: 11, fontWeight: 900, color: BLUE_LIGHT, letterSpacing: 1, textTransform: "uppercase" }}>
+              Conversations History
+            </span>
+            <button
+              onClick={handleClearCurrentChat}
+              style={{ background: "none", border: "none", color: "#EF4444", fontSize: 11, fontWeight: 800, cursor: "pointer" }}
+            >
+              Clear Current
+            </button>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {sessions.map(s => {
+              const active = s.id === currentSession.id;
+              return (
+                <div
+                  key={s.id}
+                  onClick={() => {
+                    handleStopGenerating();
+                    setActiveSessionId(s.id);
+                    if (typeof localStorage !== "undefined") localStorage.setItem("stoke_coach_active_id", s.id);
+                    setShowHistoryDrawer(false);
+                  }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "8px 12px",
+                    borderRadius: 10,
+                    background: active ? "rgba(54, 120, 245, 0.15)" : "rgba(255,255,255,0.03)",
+                    border: `1px solid ${active ? LIME : "rgba(255,255,255,0.06)"}`,
+                    cursor: "pointer"
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
+                    <span style={{ fontSize: 13, color: active ? BLUE_LIGHT : "rgba(255,255,255,0.4)" }}>💬</span>
+                    <span style={{ fontSize: 12.5, fontWeight: active ? 800 : 600, color: active ? "#FFFFFF" : "rgba(255,255,255,0.7)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      {s.title}
+                    </span>
+                  </div>
+                  {sessions.length > 1 && (
+                    <button
+                      onClick={(e) => handleDeleteSession(s.id, e)}
+                      style={{ background: "none", border: "none", color: "rgba(255,255,255,0.3)", fontSize: 12, cursor: "pointer", padding: "2px 4px" }}
+                      title="Delete chat"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* ── SCROLLABLE CONVERSATION AREA ── */}
+      <div style={{
+        flex: 1,
+        overflowY: "auto",
+        WebkitOverflowScrolling: "touch",
+        padding: "8px 2px 20px",
+        display: "flex",
+        flexDirection: "column",
+        gap: 14
+      }}>
+        {messages.map((m, idx) => {
+          const isUser = m.role === "user";
+          return (
+            <div key={m.id || idx} style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: isUser ? "flex-end" : "flex-start",
+              width: "100%"
+            }}>
+              {/* Message Header / Timestamp */}
+              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.35)", fontWeight: 700, marginBottom: 4, padding: "0 6px" }}>
+                {isUser ? athleteName : "Coach"} · {m.timestamp}
+              </div>
+
+              {/* Message Bubble */}
+              <div style={{
+                maxWidth: isUser ? "85%" : "100%",
+                background: isUser ? "linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%)" : "#FFFFFF",
+                color: "#FFFFFF",
+                border: isUser ? "1px solid rgba(255,255,255,0.15)" : "1px solid rgba(255,255,255,0.08)",
+                borderRadius: isUser ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
+                padding: "14px 16px",
+                boxShadow: isUser ? "0 4px 16px rgba(29, 78, 216, 0.3)" : "0 4px 20px rgba(0,0,0,0.5)",
+                width: isUser ? "auto" : "100%",
+                boxSizing: "border-box"
+              }}>
+                {/* Content */}
+                <div style={{ fontSize: 14, color: isUser ? "#FFFFFF" : "#26354A", lineHeight: 1.55 }}>
+                  {renderMarkdown(m.content || "")}
+                  {!isUser && isGenerating && idx === messages.length - 1 && (
+                    <span style={{ display: "inline-block", width: 7, height: 15, background: BLUE_LIGHT, marginLeft: 4, verticalAlign: "middle", animation: "pulseGlow3 0.8s infinite" }} />
+                  )}
+                </div>
+
+                {/* ── ACTIONABLE MEAL CARD ── */}
+                {m.mealCard && (
+                  <div style={{
+                    marginTop: 14,
+                    background: "linear-gradient(145deg, rgba(54, 120, 245, 0.08) 0%, rgba(14,18,26,0.95) 100%)",
+                    border: "1.5px solid rgba(54, 120, 245, 0.35)",
+                    borderRadius: 14,
+                    padding: "14px",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.5)"
+                  }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+                      <div>
+                        <div style={{ fontSize: 15, fontWeight: 900, color: "#FFFFFF" }}>{m.mealCard.name}</div>
+                        <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", marginTop: 2 }}>{m.mealCard.portion}</div>
+                      </div>
+                      <span style={{ fontSize: 16, fontWeight: 900, color: BLUE_LIGHT }}>{m.mealCard.calories} kcal</span>
+                    </div>
+
+                    {/* Macro pills */}
+                    <div style={{ display: "flex", gap: 6, margin: "8px 0 12px", flexWrap: "wrap" }}>
+                      <span style={{ background: "rgba(54, 120, 245, 0.15)", color: BLUE_LIGHT, padding: "3px 9px", borderRadius: 6, fontSize: 11, fontWeight: 800 }}>P: {m.mealCard.protein}g</span>
+                      <span style={{ background: "rgba(46, 212, 191, 0.15)", color: CYAN, padding: "3px 9px", borderRadius: 6, fontSize: 11, fontWeight: 800 }}>C: {m.mealCard.carbs}g</span>
+                      <span style={{ background: "rgba(255, 138, 61, 0.15)", color: AMBER, padding: "3px 9px", borderRadius: 6, fontSize: 11, fontWeight: 800 }}>F: {m.mealCard.fat}g</span>
+                      {m.mealCard.fibre && (
+                        <span style={{ background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.7)", padding: "3px 9px", borderRadius: 6, fontSize: 11, fontWeight: 800 }}>Fibre: {m.mealCard.fibre}</span>
+                      )}
+                    </div>
+
+                    {/* Action buttons */}
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <button
+                        onClick={() => handleAddMealToNutrition(m.mealCard)}
+                        className="mat-ripple"
+                        style={{
+                          flex: 1,
+                          background: "linear-gradient(135deg, #3678F5 0%, #1A5EE5 100%)",
+                          color: "#FFFFFF",
+                          border: "none",
+                          borderRadius: 10,
+                          padding: "9px 0",
+                          fontWeight: 800,
+                          fontSize: 12,
+                          cursor: "pointer",
+                          boxShadow: "0 2px 10px rgba(54,120,245,0.3)"
+                        }}
+                      >
+                        + Add to Nutrition
+                      </button>
+                      <button
+                        onClick={() => handleSaveMealToLibrary(m.mealCard)}
+                        style={{
+                          background: "rgba(255,255,255,0.06)",
+                          color: "rgba(255,255,255,0.85)",
+                          border: "1px solid rgba(255,255,255,0.12)",
+                          borderRadius: 10,
+                          padding: "9px 14px",
+                          fontWeight: 700,
+                          fontSize: 12,
+                          cursor: "pointer"
+                        }}
+                      >
+                        Save Meal
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* ── ACTIONABLE WORKOUT CARD ── */}
+                {m.workoutCard && (
+                  <div style={{
+                    marginTop: 14,
+                    background: "linear-gradient(145deg, rgba(54, 120, 245, 0.08) 0%, rgba(14,18,26,0.95) 100%)",
+                    border: "1.5px solid rgba(54, 120, 245, 0.35)",
+                    borderRadius: 14,
+                    padding: "14px",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.5)"
+                  }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                      <div>
+                        <div style={{ fontSize: 15, fontWeight: 900, color: "#FFFFFF" }}>{m.workoutCard.title}</div>
+                        <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", marginTop: 2 }}>Estimated Duration: {m.workoutCard.duration}</div>
+                      </div>
+                      <span style={{ fontSize: 16 }}>🏋️</span>
+                    </div>
+
+                    {/* Exercises list */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
+                      {m.workoutCard.exercises.map((ex, exIdx) => (
+                        <div key={exIdx} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 8px", background: "rgba(255,255,255,0.03)", borderRadius: 8 }}>
+                          <span style={{ fontSize: 12.5, fontWeight: 700, color: "#FFFFFF" }}>{ex.name}</span>
+                          <span style={{ fontSize: 11, color: BLUE_LIGHT, fontWeight: 800 }}>{ex.sets} sets × {ex.reps} ({ex.rest} rest)</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Action buttons */}
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <button
+                        onClick={() => handleStartWorkout(m.workoutCard)}
+                        className="mat-ripple"
+                        style={{
+                          flex: 1,
+                          background: "linear-gradient(135deg, #3678F5 0%, #1A5EE5 100%)",
+                          color: "#FFFFFF",
+                          border: "none",
+                          borderRadius: 10,
+                          padding: "9px 0",
+                          fontWeight: 800,
+                          fontSize: 12,
+                          cursor: "pointer",
+                          boxShadow: "0 2px 10px rgba(54,120,245,0.3)"
+                        }}
+                      >
+                        Start Workout
+                      </button>
+                      <button
+                        onClick={() => handleSaveWorkoutToLibrary(m.workoutCard)}
+                        style={{
+                          background: "rgba(255,255,255,0.06)",
+                          color: "rgba(255,255,255,0.85)",
+                          border: "1px solid rgba(255,255,255,0.12)",
+                          borderRadius: 10,
+                          padding: "9px 14px",
+                          fontWeight: 700,
+                          fontSize: 12,
+                          cursor: "pointer"
+                        }}
+                      >
+                        Save Routine
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* ── ASSISTANT MESSAGE TOOLBAR ── */}
+                {!isUser && (
+                  <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 12, paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                    <button
+                      onClick={() => handleCopy(m.content)}
+                      style={{ background: "none", border: "none", color: "rgba(255,255,255,0.45)", fontSize: 11, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}
+                      title="Copy response"
+                    >
+                      <span>📋</span> Copy
+                    </button>
+                    <button
+                      onClick={() => handleSpeak(m.content, m.id)}
+                      style={{ background: "none", border: "none", color: "rgba(255,255,255,0.45)", fontSize: 11, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}
+                      title="Read aloud"
+                    >
+                      <span>🔊</span> Read
+                    </button>
+                    {idx === messages.length - 1 && !isGenerating && (
+                      <button
+                        onClick={handleRegenerate}
+                        style={{ background: "none", border: "none", color: "rgba(255,255,255,0.45)", fontSize: 11, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}
+                        title="Regenerate response"
+                      >
+                        <span>🔄</span> Regenerate
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* ── CONVERSATIONAL SUGGESTIONS CHIPS ── */}
+              {!isUser && m.suggestions && m.suggestions.length > 0 && idx === messages.length - 1 && !isGenerating && (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8, maxWidth: "95%" }}>
+                  {m.suggestions.map((sug, sidx) => (
+                    <button
+                      key={sidx}
+                      onClick={() => sendMessage(sug)}
+                      style={{
+                        background: "rgba(255,255,255,0.04)",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        borderRadius: 999,
+                        padding: "6px 12px",
+                        color: "rgba(255,255,255,0.8)",
+                        fontSize: 11.5,
+                        cursor: "pointer",
+                        fontWeight: 600,
+                        transition: "all 0.15s ease"
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = BLUE_LIGHT; e.currentTarget.style.color = BLUE_LIGHT; }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "rgba(255,255,255,0.8)"; }}
+                    >
+                      {sug}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {/* Stop Generating Button while streaming */}
+        {isGenerating && (
+          <div style={{ display: "flex", justifyContent: "center", margin: "4px 0" }}>
+            <button
+              onClick={handleStopGenerating}
+              style={{
+                background: "rgba(239,68,68,0.15)",
+                border: "1px solid rgba(239,68,68,0.4)",
+                borderRadius: 999,
+                padding: "6px 16px",
+                color: "#EF4444",
+                fontSize: 12,
+                fontWeight: 800,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: 6
+              }}
+            >
+              <span>⏹</span> Stop generating
+            </button>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* ── QUICK ACTION CHIPS (Above Composer) ── */}
+      {messages.length <= 1 && (
+        <div style={{ display: "flex", gap: 6, overflowX: "auto", padding: "6px 2px", marginBottom: 6, flexShrink: 0 }}>
+          {[
+            "Build my meals for today",
+            "What should I eat with my remaining macros?",
+            "Create today’s workout",
+            "High-protein meal ideas",
+            "Analyse my nutrition today",
+            "How am I doing today?"
+          ].map((prompt, pIdx) => (
+            <button
+              key={pIdx}
+              onClick={() => sendMessage(prompt)}
+              style={{
+                flexShrink: 0,
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 999,
+                padding: "6px 12px",
+                color: "rgba(255,255,255,0.75)",
+                fontSize: 11,
+                fontWeight: 700,
+                cursor: "pointer",
+                whiteSpace: "nowrap"
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = BLUE_LIGHT; e.currentTarget.style.color = BLUE_LIGHT; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.color = "rgba(255,255,255,0.75)"; }}
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* ── TOAST SNACKBAR ── */}
+      {toastMsg && (
+        <div style={{
+          position: "fixed",
+          bottom: 84,
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "#EAF2FF",
+          border: `1.5px solid ${LIME}`,
+          borderRadius: 999,
+          padding: "8px 20px",
+          color: BLUE_LIGHT,
+          fontSize: 12,
+          fontWeight: 800,
+          zIndex: 9999,
+          boxShadow: "0 10px 30px rgba(0,0,0,0.8)"
+        }}>
+          {toastMsg}
+        </div>
+      )}
+
+      {/* ── CHATGPT-STYLE STICKY MESSAGE COMPOSER ── */}
+      <div style={{
+        display: "flex",
+        alignItems: "flex-end",
+        gap: 8,
+        background: "#14171F",
+        border: "1.5px solid rgba(255,255,255,0.1)",
+        borderRadius: 20,
+        padding: "8px 10px 8px 14px",
+        boxShadow: "inset 2px 2px 6px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.5)",
+        flexShrink: 0
+      }}>
+        {/* Voice mic button */}
+        <button
+          onClick={handleVoiceInput}
+          style={{
+            background: isListening ? "rgba(239,68,68,0.2)" : "rgba(255,255,255,0.05)",
+            border: `1px solid ${isListening ? "#EF4444" : "rgba(255,255,255,0.1)"}`,
+            borderRadius: "50%",
+            width: 36,
+            height: 36,
+            color: isListening ? "#EF4444" : "rgba(255,255,255,0.7)",
+            fontSize: 15,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 2
+          }}
+          title="Dictate with voice"
+        >
+          🎙️
+        </button>
+
+        {/* Multi-line textarea */}
+        <textarea
+          ref={inputRef}
+          rows={1}
+          value={inputText}
+          onChange={e => setInputText(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage();
+            }
+          }}
+          placeholder="Ask Coach anything…"
+          style={{
+            flex: 1,
+            background: "transparent",
+            border: "none",
+            color: "#FFFFFF",
+            fontSize: 14,
+            fontWeight: 500,
+            outline: "none",
+            fontFamily: "inherit",
+            resize: "none",
+            maxHeight: 100,
+            padding: "8px 0 6px",
+            lineHeight: 1.4
+          }}
+        />
+
+        {/* Clear input if present */}
+        {inputText.trim() && (
+          <button
+            onClick={() => setInputText("")}
+            style={{
+              background: "none",
+              border: "none",
+              color: "rgba(255,255,255,0.4)",
+              fontSize: 14,
+              cursor: "pointer",
+              padding: "0 4px",
+              marginBottom: 8
+            }}
+          >
+            ✕
+          </button>
+        )}
+
+        {/* Send Button */}
+        <button
+          onClick={() => sendMessage()}
+          disabled={!inputText.trim() || isGenerating}
+          style={{
+            background: inputText.trim() && !isGenerating ? "linear-gradient(135deg, #3678F5 0%, #1A5EE5 100%)" : "rgba(255,255,255,0.08)",
+            color: inputText.trim() && !isGenerating ? "#FFFFFF" : "rgba(255,255,255,0.3)",
+            border: "none",
+            borderRadius: 14,
+            width: 38,
+            height: 38,
+            fontWeight: 900,
+            fontSize: 16,
+            cursor: inputText.trim() && !isGenerating ? "pointer" : "default",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: inputText.trim() && !isGenerating ? `0 2px 10px rgba(54, 120, 245, 0.4)` : "none",
+            marginBottom: 1
+          }}
+          title="Send message"
+        >
+          ↑
+        </button>
+      </div>
+
+    </div>
+  );
+}

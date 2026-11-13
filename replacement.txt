@@ -1,0 +1,425 @@
+  const [pHelpMeal, setPHelpMeal] = useState("Yes, definitely");
+  const [pActivity, setPActivity] = useState("very");
+  const [pSex, setPSex] = useState("male");
+  const [pAge, setPAge] = useState("21");
+  const [pCountry, setPCountry] = useState("India");
+  const [pZip, setPZip] = useState("");
+  const [pHeight, setPHeight] = useState("167");
+  const [pWeight, setPWeight] = useState("70");
+  const [pTerms, setPTerms] = useState(true);
+  const [pReminders, setPReminders] = useState(true);
+  const [pSteps, setPSteps] = useState(true);
+  const [pEmails, setPEmails] = useState(true);
+
+  // ── SAVED EMAIL CHAIN STATE ──
+  const [emailChain, setEmailChain] = useState([
+    { name: "Mohd Numan", email: "mohdnuman701@gmail.com", avatar: "M", color: "#D93025", tag: "Primary", lastUsed: "Active now" },
+    { name: "Mohd Numan", email: "mohdnuman925@gmail.com", avatar: "M", color: "#1E8E3E", tag: "Athlete", lastUsed: "Yesterday" },
+    { name: "Mohd Numan", email: "2210560090@klh.edu.in", avatar: "N", color: "#E37400", tag: "KLH Edu", lastUsed: "2d ago" },
+    { name: "Mohammed numan", email: "2210560148@klh.edu.in", avatar: "M", color: "#1A73E8", tag: "KLH Student", lastUsed: "Sep 28" },
+  ]);
+  const [showAddChain, setShowAddChain] = useState(false);
+  const [newChainEmail, setNewChainEmail] = useState("");
+  const [newChainName, setNewChainName] = useState("");
+
+  const LIME = "#D7FF3E";
+  const totalQSteps = 14;
+
+  const calcCal = (() => {
+    const w = parseFloat(pWeight) || 70, h = parseFloat(pHeight) || 167, a = parseInt(pAge) || 21;
+    const bmr = pSex === "female" ? 10 * w + 6.25 * h - 5 * a - 161 : 10 * w + 6.25 * h - 5 * a + 5;
+    const act = pActivity === "very" ? 1.725 : pActivity === "active" ? 1.55 : 1.375;
+    const isGain = pGoals.includes("Gain Muscle") || pGoals.includes("Gain Weight");
+    const isLoss = pGoals.includes("Lose Weight");
+    const t = Math.round(bmr * act + (isGain ? 400 : isLoss ? -400 : 0));
+    return t > 1500 ? t : 2450;
+  })();
+
+  function doManualLogin() {
+    if (!phone.trim() || !password.trim()) { setError("Enter your email/phone and password."); return; }
+    setError(""); setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      onSignIn(phone, {
+        name: phone.includes("@") ? phone.split("@")[0] : "Athlete",
+        weightKg: 70,
+        heightCm: 175,
+        age: 25,
+        sex: "male",
+        goalType: "maintain",
+        activity: 1.55
+      });
+    }, 950);
+  }
+
+  function selectGoogle(acc) {
+    setSelGoogle(acc);
+    setPName(acc.name.split(" ")[0]);
+    setView("google_confirm");
+  }
+
+  function confirmGoogle() {
+    setGLoading(true);
+    setTimeout(() => {
+      setGLoading(false);
+      setQStep(1);
+      setView("questionnaire");
+    }, 850);
+  }
+
+  function finishOnboarding() {
+    onSignIn(selGoogle ? selGoogle.email : (phone || "athlete@stoke.app"), {
+      name: pName.trim() || "Mohd",
+      age: parseInt(pAge) || 21,
+      weightKg: parseFloat(pWeight) || 70,
+      heightCm: parseFloat(pHeight) || 167,
+      sex: pSex,
+      goalType: pGoals.includes("Lose Weight") ? "cut" : (pGoals.includes("Gain Muscle") || pGoals.includes("Gain Weight")) ? "gain" : "maintain",
+      activity: pActivity === "very" ? 1.725 : pActivity === "active" ? 1.55 : pActivity === "lightly" ? 1.375 : 1.2
+    });
+  }
+
+  const catLabel = qStep === 1 ? "Welcome" : qStep <= 9 ? "Goals" : qStep <= 11 ? "About You" : qStep === 12 ? "Create Account" : "Account Created";
+
+  /* ─────────────────────────── SIGN IN ─────────────────────────────── */
+  if (view === "signin") {
+    return (
+      <div style={{ position: "relative", minHeight: "100vh", fontFamily: "'Space Grotesk', ui-sans-serif, system-ui, sans-serif", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        <NeuBackground accent={LIME} />
+        <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: "28px 20px 40px" }}>
+          <div style={{ maxWidth: 410, width: "100%", margin: "0 auto" }}>
+
+            {/* Swiss Brand Header */}
+            <div style={{ textAlign: "center", marginBottom: 20, animation: "fadeUp3 0.5s ease-out both" }}>
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}>
+                <NeuLogo size={56} />
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "0 auto 8px", maxWidth: 220 }}>
+                <div style={{ flex: 1, height: 1, background: "rgba(215,255,62,0.35)" }} />
+                <span style={{ fontSize: 9, color: "rgba(215,255,62,0.85)", fontWeight: 800, letterSpacing: 2.5, textTransform: "uppercase" }}>stoke athlete</span>
+                <div style={{ flex: 1, height: 1, background: "rgba(215,255,62,0.35)" }} />
+              </div>
+              <h1 style={{ fontSize: 26, fontWeight: 900, color: "#fff", margin: "0 0 4px", letterSpacing: -0.6 }}>Welcome Back</h1>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", margin: 0, fontWeight: 500 }}>Sign in via your saved email chain or credentials</p>
+            </div>
+
+            {/* Soft UI + Material Card */}
+            <div className="s3-glass" style={{ padding: "20px 18px", marginBottom: 18, animation: "fadeUp3 0.55s ease-out 0.1s both" }}>
+
+              {/* ── SAVED EMAIL CHAIN ── */}
+              <div style={{ marginBottom: 16 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ fontSize: 13 }}>⛓️</span>
+                    <span style={{ fontSize: 10.5, fontWeight: 900, color: LIME, letterSpacing: 1.5, textTransform: "uppercase" }}>
+                      Chain of Saved Emails
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ fontSize: 9.5, background: "rgba(215,255,62,0.12)", color: LIME, padding: "2px 7px", borderRadius: 999, fontWeight: 800, border: "1px solid rgba(215,255,62,0.25)" }}>
+                      {emailChain.length} Linked
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setShowAddChain(v => !v)}
+                      style={{ background: "none", border: "none", color: showAddChain ? "#FF7070" : "rgba(255,255,255,0.5)", fontSize: 10.5, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 2, padding: "2px 4px" }}
+                    >
+                      {showAddChain ? "✕ Close" : "+ Link Email"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Optional Add Email Drawer */}
+                {showAddChain && (
+                  <div style={{ background: "rgba(215,255,62,0.05)", border: "1px solid rgba(215,255,62,0.25)", borderRadius: 12, padding: "12px", marginBottom: 12, animation: "fadeUp3 0.3s ease-out" }}>
+                    <div style={{ fontSize: 11, fontWeight: 800, color: LIME, marginBottom: 8 }}>+ Link New Email to Chain</div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                      <input
+                        type="text"
+                        placeholder="Account name (e.g. Mohd Work)"
+                        value={newChainName}
+                        onChange={e => setNewChainName(e.target.value)}
+                        style={{ background: "rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 8, padding: "7px 10px", color: "#fff", fontSize: 12, outline: "none" }}
+                      />
+                      <input
+                        type="email"
+                        placeholder="Email address"
+                        value={newChainEmail}
+                        onChange={e => setNewChainEmail(e.target.value)}
+                        style={{ background: "rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 8, padding: "7px 10px", color: "#fff", fontSize: 12, outline: "none" }}
+                      />
+                      <div style={{ display: "flex", gap: 6, justifyContent: "flex-end", marginTop: 4 }}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (!newChainEmail.trim() || !newChainEmail.includes("@")) return;
+                            const newAcc = {
+                              name: newChainName.trim() || newChainEmail.split("@")[0],
+                              email: newChainEmail.trim(),
+                              avatar: (newChainName.trim() || newChainEmail)[0].toUpperCase(),
+                              color: "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0"),
+                              tag: "Custom",
+                              lastUsed: "Just added"
+                            };
+                            setEmailChain(prev => [newAcc, ...prev]);
+                            setPhone(newAcc.email);
+                            setPassword("••••••••");
+                            setNewChainEmail("");
+                            setNewChainName("");
+                            setShowAddChain(false);
+                          }}
+                          style={{ background: LIME, color: "#060809", border: "none", borderRadius: 8, padding: "6px 12px", fontSize: 11, fontWeight: 800, cursor: "pointer" }}
+                        >
+                          Add to Chain ⛓️
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Connected Chain Rail + Nodes */}
+                <div style={{ position: "relative", paddingLeft: 18, display: "flex", flexDirection: "column", gap: 8 }}>
+                  {/* Glowing vertical chain line */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 7,
+                      top: 14,
+                      bottom: 14,
+                      width: 2,
+                      background: "linear-gradient(to bottom, rgba(215,255,62,0.6), rgba(215,255,62,0.2) 50%, rgba(215,255,62,0.5))",
+                      borderRadius: 2,
+                      boxShadow: "0 0 8px rgba(215,255,62,0.3)"
+                    }}
+                  />
+
+                  {emailChain.map((acc) => {
+                    const isSelected = phone === acc.email;
+                    return (
+                      <div key={acc.email} style={{ position: "relative" }}>
+                        {/* Chain link node marker */}
+                        <div
+                          style={{
+                            position: "absolute",
+                            left: -18,
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            width: 16,
+                            height: 16,
+                            borderRadius: "50%",
+                            background: isSelected ? LIME : "#15181E",
+                            border: `2px solid ${isSelected ? LIME : "rgba(215,255,62,0.4)"}`,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: 9,
+                            color: isSelected ? "#000" : LIME,
+                            boxShadow: isSelected ? "0 0 10px rgba(215,255,62,0.7)" : "none",
+                            zIndex: 2,
+                            transition: "all 0.2s ease"
+                          }}
+                        >
+                          🔗
+                        </div>
+
+                        {/* Account Box */}
+                        <div
+                          onClick={() => {
+                            setPhone(acc.email);
+                            setPassword("••••••••");
+                            setError("");
+                          }}
+                          className={`s3-option mat-ripple${isSelected ? " selected" : ""}`}
+                          style={{
+                            padding: "9px 11px",
+                            borderRadius: 12,
+                            background: isSelected ? "rgba(215,255,62,0.08)" : "rgba(255,255,255,0.03)",
+                            border: `1.5px solid ${isSelected ? LIME : "rgba(255,255,255,0.08)"}`,
+                            boxShadow: isSelected ? "0 0 14px rgba(215,255,62,0.18)" : "none",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            gap: 10,
+                            cursor: "pointer",
+                            transition: "all 0.18s ease"
+                          }}
+                        >
+                          <div style={{ display: "flex", alignItems: "center", gap: 9, minWidth: 0, flex: 1 }}>
+                            <div
+                              style={{
+                                width: 34,
+                                height: 34,
+                                borderRadius: "50%",
+                                background: acc.color,
+                                color: "#fff",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontSize: 13,
+                                fontWeight: 800,
+                                flexShrink: 0,
+                                boxShadow: "0 2px 8px rgba(0,0,0,0.35)"
+                              }}
+                            >
+                              {acc.avatar}
+                            </div>
+                            <div style={{ minWidth: 0, flex: 1 }}>
+                              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                                <span style={{ fontSize: 12.5, fontWeight: 700, color: "#fff", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                  {acc.name}
+                                </span>
+                                {acc.tag && (
+                                  <span style={{ fontSize: 9, fontWeight: 800, background: isSelected ? "rgba(215,255,62,0.25)" : "rgba(255,255,255,0.08)", color: isSelected ? LIME : "rgba(255,255,255,0.6)", padding: "1px 5px", borderRadius: 4 }}>
+                                    {acc.tag}
+                                  </span>
+                                )}
+                              </div>
+                              <div style={{ fontSize: 11, color: isSelected ? LIME : "rgba(255,255,255,0.5)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                {acc.email}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* 1-Tap Sign In Button */}
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              addRipple(e);
+                              setLoading(true);
+                              setTimeout(() => {
+                                setLoading(false);
+                                onSignIn(acc.email, {
+                                  name: acc.name,
+                                  weightKg: 70,
+                                  heightCm: 167,
+                                  age: 21,
+                                  sex: "male",
+                                  goalType: "maintain",
+                                  activity: 1.725
+                                });
+                              }, 350);
+                            }}
+                            className="mat-ripple"
+                            style={{
+                              background: isSelected ? LIME : "rgba(255,255,255,0.06)",
+                              color: isSelected ? "#060809" : "rgba(255,255,255,0.85)",
+                              border: `1px solid ${isSelected ? LIME : "rgba(255,255,255,0.12)"}`,
+                              borderRadius: 8,
+                              padding: "5px 9px",
+                              fontSize: 10.5,
+                              fontWeight: 800,
+                              cursor: "pointer",
+                              letterSpacing: 0.2,
+                              whiteSpace: "nowrap",
+                              flexShrink: 0
+                            }}
+                          >
+                            Sign In ⚡
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Quick Chain Chips */}
+              <div style={{ margin: "10px 0 12px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                  <span style={{ fontSize: 9.5, color: "rgba(255,255,255,0.4)", fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.8 }}>
+                    Chain Switcher:
+                  </span>
+                  {phone && (
+                    <span onClick={() => { setPhone(""); setPassword(""); }} style={{ fontSize: 10, color: LIME, fontWeight: 700, cursor: "pointer" }}>
+                      Clear / Change
+                    </span>
+                  )}
+                </div>
+                <div style={{ display: "flex", gap: 6, overflowX: "auto", paddingBottom: 4 }}>
+                  {emailChain.map(acc => (
+                    <button
+                      key={acc.email}
+                      type="button"
+                      onClick={() => {
+                        setPhone(acc.email);
+                        setPassword("••••••••");
+                        setError("");
+                      }}
+                      style={{
+                        background: phone === acc.email ? "rgba(215,255,62,0.18)" : "rgba(255,255,255,0.05)",
+                        border: `1px solid ${phone === acc.email ? LIME : "rgba(255,255,255,0.1)"}`,
+                        borderRadius: 999,
+                        padding: "4px 9px",
+                        color: phone === acc.email ? LIME : "rgba(255,255,255,0.7)",
+                        fontSize: 10.5,
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        whiteSpace: "nowrap",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 4
+                      }}
+                    >
+                      <span>⛓️</span> {acc.email.split("@")[0]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Material Google Button */}
+              <button className="s3-google-btn mat-ripple" onClick={e => { addRipple(e); setView("google_picker"); }} style={{ marginBottom: 12 }}>
+                <GIcon /> Continue with Google
+              </button>
+
+              <OrDivider3 />
+
+              {/* Credentials Form */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 11, margin: "12px 0 10px" }}>
+                <NeuInput label="Email or phone" value={phone} onChange={e => { setPhone(e.target.value); setError(""); }} />
+                <NeuInput
+                  label="Password"
+                  type={showPw ? "text" : "password"}
+                  value={password}
+                  onChange={e => { setPassword(e.target.value); setError(""); }}
+                  onKeyDown={e => e.key === "Enter" && doManualLogin()}
+                  extraRight={
+                    <button
+                      onClick={() => setShowPw(p => !p)}
+                      style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "rgba(255,255,255,0.35)", cursor: "pointer", fontSize: 17, padding: 0, lineHeight: 1, zIndex: 2 }}
+                    >
+                      {showPw ? "🙈" : "👁️"}
+                    </button>
+                  }
+                />
+              </div>
+
+              {/* Actions row: Change Email & Forgot Password */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                <span onClick={() => { setPhone(""); setPassword(""); }} style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", fontWeight: 600, cursor: "pointer" }}>
+                  ✏️ Enter Different Email
+                </span>
+                <span style={{ fontSize: 11.5, color: "rgba(215,255,62,0.75)", fontWeight: 700, cursor: "pointer", letterSpacing: 0.2 }}>
+                  Forgot password?
+                </span>
+              </div>
+
+              {error && (
+                <div style={{ background: "rgba(255,60,60,0.09)", border: "1px solid rgba(255,80,80,0.28)", borderRadius: 12, padding: "10px 14px", fontSize: 12.5, color: "#FF7070", fontWeight: 600, marginBottom: 14, boxShadow: "0 0 14px rgba(255,60,60,0.1)", display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontSize: 16 }}>⚠️</span> {error}
+                </div>
+              )}
+
+              <button className="s3-primary-btn mat-ripple" onClick={e => { addRipple(e); doManualLogin(); }} disabled={loading}>
+                {loading ? <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}><NeuSpinner /> Signing in…</span> : "Log In"}
+              </button>
+            </div>
+
+            <div style={{ textAlign: "center", fontSize: 13.5, color: "rgba(255,255,255,0.4)", animation: "fadeUp3 0.55s ease-out 0.18s both" }}>
+              New here? <span onClick={() => setView("welcome_choice")} style={{ color: LIME, fontWeight: 900, cursor: "pointer" }}>Create account →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }

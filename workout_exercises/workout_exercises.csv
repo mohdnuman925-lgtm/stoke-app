@@ -1,0 +1,227 @@
+Program,Week,Day,Focus,Exercise Name,Target Sets,Target Reps
+Classic Split,Week A,Monday,Chest + Triceps,Bench Press,3,10
+Classic Split,Week A,Monday,Chest + Triceps,Incline Press,3,10
+Classic Split,Week A,Monday,Chest + Triceps,Chest Fly,3,12
+Classic Split,Week A,Monday,Chest + Triceps,Dips,3,10
+Classic Split,Week A,Monday,Chest + Triceps,Cable Crossover,3,12
+Classic Split,Week A,Monday,Chest + Triceps,Triceps Pushdown,3,12
+Classic Split,Week A,Monday,Chest + Triceps,Overhead Triceps Extension,3,12
+Classic Split,Week A,Monday,Chest + Triceps,Close-Grip Push-up,2,15
+Classic Split,Week A,Tuesday,Back + Biceps,Deadlift,3,8
+Classic Split,Week A,Tuesday,Back + Biceps,Pull-up,3,8
+Classic Split,Week A,Tuesday,Back + Biceps,Lat Pulldown,3,10
+Classic Split,Week A,Tuesday,Back + Biceps,Barbell Row,3,10
+Classic Split,Week A,Tuesday,Back + Biceps,Seated Cable Row,3,12
+Classic Split,Week A,Tuesday,Back + Biceps,Bicep Curl,3,12
+Classic Split,Week A,Tuesday,Back + Biceps,Hammer Curl,3,12
+Classic Split,Week A,Tuesday,Back + Biceps,Face Pull,2,15
+Classic Split,Week A,Wednesday,Legs,Squat,4,8
+Classic Split,Week A,Wednesday,Legs,Romanian Deadlift,3,10
+Classic Split,Week A,Wednesday,Legs,Leg Press,3,12
+Classic Split,Week A,Wednesday,Legs,Walking Lunge,3,12
+Classic Split,Week A,Wednesday,Legs,Leg Curl,3,12
+Classic Split,Week A,Wednesday,Legs,Leg Extension,3,12
+Classic Split,Week A,Wednesday,Legs,Calf Raise,4,15
+Classic Split,Week A,Wednesday,Legs,Hip Thrust,3,10
+Classic Split,Week A,Thursday,Core + Active Recovery,Plank,3,45s
+Classic Split,Week A,Thursday,Core + Active Recovery,Hanging Leg Raise,3,12
+Classic Split,Week A,Thursday,Core + Active Recovery,Russian Twist,3,20
+Classic Split,Week A,Thursday,Core + Active Recovery,Cable Crunch,3,15
+Classic Split,Week A,Thursday,Core + Active Recovery,Bird Dog,3,12
+Classic Split,Week A,Thursday,Core + Active Recovery,Light Cycling,1,20m
+Classic Split,Week A,Friday,Shoulders + Arms,Overhead Press,3,10
+Classic Split,Week A,Friday,Shoulders + Arms,Arnold Press,3,10
+Classic Split,Week A,Friday,Shoulders + Arms,Lateral Raise,3,15
+Classic Split,Week A,Friday,Shoulders + Arms,Rear Delt Fly,3,15
+Classic Split,Week A,Friday,Shoulders + Arms,Shrugs,3,12
+Classic Split,Week A,Friday,Shoulders + Arms,Hammer Curl,3,12
+Classic Split,Week A,Friday,Shoulders + Arms,Skull Crushers,3,12
+Classic Split,Week A,Friday,Shoulders + Arms,Face Pull,2,15
+Classic Split,Week A,Saturday,Full Body / Cardio,Kettlebell Swing,3,15
+Classic Split,Week A,Saturday,Full Body / Cardio,Goblet Squat,3,12
+Classic Split,Week A,Saturday,Full Body / Cardio,Push-up,3,15
+Classic Split,Week A,Saturday,Full Body / Cardio,Dumbbell Row,3,12
+Classic Split,Week A,Saturday,Full Body / Cardio,Mountain Climbers,3,20
+Classic Split,Week A,Saturday,Full Body / Cardio,Plank,3,45s
+Classic Split,Week A,Saturday,Full Body / Cardio,Burpees,3,12
+Classic Split,Week A,Saturday,Full Body / Cardio,Incline Treadmill Walk,1,20m
+Classic Split,Week B,Monday,Chest + Triceps,Incline Dumbbell Press,4,8
+Classic Split,Week B,Monday,Chest + Triceps,Flat Dumbbell Press,3,10
+Classic Split,Week B,Monday,Chest + Triceps,Pec Deck,3,12
+Classic Split,Week B,Monday,Chest + Triceps,Weighted Dip,3,10
+Classic Split,Week B,Monday,Chest + Triceps,Low-to-High Cable Fly,3,12
+Classic Split,Week B,Monday,Chest + Triceps,Rope Pushdown,3,12
+Classic Split,Week B,Monday,Chest + Triceps,Diamond Push-up,2,15
+Classic Split,Week B,Monday,Chest + Triceps,JM Press,3,10
+Classic Split,Week B,Tuesday,Back + Biceps,Rack Pull,3,6
+Classic Split,Week B,Tuesday,Back + Biceps,Chin-up,3,8
+Classic Split,Week B,Tuesday,Back + Biceps,Single-Arm Lat Pulldown,3,10
+Classic Split,Week B,Tuesday,Back + Biceps,T-Bar Row,3,10
+Classic Split,Week B,Tuesday,Back + Biceps,Chest-Supported Row,3,12
+Classic Split,Week B,Tuesday,Back + Biceps,Preacher Curl,3,12
+Classic Split,Week B,Tuesday,Back + Biceps,Cable Curl,3,12
+Classic Split,Week B,Tuesday,Back + Biceps,Rear Delt Row,2,15
+Classic Split,Week B,Wednesday,Legs,Front Squat,4,6
+Classic Split,Week B,Wednesday,Legs,Stiff-Leg Deadlift,3,10
+Classic Split,Week B,Wednesday,Legs,Hack Squat,3,12
+Classic Split,Week B,Wednesday,Legs,Bulgarian Split Squat,3,10
+Classic Split,Week B,Wednesday,Legs,Seated Leg Curl,3,12
+Classic Split,Week B,Wednesday,Legs,Sissy Squat,3,12
+Classic Split,Week B,Wednesday,Legs,Seated Calf Raise,4,15
+Classic Split,Week B,Wednesday,Legs,Glute Bridge,3,12
+Classic Split,Week B,Thursday,Core + Active Recovery,Side Plank,3,30s
+Classic Split,Week B,Thursday,Core + Active Recovery,Toes-to-Bar,3,10
+Classic Split,Week B,Thursday,Core + Active Recovery,Cable Woodchopper,3,15
+Classic Split,Week B,Thursday,Core + Active Recovery,Ab Wheel Rollout,3,10
+Classic Split,Week B,Thursday,Core + Active Recovery,Dead Bug,3,12
+Classic Split,Week B,Thursday,Core + Active Recovery,Light Elliptical,1,20m
+Classic Split,Week B,Friday,Shoulders + Arms,Push Press,4,6
+Classic Split,Week B,Friday,Shoulders + Arms,Seated Dumbbell Press,3,10
+Classic Split,Week B,Friday,Shoulders + Arms,Cable Lateral Raise,3,15
+Classic Split,Week B,Friday,Shoulders + Arms,Reverse Pec Deck,3,15
+Classic Split,Week B,Friday,Shoulders + Arms,Upright Row,3,12
+Classic Split,Week B,Friday,Shoulders + Arms,Concentration Curl,3,12
+Classic Split,Week B,Friday,Shoulders + Arms,Overhead Triceps Extension,3,12
+Classic Split,Week B,Friday,Shoulders + Arms,Cable Face Pull,2,15
+Classic Split,Week B,Saturday,Full Body / Cardio,Battle Ropes,3,30s
+Classic Split,Week B,Saturday,Full Body / Cardio,Box Jump,3,10
+Classic Split,Week B,Saturday,Full Body / Cardio,Renegade Row,3,12
+Classic Split,Week B,Saturday,Full Body / Cardio,Medicine Ball Slam,3,15
+Classic Split,Week B,Saturday,Full Body / Cardio,Jump Rope,3,45s
+Classic Split,Week B,Saturday,Full Body / Cardio,Farmer's Carry,3,20m
+Classic Split,Week B,Saturday,Full Body / Cardio,Rowing Machine,1,15m
+Classic Split,Week B,Saturday,Full Body / Cardio,Stair Climber,1,15m
+Classic Split,Week C,Monday,Chest + Triceps,Decline Bench Press,4,8
+Classic Split,Week C,Monday,Chest + Triceps,Machine Chest Press,3,10
+Classic Split,Week C,Monday,Chest + Triceps,High-to-Low Cable Fly,3,12
+Classic Split,Week C,Monday,Chest + Triceps,Ring Dip,3,10
+Classic Split,Week C,Monday,Chest + Triceps,Svend Press,3,15
+Classic Split,Week C,Monday,Chest + Triceps,Single-Arm Pushdown,3,12
+Classic Split,Week C,Monday,Chest + Triceps,Tate Press,3,12
+Classic Split,Week C,Monday,Chest + Triceps,Bench Dip,2,15
+Classic Split,Week C,Tuesday,Back + Biceps,Trap Bar Deadlift,3,6
+Classic Split,Week C,Tuesday,Back + Biceps,Neutral-Grip Pull-up,3,8
+Classic Split,Week C,Tuesday,Back + Biceps,Straight-Arm Pulldown,3,12
+Classic Split,Week C,Tuesday,Back + Biceps,Pendlay Row,3,8
+Classic Split,Week C,Tuesday,Back + Biceps,One-Arm Dumbbell Row,3,10
+Classic Split,Week C,Tuesday,Back + Biceps,Incline Dumbbell Curl,3,12
+Classic Split,Week C,Tuesday,Back + Biceps,Spider Curl,3,12
+Classic Split,Week C,Tuesday,Back + Biceps,Reverse Fly,2,15
+Classic Split,Week C,Wednesday,Legs,Box Squat,4,8
+Classic Split,Week C,Wednesday,Legs,Single-Leg RDL,3,10
+Classic Split,Week C,Wednesday,Legs,Pendulum Squat,3,12
+Classic Split,Week C,Wednesday,Legs,Reverse Lunge,3,12
+Classic Split,Week C,Wednesday,Legs,Nordic Curl,3,8
+Classic Split,Week C,Wednesday,Legs,Step-up,3,12
+Classic Split,Week C,Wednesday,Legs,Standing Calf Raise,4,15
+Classic Split,Week C,Wednesday,Legs,Cable Kickback,3,12
+Classic Split,Week C,Thursday,Core + Active Recovery,Weighted Plank,3,40s
+Classic Split,Week C,Thursday,Core + Active Recovery,V-Ups,3,15
+Classic Split,Week C,Thursday,Core + Active Recovery,Landmine Rotation,3,15
+Classic Split,Week C,Thursday,Core + Active Recovery,Reverse Crunch,3,15
+Classic Split,Week C,Thursday,Core + Active Recovery,Pallof Press,3,12
+Classic Split,Week C,Thursday,Core + Active Recovery,Light Swimming,1,20m
+Classic Split,Week C,Friday,Shoulders + Arms,Behind-the-Neck Press,3,8
+Classic Split,Week C,Friday,Shoulders + Arms,Landmine Press,3,10
+Classic Split,Week C,Friday,Shoulders + Arms,Leaning Cable Lateral Raise,3,15
+Classic Split,Week C,Friday,Shoulders + Arms,Bent-Over Dumbbell Fly,3,15
+Classic Split,Week C,Friday,Shoulders + Arms,Barbell Shrug,3,12
+Classic Split,Week C,Friday,Shoulders + Arms,Preacher Curl,3,12
+Classic Split,Week C,Friday,Shoulders + Arms,Cable Kickback,3,12
+Classic Split,Week C,Friday,Shoulders + Arms,Band Pull-Apart,2,20
+Classic Split,Week C,Saturday,Full Body / Cardio,Sled Push,3,20m
+Classic Split,Week C,Saturday,Full Body / Cardio,Thruster,3,12
+Classic Split,Week C,Saturday,Full Body / Cardio,Man Maker,3,10
+Classic Split,Week C,Saturday,Full Body / Cardio,Wall Ball,3,15
+Classic Split,Week C,Saturday,Full Body / Cardio,Sandbag Carry,3,20m
+Classic Split,Week C,Saturday,Full Body / Cardio,Bear Crawl,3,15m
+Classic Split,Week C,Saturday,Full Body / Cardio,Assault Bike,1,15m
+Classic Split,Week C,Saturday,Full Body / Cardio,Sled Pull,1,15m
+Classic Split,Week D,Monday,Chest + Triceps,Floor Press,4,8
+Classic Split,Week D,Monday,Chest + Triceps,Smith Machine Incline Press,3,10
+Classic Split,Week D,Monday,Chest + Triceps,Dumbbell Pullover,3,12
+Classic Split,Week D,Monday,Chest + Triceps,Weighted Push-up,3,12
+Classic Split,Week D,Monday,Chest + Triceps,Landmine Press,3,12
+Classic Split,Week D,Monday,Chest + Triceps,EZ-Bar Skull Crusher,3,12
+Classic Split,Week D,Monday,Chest + Triceps,Triceps Kickback,3,15
+Classic Split,Week D,Monday,Chest + Triceps,Close-Grip Bench Press,3,10
+Classic Split,Week D,Tuesday,Back + Biceps,Sumo Deadlift,3,6
+Classic Split,Week D,Tuesday,Back + Biceps,Assisted Pull-up,3,10
+Classic Split,Week D,Tuesday,Back + Biceps,Wide-Grip Lat Pulldown,3,10
+Classic Split,Week D,Tuesday,Back + Biceps,Meadows Row,3,10
+Classic Split,Week D,Tuesday,Back + Biceps,Machine Row,3,12
+Classic Split,Week D,Tuesday,Back + Biceps,21s Bicep Curl,3,21
+Classic Split,Week D,Tuesday,Back + Biceps,Zottman Curl,3,12
+Classic Split,Week D,Tuesday,Back + Biceps,Band Pull-Apart,2,20
+Classic Split,Week D,Wednesday,Legs,Pause Squat,4,6
+Classic Split,Week D,Wednesday,Legs,Good Morning,3,10
+Classic Split,Week D,Wednesday,Legs,Belt Squat,3,12
+Classic Split,Week D,Wednesday,Legs,Lateral Lunge,3,12
+Classic Split,Week D,Wednesday,Legs,Glute-Ham Raise,3,10
+Classic Split,Week D,Wednesday,Legs,Curtsy Lunge,3,12
+Classic Split,Week D,Wednesday,Legs,Donkey Calf Raise,4,15
+Classic Split,Week D,Wednesday,Legs,Frog Pump,3,15
+Classic Split,Week D,Thursday,Core + Active Recovery,Plank Shoulder Tap,3,20
+Classic Split,Week D,Thursday,Core + Active Recovery,Hollow Body Hold,3,30s
+Classic Split,Week D,Thursday,Core + Active Recovery,Medicine Ball Twist,3,20
+Classic Split,Week D,Thursday,Core + Active Recovery,Decline Sit-up,3,15
+Classic Split,Week D,Thursday,Core + Active Recovery,Stir-the-Pot,3,10
+Classic Split,Week D,Thursday,Core + Active Recovery,Light Rowing,1,20m
+Classic Split,Week D,Friday,Shoulders + Arms,Z-Press,3,8
+Classic Split,Week D,Friday,Shoulders + Arms,Single-Arm Dumbbell Press,3,10
+Classic Split,Week D,Friday,Shoulders + Arms,Cable Y-Raise,3,15
+Classic Split,Week D,Friday,Shoulders + Arms,Chest-Supported Rear Delt Fly,3,15
+Classic Split,Week D,Friday,Shoulders + Arms,Cable Shrug,3,12
+Classic Split,Week D,Friday,Shoulders + Arms,Drag Curl,3,12
+Classic Split,Week D,Friday,Shoulders + Arms,Close-Grip Bench Press,3,10
+Classic Split,Week D,Friday,Shoulders + Arms,Rear Delt Row,2,15
+Classic Split,Week D,Saturday,Full Body / Cardio,Turkish Get-Up,3,6
+Classic Split,Week D,Saturday,Full Body / Cardio,Devil Press,3,10
+Classic Split,Week D,Saturday,Full Body / Cardio,Kettlebell Clean and Press,3,10
+Classic Split,Week D,Saturday,Full Body / Cardio,Broad Jump,3,10
+Classic Split,Week D,Saturday,Full Body / Cardio,Suitcase Carry,3,20m
+Classic Split,Week D,Saturday,Full Body / Cardio,Battle Rope Slam,3,30s
+Classic Split,Week D,Saturday,Full Body / Cardio,Row Erg Sprint,1,10m
+Classic Split,Week D,Saturday,Full Body / Cardio,Shuttle Run,1,10m
+Push / Pull / Legs,Standard,Monday,Push (Chest Shoulders Triceps),Bench Press,4,8
+Push / Pull / Legs,Standard,Monday,Push (Chest Shoulders Triceps),Overhead Press,3,10
+Push / Pull / Legs,Standard,Monday,Push (Chest Shoulders Triceps),Incline Dumbbell Press,3,10
+Push / Pull / Legs,Standard,Monday,Push (Chest Shoulders Triceps),Lateral Raise,3,15
+Push / Pull / Legs,Standard,Monday,Push (Chest Shoulders Triceps),Triceps Pushdown,3,12
+Push / Pull / Legs,Standard,Tuesday,Pull (Back Biceps),Deadlift,3,6
+Push / Pull / Legs,Standard,Tuesday,Pull (Back Biceps),Pull-up,4,8
+Push / Pull / Legs,Standard,Tuesday,Pull (Back Biceps),Barbell Row,3,10
+Push / Pull / Legs,Standard,Tuesday,Pull (Back Biceps),Face Pull,3,15
+Push / Pull / Legs,Standard,Tuesday,Pull (Back Biceps),Bicep Curl,3,12
+Push / Pull / Legs,Standard,Wednesday,Legs,Squat,4,8
+Push / Pull / Legs,Standard,Wednesday,Legs,Romanian Deadlift,3,10
+Push / Pull / Legs,Standard,Wednesday,Legs,Leg Press,3,12
+Push / Pull / Legs,Standard,Wednesday,Legs,Calf Raise,4,15
+Push / Pull / Legs,Standard,Friday,Push (Chest Shoulders Triceps),Incline Press,4,8
+Push / Pull / Legs,Standard,Friday,Push (Chest Shoulders Triceps),Arnold Press,3,10
+Push / Pull / Legs,Standard,Friday,Push (Chest Shoulders Triceps),Chest Fly,3,12
+Push / Pull / Legs,Standard,Friday,Push (Chest Shoulders Triceps),Skull Crushers,3,12
+Push / Pull / Legs,Standard,Saturday,Pull (Back Biceps),Lat Pulldown,4,10
+Push / Pull / Legs,Standard,Saturday,Pull (Back Biceps),Seated Cable Row,3,12
+Push / Pull / Legs,Standard,Saturday,Pull (Back Biceps),Hammer Curl,3,12
+Push / Pull / Legs,Standard,Saturday,Pull (Back Biceps),Shrugs,3,12
+Upper / Lower,Standard,Monday,Upper Body,Bench Press,4,8
+Upper / Lower,Standard,Monday,Upper Body,Barbell Row,4,8
+Upper / Lower,Standard,Monday,Upper Body,Overhead Press,3,10
+Upper / Lower,Standard,Monday,Upper Body,Lat Pulldown,3,10
+Upper / Lower,Standard,Monday,Upper Body,Bicep Curl,2,12
+Upper / Lower,Standard,Tuesday,Lower Body,Squat,4,8
+Upper / Lower,Standard,Tuesday,Lower Body,Romanian Deadlift,3,10
+Upper / Lower,Standard,Tuesday,Lower Body,Walking Lunge,3,12
+Upper / Lower,Standard,Tuesday,Lower Body,Calf Raise,3,15
+Upper / Lower,Standard,Thursday,Upper Body,Incline Press,4,8
+Upper / Lower,Standard,Thursday,Upper Body,Pull-up,3,8
+Upper / Lower,Standard,Thursday,Upper Body,Lateral Raise,3,15
+Upper / Lower,Standard,Thursday,Upper Body,Triceps Pushdown,3,12
+Upper / Lower,Standard,Friday,Lower Body,Deadlift,3,6
+Upper / Lower,Standard,Friday,Lower Body,Leg Press,3,12
+Upper / Lower,Standard,Friday,Lower Body,Leg Curl,3,12
+Upper / Lower,Standard,Friday,Lower Body,Hip Thrust,3,10
+Upper / Lower,Standard,Saturday,Full Body / Cardio,Kettlebell Swing,3,15
+Upper / Lower,Standard,Saturday,Full Body / Cardio,Push-up,3,15
+Upper / Lower,Standard,Saturday,Full Body / Cardio,Mountain Climbers,3,20

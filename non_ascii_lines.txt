@@ -1,0 +1,491 @@
+﻿6: <title>Stoke ⚡ — Fitness, Nutrition & Running Tracker</title>
+532: label: day.label + (rotating && !day.rest ? ` · Week ${String.fromCharCode(65 + variantIdx)}` : ""),
+672: {[["veg", "🟢 Veg"], ["nonveg", "🟤 Non-veg"]].map(([val, label]) => {
+1075: ×
+1091: <button onClick={() => onRemove(idx)} style={{ background: "none", border: "none", color: TOKENS.mutedFaint, cursor: "pointer", fontSize: 18, lineHeight: 1, padding: 4 }} aria-label="Remove">×</button>
+1098: <button onClick={startScan} style={actionBtnStyle("#111111", "#FFFFFF")}>📷 Scan</button>
+1099: <button onClick={startGallery} style={actionBtnStyle(TOKENS.surface2, TOKENS.text)}>🖼️ Gallery</button>
+1100: <button onClick={() => setMode("search")} style={actionBtnStyle(TOKENS.surface2, TOKENS.text)}>🔎 Search</button>
+1110: <span>⚡ STOKE Neural Vision</span>
+1112: <div style={{ fontSize: 12, color: TOKENS.muted, marginBottom: 12 }}>Scanning plate components, portion volume & macros…</div>
+1134: <span style={{ fontSize: 10, fontWeight: 900, color: "#256BFD" }}>⚡ STOKE Neural Vision</span>
+1154: ×
+1175: <input autoFocus placeholder="Search foods…" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+1181: {f.name} <span style={{ color: TOKENS.mutedFaint, fontSize: 12 }}>· {f.calories} kcal / {f.grams}g</span>
+1204: <div style={{ fontSize: 12, color: TOKENS.mutedFaint, marginBottom: 4 }}>Target: {ex.targetSets} × {ex.targetReps}</div>
+1224: <span>▶ Watch form on YouTube ↗</span>
+1228: background: completed ? TOKENS.ember : "transparent", color: completed ? "#FFFFFF" : TOKENS.mutedFaint, fontSize: 15, fontWeight: 800, cursor: "pointer", flexShrink: 0 }} aria-label="Mark completed">✓</button>
+1281: coachTip = "Rest day today 🧘 Focus on active recovery, light stretching, and hitting your hydration goal.";
+1283: coachTip = `Workout crushed! 💪 ${completedCount}/${workoutDay.exercises.length} exercises logged. Great effort!`;
+1301: STOKE⚡
+1319: <span style={{ fontSize: 11 }}>🔥</span>
+1350: {isPast ? "✓" : isToday ? "⚡" : ""}
+1374: <span style={{ fontSize: 18 }}>📷</span>
+1393: <span style={{ fontSize: 18 }}>🏋️</span>
+1412: <span style={{ fontSize: 18 }}>🏃</span>
+1431: <span style={{ fontSize: 18 }}>💧</span>
+1455: <span style={{ fontSize: 11, color: TOKENS.ember, fontWeight: 600 }}>Log details →</span>
+1489: <span style={{ fontSize: 16 }}>💧</span>
+1531: <IconBadge emoji="🏋️" bg="rgba(0,0,0,0.12)" />
+1548: <IconBadge emoji="🏃" bg="rgba(37, 107, 253,0.16)" />
+1580: <span style={{ fontSize: 15 }}>⚡</span>
+1583: <span style={{ fontSize: 11, color: TOKENS.muted, fontWeight: 600 }}>Chat →</span>
+1604: 🔋
+1704: <div style={{ fontSize: 13, color: TOKENS.muted, fontWeight: 500 }}>💧 Water</div>
+1708: <button onClick={() => setWater((w) => Math.max(0, w - 0.25))} style={waterBtnStyle}>−</button>
+1797: <span>ðŸ‹ï¸</span> Workout Plan
+1821: <span>ðŸƒ</span> Run & GPS â†’
+1832: <span style={{ fontSize: 26 }}>⚡</span>
+1835: <div style={{ fontSize: 11, color: "rgba(255,255,255,0.7)", marginTop: 1 }}>Tap "▶ 10s Animation & English Coach" on any exercise to watch 10-second exercise animations with spoken & written English coaching!</div>
+1882: {d}{dCompleted && !isActive && <span style={{ position: "absolute", top: -4, right: -4, fontSize: 10, color: TOKENS.teal }}>✓</span>}
+1895: <div style={{ textAlign: "center", padding: "40px 0", color: TOKENS.mutedFaint, fontSize: 14 }}>Rest day — recover up. 🌱</div>
+1919: label: "🌸 Lily (Super Cute & Sweet)",
+1923: avatar: "🌸",
+1924: preview: "Yay! Hi there! I'm Lily! Let's do our best and have lots of fun on our workout! 💖✨",
+1925: startMsg: (act) => `Yay! Starting our ${act} adventure! Let's go, you can do it! ✨`,
+1926: splitMsg: (km, pM, pS, spd, isBike) => isBike ? `Woohoo! ${km} kilometers conquered! You're flying at ${spd.toFixed(1)} km an hour! 🎉` : `Yay! ${km} whole kilometer done! You're doing amazing, keeping pace at ${pM} minutes and ${pS} seconds! 💖`,
+1927: pauseMsg: "Taking a cute little breather! Press resume when you're ready! 🌸",
+1928: resumeMsg: "Yay, we're back in action! Let's keep moving! ⚡",
+1932: return `Good try! You logged ${dist.toFixed(2)} kilometers. Every step counts, but don't stop here! Next time, let's push a little further and crush our full goal together! I believe in you, keep going! 💖💪`;
+1935: return `OMG, incredible! Massive congratulations! You conquered ${dist.toFixed(2)} kilometers and over ${steps ? steps.toLocaleString() : 'thousands of'} steps! You're an unstoppable superstar, I'm so proud of you! 🎉🌟💖`;
+1938: return `Woohoo! Congratulations! You completed ${dist.toFixed(2)} kilometers and ${steps ? steps.toLocaleString() : ''} steps! You pushed hard and crushed your workout today! Superstar effort! 🎉🌟`;
+1945: label: "✨ Chloe (Kawaii & Cheerful)",
+1949: avatar: "✨",
+1951: startMsg: (act) => `Ready, set, go! Starting our ${act}! Keep smiling and stay energized! ✨`,
+1952: splitMsg: (km, pM, pS, spd, isBike) => isBike ? `Awesome job! That's ${km} km completed on the bike! Keep the pedals spinning!` : `Great rhythm! ${km} kilometer finished at ${pM} minutes and ${pS} seconds! Keep it up! 🌟`,
+1957: return `Nice warm up! You logged ${dist.toFixed(2)} km. Don't give up early next time — let's aim for more steps and a longer run! You've got so much potential! ✨💪`;
+1959: return `Congratulations! You smashed ${dist.toFixed(2)} kilometers and ${steps ? steps.toLocaleString() : ''} steps! Incredible stamina and energy, keep shining! 🎉🔥`;
+1966: label: "⚡ Maya (Sporty & Energetic)",
+1970: avatar: "⚡",
+2046: { id: 1, title: "Midnight Stride (Phonk)", artist: "STOKE Audio ⚡", bpm: 165, duration: "3:24", genre: "Phonk & Cardio" },
+2056: icon: "🏃",
+2063: reward: "🥇 Gold Finisher Badge",
+2069: icon: "🚴",
+2076: reward: "👑 Century Rider Crown",
+2082: icon: "🚶",
+2089: reward: "🏆 Master Walker Trophy",
+2095: { rank: 1, name: "Alex Chen", country: "🇺🇸 New York, USA", handle: "@alex_runner", dist: 84.2, badge: "👑", activity: "🏃 8.4 km Central Park Loop" },
+2096: { rank: 2, name: "Sarah Jenkins", country: "🇬🇧 London, UK", handle: "@sarah_trail", dist: 76.5, badge: "🥈", activity: "🚴 24.1 km along Thames" },
+2097: { rank: 3, name: "Marcus Vance", country: "🇦🇺 Sydney, Australia", handle: "@marcus_ride", dist: 69.8, badge: "🥉", activity: "🏃 12.0 km Harbour Run" },
+2098: { rank: 4, name: "Mohd Numan (You)", country: "🌍 Global Athlete", handle: "@mohd_numan", dist: 58.4, isUser: true, badge: "⚡", activity: "🏃 10.0 km logged" },
+2099: { rank: 5, name: "Kenji Sato", country: "🇯🇵 Tokyo, Japan", handle: "@kenji_tokyo", dist: 55.1, badge: "🔥", activity: "🏃 5.0 km Imperial Palace" },
+2100: { rank: 6, name: "Fatima Al-Maktoum", country: "🇦🇪 Dubai, UAE", handle: "@fatima_dxb", dist: 53.8, badge: "⭐", activity: "🏃 7.2 km Dubai Marina" },
+2101: { rank: 7, name: "Lucas Dubois", country: "🇫🇷 Paris, France", handle: "@lucas_run", dist: 49.2, badge: "⚡", activity: "🏃 6.4 km Seine River" },
+2102: { rank: 8, name: "David Kim", country: "🇰🇷 Seoul, S. Korea", handle: "@david_k", dist: 47.9, badge: "⭐", activity: "🏃 5.2 km Han River Sprint" },
+2115: <span style={{ fontSize: 12, color: TOKENS.mutedFaint, fontWeight: 600 }}>Acquiring GPS Satellite Lock…</span>
+2191: 🗺️ Street Map
+2197: ⚡ Polyline
+2237: { key: "custom", label: "📸 Upload Photo" },
+2238: { key: "dark", label: "🌑 OLED Black" },
+2334: ctx.fillText("STOKE ⚡", W / 2, 58);
+2390: ctx.fillText(`⚡ ${paceOrSpeedLabel.toUpperCase()}`, col1X, gridY + 34);
+2399: ctx.fillText("👟 STEPS", col2X, gridY + 34);
+2409: ctx.fillText("🔥 CALORIES", col1X, gridY + 104);
+2418: ctx.fillText("⏱️ TIME", col2X, gridY + 104);
+2443: ctx.fillText("📍 LIVE GPS ROUTE MAP", mapX + 16, mapY + 26);
+2491: // Start Marker 🟢
+2499: // Finish / Current Live Marker 🟡
+2524: ctx.fillText("STOKE ⚡ ATHLETES CLUB", W / 2, 775);
+2557: { id: "my_gps", name: "My Live GPS Location", country: "Worldwide Auto-Detect", lat: null, lng: null, flag: "📍", desc: "Auto-detect your real GPS coordinates anywhere" },
+2558: { id: "dubai", name: "Dubai Marina & Palm", country: "United Arab Emirates", lat: 25.0772, lng: 55.1333, flag: "🇦🇪", desc: "Ultra-modern illuminated waterfront promenade" },
+2559: { id: "nyc", name: "Central Park Loop", country: "New York, USA", lat: 40.785091, lng: -73.968285, flag: "🇺🇸", desc: "World-famous reservoir & rolling park hills" },
+2560: { id: "london", name: "Hyde Park & Thames", country: "London, UK", lat: 51.507268, lng: -0.165730, flag: "🇬🇧", desc: "Historic river trail and royal palace grounds" },
+2561: { id: "singapore", name: "Marina Bay Waterfront", country: "Singapore", lat: 1.283333, lng: 103.860667, flag: "🇸🇬", desc: "Iconic illuminated tropical bay circuit" },
+2562: { id: "tokyo", name: "Imperial Palace Circuit", country: "Tokyo, Japan", lat: 35.685175, lng: 139.752799, flag: "🇯🇵", desc: "Japan's most iconic 5.0km runner circuit" },
+2563: { id: "paris", name: "Seine River & Eiffel", country: "Paris, France", lat: 48.858370, lng: 2.294481, flag: "🇫🇷", desc: "Romantic riverside boulevards and monuments" },
+2564: { id: "sydney", name: "Opera House & Harbour", country: "Sydney, Australia", lat: -33.856784, lng: 151.215297, flag: "🇦🇺", desc: "Coastal ocean breeze along the harbour" },
+2565: { id: "berlin", name: "Tiergarten Park", country: "Berlin, Germany", lat: 52.5145, lng: 13.3501, flag: "🇩🇪", desc: "Expansive shaded marathon capital parkway" },
+2566: { id: "hyderabad", name: "Hussain Sagar Loop", country: "Hyderabad, India", lat: 17.4239, lng: 78.4738, flag: "🇮🇳", desc: "Scenic Necklace Road lakefront running track" },
+2567: { id: "vikarabad", name: "Ananthagiri Hills Trail", country: "Vikarabad, Telangana", lat: 17.3345, lng: 77.9012, flag: "🇮🇳", desc: "Lush forest trails & scenic rolling terrain" },
+2793: flag: "📍",
+2833: flag: "📍",
+2890: flag: "🌍",
+3137: dateStr: `Today at ${new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })} · ${locString}`
+3233: text: `Crushed a ${distanceKm.toFixed(2)} km ${activityType}! ⚡🔥`,
+3253: { key: "run", label: "Run", icon: "🏃", unit: "/km pace", desc: "Pace & Splits" },
+3254: { key: "bike", label: "Bike / Ride", icon: "🚴", unit: "km/h speed", desc: "Speed & Distance" },
+3255: { key: "walk", label: "Walk", icon: "🚶", unit: "steps count", desc: "Steps & Active Time" },
+3268: <span style={{ fontSize: 20 }}>🎀</span>
+3274: <button onClick={() => setShowVoicePicker(false)} style={{ background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", width: 28, height: 28, borderRadius: "50%", cursor: "pointer", fontSize: 14 }}>✕</button>
+3328: ▶ Listen
+3339: ✓ Set Active Coach
+3351: <span style={{ fontSize: 24 }}>🌍</span>
+3357: <button onClick={() => setShowLocationPicker(false)} style={{ background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", width: 28, height: 28, borderRadius: "50%", cursor: "pointer", fontSize: 14 }}>✕</button>
+3388: <span style={{ fontSize: 18 }}>📍</span>
+3393: <span style={{ fontSize: 12, color: "#256BFD", fontWeight: 800 }}>Select →</span>
+3416: 📍
+3455: <div style={{ fontSize: 11, color: TOKENS.mutedFaint }}>{city.country} • {city.desc}</div>
+3458: {isSelected && <span style={{ color: "#256BFD", fontWeight: 900, fontSize: 14 }}>✓</span>}
+3492: <span>ðŸ‹ï¸</span> Workout Plan
+3513: <span>ðŸƒ</span> Run & GPS
+3522: <div style={{ fontSize: 11, color: "#256BFD", letterSpacing: 0.8, textTransform: "uppercase", fontWeight: 800 }}>STOKE ⚡ LIVE GPS</div>
+3550: <span>{selectedCity?.flag || "🌍"}</span>
+3552: <span style={{ fontSize: 9.5, opacity: 0.8 }}>▼</span>
+3572: <span style={{ fontSize: 9.5, opacity: 0.8 }}>▼</span>
+3591: {simulating ? "⚡ Sim ON" : "📍 Real GPS"}
+3598: {/* Hub Sub-Tabs: Tracker · Challenges · Leaderboard */}
+3601: { key: "tracker", label: "⚡ Live GPS Tracker" },
+3602: { key: "challenges", label: "🏆 Challenges" },
+3603: { key: "leaderboard", label: "👑 Leaderboard" },
+3652: {mapTileType === "dark" ? "🗺️" : mapTileType === "satellite" ? "🛰️" : "⛰️"}
+3666: 🌍
+3677: 🎯
+3684: <span>⏸ PAUSED</span>
+3706: <span>⤢</span>
+3749: <div style={{ fontSize: 10, color: TOKENS.mutedFaint, textTransform: "uppercase", fontWeight: 800 }}>{activityType === "walk" ? "👟 STEPS" : activityType === "bike" ? "SPEED" : "AVG PACE"}</div>
+3781: <span style={{ fontSize: 16, marginBottom: -2 }}>▶</span>
+3801: <span>⤢</span>
+3816: {activityType === "walk" ? "👟 LIVE STEPS" : activityType === "bike" ? "⚡ SPEED" : "SPLIT PACE"}
+3843: <span>⏸</span>
+3862: <div style={{ fontSize: 10, color: TOKENS.mutedFaint, fontWeight: 800 }}>{activityType === "walk" ? "👟 TOTAL STEPS" : "EST. KCAL"}</div>
+3889: <span>▶</span>
+3911: <span>🏁</span>
+3927: <span style={{ fontSize: 28 }}>{selectedCity?.flag || "🌤️"}</span>
+3930: <div style={{ fontSize: 11.5, color: "#22C55E", fontWeight: 700 }}>24°C • Ideal Running Weather • AQI 35 (Good)</div>
+3937: Change City 🌍
+3949: View All 10+ 🌍
+3974: <div style={{ fontSize: 11, color: TOKENS.mutedFaint }}>{city.country} • {city.desc}</div>
+3978: <div style={{ fontSize: 12, fontWeight: 900, color: "#256BFD" }}>Run Here →</div>
+3993: <span style={{ fontSize: 20 }}>🏃</span>
+3996: <div style={{ fontSize: 11, color: TOKENS.mutedFaint }}>{r.date || "Recent"} • {formatTime(r.elapsed || 735)}</div>
+4019: STOKE OLED HUD • {activityType.toUpperCase()}
+4027: <span>🗺️ MAP VIEW</span>
+4043: {activityType === "walk" ? "👟 LIVE STEPS" : "DISTANCE (KILOMETERS)"}
+4053: {activityType === "walk" ? "DISTANCE" : activityType === "bike" ? "⚡ SPEED" : "AVG PACE"}
+4085: ▶ START RECORDING
+4094: ⏸ PAUSE WORKOUT
+4104: ▶ RESUME
+4110: 🏁 FINISH & SAVE
+4127: ‹ Resume
+4173: <span style={{ fontSize: 24, marginBottom: 2 }}>📸</span>
+4196: Change Map Type 🗺️
+4232: Save Activity ⚡
+4240: <div style={{ fontSize: 72, marginBottom: 16, animation: "bounce 1s infinite" }}>👟</div>
+4267: ← Record Another
+4280: <div style={{ fontSize: 11, color: TOKENS.mutedFaint }}>{savedActivity.date} • {savedActivity.location || (selectedCity ? `${selectedCity.name}, ${selectedCity.country}` : "Worldwide Athlete")}</div>
+4321: <span>⚡ Kudos</span>
+4329: <span>🖼️ Story Card</span>
+4336: <span style={{ fontSize: 18 }}>⚡</span>
+4376: <span>👥 {c.participants.toLocaleString()} athletes</span>
+4377: <span>•</span>
+4409: {c.joined ? "✓ Challenge Active (Leave)" : "Join Challenge ⚡"}
+4430: 🌍 Global
+4436: 🏙️ Regional
+4445: <div style={{ fontSize: 20, marginBottom: 4 }}>🥈</div>
+4452: <div style={{ fontSize: 24, marginBottom: 4 }}>👑</div>
+4459: <div style={{ fontSize: 20, marginBottom: 4 }}>🥉</div>
+4486: {isCurrentUser ? "M" : u.badge || "🏃"}
+4512: <button onClick={() => setShowStoryModal(false)} style={{ background: "rgba(255,255,255,0.1)", border: "none", color: "#FFF", width: 28, height: 28, borderRadius: "50%", cursor: "pointer" }}>✕</button>
+4528: <div style={{ fontSize: 20, fontWeight: 900, color: "#256BFD", letterSpacing: 2.5, marginBottom: 2 }}>STOKE ⚡</div>
+4536: <div style={{ fontSize: 15, fontWeight: 800, color: "rgba(255,255,255,0.88)", marginTop: 4 }}>{formatPace(livePace)} /km • {formatTime(elapsed)}</div>
+4543: <div style={{ fontSize: 10, fontWeight: 800, color: "#256BFD", letterSpacing: 2, marginTop: 8 }}>STOKE ⚡ ATHLETES CLUB</div>
+4579: ✕ Remove Custom Photo (Reset to Dark)
+4587: <span>📷 Upload Photo</span>
+4595: 📲 Share / Save
+4606: STOKE — CHATGPT-GRADE PROFESSIONAL AI COACH (v3.0)
+4617: STOKE — CHATGPT-GRADE PROFESSIONAL AI COACH (v3.0)
+4671: content: `**${timeGreet}, ${userName}!** 👋 I am your **STOKE AI Coach** — powered by precision sports science and nutrition intelligence.\n\nI can build custom meal plans (**vegetarian**, **vegan**, or **high-protein**), analyze your workouts, explain supplements, or calculate exact recipes for your remaining macros.\n\n*Tap any quick prompt below or ask me anything!* ⚡`,
+4674: "I want a high-protein veg meal 🥗",
+4675: "What should I eat with my remaining macros? 🎯",
+4676: "Best snacks under 200 kcal 🍓",
+4677: "How to take creatine properly? 💊"
+4695: { id: "all", label: "🔥 All Topics" },
+4696: { id: "veg", label: "🥗 Pure Veg" },
+4697: { id: "nonveg", label: "🍗 High Protein" },
+4698: { id: "workout", label: "🏋️ Workouts" },
+4699: { id: "fatloss", label: "⚡ Fat Loss & Fasting" },
+4700: { id: "supplements", label: "💊 Supplements" },
+4705: "I want a high-protein vegetarian meal 🥗",
+4706: "What should I eat with my remaining macros? 🎯",
+4707: "Paneer vs Soya chunks: which is better? 🧀",
+4708: "Best post-workout recovery meal ⚡",
+4709: "Quick snacks under 150 kcal 🍓",
+4710: "How to take creatine monohydrate? 💊"
+4713: "I want a delicious high-protein veg lunch 🥗",
+4714: "Best vegetarian sources with 30g+ protein 🥦",
+4715: "How to make high-protein paneer bhurji? 🧀",
+4716: "Soya chunks recipe for muscle building 💪",
+4717: "High-protein vegetarian breakfast ideas 🥞",
+4718: "Can I build muscle on a pure veg diet? 🌱"
+4721: "Quick grilled chicken breast recipe 🍗",
+4722: "High protein dinner with 45g+ protein 🥩",
+4723: "Best low carb meal for cutting 🐟",
+4724: "Post-workout egg scramble with toast 🍳",
+4725: "Tuna meal under 350 calories 🥪"
+4728: "Best chest workout routine for hypertrophy 🏋️",
+4729: "How to fix lower back pain in squats? 🦵",
+4730: "Push-Pull-Legs vs Classic Split: which is best? 📊",
+4731: "How many rest days do I need per week? 💤",
+4732: "Best core exercises for visible abs 🍫"
+4735: "How to lose stubborn belly fat without losing muscle? 🔥",
+4736: "How does 16:8 intermittent fasting work? ⌛",
+4737: "Is cardio better before or after lifting? 🏃",
+4738: "How to stop late-night sugar cravings? 🌙",
+4739: "What should I drink during a fast? ☕"
+4742: "When is the best time to take creatine? 💊",
+4743: "Do I need whey protein isolate or concentrate? 🥛",
+4744: "Is pre-workout safe to take every day? ⚡",
+4745: "Best vitamins for energy and recovery 🍊",
+4746: "Does creatine cause hair loss or water retention? 🔬"
+4763: const cleanText = text.replace(/[*_#•`]/g, "").replace(/\[.*?\]/g, "");
+4790: showToast("🎙️ Listening... speak now!");
+4820: showToast("✓ Copied response to clipboard");
+4827: showToast(`✓ Logged ${meal.name} (${meal.calories} kcal, ${meal.protein}g P)`);
+4839: showToast(`✓ Added "${meal.name}" to your Nutrition Diary!`);
+4847: /* ─────────────────────────────────────────────────────────────
+4849: ───────────────────────────────────────────────────────────── */
+4866: // ──────────────── 1. VEGETARIAN MEAL QUERIES ────────────────
+4877: content: `Here are **2 top-tier, high-protein vegetarian meals** tailored specifically for your target (${remP}g protein left today). Absolutely **no meat or chicken**:\n\n### 🥗 Option 1: High-Protein Tawa Paneer Bhurji & Roti\n*A delicious, rich North-Indian spiced cottage cheese scramble packed with complete amino acids.*\n\n• **Ingredients**:\n  - 200g Low-Fat Paneer (crumbled)\n  - 1 medium onion & 1 ripe tomato (finely chopped)\n  - 1 cup fresh spinach leaves (chopped)\n  - 1 tsp olive oil or ghee, cumin seeds, turmeric, garam masala & green chili\n  - 2 whole wheat rotis or 1 cup steamed brown rice\n\n• **How to make**:\n  1. Heat 1 tsp oil in a pan, crackle cumin seeds, then sauté onions, ginger, and green chilies until golden.\n  2. Add chopped tomatoes, turmeric, and garam masala; cook until soft.\n  3. Fold in the chopped spinach and crumbled paneer. Toss on high heat for 3–4 minutes. Garnish with fresh coriander!\n\n---\n\n### 🌱 Option 2: Soya Chunks & Peas Masala Bowl\n*Soya chunks are 52% pure protein by weight — beating chicken and beef in protein density!*\n\n• **Ingredients**:\n  - 60g Soya Chunks (dry weight)\n  - ½ cup green peas\n  - 1 tbsp ginger-garlic paste, tomato puree, onion gravy spices\n\n• **How to make**:\n  1. Boil soya chunks in salted water for 5 mins; rinse with cold water and squeeze out all excess water.\n  2. Sauté spices with tomato puree, add soya chunks and peas with ½ cup water, and simmer for 6 minutes. Serve hot!\n\nBoth meals provide **32g to 36g of clean vegetarian protein** and digest smoothly without heaviness!`,
+4887: "How to make a 40g protein veg smoothie? 🥤",
+4888: "Is soya chunks safe to eat daily? 🔬",
+4889: "What are other high protein veg snacks? 🧀",
+4890: "Can you adjust this for 500 calories? 🎯"
+4895: // ──────────────── 2. PANEER VS SOYA CHUNKS ────────────────
+4905: content: `Here is the head-to-head scientific comparison between **Soya Chunks** and **Paneer**:\n\n| Feature | 🌿 Soya Chunks (100g dry) | 🧀 Low-Fat Paneer (100g) |\n| :--- | :--- | :--- |\n| **Protein** | **52g** (Unbeatable!) | **20g – 22g** |\n| **Calories** | ~345 kcal | ~180 – 220 kcal |\n| **Fat** | **0.5g** (Virtually zero) | 6g – 14g |\n| **Fiber** | 13g (Great for gut) | 0g |\n| **Digestion** | Moderate (plant protein) | Slow (Casein — great overnight) |\n\n### 🏆 The Coach's Verdict:\n• **Choose Soya Chunks** if you are cutting fat or need maximum protein per rupee/calorie with zero fat.\n• **Choose Paneer** if you need high calcium, high satiety, or a slow-release protein meal before bed.\n\n💡 **Pro Strategy**: Alternate both! Have soya chunks for lunch and paneer for dinner to get the best of both worlds.`,
+4915: "Give me a 5-minute soya chunks recipe ⏱️",
+4916: "Does soya cause estrogen increase? 🔬",
+4917: "Give me high protein vegetarian snack 🧀"
+4922: // ──────────────── 3. REMAINING MACROS CUSTOM FIT ────────────────
+4935: content: `You currently have **${remCal} kcal** and **${remP}g protein** remaining for the day.\n\nHere is your custom **Macro-Targeted Plate** designed to lock in your numbers:\n\n### 🎯 Recommended Plate: ${mealName}\n• **Primary Protein**: ${proteinFood}\n• **Carb Source**: Steamed Jasmine Rice, sweet potato, or 2 warm rotis (~${Math.min(50, Math.round(remC * 0.6))}g carbs)\n• **Healthy Fats**: 1 tsp olive oil drizzle or 10 almonds (~${Math.min(15, Math.max(5, Math.round(remF * 0.5)))}g fat)\n• **Fiber & Micronutrients**: Steamed broccoli, cucumbers, and lemon zest.\n\n📊 **Nutritional Fit**:\nThis meal hits approximately **${Math.min(remCal, 450)} kcal** and **${Math.min(remP, 38)}g protein**, leaving you right in your optimal muscle recovery and fat-loss zone.`,
+4945: "Can you suggest a lighter snack instead? 🍓",
+4946: "What if I can't hit my protein goal today? 🏋️",
+4947: "Log this meal to my diary 📝"
+4952: // ──────────────── 4. HIGH PROTEIN SNACKS (< 200 KCAL) ────────────────
+4961: content: `Here are **5 quick high-protein snacks under 200 calories** that will crush hunger without adding unwanted body fat:\n\n1. 🥣 **Non-Fat Greek Yogurt / Hung Curd (175g)**\n   • **100 kcal | 17g Protein | 6g Carbs | 0g Fat**\n   • *Tip: Dust with cinnamon powder and 1 tsp chia seeds.*\n\n2. 🥚 **2 Hard-Boiled Eggs (or 1 Whole + 3 Whites)**\n   • **140 kcal | 14g Protein | 1g Carbs | 9g Fat**\n   • *Sprinkle with black pepper & pink Himalayan salt.*\n\n3. 🧀 **Roasted Masala Paneer Cubes (100g low-fat)**\n   • **160 kcal | 18g Protein | 3g Carbs | 8g Fat**\n   • *Dry-roast on a non-stick pan with chaat masala.*\n\n4. 🥤 **Whey / Plant Isolate Shake (1 scoop + water)**\n   • **120 kcal | 25g Protein | 2g Carbs | 1g Fat**\n   • *Fastest absorbing snack post-workout or mid-afternoon.*\n\n5. 🫘 **Roasted Black Chana / Edamame (½ cup)**\n   • **150 kcal | 11g Protein | 18g Carbs | 3g Fat | 7g Fiber**\n   • *Crunchy, satisfying, and loaded with prebiotic gut fiber.*`,
+4971: "Which protein powder brand is best? 🥛",
+4972: "Give me late night snack ideas 🌙",
+4973: "Is roasted chana good for weight loss? 🫘"
+4978: // ──────────────── 5. CREATINE & SUPPLEMENTS ────────────────
+4987: content: `Here is the science-backed breakdown on **Creatine Monohydrate** — the single most researched and proven fitness supplement on Earth:\n\n### ⚡ How It Works:\nCreatine increases your cellular stores of **phosphocreatine**, enabling your muscles to rapidly regenerate **ATP** (cellular energy currency). This translates to:\n• **+5% to 15% strength gains** on heavy compound lifts (squats, bench, deadlifts).\n• Faster recovery between intense working sets.\n• Improved cellular hydration and cognitive focus.\n\n### 📋 How to Take It (The Smart Protocol):\n• **Dose**: **3g to 5g daily** (one standard scoop). You do **NOT** need an aggressive loading phase.\n• **Timing**: Anytime! Consistency matters far more than timing. Post-workout with carbs/water slightly enhances uptake.\n• **Water Intake**: Drink an extra **500ml to 750ml** of water daily because creatine draws water inside the muscle cells (intracellular hydration).\n\n### ❌ Busting Common Myths:\n• *Does it cause hair loss?* **No clinical study has ever proven this.**\n• *Does it cause fat gain?* **No.** Any slight scale weight increase (+1-2kg) is pure water held *inside* your muscle fibers, making muscles look fuller and rounder!`,
+4990: "Should I take creatine on rest days? 💤",
+4991: "What about Whey Protein vs Food? 🥩",
+4992: "Best pre-workout ingredients to look for ⚡"
+4997: // ──────────────── 6. WORKOUT & TRAINING GUIDANCE ────────────────
+5006: content: `Here is your **Elite Hypertrophy Training Blueprint** to maximize muscle growth:\n\n### 🎯 The 3 Non-Negotiable Rules of Growth:\n1. **Progressive Overload**: Every week, aim for either +1 more rep or +1kg on the bar with identical strict form.\n2. **Proximity to Failure**: Train working sets within **1 to 2 reps of muscular failure (RIR 1-2)**. Half-hearted sets don't trigger hypertrophy.\n3. **Full Range of Motion**: Pause for 1 second in the deep stretch position (e.g. at the bottom of a bench press or squat) — research shows this produces up to 2x greater muscle hypertrophy!\n\n### 🏋️ Sample Push (Chest, Shoulders, Triceps) Protocol:\n• **Incline Dumbbell Press**: 3 sets × 8–10 reps (30° bench angle for upper chest)\n• **Flat Barbell Bench Press**: 3 sets × 6–8 reps (heavy compound power)\n• **Seated Cable Chest Flyes**: 3 sets × 12–15 reps (continuous tension & squeeze)\n• **Dumbbell Lateral Raises**: 4 sets × 12–15 reps (capped side delts)\n• **Tricep Rope Pushdowns**: 3 sets × 10–12 reps (full lockout)\n\nRest **2 to 3 minutes** on heavy compound lifts and **60 to 90 seconds** on isolation movements. Drink water between sets!`,
+5009: "What should I eat before this workout? ⚡",
+5010: "How to recover faster from sore legs? 🦵",
+5011: "Give me an effective Back & Biceps workout 🦍"
+5016: // ──────────────── 7. FAT LOSS, BELLY FAT & CUTTING ────────────────
+5025: content: `Here is the honest, scientific truth about **burning fat and dropping body fat percentage**:\n\n### 💡 The Core Truth:\n**You cannot spot-reduce fat** (doing 500 crunches will strengthen abdominal muscles, but will not burn the fat covering them). Fat is mobilized systematically across the body when you sustain a **mild caloric deficit**.\n\n### 🏆 The 4-Step Fat-Loss Strategy:\n1. **Moderate Deficit (300–500 kcal)**:\n   • Don't starve yourself! A moderate deficit prevents muscle loss, hormonal crashes, and binge eating.\n2. **Keep Protein High (1.8g – 2.2g per kg)**:\n   • Protein has the highest **Thermic Effect of Food (TEF)** — your body burns 25% of protein calories just digesting it, while sparing muscle!\n3. **Daily Step Count (8,000 – 10,000 steps)**:\n   • Low-intensity walking (NEAT) burns pure fatty acids without spiking cortisol or hunger hormones like intense cardio does.\n4. **Lift Heavy Weights 3–4x a Week**:\n   • Heavy resistance training signals your body: *"I need this muscle for survival — burn the body fat instead!"*\n\nStick to this consistently for 6 to 8 weeks and you will see dramatic changes in the mirror!`,
+5028: "Calculate my exact deficit calories 🎯",
+5029: "Best vegetarian cutting meal plan 🥗",
+5030: "Does green tea or black coffee help fat burn? ☕"
+5035: // ──────────────── 8. GREETINGS & INTRODUCTIONS ────────────────
+5046: content: `**${timeGreet}, ${userName}!** 👋 Always great to see you on the platform.\n\nQuick telemetry check for today:\n• **Calories Remaining**: **${remCal} kcal**\n• **Protein Remaining**: **${remP}g**\n• **Current Streak**: **3 Days** 🔥\n\nWhat are we focusing on right now? Ask me about **vegetarian meal recipes**, **workout tips**, **post-workout snacks**, or **supplements**!`,
+5049: "I want a high-protein veg meal 🥗",
+5050: "What should I eat with my remaining macros? 🎯",
+5051: "Tell me a high protein snack under 200 kcal 🍓",
+5052: "Review today's workout split 🏋️"
+5057: // ──────────────── 9. COMPREHENSIVE INTELLIGENT FALLBACK ────────────────
+5065: content: `I analyzed your question regarding **"${userText}"**:\n\nFrom a sports science and nutrition standpoint, the key is keeping your habits aligned with your **daily calorie target (${goals.calories} kcal)** and **protein target (${goals.protein}g)**.\n\n### 💡 Key Takeaway for ${userName}:\n• **Consistency**: Progress is built on 80% nutrition compliance and regular progressive overload in training.\n• **Macro Balance**: You currently have **${remCal} kcal** and **${remP}g protein** left today.\n• **Hydration**: Aim for your **${goals.water || 2.6}L** daily water goal to maintain peak muscular pump and cognitive clarity.\n\nWould you like me to suggest a specific **vegetarian or high-protein meal recipe**, detail a **workout protocol**, or answer another fitness question? ⚡`,
+5068: "Give me a high-protein veg meal 🥗",
+5069: "What snacks can I eat right now? 🍓",
+5070: "How to hit my daily protein target? 💪",
+5071: "Explain my calorie targets 📊"
+5076: /* ─────────────────────────────────────────────────────────────
+5078: ───────────────────────────────────────────────────────────── */
+5145: if (line.startsWith("• ") || line.startsWith("- ")) {
+5146: const itemText = line.replace(/^[•-]\s*/, "");
+5149: <span style={{ color: LIME, fontWeight: 900 }}>•</span>
+5181: {/* ── TOP TELEMETRY STATUS BAR ── */}
+5187: <span style={{ fontSize: 17 }}>⚡</span>
+5246: {/* ── TOPIC FILTER CHIPS & QUICK PROMPTS ── */}
+5303: {/* ── MESSAGES THREAD (ChatGPT / Swiss Style) ── */}
+5361: <span style={{ fontSize: 12 }}>⚡</span>
+5368: {/* ── CHATGPT-STYLE THINKING / REASONING ACCORDION ── */}
+5389: <span style={{ fontSize: 13 }}>🧠</span>
+5395: {isExpanded ? "Hide thoughts ▲" : "View thoughts ▼"}
+5403: <span style={{ color: LIME }}>›</span>
+5420: {/* ── ACTIONABLE MACRO CARD ── */}
+5466: {/* ── ASSISTANT ACTION TOOLBAR ── */}
+5474: <span>📋</span> Copy
+5481: <span>{speakingIndex === idx ? "🛑" : "🔊"}</span> {speakingIndex === idx ? "Stop" : "Read"}
+5487: {/* ── FOLLOW-UP SUGGESTIONS PILLS ── */}
+5530: <span style={{ fontSize: 16 }}>🧠</span>
+5539: {/* ── TOAST NOTIFICATION ── */}
+5560: {/* ── SOFT UI INPUT BAR ── */}
+5591: 🎙️
+5602: placeholder="Ask for veg meal, high-protein recipes, workout tips…"
+5627: ✕
+5652: ↑
+5662: STOKE — LUXURY PROFILE & TELEMETRY HUB (v3.0)
+5663: Fusing: Soft UI · Dark Neumorphism · Material Design · Swiss Design
+5739: triggerToast("✓ Telemetry & Apple Health data synced");
+5759: triggerToast("✓ Profile & daily calorie targets updated!");
+5766: triggerToast(`✓ Target strategy changed to ${type.toUpperCase()}`);
+5776: triggerToast(`✓ Logged weight: ${num.toFixed(1)} kg`);
+5800: {/* ── SWISS STATUS TICKER ── */}
+5820: {/* ── LUXURY ATHLETE HERO CARD (Soft UI + Neumorphism + Swiss) ── */}
+5839: <span style={{ color: LIME, fontSize: 14 }} title="Verified STOKE Athlete">✓</span>
+5842: STOKE Pro Member · Level 12 Athlete
+5873: <span>✏️</span> Edit Biometrics
+5895: <span>🔐</span> Profile Login & Switch
+5915: <span style={{ display: "inline-block", transform: isSyncing ? "rotate(360deg)" : "none", transition: isSyncing ? "transform 0.8s ease" : "none" }}>🔄</span>
+5916: <span>{isSyncing ? "Syncing…" : "Sync"}</span>
+5922: {/* ── SWISS TELEMETRY 4-CELL GRID (Neumorphic Inset Wells) ── */}
+5929: <div className="prof-telemetry-val" style={{ color: AMBER }}>3 <span style={{ fontSize: 10 }}>🔥</span></div>
+5942: {/* ── NEUMORPHIC STRATEGY CONTROL ── */}
+5952: { id: "cut", label: "Cut · Fat Loss" },
+5954: { id: "gain", label: "Bulk · Muscle" },
+5970: {/* ── SWISS MACRO RATIO BAR ── */}
+5984: <span>Est. BMR: 1,745 kcal · TDEE: {goals.calories} kcal</span>
+5989: {/* ── GOLD PRO VIP PASS BANNER (Neumorphic Glow) ── */}
+6008: 👑
+6015: <span style={{ fontSize: 18, color: "#FBBF24", fontWeight: 900 }}>›</span>
+6018: {/* ── SECTION 1: BIOMETRICS & TARGETS (Material Cards) ── */}
+6025: { id: "profile_login", label: "Profile Login & Account Management", icon: "🔐", sub: `Active: ${username} · 4 Linked Accounts`, badge: "Active", badgeColor: LIME },
+6026: { id: "profile", label: "My Profile & Biometrics", icon: "👤", sub: `${profile.name || "Mohd Numan"} · ${profile.weightKg || 70}kg · ${profile.heightCm || 167}cm` },
+6027: { id: "weight", label: "Weight & Body Measurements", icon: "📊", sub: `Current: ${profile.weightKg || 70} kg · Δ -0.8kg 30d` },
+6028: { id: "goals", label: "Target Goals & Strategy", icon: "🎯", sub: `${profile.goalType === "cut" ? "Fat Loss Cut" : profile.goalType === "gain" ? "Hypertrophy Bulk" : "Maintenance"} · ${goals.calories} kcal` },
+6029: { id: "fasting", label: "Intermittent Fasting", icon: "⌛", badge: isFasting ? "14h 22m Active" : "Idle", badgeColor: LIME },
+6049: <span style={{ fontSize: 18, color: "rgba(255,255,255,0.3)" }}>›</span>
+6056: {/* ── SECTION 2: PERFORMANCE & RECOVERY ── */}
+6063: { id: "sleep", label: "Sleep & Recovery Quality", icon: "🌙", sub: "7.8 hrs · 88% Recovery Score (Excellent)" },
+6064: { id: "steps", label: "Daily Steps & Movement", icon: "👟", sub: "7,420 steps · 74% of 10,000 target" },
+6065: { id: "routines", label: "Workout Routines & Splits", icon: "🏋️", sub: "Classic Split (4 days / week active)", nav: "workout" },
+6066: { id: "nutrition", label: "Nutrition & Recipe Discovery", icon: "🥗", sub: "Browse high-protein meal templates", nav: "nutrition" },
+6083: <span style={{ fontSize: 18, color: "rgba(255,255,255,0.3)" }}>›</span>
+6089: {/* ── SECTION 3: SYSTEM, DEVICES & PREFERENCES ── */}
+6096: { id: "devices", label: "Apps & Connected Devices", icon: "📱", sub: "Apple Health & Strava Connected" },
+6097: { id: "reminders", label: "Daily Reminders & Alerts", icon: "⏰", sub: "Meals, water and workout prompts active" },
+6098: { id: "settings", label: "Account & App Preferences", icon: "⚙️", sub: "Metric units (kg/cm) · Dark Neumorphic UI" },
+6099: { id: "privacy", label: "Privacy & Cloud Security", icon: "🔒", sub: "End-to-end encrypted biometric telemetry" },
+6113: <span style={{ fontSize: 18, color: "rgba(255,255,255,0.3)" }}>›</span>
+6119: {/* ── MATERIAL TOAST SNACKBAR ── */}
+6144: {/* ────────────────── SUB-SCREEN MODALS (Bottom Sheets) ────────────────── */}
+6164: {activeModal === "profile_login" && "🔐"}
+6165: {activeModal === "profile" && "👤"}
+6166: {activeModal === "weight" && "📊"}
+6167: {activeModal === "goals" && "🎯"}
+6168: {activeModal === "fasting" && "⌛"}
+6169: {activeModal === "sleep" && "🌙"}
+6170: {activeModal === "steps" && "👟"}
+6171: {activeModal === "devices" && "📱"}
+6172: {activeModal === "reminders" && "⏰"}
+6173: {activeModal === "premium" && "👑"}
+6174: {activeModal === "settings" && "⚙️"}
+6175: {activeModal === "privacy" && "🔒"}
+6208: ✕
+6212: {/* ── MODAL 0: PROFILE LOGIN & ACCOUNT SWITCHER ── */}
+6234: { name: "Mohd Numan", email: "mohdnuman701@gmail.com", avatar: "M", color: "#D93025", tag: "Primary Athlete · 70kg" },
+6235: { name: "Mohd Numan", email: "mohdnuman925@gmail.com", avatar: "M", color: "#1E8E3E", tag: "Personal · Level 12" },
+6258: triggerToast("✓ Logged in as " + p.name + " (" + p.email + ")");
+6277: <div style={{ fontSize: 11, color: isCurrent ? LIME : "rgba(255,255,255,0.5)" }}>{p.email} · {p.tag}</div>
+6293: {isCurrent ? "Active" : "Switch ⚡"}
+6305: 🚪 Sign Out of STOKE
+6317: {/* ── MODAL 1: MY PROFILE & BIOMETRICS EDIT ── */}
+6349: {[{ id: "male", l: "♂ Male" }, { id: "female", l: "♀ Female" }].map(s => (
+6422: Save Profile Changes →
+6427: {/* ── MODAL 2: WEIGHT LOGGING & TREND ── */}
+6445: ✓ BMI: {bmi} · Healthy weight range
+6508: {/* ── MODAL 3: INTERMITTENT FASTING ── */}
+6520: {isFasting ? "Fast In Progress" : "Fasting Idle"} · {fastGoal}:8 Protocol
+6526: 🔥 Peak Autophagy & Fat Oxidation Active
+6559: {isFasting ? "🛑 Stop Fast" : "▶ Start New Fast"}
+6564: {/* ── MODAL 4: CONNECTED DEVICES ── */}
+6569: { key: "appleHealth", name: "Apple Health", desc: "Syncs steps, workouts, heart rate & sleep", icon: "🍎" },
+6570: { key: "googleFit", name: "Google Fit", desc: "Syncs daily active minutes & distance", icon: "🌐" },
+6571: { key: "garmin", name: "Garmin Connect", desc: "GPS route telemetry and VO2 max", icon: "⌚" },
+6572: { key: "strava", name: "Strava", desc: "Auto-exports outdoor running splits", icon: "🏃" },
+6597: {/* ── MODAL 5: REMINDERS ── */}
+6626: {/* ── MODAL 6: PREMIUM MODAL ── */}
+6629: <div style={{ fontSize: 44, marginBottom: 12 }}>👑</div>
+6641: <span style={{ color: LIME, fontWeight: 900 }}>✓</span> {feat}
+6648: triggerToast("👑 STOKE Pro unlocked for your account!");
+6657: {/* ── MODAL 7: SLEEP & STEPS & OTHERS ── */}
+6668: {activeModal === "sleep" ? "7h 48m total sleep · 1h 50m deep sleep" : activeModal === "steps" ? "Goal: 10,000 steps · 2,580 steps to go" : "All local telemetry encrypted and backed up"}
+6685: STOKE — MULTI-DESIGN-SYSTEM AUTH v3.0
+6686: Fusing: Soft UI · Dark Neumorphism · Material Design · Swiss Design
+6690: /* ── SWISS DESIGN: Typography foundation ── */
+6693: /* ── KEYFRAMES ── */
+6772: /* ── LOGIN ENTRANCE ANIMATIONS (300-500ms staggered) ── */
+6798: /* ── MODERN MOBILE LOGIN FIELD ── */
+6838: /* ── SOFT UI / NEUMORPHISM: Dark surface tokens ── */
+6854: /* ── MATERIAL DESIGN: Ripple effect ── */
+6875: /* ── MAIN BUTTON: Soft UI + Material + Swiss ── */
+6909: /* ── ANIMATED ERROR MESSAGE ── */
+6926: /* ── VIEW TRANSITION WRAPPER ── */
+6931: /* ── SKELETON LOADING ── */
+6939: /* ── STAGGER CHILDREN ── */
+6950: /* ── CATEGORY BADGE ── */
+6967: /* ── GOOGLE BUTTON: Material elevated card ── */
+6990: /* ── GHOST BUTTON: Neumorphic outlined ── */
+7013: /* ── NEUMORPHIC INPUT (floating label) ── */
+7068: /* ── OPTION CARD: Swiss grid + Neumorphic surface ── */
+7104: /* ── CHIP: Material + Swiss ── */
+7128: /* ── PILL TOGGLE: Soft UI ── */
+7154: /* ── GLASS CARD: Soft UI + Material elevation ── */
+7164: /* ── INTERMISSION CARD: Neumorphic deep container ── */
+7173: /* ── SWISS: Progress bar ── */
+7206: /* ── MATERIAL: Checkbox ── */
+7227: /* ── MATERIAL: Radio ── */
+7241: /* ── SWISS: Divider with label ── */
+7248: /* ── SOFT UI: Back button ── */
+7265: /* ── MATERIAL: Floating action card ── */
+7276: /* ── SOFT UI: Preference row ── */
+7292: /* ── SWISS: Feature chip card ── */
+7316: /* ── SOFT UI + NEUMORPHIC PROFILE TOKENS ── */
+7359: /* â”€â”€ SWISS TELEMETRY 4-CELL GRID â”€â”€ */
+7390: /* â”€â”€ SWISS MACRO RATIO BAR â”€â”€ */
+7401: /* â”€â”€ NEUMORPHIC STRATEGY CONTROL â”€â”€ */
+7434: /* â”€â”€ MATERIAL ELEVATED SECTION CARD â”€â”€ */
+7467: /* â”€â”€ MATERIAL BOTTOM SHEET MODAL â”€â”€ */
+7496: // ─── Animated background ────────────────────────────────────────
+7503: {/* Soft orbs — Soft UI */}
+7530: // ─── Ripple handler ────────────────────────────────────────────
+7541: // ─── Google SVG ────────────────────────────────────────────────
+7553: // ─── Logo Mark: Soft UI embossed ──────────────────────────────
+7567: }}>⚡</div>
+7571: // ─── Floating label field ──────────────────────────────────────
+7582: // ─── Subcomponents ─────────────────────────────────────────────
+7584: return <div className={`s3-checkbox${checked?" checked":""}`}>{checked && "✓"}</div>;
+7598: // ══════════════════════════════════════════════════════════════════════
+7600: // ══════════════════════════════════════════════════════════════════════
+7664: ←
+7841: {selected ? "✓" : null}
+7892: <NeuSpinner /> Loading…
+7904: function LoadingState({ message = "Processing…" }) {
+7950: <span style={{ fontSize: 16 }}>⚠️</span>
+8013: // ══════════════════════════════════════════════════════════════════════
+8014: //  WELCOME CAROUSEL  ─ Swiss typography + Soft UI cards
+8015: // ══════════════════════════════════════════════════════════════════════
+8034: <div style={{ fontSize:10, color:"rgba(255,255,255,0.38)", fontWeight:600 }}>Monday · Sep 29</div>
+8053: {[["🎯 Goal","2,400","#fff"],["🥗 Food","550","#2ED4BF"],["⚡ Exercise","400",LIME]].map(([l,v,c],i)=>(
+8063: {[["👟","Steps","6,342","63%",LIME],["🔥","Workout","400 cal","42m","rgba(255,255,255,0.35)"]].map(([ic,l,v,s,sc],i)=>(
+8088: <span style={{ background:"rgba(46,212,191,0.12)", color:"#2ED4BF", border:"1px solid rgba(46,212,191,0.25)", borderRadius:999, padding:"4px 12px", fontSize:11, fontWeight:800, letterSpacing:0.8, display:"inline-flex", alignItems:"center", gap:6, alignSelf:"flex-start", boxShadow:"0 0 14px rgba(46,212,191,0.15)" }}>⚡ STOKE PERFORMANCE</span>
+8092: <div style={{ fontSize:13, fontWeight:800, color:"#fff", letterSpacing:-0.2 }}>Protein <span style={{ fontSize:11, color:"rgba(255,255,255,0.38)", fontWeight:500 }}>· 7 days</span></div>
+8093: <div style={{ fontSize:11, color:"#2ED4BF", fontWeight:700, marginTop:2 }}>Avg 162g · Target Met</div>
+8095: <div style={{ background:"rgba(37, 107, 253,0.12)", color:"#256BFD", fontSize:10, fontWeight:900, padding:"3px 8px", borderRadius:6, letterSpacing:0.5 }}>🔥 7-DAY</div>
+8124: <span style={{ background:"rgba(255,138,61,0.12)", color:"#FF8A3D", border:"1px solid rgba(255,138,61,0.25)", borderRadius:999, padding:"4px 12px", fontSize:11, fontWeight:800, letterSpacing:0.8, display:"inline-flex", alignItems:"center", gap:6, alignSelf:"flex-start" }}>🥗 MINDFUL FUEL</span>
+8158: <div style={{ fontSize:42, fontWeight:900, letterSpacing:-2, background:"linear-gradient(90deg,#3B82F6 0%,#fff 65%)", WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent", display:"inline-block", lineHeight:1 }}>stoke⚡</div>
+8161: {/* Feature card — click to cycle */}
+8182: Get Started — It's Free
+8189: <div style={{ textAlign:"center", fontSize:10, color:"rgba(255,255,255,0.18)", letterSpacing:1, textTransform:"uppercase" }}>Version 26.37 · STOKE Inc.</div>
+8196: // ══════════════════════════════════════════════════════════════════════
+8197: //  AUTH SCREEN — all sub-views + 14-step questionnaire
+8198: // ══════════════════════════════════════════════════════════════════════
+8199: // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+8201: // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+8254: "1â€“2 days",
+8255: "3â€“4 days",
+8256: "5â€“6 days",
+8431: frequency: form.frequency || "3â€“4 days",
+8450: update("password", "â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢");
+8647: {showPassword ? "ðŸ‘ï¸" : "ðŸ™ˆ"}
+8665: <span>âš ï¸</span> {error}
+8702: <span>LOG IN â†’</span>
+8727: <span>âš¡</span> Quick Demo Login (Mohd Numan)
+8787: âœ•
+8900: â†
+9058: {showPassword ? "ðŸ‘ï¸" : "ðŸ™ˆ"}
+9076: <span>âš ï¸</span> {error}
+9104: CREATE ACCOUNT â†’
+9164: âœ•
+9275: â†
+9416: âœ“
+9439: <span>âš ï¸</span> {error}
+9468: {step === STEPS.length - 1 ? "FINISH PROFILE â†’" : "CONTINUE â†’"}
+9523: ðŸ‘¤
+9571: <span>âš ï¸</span> {error}
+9609: <span>START MY JOURNEY â†’</span>
+9844: setRunGpsError("GPS isn't available in this preview environment — on a real device the app requests high-accuracy location.");

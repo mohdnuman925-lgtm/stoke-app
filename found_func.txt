@@ -1,0 +1,12 @@
+emini\antigravity-ide\brain\49014abe-8d35-4128-b6a6-ed444c26c296\scratch\auth_components.js:789:  
+function doManualLogin() {
+C:\Users\HOME\.gemini\antigravity-ide\brain\49014abe-8d35-4128-b6a6-ed444c26c296\scratch\auth_components.js:797:  
+function selectGoogle(acc) { setSelGoogle(acc); setPName(acc.name.split(" ")[0]); setView("google_confirm"); }
+C:\Users\HOME\.gemini\antigravity-ide\brain\49014abe-8d35-4128-b6a6-ed444c26c296\scratch\auth_components.js:798:  
+function confirmGoogle() { setGLoading(true); setTimeout(() => { setGLoading(false); setQStep(1); 
+setView("questionnaire"); }, 850); }
+C:\Users\HOME\.gemini\antigravity-ide\brain\49014abe-8d35-4128-b6a6-ed444c26c296\scratch\auth_components.js:799:  
+function finishOnboarding() {
+
+
+

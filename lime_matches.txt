@@ -1,0 +1,190 @@
+﻿44: .stoke-auth-input:focus { outline: none; border-color: #D7FF3E !important; }
+66: background: #D7FF3E;
+69: box-shadow: 0 0 14px rgba(215, 255, 62, 0.95);
+78: background: rgba(215, 255, 62, 0.35);
+89: background: radial-gradient(circle at 50% 100%, rgba(215, 255, 62, 0.55) 0%, rgba(215, 255, 62, 0) 75%);
+110: <div id="stoke-fatal-error" style="display:none; position:fixed; inset:0; z-index:9999999; background:#0B0E14; color:#FF5252; padding:24px; font-family:monospace; font-size:14px; overflow:auto; white-space:pre-wrap; border:3px solid #D7FF3E;"></div>
+149: ember: "#D7FF3E",
+1107: <img src={photoPreview} alt="Captured food" style={{ width: 120, height: 120, objectFit: "cover", borderRadius: 16, marginBottom: 12, border: `1px solid rgba(215,255,62,0.3)`, boxShadow: "0 0 20px rgba(215,255,62,0.2)" }} />
+1114: <div style={{ height: "100%", width: "85%", background: "linear-gradient(90deg, #D7FF3E, #2DD4BF)", borderRadius: 999 }} />
+1133: <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(215,255,62,0.15)", border: "1px solid rgba(215,255,62,0.4)", borderRadius: 999, padding: "2px 8px", marginBottom: 4 }}>
+1134: <span style={{ fontSize: 10, fontWeight: 900, color: "#D7FF3E" }}>⚡ STOKE Neural Vision</span>
+1300: <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: -0.5, background: "linear-gradient(90deg, #D7FF3E 0%, #FFFFFF 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", display: "inline-block" }}>
+1314: style={{ cursor: "pointer", width: 36, height: 36, borderRadius: "50%", background: TOKENS.ember, color: "#0B0E13", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 15, flexShrink: 0, boxShadow: "0 0 16px rgba(215,255,62,0.3)" }}
+1318: <div style={{ display: "flex", alignItems: "center", gap: 4, background: "rgba(215,255,62,0.12)", border: `1px solid ${TOKENS.ember}`, borderRadius: 999, padding: "3px 8px" }}>
+1345: background: isToday ? TOKENS.ember : isPast ? "rgba(215,255,62,0.18)" : "rgba(255,255,255,0.04)",
+1347: border: isToday ? `1.5px solid ${TOKENS.ember}` : `1px solid ${isPast ? "rgba(215,255,62,0.3)" : "rgba(255,255,255,0.08)"}`,
+1548: <IconBadge emoji="🏃" bg="rgba(215,255,62,0.16)" />
+1549: <span style={{ fontSize: 10, background: "rgba(215,255,62,0.15)", color: TOKENS.ember, padding: "2px 6px", borderRadius: 6, fontWeight: 700 }}>STOKE</span>
+1568: background: "linear-gradient(135deg, rgba(215,255,62,0.06) 0%, rgba(30,30,30,0.7) 100%)",
+1571: border: `1px solid rgba(215,255,62,0.25)`,
+1757: boxShadow: "0 6px 18px rgba(215,255,62,0.35)",
+1782: <div style={{ background: "linear-gradient(135deg, rgba(215,255,62,0.12) 0%, rgba(34,197,94,0.06) 100%)", border: "1px solid rgba(215,255,62,0.25)", borderRadius: 16, padding: "12px 14px", marginBottom: 16, display: "flex", alignItems: "center", gap: 10, boxShadow: "0 4px 16px rgba(0,0,0,0.4)" }}>
+1785: <div style={{ fontSize: 12.5, fontWeight: 800, color: "#D7FF3E" }}>10s Biomechanical Animation & English Voice Coach</div>
+2056: function RoutePreview({ path, size = 180, color = "#D7FF3E", mapMode = "map" }) {
+2065: <div style={{ width: 10, height: 10, borderRadius: "50%", background: TOKENS.ember, boxShadow: "0 0 10px #D7FF3E", animation: "stokeFadeIn 1s infinite alternate" }} />
+2122: <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#D7FF3E" floodOpacity="0.8" />
+2126: <polyline points={points} fill="none" stroke="rgba(215,255,62,0.3)" strokeWidth={7} strokeLinejoin="round" strokeLinecap="round" />
+2132: <circle cx={lastX} cy={lastY} r={10} fill="rgba(215,255,62,0.3)" />
+2133: <circle cx={lastX} cy={lastY} r={5.5} fill="#D7FF3E" stroke="#0B0E13" strokeWidth={1.5} />
+2140: style={{ background: interactiveMode === "map" ? "rgba(215,255,62,0.25)" : "transparent", color: interactiveMode === "map" ? TOKENS.ember : TOKENS.muted, border: "none", borderRadius: 6, padding: "3px 6px", fontSize: 10, fontWeight: 700, cursor: "pointer" }}
+2146: style={{ background: interactiveMode === "neon" ? "rgba(215,255,62,0.25)" : "transparent", color: interactiveMode === "neon" ? TOKENS.ember : TOKENS.muted, border: "none", borderRadius: 6, padding: "3px 6px", fontSize: 10, fontWeight: 700, cursor: "pointer" }}
+2225: glow.addColorStop(0, "rgba(215, 255, 62, 0.22)");
+2226: glow.addColorStop(0.6, "rgba(215, 255, 62, 0.04)");
+2282: ctx.fillStyle = "#D7FF3E";
+2423: ctx.shadowColor = "rgba(215, 255, 62, 0.95)";
+2425: ctx.strokeStyle = "rgba(215, 255, 62, 0.55)";
+2438: ctx.strokeStyle = "#D7FF3E";
+2452: ctx.fillStyle = "rgba(215, 255, 62, 0.35)";
+2454: ctx.fillStyle = "#D7FF3E";
+2472: ctx.fillStyle = "#D7FF3E";
+2603: color: "#D7FF3E",
+3323: style={{ background: "#D7FF3E", border: "none", color: "#0B0E13", padding: "0 16px", borderRadius: 12, fontWeight: 800, fontSize: 13, cursor: "pointer" }}
+3332: <div style={{ fontSize: 11, fontWeight: 800, color: "#D7FF3E", padding: "4px 8px 6px" }}>SEARCH RESULTS</div>
+3344: <span style={{ fontSize: 12, color: "#D7FF3E", fontWeight: 800 }}>Select →</span>
+3396: background: isSelected ? "rgba(215,255,62,0.18)" : "rgba(255,255,255,0.03)",
+3397: border: isSelected ? `1.5px solid #D7FF3E` : `1px solid rgba(255,255,255,0.06)`,
+3405: <div style={{ fontSize: 13.5, fontWeight: 800, color: isSelected ? "#D7FF3E" : "#FFF" }}>{city.name}</div>
+3409: {isSelected && <span style={{ color: "#D7FF3E", fontWeight: 900, fontSize: 14 }}>✓</span>}
+3422: <div style={{ fontSize: 11, color: "#D7FF3E", letterSpacing: 0.8, textTransform: "uppercase", fontWeight: 800 }}>STOKE ⚡ LIVE GPS</div>
+3483: border: `1px solid ${simulating ? "#D7FF3E" : TOKENS.border}`,
+3484: background: simulating ? "rgba(215,255,62,0.15)" : "rgba(255,255,255,0.04)",
+3485: color: simulating ? "#D7FF3E" : TOKENS.muted,
+3513: background: activeSubTab === t.key ? "#D7FF3E" : "transparent",
+3557: style={{ width: 40, height: 40, borderRadius: 12, background: is3DTilted ? "#D7FF3E" : "rgba(11,14,19,0.85)", backdropFilter: "blur(8px)", border: `1px solid ${is3DTilted ? "#D7FF3E" : "rgba(255,255,255,0.15)"}`, color: is3DTilted ? "#0B0E13" : "#FFF", fontSize: 13, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.4)" }}
+3626: background: active ? "rgba(215,255,62,0.18)" : "rgba(255,255,255,0.04)",
+3627: border: active ? "1.5px solid #D7FF3E" : "1px solid rgba(255,255,255,0.06)",
+3628: color: active ? "#D7FF3E" : TOKENS.muted,
+3650: <div style={{ fontSize: 20, fontWeight: 900, color: activityType === "walk" ? "#D7FF3E" : TOKENS.text, fontFamily: "monospace" }}>
+3666: background: "linear-gradient(135deg, #D7FF3E 0%, #B2E600 100%)",
+3672: boxShadow: "0 0 24px rgba(215,255,62,0.6)",
+3693: <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#D7FF3E", animation: "pulse 1.2s infinite" }} />
+3694: <span style={{ fontSize: 12, fontWeight: 900, color: "#D7FF3E", letterSpacing: 0.8, textTransform: "uppercase" }}>STOKE LIVE RECORDING</span>
+3718: <div style={{ fontSize: 24, fontWeight: 900, color: "#D7FF3E", fontFamily: "monospace" }}>
+3730: background: "linear-gradient(135deg, #D7FF3E 0%, #B2E600 100%)",
+3736: boxShadow: "0 6px 20px rgba(215,255,62,0.4)",
+3763: <div style={{ fontSize: 22, fontWeight: 900, color: activityType === "walk" ? "#D7FF3E" : TOKENS.text, fontFamily: "monospace" }}>
+3776: background: "linear-gradient(135deg, #D7FF3E 0%, #B2E600 100%)",
+3782: boxShadow: "0 6px 20px rgba(215,255,62,0.4)",
+3835: style={{ background: "rgba(215,255,62,0.15)", border: "1px solid #D7FF3E", color: "#D7FF3E", padding: "6px 12px", borderRadius: 999, fontSize: 11, fontWeight: 800, cursor: "pointer", flexShrink: 0 }}
+3847: style={{ background: "none", border: "none", color: "#D7FF3E", fontSize: 11, fontWeight: 800, cursor: "pointer" }}
+3862: background: selectedCity?.id === city.id ? "rgba(215,255,62,0.12)" : "rgba(255,255,255,0.03)",
+3863: border: selectedCity?.id === city.id ? "1px solid #D7FF3E" : `1px solid rgba(255,255,255,0.06)`,
+3878: <div style={{ fontSize: 12, fontWeight: 900, color: "#D7FF3E" }}>Run Here →</div>
+3900: <div style={{ fontSize: 14, fontWeight: 900, color: "#D7FF3E", fontFamily: "monospace" }}>{(r.distanceKm || 2.15).toFixed(2)} km</div>
+3917: <div style={{ width: 10, height: 10, borderRadius: "50%", background: status === "paused" ? "#EAB308" : "#D7FF3E", animation: status === "paused" ? "none" : "pulse 1.2s infinite" }} />
+3918: <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: 1.2, color: status === "paused" ? "#EAB308" : "#D7FF3E", textTransform: "uppercase" }}>
+3945: <div style={{ fontSize: "clamp(56px, 16vw, 96px)", fontWeight: 900, fontFamily: "monospace", letterSpacing: -2, lineHeight: 1, color: "#D7FF3E", marginBottom: 32 }}>
+3973: <div style={{ width: activityType === "walk" ? `${Math.min(100, (liveSteps / 10000) * 100)}%` : `${(distanceKm % 1) * 100}%`, height: "100%", background: "#D7FF3E", borderRadius: 999 }} />
+3983: style={{ flex: 1, padding: "18px 0", borderRadius: 20, background: "#D7FF3E", border: "none", color: "#0B0E13", fontWeight: 900, fontSize: 18, cursor: "pointer", boxShadow: "0 8px 30px rgba(215,255,62,0.5)" }}
+3992: style={{ flex: 1, padding: "18px 0", borderRadius: 20, background: "#D7FF3E", border: "none", color: "#0B0E13", fontWeight: 900, fontSize: 18, cursor: "pointer", boxShadow: "0 8px 30px rgba(215,255,62,0.5)" }}
+4002: style={{ flex: 1, padding: "18px 0", borderRadius: 20, background: "#D7FF3E", border: "none", color: "#0B0E13", fontWeight: 900, fontSize: 16, cursor: "pointer" }}
+4025: style={{ background: "transparent", border: "none", color: "#D7FF3E", fontSize: 14, fontWeight: 800, cursor: "pointer" }}
+4032: style={{ background: "#D7FF3E", border: "none", color: "#0B0E13", padding: "6px 14px", borderRadius: 999, fontSize: 12, fontWeight: 800, cursor: "pointer" }}
+4074: <span style={{ fontSize: 10, fontWeight: 800, color: "#D7FF3E" }}>+ Add Photo</span>
+4094: style={{ background: "rgba(215,255,62,0.15)", border: "1px solid #D7FF3E", color: "#D7FF3E", padding: "6px 12px", borderRadius: 999, fontSize: 11.5, fontWeight: 800, cursor: "pointer" }}
+4104: <span style={{ fontSize: 12, fontWeight: 800, color: "#D7FF3E" }}>{perceivedExertion} / 10 - {perceivedExertion <= 3 ? "Easy" : perceivedExertion <= 6 ? "Moderate" : perceivedExertion <= 8 ? "Hard" : "Max Effort"}</span>
+4112: style={{ width: "100%", accentColor: "#D7FF3E", cursor: "pointer" }}
+4123: background: "linear-gradient(135deg, #D7FF3E 0%, #B2E600 100%)",
+4129: boxShadow: "0 8px 24px rgba(215,255,62,0.4)",
+4142: <p style={{ fontSize: 14, color: "#D7FF3E", fontWeight: 800, margin: 0 }}>Activity saved! Preparing your STOKE intelligence report...</p>
+4191: <div style={{ fontSize: 20, fontWeight: 900, color: "#D7FF3E", fontFamily: "monospace" }}>{savedActivity.distance.toFixed(2)} km</div>
+4219: style={{ flex: 1, padding: "12px 0", borderRadius: 14, background: "rgba(215,255,62,0.15)", border: "1px solid #D7FF3E", color: "#D7FF3E", fontWeight: 800, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}
+4222: <span style={{ background: "#D7FF3E", color: "#0B0E13", padding: "2px 7px", borderRadius: 999, fontSize: 11, fontWeight: 900 }}>{kudosCount}</span>
+4227: style={{ flex: 1, padding: "12px 0", borderRadius: 14, background: "linear-gradient(135deg, #D7FF3E 0%, #B2E600 100%)", border: "none", color: "#0B0E13", fontWeight: 900, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, boxShadow: "0 4px 16px rgba(215,255,62,0.4)" }}
+4259: <div style={{ background: "rgba(215,255,62,0.15)", border: "1px solid #D7FF3E", color: "#D7FF3E", padding: "4px 10px", borderRadius: 999, fontSize: 11, fontWeight: 800 }}>
+4267: <div key={c.id} style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${c.joined ? "rgba(215,255,62,0.5)" : TOKENS.border}`, borderRadius: 20, padding: 18, position: "relative", overflow: "hidden" }}>
+4278: <span style={{ color: "#D7FF3E", fontWeight: 700 }}>{c.reward}</span>
+4287: <span style={{ color: "#D7FF3E" }}>{pct}%</span>
+4290: <div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg, #D7FF3E, #2DD4BF)", borderRadius: 999, transition: "width 0.4s ease" }} />
+4301: background: c.joined ? "rgba(255,255,255,0.06)" : "#D7FF3E",
+4328: style={{ background: leaderboardFilter === "worldwide" ? "#D7FF3E" : "transparent", border: "none", color: leaderboardFilter === "worldwide" ? "#0B0E13" : "#FFF", padding: "3px 9px", borderRadius: 999, fontSize: 10.5, fontWeight: 800, cursor: "pointer" }}
+4334: style={{ background: leaderboardFilter === "regional" ? "#D7FF3E" : "transparent", border: "none", color: leaderboardFilter === "regional" ? "#0B0E13" : "#FFF", padding: "3px 9px", borderRadius: 999, fontSize: 10.5, fontWeight: 800, cursor: "pointer" }}
+4347: <div style={{ fontSize: 13, fontWeight: 900, color: "#D7FF3E", marginTop: 4 }}>76.5 km</div>
+4351: <div style={{ background: "linear-gradient(180deg, rgba(215,255,62,0.2) 0%, rgba(255,255,255,0.03) 100%)", border: "1px solid #D7FF3E", borderRadius: 18, padding: "18px 8px 14px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", transform: "scale(1.04)" }}>
+4354: <div style={{ fontSize: 15, fontWeight: 900, color: "#D7FF3E", marginTop: 4 }}>84.2 km</div>
+4361: <div style={{ fontSize: 13, fontWeight: 900, color: "#D7FF3E", marginTop: 4 }}>69.8 km</div>
+4378: background: isCurrentUser ? "rgba(215,255,62,0.14)" : "rgba(255,255,255,0.03)",
+4379: border: `1px solid ${isCurrentUser ? "#D7FF3E" : TOKENS.border}`,
+4382: <div style={{ width: 24, fontSize: 13, fontWeight: 900, color: isCurrentUser ? "#D7FF3E" : TOKENS.muted, textAlign: "center" }}>
+4385: <div style={{ width: 36, height: 36, borderRadius: "50%", background: isCurrentUser ? "#D7FF3E" : "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 14, color: isCurrentUser ? "#0B0E13" : "#FFF" }}>
+4391: {isCurrentUser && <span style={{ background: "#D7FF3E", color: "#0B0E13", fontSize: 9, fontWeight: 800, padding: "1px 6px", borderRadius: 999 }}>YOU</span>}
+4396: <div style={{ fontSize: 14, fontWeight: 900, color: isCurrentUser ? "#D7FF3E" : TOKENS.text, fontFamily: "monospace" }}>{u.dist.toFixed(1)} km</div>
+4428: <div style={{ fontSize: 20, fontWeight: 900, color: "#D7FF3E", letterSpacing: 2.5, marginBottom: 2 }}>STOKE ⚡</div>
+4443: <div style={{ fontSize: 10, fontWeight: 800, color: "#D7FF3E", letterSpacing: 2, marginTop: 8 }}>STOKE ⚡ ATHLETES CLUB</div>
+4493: style={{ flex: 1, padding: "12px 0", borderRadius: 14, background: "#D7FF3E", border: "none", color: "#0B0E13", fontWeight: 900, fontSize: 12, cursor: "pointer" }}
+4543: const LIME = "#D7FF3E";
+5075: .replace(/`([^`]+)`/g, '<code style="background: rgba(255,255,255,0.1); padding: 1px 5px; border-radius: 4px; font-size: 12px; color: #D7FF3E;">$1</code>');
+5086: <div style={{ width: 36, height: 36, borderRadius: "50%", background: "linear-gradient(135deg, #1C2433 0%, #0E121A 100%)", border: "1.5px solid rgba(215,255,62,0.35)", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", boxShadow: "0 0 12px rgba(215,255,62,0.15)" }}>
+5116: <div style={{ display: "flex", alignItems: "center", gap: 5, background: "rgba(215,255,62,0.1)", border: `1px solid rgba(215,255,62,0.25)`, borderRadius: 999, padding: "4px 10px" }}>
+5157: background: active ? "rgba(215,255,62,0.15)" : "rgba(255,255,255,0.04)",
+5236: ? `1.5px solid rgba(215,255,62,0.35)`
+5242: ? "4px 4px 16px rgba(0,0,0,0.6), 0 0 16px rgba(215,255,62,0.1)"
+5324: background: "linear-gradient(145deg, rgba(215,255,62,0.08) 0%, rgba(14,18,26,0.95) 100%)",
+5325: border: `1.5px solid rgba(215,255,62,0.25)`,
+5340: <span style={{ background: "rgba(215,255,62,0.12)", color: LIME, padding: "2px 8px", borderRadius: 6, fontSize: 11, fontWeight: 800 }}>P: {m.macroCard.protein}g</span>
+5358: boxShadow: "0 2px 10px rgba(215,255,62,0.3)"
+5422: border: "1px solid rgba(215,255,62,0.3)",
+5547: boxShadow: input.trim() ? `0 2px 10px rgba(215,255,62,0.35)` : "none",
+5619: const LIME = "#D7FF3E";
+5723: <div style={{ position: "absolute", top: -40, right: -40, width: 140, height: 140, borderRadius: "50%", background: "radial-gradient(circle, rgba(215,255,62,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
+5758: background: "rgba(215,255,62,0.1)",
+5759: border: "1px solid rgba(215,255,62,0.3)",
+5780: background: "rgba(215,255,62,0.18)",
+5792: boxShadow: "0 0 12px rgba(215,255,62,0.2)"
+5895: background: "linear-gradient(135deg, rgba(245,158,11,0.18) 0%, rgba(215,255,62,0.12) 100%)",
+5945: <span style={{ fontSize: 10, background: "rgba(215,255,62,0.12)", color: item.badgeColor || LIME, padding: "2px 8px", borderRadius: 999, fontWeight: 800, border: "1px solid rgba(215,255,62,0.2)" }}>
+6034: boxShadow: "0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(215,255,62,0.2)",
+6115: <div style={{ background: "rgba(215,255,62,0.08)", border: "1px solid rgba(215,255,62,0.3)", borderRadius: 14, padding: "14px", display: "flex", alignItems: "center", gap: 12 }}>
+6122: <span style={{ background: "rgba(215,255,62,0.2)", color: LIME, fontSize: 10, fontWeight: 900, padding: "1px 6px", borderRadius: 4 }}>CURRENT</span>
+6164: background: isCurrent ? "rgba(215,255,62,0.1)" : "rgba(255,255,255,0.03)",
+6615: 0%,100% { filter: drop-shadow(0 0 8px rgba(215,255,62,0.3)); }
+6616: 50%     { filter: drop-shadow(0 0 18px rgba(215,255,62,0.6)); }
+6855: background: rgba(215,255,62,0.08);
+6856: border: 1px solid rgba(215,255,62,0.2);
+6951: box-shadow: var(--neu-inset), 0 0 0 3px rgba(215,255,62,0.1), 0 0 20px rgba(215,255,62,0.08);
+6989: background: linear-gradient(135deg, rgba(215,255,62,0.08) 0%, transparent 60%);
+6996: background: rgba(215,255,62,0.07);
+6998: box-shadow: 0 0 0 1.5px rgba(215,255,62,0.25), var(--mat-elev2), 0 0 28px rgba(215,255,62,0.1);
+7024: box-shadow: 0 4px 16px rgba(215,255,62,0.4), var(--neu-flat);
+7047: background: rgba(215,255,62,0.1);
+7050: box-shadow: 0 0 0 1px rgba(215,255,62,0.15), 0 0 20px rgba(215,255,62,0.12);
+7099: box-shadow: 0 0 12px rgba(215,255,62,0.6);
+7123: box-shadow: 0 0 0 3px rgba(215,255,62,0.2), var(--mat-elev1);
+7138: .s3-radio.checked { border-color: var(--lime); box-shadow: 0 0 0 3px rgba(215,255,62,0.15); }
+7139: .s3-radio .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--lime); animation: checkBounce3 0.25s ease; box-shadow: 0 0 8px rgba(215,255,62,0.6); }
+7170: background: linear-gradient(145deg, rgba(215,255,62,0.07) 0%, rgba(11,14,20,0.95) 100%);
+7171: border: 1.5px solid rgba(215,255,62,0.22);
+7172: box-shadow: var(--mat-elev3), 0 0 40px rgba(215,255,62,0.06), inset 0 1px 0 rgba(215,255,62,0.1);
+7204: .s3-feature-card:hover { box-shadow: var(--mat-elev2); border-color: rgba(215,255,62,0.15); transform: translateY(-1px); }
+7231: box-shadow: 6px 6px 16px rgba(0,0,0,0.7), -4px -4px 12px rgba(255,255,255,0.05), 0 0 20px rgba(215,255,62,0.2);
+7239: background: linear-gradient(135deg, #D7FF3E 0%, #2ED4BF 100%);
+7249: border: 1.5px solid #D7FF3E;
+7250: color: #D7FF3E;
+7329: color: #D7FF3E;
+7330: box-shadow: 4px 4px 12px rgba(0,0,0,0.5), -2px -2px 8px rgba(255,255,255,0.05), 0 0 16px rgba(215,255,62,0.15);
+7460: background: isBlue ? "linear-gradient(145deg, #2A72FD 0%, #1557E0 100%)" : "linear-gradient(145deg, #D7FF3E 0%, #C0EC00 100%)",
+7461: boxShadow: isBlue ? "5px 5px 14px rgba(0,0,0,0.6), -3px -3px 10px rgba(255,255,255,0.04), 0 0 32px rgba(37,107,253,0.55)" : "5px 5px 14px rgba(0,0,0,0.6), -3px -3px 10px rgba(255,255,255,0.04), 0 0 32px rgba(215,255,62,0.5)",
+7818: border: "3px solid rgba(215,255,62,0.2)",
+7819: borderTopColor: "#D7FF3E",
+7821: boxShadow: "0 0 16px rgba(215,255,62,0.35)"
+7878: <NeuBackground accent="#D7FF3E" />
+7917: { id:0, quote:"Discover the impact of your food & fitness", sub:"Track every calorie, run, and workout in one place.", accent:"#D7FF3E", type:"dashboard" },
+7923: const LIME = "#D7FF3E";
+7926: <div className="s3-glass" style={{ height:268, padding:"18px", display:"flex", flexDirection:"column", justifyContent:"space-between", position:"relative", overflow:"hidden", borderColor:"rgba(215,255,62,0.18)" }}>
+7927: <div style={{ position:"absolute", top:-30, right:-30, width:160, height:160, borderRadius:"50%", background:"radial-gradient(circle, rgba(215,255,62,0.16) 0%, transparent 70%)", pointerEvents:"none" }} />
+7931: <div style={{ width:32, height:32, borderRadius:"50%", background:"linear-gradient(135deg,#D7FF3E,#C0EC00)", boxShadow:"0 0 12px rgba(215,255,62,0.5)", display:"flex", alignItems:"center", justifyContent:"center", fontWeight:900, fontSize:13, color:"#000" }}>M</div>
+7933: <div style={{ fontSize:13, fontWeight:800, color:"#fff", letterSpacing:-0.3, display:"flex", alignItems:"center", gap:5 }}>Today <span style={{ fontSize:9, background:"rgba(215,255,62,0.15)", color:LIME, padding:"2px 6px", borderRadius:4, fontWeight:900, letterSpacing:0.5 }}>PRO</span></div>
+7944: <circle cx="50" cy="50" r="42" fill="none" stroke="url(#dg)" strokeWidth="10" strokeDasharray="264" strokeDashoffset="78" strokeLinecap="round" transform="rotate(-90 50 50)" style={{filter:"drop-shadow(0 0 10px rgba(215,255,62,0.7))"}}/>
+7945: <defs><linearGradient id="dg" x1="0%" y1="0%" x2="100%"><stop offset="0%" stopColor="#D7FF3E"/><stop offset="100%" stopColor="#2ED4BF"/></linearGradient></defs>
+7984: <path d="M42 54 L52 70 L58 92" stroke="#D7FF3E" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+7985: <path d="M52 70 L35 78 L22 88" stroke="#D7FF3E" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+7995: <div style={{ background:"rgba(215,255,62,0.12)", color:"#D7FF3E", fontSize:10, fontWeight:900, padding:"3px 8px", borderRadius:6, letterSpacing:0.5 }}>🔥 7-DAY</div>
+8000: <div style={{ width:"100%", height:col.h*0.86, background:col.h>=45?"linear-gradient(180deg,#D7FF3E,#2ED4BF)":"rgba(255,255,255,0.12)", borderRadius:4, boxShadow:col.h>=45?"0 0 10px rgba(215,255,62,0.35)":"none" }} />
+8016: <circle cx="37" cy="40" r="4.5" fill="#D7FF3E"/>
+8019: <circle cx="50" cy="48" r="2.5" fill="#D7FF3E"/>
+8020: <circle cx="56" cy="52" r="2" fill="#D7FF3E"/>
+8028: {[["Protein","32%","145g","#D7FF3E","rgba(215,255,62,0.1)"],["Fat","20%","52g","#2ED4BF","rgba(46,212,191,0.1)"],["Carbs","48%","220g","#FF8A3D","rgba(255,138,61,0.1)"]].map(([l,p,g,c,bg],i)=>(
+9900: background: "linear-gradient(155deg, rgba(215,255,62,0.35), rgba(215,255,62,0.12))",
+9903: border: "1px solid rgba(215,255,62,0.4)",
+9904: boxShadow: "0 0 16px rgba(215,255,62,0.25)",

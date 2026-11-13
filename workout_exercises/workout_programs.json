@@ -1,0 +1,58 @@
+{
+  "Classic Split": {
+    "Week A": {
+      "Monday": { "focus": "Chest + Triceps", "exercises": ["Bench Press", "Incline Press", "Chest Fly", "Dips", "Cable Crossover", "Triceps Pushdown", "Overhead Triceps Extension", "Close-Grip Push-up"] },
+      "Tuesday": { "focus": "Back + Biceps", "exercises": ["Deadlift", "Pull-up", "Lat Pulldown", "Barbell Row", "Seated Cable Row", "Bicep Curl", "Hammer Curl", "Face Pull"] },
+      "Wednesday": { "focus": "Legs", "exercises": ["Squat", "Romanian Deadlift", "Leg Press", "Walking Lunge", "Leg Curl", "Leg Extension", "Calf Raise", "Hip Thrust"] },
+      "Thursday": { "focus": "Core + Active Recovery", "exercises": ["Plank", "Hanging Leg Raise", "Russian Twist", "Cable Crunch", "Bird Dog", "Light Cycling"] },
+      "Friday": { "focus": "Shoulders + Arms", "exercises": ["Overhead Press", "Arnold Press", "Lateral Raise", "Rear Delt Fly", "Shrugs", "Hammer Curl", "Skull Crushers", "Face Pull"] },
+      "Saturday": { "focus": "Full Body / Cardio", "exercises": ["Kettlebell Swing", "Goblet Squat", "Push-up", "Dumbbell Row", "Mountain Climbers", "Plank", "Burpees", "Incline Treadmill Walk"] },
+      "Sunday": { "focus": "Rest", "exercises": [] }
+    },
+    "Week B": {
+      "Monday": { "focus": "Chest + Triceps", "exercises": ["Incline Dumbbell Press", "Flat Dumbbell Press", "Pec Deck", "Weighted Dip", "Low-to-High Cable Fly", "Rope Pushdown", "Diamond Push-up", "JM Press"] },
+      "Tuesday": { "focus": "Back + Biceps", "exercises": ["Rack Pull", "Chin-up", "Single-Arm Lat Pulldown", "T-Bar Row", "Chest-Supported Row", "Preacher Curl", "Cable Curl", "Rear Delt Row"] },
+      "Wednesday": { "focus": "Legs", "exercises": ["Front Squat", "Stiff-Leg Deadlift", "Hack Squat", "Bulgarian Split Squat", "Seated Leg Curl", "Sissy Squat", "Seated Calf Raise", "Glute Bridge"] },
+      "Thursday": { "focus": "Core + Active Recovery", "exercises": ["Side Plank", "Toes-to-Bar", "Cable Woodchopper", "Ab Wheel Rollout", "Dead Bug", "Light Elliptical"] },
+      "Friday": { "focus": "Shoulders + Arms", "exercises": ["Push Press", "Seated Dumbbell Press", "Cable Lateral Raise", "Reverse Pec Deck", "Upright Row", "Concentration Curl", "Overhead Triceps Extension", "Cable Face Pull"] },
+      "Saturday": { "focus": "Full Body / Cardio", "exercises": ["Battle Ropes", "Box Jump", "Renegade Row", "Medicine Ball Slam", "Jump Rope", "Farmer's Carry", "Rowing Machine", "Stair Climber"] },
+      "Sunday": { "focus": "Rest", "exercises": [] }
+    },
+    "Week C": {
+      "Monday": { "focus": "Chest + Triceps", "exercises": ["Decline Bench Press", "Machine Chest Press", "High-to-Low Cable Fly", "Ring Dip", "Svend Press", "Single-Arm Pushdown", "Tate Press", "Bench Dip"] },
+      "Tuesday": { "focus": "Back + Biceps", "exercises": ["Trap Bar Deadlift", "Neutral-Grip Pull-up", "Straight-Arm Pulldown", "Pendlay Row", "One-Arm Dumbbell Row", "Incline Dumbbell Curl", "Spider Curl", "Reverse Fly"] },
+      "Wednesday": { "focus": "Legs", "exercises": ["Box Squat", "Single-Leg RDL", "Pendulum Squat", "Reverse Lunge", "Nordic Curl", "Step-up", "Standing Calf Raise", "Cable Kickback"] },
+      "Thursday": { "focus": "Core + Active Recovery", "exercises": ["Weighted Plank", "V-Ups", "Landmine Rotation", "Reverse Crunch", "Pallof Press", "Light Swimming"] },
+      "Friday": { "focus": "Shoulders + Arms", "exercises": ["Behind-the-Neck Press", "Landmine Press", "Leaning Cable Lateral Raise", "Bent-Over Dumbbell Fly", "Barbell Shrug", "Preacher Curl", "Cable Kickback", "Band Pull-Apart"] },
+      "Saturday": { "focus": "Full Body / Cardio", "exercises": ["Sled Push", "Thruster", "Man Maker", "Wall Ball", "Sandbag Carry", "Bear Crawl", "Assault Bike", "Sled Pull"] },
+      "Sunday": { "focus": "Rest", "exercises": [] }
+    },
+    "Week D": {
+      "Monday": { "focus": "Chest + Triceps", "exercises": ["Floor Press", "Smith Machine Incline Press", "Dumbbell Pullover", "Weighted Push-up", "Landmine Press", "EZ-Bar Skull Crusher", "Triceps Kickback", "Close-Grip Bench Press"] },
+      "Tuesday": { "focus": "Back + Biceps", "exercises": ["Sumo Deadlift", "Assisted Pull-up", "Wide-Grip Lat Pulldown", "Meadows Row", "Machine Row", "21s Bicep Curl", "Zottman Curl", "Band Pull-Apart"] },
+      "Wednesday": { "focus": "Legs", "exercises": ["Pause Squat", "Good Morning", "Belt Squat", "Lateral Lunge", "Glute-Ham Raise", "Curtsy Lunge", "Donkey Calf Raise", "Frog Pump"] },
+      "Thursday": { "focus": "Core + Active Recovery", "exercises": ["Plank Shoulder Tap", "Hollow Body Hold", "Medicine Ball Twist", "Decline Sit-up", "Stir-the-Pot", "Light Rowing"] },
+      "Friday": { "focus": "Shoulders + Arms", "exercises": ["Z-Press", "Single-Arm Dumbbell Press", "Cable Y-Raise", "Chest-Supported Rear Delt Fly", "Cable Shrug", "Drag Curl", "Close-Grip Bench Press", "Rear Delt Row"] },
+      "Saturday": { "focus": "Full Body / Cardio", "exercises": ["Turkish Get-Up", "Devil Press", "Kettlebell Clean and Press", "Broad Jump", "Suitcase Carry", "Battle Rope Slam", "Row Erg Sprint", "Shuttle Run"] },
+      "Sunday": { "focus": "Rest", "exercises": [] }
+    }
+  },
+  "Push / Pull / Legs": {
+    "Monday": { "focus": "Push (Chest, Shoulders, Triceps)", "exercises": ["Bench Press", "Overhead Press", "Incline Dumbbell Press", "Lateral Raise", "Triceps Pushdown"] },
+    "Tuesday": { "focus": "Pull (Back, Biceps)", "exercises": ["Deadlift", "Pull-up", "Barbell Row", "Face Pull", "Bicep Curl"] },
+    "Wednesday": { "focus": "Legs", "exercises": ["Squat", "Romanian Deadlift", "Leg Press", "Calf Raise"] },
+    "Thursday": { "focus": "Rest", "exercises": [] },
+    "Friday": { "focus": "Push (Chest, Shoulders, Triceps)", "exercises": ["Incline Press", "Arnold Press", "Chest Fly", "Skull Crushers"] },
+    "Saturday": { "focus": "Pull (Back, Biceps)", "exercises": ["Lat Pulldown", "Seated Cable Row", "Hammer Curl", "Shrugs"] },
+    "Sunday": { "focus": "Rest", "exercises": [] }
+  },
+  "Upper / Lower": {
+    "Monday": { "focus": "Upper Body", "exercises": ["Bench Press", "Barbell Row", "Overhead Press", "Lat Pulldown", "Bicep Curl"] },
+    "Tuesday": { "focus": "Lower Body", "exercises": ["Squat", "Romanian Deadlift", "Walking Lunge", "Calf Raise"] },
+    "Wednesday": { "focus": "Rest", "exercises": [] },
+    "Thursday": { "focus": "Upper Body", "exercises": ["Incline Press", "Pull-up", "Lateral Raise", "Triceps Pushdown"] },
+    "Friday": { "focus": "Lower Body", "exercises": ["Deadlift", "Leg Press", "Leg Curl", "Hip Thrust"] },
+    "Saturday": { "focus": "Full Body / Cardio", "exercises": ["Kettlebell Swing", "Push-up", "Mountain Climbers"] },
+    "Sunday": { "focus": "Rest", "exercises": [] }
+  }
+}

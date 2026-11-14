@@ -1,7 +1,8 @@
-// Vercel / Node.js Serverless Function: Secure Multi-Model Vision AI Gateway (Claude & Gemini)
+// Vercel / Node.js Serverless Function: Multi-Model Vision AI Gateway (AWS Bedrock Claude, Anthropic Claude, Google Gemini)
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 // Safe environment loader fallback
@@ -10,7 +11,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
 // Safe server-side environment loading
-if (!process.env.GEMINI_API_KEY && !process.env.ANTHROPIC_API_KEY) {
+if (!process.env.GEMINI_API_KEY && !process.env.ANTHROPIC_API_KEY && !process.env.AWS_ACCESS_KEY_ID) {
   const envLocal = path.join(rootDir, '.env.local');
   const envMain = path.join(rootDir, '.env');
   if (fs.existsSync(envLocal)) {
@@ -51,6 +52,88 @@ setInterval(() => {
 }, 300000);
 
 const ALLOWED_MIME_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+
+// ---------------------------------------------------------------------------
+// AWS SigV4 SIGNING SUITE FOR AWS BEDROCK RUNTIME
+// ---------------------------------------------------------------------------
+function hmac(key, str) {
+  return crypto.createHmac('sha256', key).update(str, 'utf8').digest();
+}
+
+function hash(str) {
+  return crypto.createHash('sha256').update(str, 'utf8').digest('hex');
+}
+
+function getSignatureKey(key, dateStamp, regionName, serviceName) {
+  const kDate = hmac('AWS4' + key, dateStamp);
+  const kRegion = hmac(kDate, regionName);
+  const kService = hmac(kRegion, serviceName);
+  const kSigning = hmac(kService, 'aws4_request');
+  return kSigning;
+}
+
+function signBedrockRequest({ accessKey, secretKey, sessionToken, region = 'us-east-1', modelId, payload }) {
+  const method = 'POST';
+  const service = 'bedrock';
+  const host = `bedrock-runtime.${region}.amazonaws.com`;
+  const endpoint = `https://${host}/model/${encodeURIComponent(modelId)}/invoke`;
+  const canonicalUri = `/model/${encodeURIComponent(modelId)}/invoke`;
+
+  const now = new Date();
+  const amzDate = now.toISOString().replace(/[:-]|\.\d{3}/g, '');
+  const dateStamp = amzDate.substring(0, 8);
+
+  const payloadHash = hash(payload);
+
+  const headersToSign = {
+    'content-type': 'application/json',
+    'host': host,
+    'x-amz-date': amzDate
+  };
+
+  if (sessionToken) {
+    headersToSign['x-amz-security-token'] = sessionToken;
+  }
+
+  const sortedKeys = Object.keys(headersToSign).sort();
+  const canonicalHeaders = sortedKeys.map(k => `${k}:${headersToSign[k]}\n`).join('');
+  const signedHeaders = sortedKeys.join(';');
+
+  const canonicalRequest = [
+    method,
+    canonicalUri,
+    '',
+    canonicalHeaders,
+    signedHeaders,
+    payloadHash
+  ].join('\n');
+
+  const credentialScope = `${dateStamp}/${region}/${service}/aws4_request`;
+  const stringToSign = [
+    'AWS4-HMAC-SHA256',
+    amzDate,
+    credentialScope,
+    hash(canonicalRequest)
+  ].join('\n');
+
+  const signingKey = getSignatureKey(secretKey, dateStamp, region, service);
+  const signature = crypto.createHmac('sha256', signingKey).update(stringToSign, 'utf8').digest('hex');
+
+  const authorizationHeader = `AWS4-HMAC-SHA256 Credential=${accessKey}/${credentialScope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
+
+  const requestHeaders = {
+    'Content-Type': 'application/json',
+    'Host': host,
+    'X-Amz-Date': amzDate,
+    'Authorization': authorizationHeader
+  };
+
+  if (sessionToken) {
+    requestHeaders['X-Amz-Security-Token'] = sessionToken;
+  }
+
+  return { endpoint, headers: requestHeaders };
+}
 
 export default async function handler(req, res) {
   // CORS configuration
@@ -115,7 +198,6 @@ export default async function handler(req, res) {
       }
     }
 
-    // Require valid authentication
     if (!userId) {
       return res.status(401).json({
         success: false,
@@ -125,7 +207,7 @@ export default async function handler(req, res) {
     }
 
     // -------------------------------------------------------------------------
-    // 2. RATE LIMITING (Per-User & Per-IP)
+    // 2. RATE LIMITING
     // -------------------------------------------------------------------------
     const rateLimitKey = `user_${userId}`;
     const rateLimit = checkVisionRateLimit(rateLimitKey, 10, 60000);
@@ -159,7 +241,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // Enforce 5MB base64 size limit (approx 3.75MB raw file)
     if (base64.length > 5 * 1024 * 1024) {
       return res.status(400).json({
         success: false,
@@ -169,28 +250,120 @@ export default async function handler(req, res) {
     }
 
     // -------------------------------------------------------------------------
-    // 4. MULTI-MODEL AI KEY RESOLUTION (Claude & Gemini)
+    // 4. MULTI-MODEL CREDENTIALS RESOLUTION (Bedrock, Anthropic, Gemini)
     // -------------------------------------------------------------------------
+    const awsAccessKey = (process.env.AWS_ACCESS_KEY_ID || process.env.AWS_BEDROCK_ACCESS_KEY || '').trim();
+    const awsSecretKey = (process.env.AWS_SECRET_ACCESS_KEY || process.env.AWS_BEDROCK_SECRET_KEY || '').trim();
+    const awsRegion = (process.env.AWS_REGION || process.env.AWS_BEDROCK_REGION || 'us-east-1').trim();
+    const awsSessionToken = (process.env.AWS_SESSION_TOKEN || '').trim();
+
     const claudeKey = (process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY || '').trim();
     const geminiKey = (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '').trim();
 
+    const hasBedrock = Boolean(awsAccessKey && awsSecretKey && awsAccessKey.length > 8 && awsSecretKey.length > 15);
     const hasClaude = Boolean(claudeKey && claudeKey.length > 10 && !claudeKey.includes('your_anthropic_api_key'));
     const hasGemini = Boolean(geminiKey && geminiKey.length > 10 && !geminiKey.includes('your_gemini_api_key'));
 
-    if (!hasClaude && !hasGemini) {
+    if (!hasBedrock && !hasClaude && !hasGemini) {
       return res.status(500).json({
         success: false,
         scanId,
         requiresApiKey: true,
         configured: false,
-        error: 'Vision AI key is not configured on the server. Please configure ANTHROPIC_API_KEY (Claude) or GEMINI_API_KEY in your hosting environment variables.'
+        error: 'Vision AI credentials not configured on the server. Please configure AWS Bedrock (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY), ANTHROPIC_API_KEY, or GEMINI_API_KEY in your Vercel project environment variables.'
       });
     }
 
     const systemPrompt = `You are STOKE Vision AI, an expert food recognition and nutrition system. Analyze the meal photo and output ONLY valid JSON matching this schema: {"items": [{"name": "Food Name", "grams": 150, "calories": 250, "protein": 20, "carbs": 30, "fat": 5, "fiber": 3, "dietType": "veg"|"nonveg", "confidence": 95}], "disclaimer": "Nutritional estimates based on visual volume."}. Ensure calories and macros are realistic estimates for the visual portions. No markdown fences, no explanations outside the JSON.`;
 
     // -------------------------------------------------------------------------
-    // 5. ANTHROPIC CLAUDE 3.5 VISION PIPELINE (If Claude Key Configured)
+    // 5. AWS BEDROCK RUNTIME PIPELINE (Claude 3.5 Sonnet & Haiku on Bedrock)
+    // -------------------------------------------------------------------------
+    if (hasBedrock) {
+      const bedrockModels = [
+        process.env.BEDROCK_MODEL_ID,
+        'anthropic.claude-3-5-sonnet-20241022-v2:0',
+        'us.anthropic.claude-3-5-sonnet-20241022-v2:0',
+        'anthropic.claude-3-5-sonnet-20240620-v1:0',
+        'us.anthropic.claude-3-5-haiku-20241022-v1:0',
+        'anthropic.claude-3-haiku-20240307-v1:0'
+      ].filter(Boolean);
+
+      const bedrockPayload = JSON.stringify({
+        anthropic_version: 'bedrock-2023-05-31',
+        max_tokens: 1200,
+        system: systemPrompt,
+        messages: [
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'image',
+                source: {
+                  type: 'base64',
+                  media_type: cleanMime,
+                  data: base64
+                }
+              },
+              {
+                type: 'text',
+                text: 'Identify all visible foods and return structured JSON nutrition data.'
+              }
+            ]
+          }
+        ]
+      });
+
+      for (const bModel of bedrockModels) {
+        try {
+          const signed = signBedrockRequest({
+            accessKey: awsAccessKey,
+            secretKey: awsSecretKey,
+            sessionToken: awsSessionToken,
+            region: awsRegion,
+            modelId: bModel,
+            payload: bedrockPayload
+          });
+
+          const bResponse = await fetch(signed.endpoint, {
+            method: 'POST',
+            headers: signed.headers,
+            body: bedrockPayload,
+            signal: AbortSignal.timeout(28000)
+          });
+
+          if (bResponse.ok) {
+            const bData = await bResponse.json();
+            const rawText = (bData.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+            let cleanText = rawText.trim();
+            if (cleanText.startsWith('```json')) cleanText = cleanText.slice(7);
+            if (cleanText.startsWith('```')) cleanText = cleanText.slice(3);
+            if (cleanText.endsWith('```')) cleanText = cleanText.slice(0, -3);
+            cleanText = cleanText.trim();
+
+            const parsedResult = JSON.parse(cleanText);
+            return res.status(200).json({
+              success: true,
+              scanId,
+              userId,
+              items: parsedResult.items || [],
+              disclaimer: parsedResult.disclaimer || 'Nutritional estimates powered by AWS Bedrock Claude 3.5 Vision AI.',
+              source: 'stoke_backend_aws_bedrock',
+              model: bModel,
+              region: awsRegion
+            });
+          } else {
+            const errText = await bResponse.text();
+            console.warn(`[Bedrock Vision Notice] Model ${bModel} HTTP ${bResponse.status}:`, errText.substring(0, 150));
+          }
+        } catch (bErr) {
+          console.warn(`[Bedrock Vision Exception] Model ${bModel}:`, bErr.message);
+        }
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // 6. ANTHROPIC DIRECT API PIPELINE (Claude 3.5 Sonnet & Haiku)
     // -------------------------------------------------------------------------
     if (hasClaude) {
       const claudeModels = ['claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022'];
@@ -257,7 +430,7 @@ export default async function handler(req, res) {
     }
 
     // -------------------------------------------------------------------------
-    // 6. GOOGLE GEMINI VISION PIPELINE (If Gemini Key Configured or Fallback)
+    // 7. GOOGLE GEMINI VISION PIPELINE (Gemini 3.5 / 2.5 Flash)
     // -------------------------------------------------------------------------
     if (hasGemini) {
       const candidateModels = ['gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-2.5-flash'];

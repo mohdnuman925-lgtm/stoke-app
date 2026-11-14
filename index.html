@@ -3063,7 +3063,22 @@ if (typeof window !== "undefined") {
       animation: stokeBarShimmer 2.5s infinite linear;
     }
 
+  
+    @keyframes drawStroke {
+      0% {
+        stroke-dashoffset: 1400;
+      }
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
   </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Kaushan+Script&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -3094,34 +3109,28 @@ if (typeof window !== "undefined") {
     }
   </script>
   <div id="root">
-    <!-- STOKE APPLE iOS INSTANT APP LAUNCH SURFACE (Prevents blank void during hydration) -->
-    <div id="stoke-ios-splash" style="position: fixed; inset: 0; background: var(--bg-app, #000000); display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif; z-index: 999999; padding: 24px; box-sizing: border-box;">
-      <div style="position: relative; width: 84px; height: 84px; border-radius: 24px; background: linear-gradient(135deg, rgba(217, 255, 114, 0.22) 0%, rgba(217, 255, 114, 0.04) 100%); border: 1.5px solid rgba(217, 255, 114, 0.35); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(217, 255, 114, 0.22); display: flex; align-items: center; justify-content: center; margin-bottom: 22px;">
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#D9FF72" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="rgba(217, 255, 114, 0.28)"></polygon>
-        </svg>
+    <!-- STOKE CINEMATIC INSTANT FIRST FRAME (Matches reference video pixel-for-pixel) -->
+    <div id="stoke-splash-initial" style="position: fixed; inset: 0; z-index: 9999999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #080B0A; user-select: none;">
+      <div style="position: absolute; width: 440px; height: 440px; border-radius: 50%; pointer-events: none; opacity: 0.35; background: radial-gradient(circle, rgba(255, 255, 255, 0.09) 0%, rgba(217, 255, 114, 0.04) 40%, transparent 70%);"></div>
+      <div style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div style="position: relative; width: 280px; height: 168px; margin-bottom: 16px;">
+          <svg viewBox="0 0 300 180" style="width: 100%; height: 100%; overflow: visible;" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 54 12 L 126 12 C 142 12, 148 24, 146 42 L 78 42 C 68 42, 64 48, 64 56 C 64 64, 72 70, 84 74 L 122 86 C 144 94, 150 108, 148 132 C 146 154, 134 166, 110 166 L 36 166 C 18 166, 14 152, 16 134 L 84 134 C 94 134, 98 128, 98 120 C 98 112, 90 106, 78 102 L 40 90 C 20 82, 14 68, 16 46 C 18 24, 30 12, 54 12 Z M 162 12 L 284 12 L 278 42 L 238 42 L 222 166 L 186 166 L 202 42 L 168 42 Z" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1400" style="animation: drawStroke 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));"></path>
+          </svg>
+        </div>
+        <div style="height: 64px; margin-bottom: 16px;"></div>
+        <div style="display: flex; align-items: center; gap: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; letter-spacing: 0.38em; color: #A3A3A3; font-weight: 600; text-transform: uppercase;">
+          <span>STARTING STOKE</span>
+          <span style="display: inline-flex; letter-spacing: 0.15em; color: #D9FF72;">
+            <span style="animation: pulse 1.2s infinite 100ms;">.</span>
+            <span style="animation: pulse 1.2s infinite 300ms;">.</span>
+            <span style="animation: pulse 1.2s infinite 500ms;">.</span>
+          </span>
+        </div>
       </div>
-      <div style="font-size: 24px; font-weight: 900; letter-spacing: -0.02em; color: var(--text-primary, #FFFFFF); margin-bottom: 6px;">STOKE</div>
-      <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary, #A1A1A6); margin-bottom: 20px;">Fitness • Nutrition • Running</div>
-      <div style="display: flex; align-items: center; gap: 9px; padding: 7px 14px; border-radius: 999px; background: var(--surface-primary, rgba(28, 28, 30, 0.75)); border: 1px solid var(--border-divider, rgba(255, 255, 255, 0.1)); backdrop-filter: blur(20px);">
-        <span style="display: inline-block; width: 10px; height: 10px; border: 2px solid rgba(217, 255, 114, 0.3); border-top-color: #D9FF72; border-radius: 50%; animation: spin 0.75s linear infinite;"></span>
-        <span style="font-size: 11.5px; font-weight: 600; color: var(--text-secondary, #A1A1A6);">Syncing telemetry...</span>
-      </div>
+      <div style="position: absolute; bottom: 24px; right: 24px; font-size: 10px; text-transform: uppercase; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.2em; color: #737373; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); background: rgba(255, 255, 255, 0.02);">Skip [ESC]</div>
     </div>
   </div>
-  <div id="stoke-fatal-error"
-    style="display:none; position:fixed; inset:0; z-index:9999999; background:#14171F; color:#FFFFFF; padding:24px; font-family:sans-serif; font-size:14px; overflow:auto; border:3px solid #237547;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-      <h3 style="margin:0; color:#D14343; font-size:18px;">Application Notice</h3>
-      <button onclick="document.getElementById('stoke-fatal-error').style.display='none'"
-        style="background:#237547; color:#fff; border:none; padding:8px 16px; border-radius:12px; font-weight:700; cursor:pointer;">Dismiss
-        & Continue to App</button>
-    </div>
-    <div id="stoke-fatal-error-content"
-      style="white-space:pre-wrap; font-family:monospace; background:#14171F; padding:16px; border-radius:12px; border:1px solid #232936; color:#D14343;">
-    </div>
-  </div>
-
   <script>
     function reportAppError(title, err) {
       var str = (err && err.stack ? err.stack : String(err));
@@ -10595,7 +10604,282 @@ if(authChecking||authPhase==="INITIAL_CHECK"){return/*#__PURE__*/React.createEle
 if(authPhase==="BACKEND_ERROR"){return/*#__PURE__*/React.createElement(BackendErrorScreen,{errorMessage:backendError,onRetry:()=>{setBackendError(null);setProfileLoadingMsg("Retrying database connection...");setAuthChecking(true);setAuthPhase("INITIAL_CHECK");setRetryNonce(n=>n+1);},onSignOut:handleSignOut});}// 3. User authenticated via Google or email, but no profile or profile incomplete (Requirement 2, 3 & 4)
 if(authPhase==="CREATE_PROFILE"||authPhase==="COMPLETE_PROFILE"){return/*#__PURE__*/React.createElement(AthleteProfileSetupScreen,{key:currentUser?.id||"athlete-profile-setup",user:currentUser,initialProfile:profile,isCompleteMode:authPhase==="COMPLETE_PROFILE",onProfileSaved:savedProfile=>{setProfile(savedProfile);if(typeof localStorage!=="undefined"){localStorage.setItem("stoke_onboarding_completed","true");localStorage.setItem("stoke_profile",JSON.stringify(savedProfile));localStorage.setItem("stoke_authed","true");if(currentUser?.id)localStorage.setItem("stoke_current_user_id",currentUser.id);if(currentUser?.email)localStorage.setItem("stoke_userPhone",currentUser.email);}setAuthed(true);setTab("home");setAuthPhase("APP");},onSignOut:handleSignOut});}// 4. Onboarding welcome carousel
 if(showWelcome&&authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.createElement(WelcomeCarousel,{onSignUp:()=>{setAuthMode("signup");setShowWelcome(false);},onLogIn:()=>{setAuthMode("signin");setShowWelcome(false);}});}// 5. Unauthenticated user login / sign-up screen
-if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.createElement(AuthScreen,{onSignIn:handleSignIn,initialMode:authMode,authError:backendError,onClearError:()=>setBackendError(null)});}return/*#__PURE__*/React.createElement("div",{style:{background:"var(--bg-app)",minHeight:"100vh",height:"100dvh",overflow:"hidden",fontFamily:"-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif",display:"flex",flexDirection:"column"}},/*#__PURE__*/React.createElement("div",{style:{maxWidth:480,width:"100%",margin:"0 auto",display:"flex",flexDirection:"column",height:"100%",position:"relative"}},/*#__PURE__*/React.createElement("div",{style:{flex:1,overflowY:tab==="run"?"hidden":"auto",WebkitOverflowScrolling:"touch",padding:tab==="run"?0:"calc(16px + env(safe-area-inset-top, 44px)) 16px calc(115px + env(safe-area-inset-bottom, 34px))",display:"flex",flexDirection:"column",position:"relative"}},tab==="home"&&/*#__PURE__*/React.createElement(HomeScreen,{totals:totals,calPct:calPct,goals:goals,workoutDay:week[TODAY_KEY],workoutLog:logs[TODAY_KEY],lastRun:runs[0],profileName:profile.name,water:water,setWater:handleSetWater,onNavigate:handleNavigate,meals:meals,mealSlots:mealSlots,addItem:addItem,logs:logs,runs:runs,profile:profile,week:week,remaining:remaining,selectedDate:selectedDate,onSelectDate:setSelectedDate,userXp:userXp}),tab==="nutrition"&&/*#__PURE__*/React.createElement(NutritionScreen,{meals:meals,mealSlots:mealSlots,addMealSlot:addMealSlot,removeMealSlot:removeMealSlot,water:water,setWater:handleSetWater,addItem:addItem,removeItem:removeItem,totals:totals,calPct:calPct,goals:goals,onBack:handleBack,onNavigate:handleNavigate,selectedDate:selectedDate,onSelectDate:setSelectedDate}),tab==="workout"&&/*#__PURE__*/React.createElement(WorkoutScreen,{week:week,programKey:programKey,onProgramChange:switchProgram,activeDay:activeDay,setActiveDay:setActiveDay,logs:logs,updateSet:updateSet,addSet:addSet,toggleComplete:toggleComplete,onNavigate:handleNavigate,onBack:handleBack,profile:profile}),tab==="goals"&&/*#__PURE__*/React.createElement(BodyGoalsScreen,{profile:profile,setProfile:setProfile,goals:goals,totals:totals,onNavigate:handleNavigate,onBack:handleBack,currentUser:currentUser,meals:meals,addItem:addItem}),tab==="run"&&/*#__PURE__*/React.createElement(RunScreen,{profile:profile,runs:runs,setRuns:setRuns,status:runStatus,elapsed:runElapsed,distanceKm:runDistanceKm,setDistanceKm:setRunDistanceKm,gpsError:runGpsError,accuracy:runAccuracy,gpsStatus:runGpsStatus,liveSpeed:runLiveSpeed,maxSpeed:runMaxSpeed,elevationGain:runElevationGain,shareCardUrl:runShareCardUrl,shareStyle:runShareStyle,onChangeStyle:handleRunChangeStyle,pathRef:runPathRef,handleStart:handleRunStart,handlePause:handleRunPause,handleResume:handleRunResume,handleFinish:handleRunFinish,handleReset:handleRunReset,handleDiscard:handleRunDiscard,liveGpsPos:runLiveGpsPos,runStartTimeRef:runStartTimeRef,onNavigate:handleNavigate,onBack:handleBack,currentUser:currentUser}),(tab==="more"||tab==="profile")&&/*#__PURE__*/React.createElement(MoreHubScreen,{profile:profile,setProfile:setProfile,goals:goals,userPhone:userPhone,onSignOut:handleSignOut,onSwitchAccount:handleSignIn,totals:totals,onNavigate:handleNavigate,onBack:handleBack,currentUser:currentUser,onOpenSupabaseModal:()=>setShowSupabaseModal(true)})),tab!=="run"&&/*#__PURE__*/React.createElement("div",{style:{padding:"4px 16px calc(12px + env(safe-area-inset-bottom, 24px)) 16px",background:"transparent"}},/*#__PURE__*/React.createElement("div",{style:{position:"relative",display:"flex",background:"var(--surface-primary)",backdropFilter:"var(--glass-blur)",WebkitBackdropFilter:"var(--glass-blur)",border:"1px solid var(--border-divider)",borderRadius:999,padding:6,boxShadow:"var(--neu-raised)"}},/*#__PURE__*/React.createElement("div",{style:{position:"absolute",top:6,bottom:6,left:`calc(${TABS.findIndex(t=>t.key===tab)/TABS.length*100}% + 6px)`,width:`calc(${100/TABS.length}% - 12px)`,borderRadius:999,background:"var(--surface-secondary)",border:"1px solid var(--border-divider)",boxShadow:"var(--neu-pill-active)",transition:"left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)"}}),TABS.map(t=>/*#__PURE__*/React.createElement("button",{key:t.key,onClick:()=>handleTabClick(t.key),style:{flex:1,background:"none",border:"none",padding:"10px 0 8px",cursor:"pointer",color:tab===t.key?"var(--btn-primary-bg)":"var(--text-muted)",display:"flex",flexDirection:"column",alignItems:"center",gap:2,position:"relative",zIndex:1}},/*#__PURE__*/React.createElement("span",{style:{position:"relative",display:"flex"}},/*#__PURE__*/React.createElement(NavIcon,{name:t.icon,size:19}),t.key==="run"&&runStatus==="active"&&/*#__PURE__*/React.createElement("span",{style:{position:"absolute",top:-2,right:-6,width:8,height:8,borderRadius:"50%",background:TOKENS.ember,border:"1.5px solid rgba(22,27,36,0.9)"}})),/*#__PURE__*/React.createElement("span",{style:{fontSize:9.5,fontWeight:600}},t.label))))),/*#__PURE__*/React.createElement(SupabaseSettingsModal,{isOpen:showSupabaseModal,onClose:()=>setShowSupabaseModal(false)})));}class StokeErrorBoundary extends React.Component{constructor(props){super(props);this.state={hasError:false,error:null,errorInfo:null};}static getDerivedStateFromError(error){return{hasError:true,error};}componentDidCatch(error,errorInfo){this.setState({error,errorInfo});console.error("Stoke Root Error Boundary Caught:",error,errorInfo);}render(){if(this.state.hasError){return/*#__PURE__*/React.createElement("div",{id:"stoke-render-error",style:{padding:24,background:"#14171F",color:"#FF6B6B",fontFamily:"monospace",zIndex:999999}},/*#__PURE__*/React.createElement("h2",null,"Application Render Error"),/*#__PURE__*/React.createElement("pre",null,String(this.state.error?.stack||this.state.error)));}return this.props.children;}}ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(StokeErrorBoundary,null,/*#__PURE__*/React.createElement(StokeApp,null)));
+if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.createElement(AuthScreen,{onSignIn:handleSignIn,initialMode:authMode,authError:backendError,onClearError:()=>setBackendError(null)});}return/*#__PURE__*/React.createElement("div",{style:{background:"var(--bg-app)",minHeight:"100vh",height:"100dvh",overflow:"hidden",fontFamily:"-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif",display:"flex",flexDirection:"column"}},/*#__PURE__*/React.createElement("div",{style:{maxWidth:480,width:"100%",margin:"0 auto",display:"flex",flexDirection:"column",height:"100%",position:"relative"}},/*#__PURE__*/React.createElement("div",{style:{flex:1,overflowY:tab==="run"?"hidden":"auto",WebkitOverflowScrolling:"touch",padding:tab==="run"?0:"calc(16px + env(safe-area-inset-top, 44px)) 16px calc(115px + env(safe-area-inset-bottom, 34px))",display:"flex",flexDirection:"column",position:"relative"}},tab==="home"&&/*#__PURE__*/React.createElement(HomeScreen,{totals:totals,calPct:calPct,goals:goals,workoutDay:week[TODAY_KEY],workoutLog:logs[TODAY_KEY],lastRun:runs[0],profileName:profile.name,water:water,setWater:handleSetWater,onNavigate:handleNavigate,meals:meals,mealSlots:mealSlots,addItem:addItem,logs:logs,runs:runs,profile:profile,week:week,remaining:remaining,selectedDate:selectedDate,onSelectDate:setSelectedDate,userXp:userXp}),tab==="nutrition"&&/*#__PURE__*/React.createElement(NutritionScreen,{meals:meals,mealSlots:mealSlots,addMealSlot:addMealSlot,removeMealSlot:removeMealSlot,water:water,setWater:handleSetWater,addItem:addItem,removeItem:removeItem,totals:totals,calPct:calPct,goals:goals,onBack:handleBack,onNavigate:handleNavigate,selectedDate:selectedDate,onSelectDate:setSelectedDate}),tab==="workout"&&/*#__PURE__*/React.createElement(WorkoutScreen,{week:week,programKey:programKey,onProgramChange:switchProgram,activeDay:activeDay,setActiveDay:setActiveDay,logs:logs,updateSet:updateSet,addSet:addSet,toggleComplete:toggleComplete,onNavigate:handleNavigate,onBack:handleBack,profile:profile}),tab==="goals"&&/*#__PURE__*/React.createElement(BodyGoalsScreen,{profile:profile,setProfile:setProfile,goals:goals,totals:totals,onNavigate:handleNavigate,onBack:handleBack,currentUser:currentUser,meals:meals,addItem:addItem}),tab==="run"&&/*#__PURE__*/React.createElement(RunScreen,{profile:profile,runs:runs,setRuns:setRuns,status:runStatus,elapsed:runElapsed,distanceKm:runDistanceKm,setDistanceKm:setRunDistanceKm,gpsError:runGpsError,accuracy:runAccuracy,gpsStatus:runGpsStatus,liveSpeed:runLiveSpeed,maxSpeed:runMaxSpeed,elevationGain:runElevationGain,shareCardUrl:runShareCardUrl,shareStyle:runShareStyle,onChangeStyle:handleRunChangeStyle,pathRef:runPathRef,handleStart:handleRunStart,handlePause:handleRunPause,handleResume:handleRunResume,handleFinish:handleRunFinish,handleReset:handleRunReset,handleDiscard:handleRunDiscard,liveGpsPos:runLiveGpsPos,runStartTimeRef:runStartTimeRef,onNavigate:handleNavigate,onBack:handleBack,currentUser:currentUser}),(tab==="more"||tab==="profile")&&/*#__PURE__*/React.createElement(MoreHubScreen,{profile:profile,setProfile:setProfile,goals:goals,userPhone:userPhone,onSignOut:handleSignOut,onSwitchAccount:handleSignIn,totals:totals,onNavigate:handleNavigate,onBack:handleBack,currentUser:currentUser,onOpenSupabaseModal:()=>setShowSupabaseModal(true)})),tab!=="run"&&/*#__PURE__*/React.createElement("div",{style:{padding:"4px 16px calc(12px + env(safe-area-inset-bottom, 24px)) 16px",background:"transparent"}},/*#__PURE__*/React.createElement("div",{style:{position:"relative",display:"flex",background:"var(--surface-primary)",backdropFilter:"var(--glass-blur)",WebkitBackdropFilter:"var(--glass-blur)",border:"1px solid var(--border-divider)",borderRadius:999,padding:6,boxShadow:"var(--neu-raised)"}},/*#__PURE__*/React.createElement("div",{style:{position:"absolute",top:6,bottom:6,left:`calc(${TABS.findIndex(t=>t.key===tab)/TABS.length*100}% + 6px)`,width:`calc(${100/TABS.length}% - 12px)`,borderRadius:999,background:"var(--surface-secondary)",border:"1px solid var(--border-divider)",boxShadow:"var(--neu-pill-active)",transition:"left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)"}}),TABS.map(t=>/*#__PURE__*/React.createElement("button",{key:t.key,onClick:()=>handleTabClick(t.key),style:{flex:1,background:"none",border:"none",padding:"10px 0 8px",cursor:"pointer",color:tab===t.key?"var(--btn-primary-bg)":"var(--text-muted)",display:"flex",flexDirection:"column",alignItems:"center",gap:2,position:"relative",zIndex:1}},/*#__PURE__*/React.createElement("span",{style:{position:"relative",display:"flex"}},/*#__PURE__*/React.createElement(NavIcon,{name:t.icon,size:19}),t.key==="run"&&runStatus==="active"&&/*#__PURE__*/React.createElement("span",{style:{position:"absolute",top:-2,right:-6,width:8,height:8,borderRadius:"50%",background:TOKENS.ember,border:"1.5px solid rgba(22,27,36,0.9)"}})),/*#__PURE__*/React.createElement("span",{style:{fontSize:9.5,fontWeight:600}},t.label))))),/*#__PURE__*/React.createElement(SupabaseSettingsModal,{isOpen:showSupabaseModal,onClose:()=>setShowSupabaseModal(false)})));}class StokeErrorBoundary extends React.Component{constructor(props){super(props);this.state={hasError:false,error:null,errorInfo:null};}static getDerivedStateFromError(error){return{hasError:true,error};}componentDidCatch(error,errorInfo){this.setState({error,errorInfo});console.error("Stoke Root Error Boundary Caught:",error,errorInfo);}render(){if(this.state.hasError){return/*#__PURE__*/React.createElement("div",{id:"stoke-render-error",style:{padding:24,background:"#14171F",color:"#FF6B6B",fontFamily:"monospace",zIndex:999999}},/*#__PURE__*/React.createElement("h2",null,"Application Render Error"),/*#__PURE__*/React.createElement("pre",null,String(this.state.error?.stack||this.state.error)));}return this.props.children;}}
+    
+    const STOKE_MONO_PATH = "M 54 12 L 126 12 C 142 12, 148 24, 146 42 L 78 42 C 68 42, 64 48, 64 56 C 64 64, 72 70, 84 74 L 122 86 C 144 94, 150 108, 148 132 C 146 154, 134 166, 110 166 L 36 166 C 18 166, 14 152, 16 134 L 84 134 C 94 134, 98 128, 98 120 C 98 112, 90 106, 78 102 L 40 90 C 20 82, 14 68, 16 46 C 18 24, 30 12, 54 12 Z M 162 12 L 284 12 L 278 42 L 238 42 L 222 166 L 186 166 L 202 42 L 168 42 Z";
+
+    function SplashScreen({ onFinish, forceShow = false }) {
+      const [phase, setPhase] = React.useState(0);
+      const [typedLetters, setTypedLetters] = React.useState(0);
+      const [isDismissed, setIsDismissed] = React.useState(false);
+
+      const FULL_BRAND_NAME = "Stoke";
+
+      React.useEffect(() => {
+        let hasSeenSplash = false;
+        try {
+          hasSeenSplash = sessionStorage.getItem("stoke_splash_shown") === "true";
+        } catch (e) {}
+
+        if (hasSeenSplash && !forceShow) {
+          setIsDismissed(true);
+          if (onFinish) onFinish();
+          return;
+        }
+
+        const t1 = setTimeout(() => { setPhase(1); }, 650);
+        const t2 = setTimeout(() => { setPhase(2); }, 1450);
+        const t3 = setTimeout(() => { setPhase(3); }, 2400);
+        const t4 = setTimeout(() => {
+          setPhase(4);
+          setIsDismissed(true);
+          try { sessionStorage.setItem("stoke_splash_shown", "true"); } catch (e) {}
+          if (onFinish) onFinish();
+        }, 2900);
+
+        return () => {
+          clearTimeout(t1);
+          clearTimeout(t2);
+          clearTimeout(t3);
+          clearTimeout(t4);
+        };
+      }, [forceShow, onFinish]);
+
+      React.useEffect(() => {
+        if (phase < 1) {
+          setTypedLetters(0);
+          return;
+        }
+        if (phase >= 2) {
+          setTypedLetters(FULL_BRAND_NAME.length);
+          return;
+        }
+
+        const interval = setInterval(() => {
+          setTypedLetters((prev) => {
+            if (prev < FULL_BRAND_NAME.length) {
+              return prev + 1;
+            }
+            clearInterval(interval);
+            return prev;
+          });
+        }, 85);
+
+        return () => clearInterval(interval);
+      }, [phase]);
+
+      React.useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (e.key === "Escape") {
+            setIsDismissed(true);
+            try { sessionStorage.setItem("stoke_splash_shown", "true"); } catch (e) {}
+            if (onFinish) onFinish();
+          }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+      }, [onFinish]);
+
+      if (isDismissed || phase === 4) {
+        return null;
+      }
+
+      const isFadingOut = phase === 3;
+
+      return React.createElement("div", {
+        "data-testid": "splash-screen",
+        "data-phase": phase,
+        style: {
+          position: "fixed",
+          inset: 0,
+          zIndex: 9999999,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#080B0A",
+          userSelect: "none",
+          WebkitUserSelect: "none",
+          transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+          opacity: isFadingOut ? 0 : 1,
+          transform: isFadingOut ? "scale(1.02)" : "scale(1)",
+          pointerEvents: isFadingOut ? "none" : "auto",
+        }
+      },
+        /* Radial ambient glow behind the logo */
+        React.createElement("div", {
+          style: {
+            position: "absolute",
+            width: 440,
+            height: 440,
+            borderRadius: "50%",
+            pointerEvents: "none",
+            transition: "opacity 1s ease",
+            opacity: phase >= 1 ? 1 : 0.35,
+            background: "radial-gradient(circle, rgba(255, 255, 255, 0.09) 0%, rgba(217, 255, 114, 0.04) 40%, transparent 70%)",
+          }
+        }),
+
+        /* Main Brand Assembly */
+        React.createElement("div", {
+          style: {
+            position: "relative",
+            zIndex: 10,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }
+        },
+          /* Monogram SVG "ST" */
+          React.createElement("div", {
+            style: {
+              position: "relative",
+              width: 280,
+              height: 168,
+              marginBottom: 16,
+            }
+          },
+            React.createElement("svg", {
+              viewBox: "0 0 300 180",
+              style: { width: "100%", height: "100%", overflow: "visible" },
+              xmlns: "http://www.w3.org/2000/svg",
+            },
+              /* Outline Stroke Layer (Active in Phase 0) */
+              React.createElement("path", {
+                d: STOKE_MONO_PATH,
+                fill: "none",
+                stroke: "#ffffff",
+                strokeWidth: "2.2",
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeDasharray: "1400",
+                style: {
+                  strokeDashoffset: 0,
+                  opacity: phase === 0 ? 1 : 0,
+                  animation: phase === 0 ? "drawStroke 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards" : "none",
+                  transition: "opacity 0.2s ease-in-out",
+                  filter: "drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))",
+                }
+              }),
+              /* Solid Pure White Fill Layer (Active in Phase 1+) */
+              React.createElement("path", {
+                d: STOKE_MONO_PATH,
+                fill: "#ffffff",
+                stroke: "none",
+                fillRule: "evenodd",
+                style: {
+                  display: phase >= 1 ? "block" : "none",
+                  filter: "drop-shadow(0 0 24px rgba(255, 255, 255, 0.55)) drop-shadow(0 0 50px rgba(217, 255, 114, 0.25))",
+                }
+              })
+            )
+          ),
+
+          /* Cursive Handwriting Brand Name */
+          React.createElement("div", {
+            style: {
+              height: 64,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 16,
+            }
+          },
+            phase >= 1 && React.createElement("div", {
+              style: {
+                fontSize: 52,
+                color: "#ffffff",
+                fontWeight: "normal",
+                letterSpacing: "-0.02em",
+                display: "flex",
+                alignItems: "baseline",
+                userSelect: "none",
+                fontFamily: "'Kaushan Script', 'Caveat', 'Brush Script MT', cursive",
+                textShadow: "0 0 20px rgba(255, 255, 255, 0.45), 0 0 40px rgba(217, 255, 114, 0.2)",
+              }
+            },
+              React.createElement("span", null, FULL_BRAND_NAME.slice(0, typedLetters)),
+              /* Glowing ink tip cursor during writing */
+              phase === 1 && typedLetters < FULL_BRAND_NAME.length && React.createElement("span", {
+                style: {
+                  display: "inline-block",
+                  width: 4,
+                  height: 26,
+                  marginLeft: 3,
+                  backgroundColor: "#D9FF72",
+                  borderRadius: 999,
+                  animation: "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                  boxShadow: "0 0 10px #D9FF72",
+                }
+              })
+            )
+          ),
+
+          /* Subtitle: "STARTING STOKE..." */
+          React.createElement("div", {
+            style: {
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+              fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+              fontSize: 11,
+              letterSpacing: "0.38em",
+              color: "#A3A3A3",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              userSelect: "none",
+            }
+          },
+            React.createElement("span", null, "STARTING STOKE"),
+            React.createElement("span", {
+              style: { display: "inline-flex", letterSpacing: "0.15em", color: "#D9FF72" }
+            },
+              React.createElement("span", { style: { animation: "pulse 1.2s infinite 100ms" } }, "."),
+              React.createElement("span", { style: { animation: "pulse 1.2s infinite 300ms" } }, "."),
+              React.createElement("span", { style: { animation: "pulse 1.2s infinite 500ms" } }, ".")
+            )
+          )
+        ),
+
+        /* Skip button for user convenience */
+        React.createElement("button", {
+          type: "button",
+          onClick: () => {
+            setIsDismissed(true);
+            try { sessionStorage.setItem("stoke_splash_shown", "true"); } catch (e) {}
+            if (onFinish) onFinish();
+          },
+          style: {
+            position: "absolute",
+            bottom: 24,
+            right: 24,
+            fontSize: 10,
+            textTransform: "uppercase",
+            fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+            letterSpacing: "0.2em",
+            color: "#737373",
+            transition: "color 0.2s ease, border-color 0.2s ease",
+            padding: "6px 12px",
+            borderRadius: 8,
+            border: "1px solid rgba(255, 255, 255, 0.05)",
+            background: "rgba(255, 255, 255, 0.02)",
+            cursor: "pointer",
+          }
+        }, "Skip [ESC]")
+      );
+    }
+
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      /*#__PURE__*/React.createElement(StokeErrorBoundary, null,
+        /*#__PURE__*/React.createElement(React.Fragment, null,
+          /*#__PURE__*/React.createElement(SplashScreen, null),
+          /*#__PURE__*/React.createElement(StokeApp, null)
+        )
+      )
+    );
+
 </script>
 </body>
 

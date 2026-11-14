@@ -2962,6 +2962,104 @@ if (typeof window !== "undefined") {
       justify-content: center;
       box-shadow: var(--shadow-sm);
     }
+  
+    /* ============================================================
+       STOKE ADVANCED MOTION & MICRO-INTERACTION SUITE
+       ============================================================ */
+
+    /* Tactile Spring Press Physics for Buttons */
+    button, .btn, [role="button"], input[type="button"], input[type="submit"] {
+      transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, filter 0.2s ease, background 0.2s ease !important;
+      will-change: transform;
+    }
+    button:active, .btn:active, [role="button"]:active {
+      transform: scale(0.95) !important;
+    }
+    button:hover, .btn:hover {
+      filter: brightness(1.06);
+    }
+
+    /* Card Smooth Cascade & Hover Physics */
+    div[style*="var(--surface-primary)"],
+    div[style*="var(--surface-elevated)"],
+    div[style*="var(--shadow-card)"] {
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.25s ease;
+      animation: stokeCardEntrance 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    div[style*="var(--surface-primary)"]:hover,
+    div[style*="var(--surface-elevated)"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24), 0 0 16px rgba(217, 255, 114, 0.09) !important;
+    }
+
+    /* Staggered Card Entrance Keyframes */
+    @keyframes stokeCardEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(16px) scale(0.985);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Modal Smooth Spring Entrance */
+    @keyframes stokeModalSpring {
+      0% {
+        opacity: 0;
+        transform: scale(0.93) translateY(18px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Pulse Ripple Glow for Live Indicators */
+    @keyframes stokeLivePulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(217, 255, 114, 0.6);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(217, 255, 114, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(217, 255, 114, 0);
+      }
+    }
+
+    .stoke-pulse-live {
+      animation: stokeLivePulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+
+    /* Floating Badges for Achievements */
+    @keyframes stokeFloatBadge {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .stoke-badge-float {
+      animation: stokeFloatBadge 3.6s ease-in-out infinite;
+    }
+
+    /* Shimmer Progress Effect */
+    @keyframes stokeBarShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .stoke-shimmer-bar {
+      background: linear-gradient(90deg, var(--brand-lime) 0%, #FFFFFF 50%, var(--brand-lime) 100%) !important;
+      background-size: 200% 100% !important;
+      animation: stokeBarShimmer 2.5s infinite linear;
+    }
+
   </style>
 </head>
 
@@ -9787,6 +9885,213 @@ if (typeof window !== "undefined") {
 
   </script>
   <script type="text/babel" data-presets="react" data-compact="true">
+
+    /* ============================================================
+       STOKE VECTOR IMAGE ICON SUITE (Replaces text emojis)
+       ============================================================ */
+    function StokeImgIcon({ name, size = 18, color = "currentColor", style = {} }) {
+      const s = size;
+      const c = color;
+      const n = String(name || "").trim().toLowerCase();
+
+      // Normalize emojis or icon names
+      if (n === "🏆" || n === "trophy") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+            <path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34" />
+            <path d="M6 4h12v7a6 6 0 0 1-12 0V4z" fill="rgba(217,255,114,0.18)" />
+          </svg>
+        );
+      }
+      if (n === "🔥" || n === "fire") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" fill="rgba(255,107,74,0.2)" />
+          </svg>
+        );
+      }
+      if (n === "⚡" || n === "lightning" || n === "bolt") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill={c} stroke={c} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+          </svg>
+        );
+      }
+      if (n === "🛡️" || n === "🛡" || n === "shield") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(35,117,71,0.2)" />
+          </svg>
+        );
+      }
+      if (n === "👟" || n === "shoe") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M3.5 15.5l2-2 3.5 1 4-3 5 1.5 2.5 5.5-17-3z" />
+            <circle cx="16" cy="18" r="2" />
+          </svg>
+        );
+      }
+      if (n === "🏃" || n === "run" || n === "runner") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <circle cx="15.5" cy="5" r="1.8" />
+            <path d="M9 20l2.5-5.5 2 1.8 3.5-1" />
+            <path d="M7 13.5l3.5-2.5 2 2.5-2.5 3.5" />
+          </svg>
+        );
+      }
+      if (n === "🏋️" || n === "🏋" || n === "workout") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <circle cx="5" cy="12" r="2.2" /><circle cx="19" cy="12" r="2.2" />
+            <line x1="7.2" y1="12" x2="16.8" y2="12" />
+            <line x1="5" y1="9.3" x2="5" y2="14.7" /><line x1="19" y1="9.3" x2="19" y2="14.7" />
+          </svg>
+        );
+      }
+      if (n === "🏅" || n === "medal") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <circle cx="12" cy="8" r="6" /><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+          </svg>
+        );
+      }
+      if (n === "⛰️" || n === "⛰" || n === "mountain") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+          </svg>
+        );
+      }
+      if (n === "🌟" || n === "star") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill={c} stroke={c} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+        );
+      }
+      if (n === "👑" || n === "crown") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" />
+          </svg>
+        );
+      }
+      if (n === "🥗" || n === "salad" || n === "nutrition") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z" /><path d="M3 11a9 9 0 0 0 18 0H3z" />
+            <line x1="12" y1="20" x2="12" y2="22" />
+          </svg>
+        );
+      }
+      if (n === "🍱" || n === "bento") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <rect x="3" y="3" width="18" height="18" rx="3" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="12" y1="12" x2="12" y2="21" />
+          </svg>
+        );
+      }
+      if (n === "🥩" || n === "meat" || n === "protein") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <circle cx="12" cy="12" r="8" /><path d="m14 8-4 8" /><path d="M9.5 9.5 14 14" />
+          </svg>
+        );
+      }
+      if (n === "💧" || n === "water" || n === "🥛" || n === "glass") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="rgba(61,220,255,0.25)" />
+          </svg>
+        );
+      }
+      if (n === "🌊" || n === "wave") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M2 12c3-4 5-4 8 0s5 4 8 0 5-4 8 0" /><path d="M2 17c3-4 5-4 8 0s5 4 8 0 5-4 8 0" />
+          </svg>
+        );
+      }
+      if (n === "💎" || n === "diamond") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M6 3h12l4 6-10 12L2 9z" fill="rgba(217,255,114,0.18)" />
+          </svg>
+        );
+      }
+      if (n === "🎮" || n === "gamepad") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <rect x="2" y="6" width="20" height="12" rx="4" /><line x1="6" y1="12" x2="10" y2="12" /><line x1="8" y1="10" x2="8" y2="14" />
+            <circle cx="16" cy="11" r="1" /><circle cx="18" cy="13" r="1" />
+          </svg>
+        );
+      }
+      if (n === "🔱" || n === "trident") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M6 3v9a6 6 0 0 0 12 0V3" /><line x1="12" y1="3" x2="12" y2="21" />
+          </svg>
+        );
+      }
+      if (n === "🔒" || n === "lock") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        );
+      }
+      if (n === "📷" || n === "📸" || n === "camera" || n === "scan") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+            <circle cx="12" cy="13" r="4" />
+          </svg>
+        );
+      }
+      if (n === "🖼️" || n === "🖼" || n === "image" || n === "gallery") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
+          </svg>
+        );
+      }
+      if (n === "🔎" || n === "🔍" || n === "search") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        );
+      }
+      if (n === "🎙️" || n === "🎙" || n === "mic") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" />
+          </svg>
+        );
+      }
+      if (n === "💡" || n === "bulb") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <path d="M9 18h6" /><path d="M10 22h4" />
+            <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5" />
+          </svg>
+        );
+      }
+      if (n === "🔄" || n === "refresh") {
+        return (
+          <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={style}>
+            <polyline points="23 4 23 10 17 10" /><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+          </svg>
+        );
+      }
+      return <span style={style}>{name}</span>;
+    }
+
     const { useState, useRef, useEffect, useMemo, useCallback } = React;
 
     const THEME = {
@@ -10912,9 +11217,9 @@ if (typeof window !== "undefined") {
           )}
           {mode === null && (
             <div style={{ display: "flex", gap: 8 }}>
-              <button onClick={startScan} style={actionBtnStyle("#111111", "#FFFFFF")}>📷 Scan</button>
-              <button onClick={startGallery} style={actionBtnStyle(TOKENS.surface2, TOKENS.text)}>🖼️ Gallery</button>
-              <button onClick={() => setMode("search")} style={actionBtnStyle(TOKENS.surface2, TOKENS.text)}>🔎 Search</button>
+              <button onClick={startScan} style={actionBtnStyle("#111111", "#FFFFFF")}><StokeImgIcon name="camera" size={15} style={{ marginRight: 5, verticalAlign: 'middle' }} />Scan</button>
+              <button onClick={startGallery} style={actionBtnStyle(TOKENS.surface2, TOKENS.text)}><StokeImgIcon name="image" size={15} style={{ marginRight: 5, verticalAlign: 'middle' }} />Gallery</button>
+              <button onClick={() => setMode("search")} style={actionBtnStyle(TOKENS.surface2, TOKENS.text)}><StokeImgIcon name="search" size={15} style={{ marginRight: 5, verticalAlign: 'middle' }} />Search</button>
               <button onClick={startManual} style={actionBtnStyle(TOKENS.surface2, TOKENS.text)}>+ Manual</button>
             </div>
           )}
@@ -11814,14 +12119,10 @@ if (typeof window !== "undefined") {
     function IconBadge({ emoji, icon, bg }) {
       return (
         <div style={{
-          width: 44, height: 44, borderRadius: 13, background: bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0,
+          width: 44, height: 44, borderRadius: 13, background: bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           boxShadow: "5px 5px 10px rgba(0,0,0,0.6), -5px -5px 10px rgba(255,255,255,0.04)"
-        }}>
-          {icon === "workout" ? (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B0E13" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6.5 6.5h11M6 20v-2a6 6 0 0 1 12 0v2M2 9v6M22 9v6M4 7h2v10H4zM18 7h2v10h-2z" /></svg>
-          ) : icon === "run" ? (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#237547" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="15.5" cy="5" r="1.8" /><path d="M9 20l2.5-5.5 2 1.8 3.5-1" /><path d="M7 13.5l3.5-2.5 2 2.5-2.5 3.5" /></svg>
-          ) : emoji}
+        }} className="stoke-badge-float">
+          <StokeImgIcon name={icon || emoji} size={22} color={bg && bg.includes("217") ? "#111510" : "var(--brand-lime)"} />
         </div>
       );
     }
@@ -13066,10 +13367,10 @@ if (typeof window !== "undefined") {
       };
 
       const chips = [
-        { label: "🥗 What to eat?", q: "What should I eat with my remaining macros?" },
-        { label: "🏋️ Today's workout", q: "Give me form cues and tips for today's workout" },
-        { label: "⚡ Recovery advice", q: "How can I optimize muscle recovery and soreness?" },
-        { label: "🥛 Hit protein goal", q: "High-protein quick snack recommendations" },
+        { icon: "salad", label: "What to eat?", q: "What should I eat with my remaining macros?" },
+        { icon: "workout", label: "Today's workout", q: "Give me form cues and tips for today's workout" },
+        { icon: "lightning", label: "Recovery advice", q: "How can I optimize muscle recovery and soreness?" },
+        { icon: "water", label: "Hit protein goal", q: "High-protein quick snack recommendations" },
       ];
 
       return (
@@ -13736,7 +14037,7 @@ if (typeof window !== "undefined") {
                     filter: badge.unlocked ? "none" : "grayscale(1) opacity(0.5)"
                   }}
                 >
-                  {badge.unlocked ? badge.icon : "🔒"}
+                  {badge.unlocked ? <StokeImgIcon name={badge.icon} size={22} color="#D9FF72" /> : <StokeImgIcon name="lock" size={20} color="#64748B" />}
                 </div>
                 <div style={{ fontSize: 11, fontWeight: 800, color: badge.unlocked ? "#FFFFFF" : "#94A3B8", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", width: "100%" }}>
                   {badge.title}

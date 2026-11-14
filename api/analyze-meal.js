@@ -61,7 +61,7 @@ export default async function handler(req, res) {
     /^https?:\/\/localhost(:\d+)?$/,
     /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
     /^https:\/\/[a-z0-9-]+\.trycloudflare\.com$/,
-    /^https:\/\/stoke\.bond$/,
+    /^https:\/\/(www\.)?stoke\.bond$/,
     /^https:\/\/[a-z0-9-]+\.vercel\.app$/
   ];
   if (origin && ALLOWED_ORIGINS.some(r => r.test(origin))) {

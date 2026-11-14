@@ -5,8 +5,7 @@
   "main": "index.html",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "build": "node -e \"console.log('Build verified successfully')\""
+    "start": "node server.js"
   },
   "keywords": [
     "fitness",
@@ -18,9 +17,6 @@
   ],
   "author": "Stoke Athlete",
   "license": "UNLICENSED",
-  "devDependencies": {
-    "vercel": "^39.3.0"
-  },
   "dependencies": {
     "dotenv": "^18.0.9"
   }

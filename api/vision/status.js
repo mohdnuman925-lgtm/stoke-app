@@ -1,4 +1,4 @@
-// Vercel / Node.js Serverless Function: Vision AI Status Health Check
+// Vercel / Node.js Serverless Function: Multi-Model Vision AI Status Health Check
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
-if (!process.env.GEMINI_API_KEY) {
+if (!process.env.GEMINI_API_KEY && !process.env.ANTHROPIC_API_KEY) {
   const envLocal = path.join(rootDir, '.env.local');
   const envMain = path.join(rootDir, '.env');
   if (fs.existsSync(envLocal)) {
@@ -28,15 +28,27 @@ export default function handler(req, res) {
     return res.status(200).end();
   }
 
-  const activeKey = (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '').trim();
-  const hasKey = Boolean(activeKey && activeKey.length > 8 && !activeKey.includes('your_gemini_api_key'));
+  const claudeKey = (process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY || '').trim();
+  const geminiKey = (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '').trim();
+
+  const hasClaude = Boolean(claudeKey && claudeKey.length > 10 && !claudeKey.includes('your_anthropic_api_key'));
+  const hasGemini = Boolean(geminiKey && geminiKey.length > 10 && !geminiKey.includes('your_gemini_api_key'));
 
   return res.status(200).json({
     status: 'ok',
-    hasApiKey: hasKey,
-    supportedModels: ['gemini-3.5-flash', 'gemini-3.5-flash-lite'],
-    activeModel: 'gemini-3.5-flash',
-    service: 'STOKE Vision AI Secure Gateway',
+    hasApiKey: hasClaude || hasGemini,
+    providers: {
+      anthropicClaude: hasClaude,
+      googleGemini: hasGemini
+    },
+    activeProvider: hasClaude ? 'Anthropic Claude 3.5' : (hasGemini ? 'Google Gemini' : 'None configured'),
+    supportedModels: [
+      'claude-3-5-sonnet',
+      'claude-3-5-haiku',
+      'gemini-3.5-flash',
+      'gemini-3.5-flash-lite'
+    ],
+    service: 'STOKE Multi-Model Vision AI Gateway (Claude & Gemini)',
     timestamp: new Date().toISOString()
   });
 }

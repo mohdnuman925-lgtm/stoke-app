@@ -1,4 +1,4 @@
-// Vercel / Node.js Serverless Function: Secure Gemini Vision AI Gateway
+// Vercel / Node.js Serverless Function: Secure Multi-Model Vision AI Gateway (Claude & Gemini)
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
 // Safe server-side environment loading
-if (!process.env.GEMINI_API_KEY) {
+if (!process.env.GEMINI_API_KEY && !process.env.ANTHROPIC_API_KEY) {
   const envLocal = path.join(rootDir, '.env.local');
   const envMain = path.join(rootDir, '.env');
   if (fs.existsSync(envLocal)) {
@@ -55,7 +55,6 @@ const ALLOWED_MIME_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 export default async function handler(req, res) {
   // CORS configuration
   res.setHeader('Access-Control-Allow-Origin', '*');
-  // CORS Security: reflect authorized origin or block
   const origin = req.headers?.origin || '';
   const ALLOWED_ORIGINS = [
     /^https?:\/\/localhost(:\d+)?$/,
@@ -86,7 +85,7 @@ export default async function handler(req, res) {
     const clientIp = req.socket?.remoteAddress || req.headers?.['x-forwarded-for'] || '127.0.0.1';
 
     // -------------------------------------------------------------------------
-    // 1. AUTHENTICATION & IDENTITY VERIFICATION (CRIT-03 & HIGH-02 Remediation)
+    // 1. AUTHENTICATION & IDENTITY VERIFICATION
     // -------------------------------------------------------------------------
     const authHeader = req.headers?.authorization || '';
     let userId = null;
@@ -131,10 +130,9 @@ export default async function handler(req, res) {
     const rateLimitKey = `user_${userId}`;
     const rateLimit = checkVisionRateLimit(rateLimitKey, 10, 60000);
     if (!rateLimit.allowed) {
-      res.setHeader('Retry-After', rateLimit.retryAfter);
       return res.status(429).json({
         success: false,
-        error: `Vision AI rate limit reached. Please wait ${rateLimit.retryAfter}s before scanning another photo.`,
+        error: `Vision AI rate limit exceeded. Please wait ${rateLimit.retryAfter} seconds before analyzing another meal.`,
         retryAfter: rateLimit.retryAfter
       });
     }
@@ -152,8 +150,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // Resolve API key EXCLUSIVELY from server-side environment variables
-    // Validate image MIME type
     const cleanMime = mimeType.toLowerCase().trim();
     if (!ALLOWED_MIME_TYPES.has(cleanMime)) {
       return res.status(400).json({
@@ -173,37 +169,111 @@ export default async function handler(req, res) {
     }
 
     // -------------------------------------------------------------------------
-    // 4. SECURE SERVER-SIDE GEMINI API KEY RESOLUTION
+    // 4. MULTI-MODEL AI KEY RESOLUTION (Claude & Gemini)
     // -------------------------------------------------------------------------
-    const activeKey = (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '').trim();
+    const claudeKey = (process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY || '').trim();
+    const geminiKey = (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '').trim();
 
-    if (!activeKey || activeKey === 'none' || activeKey.includes('your_gemini_api_key')) {
+    const hasClaude = Boolean(claudeKey && claudeKey.length > 10 && !claudeKey.includes('your_anthropic_api_key'));
+    const hasGemini = Boolean(geminiKey && geminiKey.length > 10 && !geminiKey.includes('your_gemini_api_key'));
+
+    if (!hasClaude && !hasGemini) {
       return res.status(500).json({
         success: false,
         scanId,
         requiresApiKey: true,
         configured: false,
-        error: 'Gemini Vision API key is not configured on the server. Please configure GEMINI_API_KEY in .env.local or your hosting environment.'
+        error: 'Vision AI key is not configured on the server. Please configure ANTHROPIC_API_KEY (Claude) or GEMINI_API_KEY in your hosting environment variables.'
       });
     }
 
-    // Supported production models verified for vision
-    const candidateModels = ['gemini-3.5-flash', 'gemini-3.5-flash-lite'];
     const systemPrompt = `You are STOKE Vision AI, an expert food recognition and nutrition system. Analyze the meal photo and output ONLY valid JSON matching this schema: {"items": [{"name": "Food Name", "grams": 150, "calories": 250, "protein": 20, "carbs": 30, "fat": 5, "fiber": 3, "dietType": "veg"|"nonveg", "confidence": 95}], "disclaimer": "Nutritional estimates based on visual volume."}. Ensure calories and macros are realistic estimates for the visual portions. No markdown fences, no explanations outside the JSON.`;
 
-    const payload = {
-      systemInstruction: {
-        parts: [{ text: systemPrompt }]
-      },
-      contents: [
-        {
-          parts: [
-            {
-              inline_data: {
-                mime_type: cleanMime,
-                data: base64
-              }
+    // -------------------------------------------------------------------------
+    // 5. ANTHROPIC CLAUDE 3.5 VISION PIPELINE (If Claude Key Configured)
+    // -------------------------------------------------------------------------
+    if (hasClaude) {
+      const claudeModels = ['claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022'];
+      for (const cModel of claudeModels) {
+        try {
+          const claudeResponse = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-key': claudeKey,
+              'anthropic-version': '2023-06-01'
             },
+            body: JSON.stringify({
+              model: cModel,
+              max_tokens: 1200,
+              system: systemPrompt,
+              messages: [
+                {
+                  role: 'user',
+                  content: [
+                    {
+                      type: 'image',
+                      source: {
+                        type: 'base64',
+                        media_type: cleanMime,
+                        data: base64
+                      }
+                    },
+                    {
+                      type: 'text',
+                      text: 'Identify all visible foods and return structured JSON nutrition data.'
+                    }
+                  ]
+                }
+              ]
+            }),
+            signal: AbortSignal.timeout(25000)
+          });
+
+          if (claudeResponse.ok) {
+            const cData = await claudeResponse.json();
+            const rawText = (cData.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+            let cleanText = rawText.trim();
+            if (cleanText.startsWith('```json')) cleanText = cleanText.slice(7);
+            if (cleanText.startsWith('```')) cleanText = cleanText.slice(3);
+            if (cleanText.endsWith('```')) cleanText = cleanText.slice(0, -3);
+            cleanText = cleanText.trim();
+
+            const parsedResult = JSON.parse(cleanText);
+            return res.status(200).json({
+              success: true,
+              scanId,
+              userId,
+              items: parsedResult.items || [],
+              disclaimer: parsedResult.disclaimer || 'Nutritional estimates powered by Anthropic Claude Vision AI.',
+              source: 'stoke_backend_claude',
+              model: cModel
+            });
+          }
+        } catch (claudeErr) {
+          console.warn(`[Claude Vision Notice] Model ${cModel}:`, claudeErr.message);
+        }
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // 6. GOOGLE GEMINI VISION PIPELINE (If Gemini Key Configured or Fallback)
+    // -------------------------------------------------------------------------
+    if (hasGemini) {
+      const candidateModels = ['gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-2.5-flash'];
+      const payload = {
+        systemInstruction: {
+          parts: [{ text: systemPrompt }]
+        },
+        contents: [
+          {
+            parts: [
+              {
+                inline_data: {
+                  mime_type: cleanMime,
+                  data: base64
+                }
+              },
               {
                 text: 'Identify all visible foods and return structured JSON nutrition data.'
               }
@@ -219,7 +289,7 @@ export default async function handler(req, res) {
       let lastError = '';
       for (const model of candidateModels) {
         try {
-          const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(activeKey)}`;
+          const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(geminiKey)}`;
           const response = await fetch(geminiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -234,15 +304,6 @@ export default async function handler(req, res) {
               const parsed = JSON.parse(errBody);
               if (parsed.error?.message) parsedMsg = parsed.error.message;
             } catch { }
-
-            if ((response.status === 400 && (errBody.includes('API_KEY') || errBody.includes('API key'))) || response.status === 401 || response.status === 403) {
-              return res.status(500).json({
-                success: false,
-                scanId,
-                requiresApiKey: true,
-                error: 'Server Gemini Vision configuration error. Please check server GEMINI_API_KEY.'
-              });
-            }
             lastError = `Model ${model} returned HTTP ${response.status}: ${parsedMsg}`;
             continue;
           }
@@ -261,7 +322,7 @@ export default async function handler(req, res) {
             scanId,
             userId,
             items: parsedResult.items || [],
-            disclaimer: parsedResult.disclaimer || 'Nutritional values are estimates based on visual portion estimation.',
+            disclaimer: parsedResult.disclaimer || 'Nutritional estimates based on visual volume estimation.',
             source: 'stoke_backend_gemini',
             model
           });
@@ -273,13 +334,19 @@ export default async function handler(req, res) {
       return res.status(502).json({
         success: false,
         scanId,
-        error: `Gemini Vision AI processing failed: ${lastError}`,
+        error: `Vision AI processing failed: ${lastError}`,
         items: []
       });
-    } catch (globalErr) {
-      return res.status(500).json({
-        success: false,
-        error: 'Internal Vision AI gateway error.'
-      });
     }
+
+    return res.status(500).json({
+      success: false,
+      error: 'No active AI Vision provider succeeded.'
+    });
+  } catch (globalErr) {
+    return res.status(500).json({
+      success: false,
+      error: 'Internal Vision AI gateway error.'
+    });
   }
+}

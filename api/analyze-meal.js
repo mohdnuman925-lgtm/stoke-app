@@ -325,42 +325,52 @@ export default async function handler(req, res) {
         ]
       });
 
-      for (const bModel of bedrockModels) {
-        try {
-          const endpoint = `https://bedrock-runtime.${awsRegion}.amazonaws.com/model/${encodeURIComponent(bModel)}/invoke`;
-          const bResponse = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${rawSingleKey}`
-            },
-            body: bedrockPayload,
-            signal: AbortSignal.timeout(28000)
-          });
-
-          if (bResponse.ok) {
-            const bData = await bResponse.json();
-            const rawText = (bData.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
-            let cleanText = rawText.trim();
-            if (cleanText.startsWith('```json')) cleanText = cleanText.slice(7);
-            if (cleanText.startsWith('```')) cleanText = cleanText.slice(3);
-            if (cleanText.endsWith('```')) cleanText = cleanText.slice(0, -3);
-            cleanText = cleanText.trim();
-
-            const parsedResult = JSON.parse(cleanText);
-            return res.status(200).json({
-              success: true,
-              scanId,
-              userId,
-              items: parsedResult.items || [],
-              disclaimer: parsedResult.disclaimer || 'Nutritional estimates powered by AWS Bedrock Claude 3.5 Vision AI.',
-              source: 'stoke_backend_aws_bedrock_apikey',
-              model: bModel,
-              region: awsRegion
+      let bedrockLastError = '';
+      const candidateRegions = Array.from(new Set([awsRegion, 'us-east-1', 'us-west-2', 'ap-south-1', 'eu-central-1']));
+      
+      for (const reg of candidateRegions) {
+        for (const bModel of bedrockModels) {
+          try {
+            const endpoint = `https://bedrock-runtime.${reg}.amazonaws.com/model/${encodeURIComponent(bModel)}/invoke`;
+            const bResponse = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${rawSingleKey}`
+              },
+              body: bedrockPayload,
+              signal: AbortSignal.timeout(25000)
             });
+
+            if (bResponse.ok) {
+              const bData = await bResponse.json();
+              const rawText = (bData.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+              let cleanText = rawText.trim();
+              if (cleanText.startsWith('```json')) cleanText = cleanText.slice(7);
+              if (cleanText.startsWith('```')) cleanText = cleanText.slice(3);
+              if (cleanText.endsWith('```')) cleanText = cleanText.slice(0, -3);
+              cleanText = cleanText.trim();
+
+              const parsedResult = JSON.parse(cleanText);
+              return res.status(200).json({
+                success: true,
+                scanId,
+                userId,
+                items: parsedResult.items || [],
+                disclaimer: parsedResult.disclaimer || 'Nutritional estimates powered by AWS Bedrock Claude 3.5 Vision AI.',
+                source: 'stoke_backend_aws_bedrock_apikey',
+                model: bModel,
+                region: reg
+              });
+            } else {
+              const errBody = await bResponse.text();
+              bedrockLastError = `Bedrock (${bModel} in ${reg}) HTTP ${bResponse.status}: ${errBody.substring(0, 200)}`;
+              console.warn('[Bedrock Bearer Error]:', bedrockLastError);
+            }
+          } catch (bKeyErr) {
+            bedrockLastError = `Bedrock (${bModel} in ${reg}) fetch error: ${bKeyErr.message}`;
+            console.warn('[Bedrock Bearer Exception]:', bedrockLastError);
           }
-        } catch (bKeyErr) {
-          console.warn(`[Bedrock Bearer Notice] Model ${bModel}:`, bKeyErr.message);
         }
       }
     }
@@ -599,7 +609,8 @@ export default async function handler(req, res) {
 
     return res.status(500).json({
       success: false,
-      error: 'No active AI Vision provider succeeded.'
+      scanId,
+      error: `Vision AI processing notice: ${bedrockLastError || 'No active AI Vision provider succeeded. Check server logs.'}`
     });
   } catch (globalErr) {
     return res.status(500).json({
@@ -608,3 +619,4 @@ export default async function handler(req, res) {
     });
   }
 }
+

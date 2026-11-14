@@ -1,10 +1,9 @@
-// Vercel / Node.js Serverless Function: Multi-Model Vision AI Status Health Check
+// Vercel / Node.js Serverless Function: Multi-Model Vision AI Status & Live Diagnostic Check
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 
-// Safe environment loader fallback
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
@@ -19,7 +18,7 @@ if (!process.env.GEMINI_API_KEY && !process.env.ANTHROPIC_API_KEY && !process.en
   }
 }
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -57,23 +56,85 @@ export default function handler(req, res) {
 
   const hasApiKey = Boolean(isBedrockBearerKey || isAnthropicDirectKey || hasBedrockSigV4 || hasGemini || rawSingleKey);
 
+  // Diagnostic Test Execution if requested via ?test=1 or ?diagnose=1
+  const testRequested = req.url && (req.url.includes('test=') || req.url.includes('diagnose='));
+  let diagnosticResult = null;
+
+  if (testRequested && hasApiKey) {
+    diagnosticResult = { attempts: [] };
+
+    // Test Bedrock Bearer Key if configured
+    if (isBedrockBearerKey || (rawSingleKey && !isAnthropicDirectKey && !rawSingleKey.startsWith('AIza'))) {
+      const testRegions = Array.from(new Set([awsRegion, 'us-east-1', 'us-west-2', 'ap-south-1', 'eu-central-1']));
+      const testModels = [
+        'us.anthropic.claude-3-5-sonnet-20241022-v2:0',
+        'anthropic.claude-3-5-sonnet-20241022-v2:0',
+        'us.anthropic.claude-3-5-haiku-20241022-v1:0',
+        'anthropic.claude-3-haiku-20240307-v1:0'
+      ];
+
+      for (const r of testRegions) {
+        for (const m of testModels) {
+          try {
+            const url = `https://bedrock-runtime.${r}.amazonaws.com/model/${encodeURIComponent(m)}/invoke`;
+            const payload = JSON.stringify({
+              anthropic_version: 'bedrock-2023-05-31',
+              max_tokens: 10,
+              messages: [{ role: 'user', content: 'hi' }]
+            });
+
+            const resp = await fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${rawSingleKey}`
+              },
+              body: payload,
+              signal: AbortSignal.timeout(6000)
+            });
+
+            const text = await resp.text();
+            let parsed = null;
+            try { parsed = JSON.parse(text); } catch {}
+
+            diagnosticResult.attempts.push({
+              region: r,
+              model: m,
+              status: resp.status,
+              ok: resp.ok,
+              error: resp.ok ? null : (parsed?.message || text.substring(0, 150))
+            });
+
+            if (resp.ok) {
+              diagnosticResult.successfulCall = { region: r, model: m };
+              break;
+            }
+          } catch (err) {
+            diagnosticResult.attempts.push({
+              region: r,
+              model: m,
+              error: err.message
+            });
+          }
+        }
+        if (diagnosticResult.successfulCall) break;
+      }
+    }
+  }
+
   return res.status(200).json({
     status: 'ok',
     hasApiKey,
     activeProvider,
     keyConfigured: hasApiKey ? 'Active' : 'Missing',
+    configuredRegion: awsRegion,
+    keyPrefix: rawSingleKey ? `${rawSingleKey.substring(0, 5)}...` : (awsAccessKey ? `${awsAccessKey.substring(0, 5)}...` : 'none'),
+    diagnosticResult,
     supportedModels: [
       'claude-3-5-sonnet',
       'claude-3-5-haiku',
       'claude-3-haiku',
-      'gemini-3.5-flash',
-      'gemini-3.5-flash-lite'
-    ],
-    supportedKeyFormats: [
-      'Anthropic Claude Key (sk-ant-...)',
-      'AWS Bedrock API Key (ABSK...)',
-      'Google Gemini Key (AIza...)',
-      'AWS IAM SigV4 (AccessKey + SecretKey)'
+      'gemini-3.5-flash'
     ],
     service: 'STOKE Universal Vision AI Gateway',
     timestamp: new Date().toISOString()

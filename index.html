@@ -3109,26 +3109,26 @@ if (typeof window !== "undefined") {
     }
   </script>
   <div id="root">
-    <!-- STOKE CINEMATIC INSTANT FIRST FRAME (Matches reference video pixel-for-pixel) -->
-    <div id="stoke-splash-initial" style="position: fixed; inset: 0; z-index: 9999999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #080B0A; user-select: none;">
-      <div style="position: absolute; width: 440px; height: 440px; border-radius: 50%; pointer-events: none; opacity: 0.35; background: radial-gradient(circle, rgba(255, 255, 255, 0.09) 0%, rgba(217, 255, 114, 0.04) 40%, transparent 70%);"></div>
+    <!-- STOKE CINEMATIC INSTANT FIRST FRAME (White Background & Military Green) -->
+    <div id="stoke-splash-initial" style="position: fixed; inset: 0; z-index: 9999999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #FFFFFF; user-select: none;">
+      <div style="position: absolute; width: 500px; height: 500px; border-radius: 50%; pointer-events: none; opacity: 0.8; background: radial-gradient(circle, rgba(43, 68, 54, 0.07) 0%, rgba(43, 68, 54, 0.02) 45%, transparent 70%);"></div>
       <div style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <div style="position: relative; width: 280px; height: 168px; margin-bottom: 16px;">
           <svg viewBox="0 0 300 180" style="width: 100%; height: 100%; overflow: visible;" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 54 12 L 126 12 C 142 12, 148 24, 146 42 L 78 42 C 68 42, 64 48, 64 56 C 64 64, 72 70, 84 74 L 122 86 C 144 94, 150 108, 148 132 C 146 154, 134 166, 110 166 L 36 166 C 18 166, 14 152, 16 134 L 84 134 C 94 134, 98 128, 98 120 C 98 112, 90 106, 78 102 L 40 90 C 20 82, 14 68, 16 46 C 18 24, 30 12, 54 12 Z M 162 12 L 284 12 L 278 42 L 238 42 L 222 166 L 186 166 L 202 42 L 168 42 Z" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1400" style="animation: drawStroke 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));"></path>
+            <path d="M 54 12 L 126 12 C 142 12, 148 24, 146 42 L 78 42 C 68 42, 64 48, 64 56 C 64 64, 72 70, 84 74 L 122 86 C 144 94, 150 108, 148 132 C 146 154, 134 166, 110 166 L 36 166 C 18 166, 14 152, 16 134 L 84 134 C 94 134, 98 128, 98 120 C 98 112, 90 106, 78 102 L 40 90 C 20 82, 14 68, 16 46 C 18 24, 30 12, 54 12 Z M 162 12 L 284 12 L 278 42 L 238 42 L 222 166 L 186 166 L 202 42 L 168 42 Z" fill="none" stroke="#2B4436" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1400" style="animation: drawStroke 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards; filter: drop-shadow(0 2px 8px rgba(43, 68, 54, 0.25));"></path>
           </svg>
         </div>
         <div style="height: 64px; margin-bottom: 16px;"></div>
-        <div style="display: flex; align-items: center; gap: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; letter-spacing: 0.38em; color: #A3A3A3; font-weight: 600; text-transform: uppercase;">
+        <div style="display: flex; align-items: center; gap: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; letter-spacing: 0.38em; color: #556F5F; font-weight: 700; text-transform: uppercase;">
           <span>STARTING STOKE</span>
-          <span style="display: inline-flex; letter-spacing: 0.15em; color: #D9FF72;">
+          <span style="display: inline-flex; letter-spacing: 0.15em; color: #2B4436;">
             <span style="animation: pulse 1.2s infinite 100ms;">.</span>
             <span style="animation: pulse 1.2s infinite 300ms;">.</span>
             <span style="animation: pulse 1.2s infinite 500ms;">.</span>
           </span>
         </div>
       </div>
-      <div style="position: absolute; bottom: 24px; right: 24px; font-size: 10px; text-transform: uppercase; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.2em; color: #737373; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); background: rgba(255, 255, 255, 0.02);">Skip [ESC]</div>
+      <div style="position: absolute; bottom: 24px; right: 24px; font-size: 10px; text-transform: uppercase; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.2em; color: #556F5F; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(43, 68, 54, 0.15); background: rgba(43, 68, 54, 0.03);">Skip [ESC]</div>
     </div>
   </div>
   <script>
@@ -10697,7 +10697,7 @@ if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#080B0A",
+          backgroundColor: "#FFFFFF",
           userSelect: "none",
           WebkitUserSelect: "none",
           transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
@@ -10710,13 +10710,13 @@ if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.
         React.createElement("div", {
           style: {
             position: "absolute",
-            width: 440,
-            height: 440,
+            width: 500,
+            height: 500,
             borderRadius: "50%",
             pointerEvents: "none",
             transition: "opacity 1s ease",
-            opacity: phase >= 1 ? 1 : 0.35,
-            background: "radial-gradient(circle, rgba(255, 255, 255, 0.09) 0%, rgba(217, 255, 114, 0.04) 40%, transparent 70%)",
+            opacity: phase >= 1 ? 1 : 0.4,
+            background: "radial-gradient(circle, rgba(43, 68, 54, 0.08) 0%, rgba(43, 68, 54, 0.02) 45%, transparent 70%)",
           }
         }),
 
@@ -10749,7 +10749,7 @@ if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.
               React.createElement("path", {
                 d: STOKE_MONO_PATH,
                 fill: "none",
-                stroke: "#ffffff",
+                stroke: "#2B4436",
                 strokeWidth: "2.2",
                 strokeLinecap: "round",
                 strokeLinejoin: "round",
@@ -10759,24 +10759,24 @@ if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.
                   opacity: phase === 0 ? 1 : 0,
                   animation: phase === 0 ? "drawStroke 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards" : "none",
                   transition: "opacity 0.2s ease-in-out",
-                  filter: "drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))",
+                  filter: "drop-shadow(0 2px 8px rgba(43, 68, 54, 0.25))",
                 }
               }),
-              /* Solid Pure White Fill Layer (Active in Phase 1+) */
+              /* Solid Fill Layer in Military Green (Active in Phase 1+) */
               React.createElement("path", {
                 d: STOKE_MONO_PATH,
-                fill: "#ffffff",
+                fill: "#2B4436",
                 stroke: "none",
                 fillRule: "evenodd",
                 style: {
                   display: phase >= 1 ? "block" : "none",
-                  filter: "drop-shadow(0 0 24px rgba(255, 255, 255, 0.55)) drop-shadow(0 0 50px rgba(217, 255, 114, 0.25))",
+                  filter: "drop-shadow(0 8px 24px rgba(43, 68, 54, 0.22))",
                 }
               })
             )
           ),
 
-          /* Cursive Handwriting Brand Name */
+          /* Cursive Handwriting Brand Name in Military Green */
           React.createElement("div", {
             style: {
               height: 64,
@@ -10788,35 +10788,35 @@ if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.
           },
             phase >= 1 && React.createElement("div", {
               style: {
-                fontSize: 52,
-                color: "#ffffff",
+                fontSize: 54,
+                color: "#2B4436",
                 fontWeight: "normal",
                 letterSpacing: "-0.02em",
                 display: "flex",
                 alignItems: "baseline",
                 userSelect: "none",
                 fontFamily: "'Kaushan Script', 'Caveat', 'Brush Script MT', cursive",
-                textShadow: "0 0 20px rgba(255, 255, 255, 0.45), 0 0 40px rgba(217, 255, 114, 0.2)",
+                textShadow: "0 4px 16px rgba(43, 68, 54, 0.15)",
               }
             },
               React.createElement("span", null, FULL_BRAND_NAME.slice(0, typedLetters)),
-              /* Glowing ink tip cursor during writing */
+              /* Glowing ink tip cursor during writing in Military Green */
               phase === 1 && typedLetters < FULL_BRAND_NAME.length && React.createElement("span", {
                 style: {
                   display: "inline-block",
                   width: 4,
                   height: 26,
-                  marginLeft: 3,
-                  backgroundColor: "#D9FF72",
+                  marginLeft: 4,
+                  backgroundColor: "#385C46",
                   borderRadius: 999,
                   animation: "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-                  boxShadow: "0 0 10px #D9FF72",
+                  boxShadow: "0 0 8px rgba(43, 68, 54, 0.4)",
                 }
               })
             )
           ),
 
-          /* Subtitle: "STARTING STOKE..." */
+          /* Subtitle: "STARTING STOKE..." in Military Green */
           React.createElement("div", {
             style: {
               display: "flex",
@@ -10825,15 +10825,15 @@ if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.
               fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
               fontSize: 11,
               letterSpacing: "0.38em",
-              color: "#A3A3A3",
-              fontWeight: 600,
+              color: "#556F5F",
+              fontWeight: 700,
               textTransform: "uppercase",
               userSelect: "none",
             }
           },
             React.createElement("span", null, "STARTING STOKE"),
             React.createElement("span", {
-              style: { display: "inline-flex", letterSpacing: "0.15em", color: "#D9FF72" }
+              style: { display: "inline-flex", letterSpacing: "0.15em", color: "#2B4436" }
             },
               React.createElement("span", { style: { animation: "pulse 1.2s infinite 100ms" } }, "."),
               React.createElement("span", { style: { animation: "pulse 1.2s infinite 300ms" } }, "."),
@@ -10842,7 +10842,7 @@ if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.
           )
         ),
 
-        /* Skip button for user convenience */
+        /* Skip button in Military Green styling */
         React.createElement("button", {
           type: "button",
           onClick: () => {
@@ -10858,18 +10858,19 @@ if(!authed||!currentUser||authPhase==="AUTH_REQUIRED"){return/*#__PURE__*/React.
             textTransform: "uppercase",
             fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
             letterSpacing: "0.2em",
-            color: "#737373",
+            color: "#556F5F",
             transition: "color 0.2s ease, border-color 0.2s ease",
             padding: "6px 12px",
             borderRadius: 8,
-            border: "1px solid rgba(255, 255, 255, 0.05)",
-            background: "rgba(255, 255, 255, 0.02)",
+            border: "1px solid rgba(43, 68, 54, 0.15)",
+            background: "rgba(43, 68, 54, 0.03)",
             cursor: "pointer",
-          }
+          },
+          onMouseEnter: (e) => { e.currentTarget.style.color = "#2B4436"; e.currentTarget.style.borderColor = "rgba(43, 68, 54, 0.35)"; },
+          onMouseLeave: (e) => { e.currentTarget.style.color = "#556F5F"; e.currentTarget.style.borderColor = "rgba(43, 68, 54, 0.15)"; }
         }, "Skip [ESC]")
       );
     }
-
 
     ReactDOM.createRoot(document.getElementById("root")).render(
       /*#__PURE__*/React.createElement(StokeErrorBoundary, null,

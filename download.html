@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Download Stoke Android App (APK)</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Inter", sans-serif;
+      background: #F2F2F7;
+      color: #000000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .orb {
+      position: fixed;
+      width: 440px;
+      height: 440px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(43, 68, 54, 0.08) 0%, rgba(43, 68, 54, 0.02) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      maxWidth: 440px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 28px;
+      padding: 36px 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
+      text-align: center;
+    }
+    .icon-box {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #1A2820 0%, #0F1713 100%);
+      border: 1.5px solid rgba(43, 68, 54, 0.3);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(43, 68, 54, 0.08);
+      border: 1px solid rgba(43, 68, 54, 0.18);
+      font-size: 11px;
+      font-weight: 700;
+      color: #2B4436;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34C759;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+      color: #000000;
+    }
+    p.desc {
+      font-size: 14px;
+      color: #636366;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .btn-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: #2B4436;
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(43, 68, 54, 0.3);
+      transition: transform 0.16s ease, filter 0.16s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-download:active {
+      transform: scale(0.97);
+    }
+    .btn-download:hover {
+      filter: brightness(1.08);
+    }
+    .btn-mirror {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #556F5F;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: color 0.15s ease;
+    }
+    .btn-mirror:hover {
+      color: #2B4436;
+      text-decoration: underline;
+    }
+    .steps {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      text-align: left;
+    }
+    .steps-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #8E8E93;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #3C3C43;
+      line-height: 1.4;
+    }
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(43, 68, 54, 0.1);
+      color: #2B4436;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .footer-link {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #8E8E93;
+      text-decoration: none;
+    }
+    .footer-link:hover { color: #000; }
+  </style>
+</head>
+<body>
+  <div class="orb"></div>
+
+  <div class="card">
+    <div class="icon-box">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#D9FF72" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="rgba(217, 255, 114, 0.28)"></polygon>
+      </svg>
+    </div>
+
+    <div class="badge">
+      <span class="dot"></span>
+      <span>Official Release • v1.0.0</span>
+    </div>
+
+    <h1>Stoke for Android</h1>
+    <p class="desc">Standalone native app with white & military green loading screen, full-screen GPS tracker, and AI meal scanner.</p>
+
+    <!-- Primary Download Button with Force Attachment and Download Attribute -->
+    <a id="main-dl" href="/Stoke.apk" download="Stoke.apk" class="btn-download">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      <span>Download APK (1.12 MB)</span>
+    </a>
+
+    <!-- Alternative Direct Mirror -->
+    <a href="https://raw.githubusercontent.com/mohdnuman925-lgtm/stoke-app/main/Stoke.apk" download="Stoke.apk" class="btn-mirror">
+      Direct Mirror (GitHub CDN) &rarr;
+    </a>
+
+    <div class="steps">
+      <div class="steps-title">Installation Steps</div>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div>Tap <strong>Download APK</strong>. If Chrome displays a warning, tap <strong>Download anyway</strong>.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div>Once downloaded, tap the notification or open the file from your <strong>Downloads</strong>.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div>Tap <strong>Install</strong> to add Stoke to your home screen and app drawer.</div>
+      </div>
+    </div>
+
+    <a href="/" class="footer-link">&larr; Open Web Version</a>
+  </div>
+
+  <script>
+    // Auto-trigger download if accessed directly
+    window.addEventListener('DOMContentLoaded', function () {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('auto') === '1') {
+        var a = document.getElementById('main-dl');
+        if (a) a.click();
+      }
+    });
+  </script>
+</body>
+</html>

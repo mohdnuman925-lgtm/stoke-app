@@ -1,5 +1,5 @@
-// STOKE Service Worker (v1.3.2) - High performance offline shell cache with AutoPay & Subscriptions
-const CACHE_NAME = 'stoke-shell-v6';
+// STOKE Service Worker (v1.3.3) - High performance offline shell cache with 95% transparent nav bar
+const CACHE_NAME = 'stoke-shell-v7';
 const CORE_ASSETS = [
   './',
   './index.html',

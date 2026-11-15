@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "bond.stoke.app",
+        "sha256_cert_fingerprints": ["7A:09:5B:2F:54:FF:6B:9A:A9:95:DE:01:87:7C:EE:90:D3:01:8C:FD:82:9E:6D:7D:D2:CC:0D:07:54:29:23:AC"]
+      }
+    }]

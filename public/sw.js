@@ -1,4 +1,4 @@
-// STOKE Service Worker (v1.2.0) - High performance offline shell cache
+// STOKE Service Worker (v1.3.0) - High performance offline shell cache
 const CACHE_NAME = 'stoke-shell-v4';
 const CORE_ASSETS = [
   './',

@@ -51,6 +51,7 @@ console.log('============================================================');
 // Import API handlers
 import analyzeMealHandler from './api/analyze-meal.js';
 import visionStatusHandler from './api/vision/status.js';
+import coachHandler from './api/coach.js';
 
 // ---------------------------------------------------------------------------
 // 3. SECURITY & MIME POLICY
@@ -185,6 +186,39 @@ const server = http.createServer(async (req, res) => {
           req.body = {};
         }
         await analyzeMealHandler(req, res);
+      });
+      return;
+    }
+
+    // -----------------------------------------------------------------------
+    // ROUTE: /api/coach (ChatGPT-Style AI Conversational Coach Gateway)
+    // -----------------------------------------------------------------------
+    if (rawUrl === '/api/coach' || rawUrl === '/api/coach.js') {
+      createServerlessAdapter(req, res);
+
+      let bodyData = '';
+      let bodyTooLarge = false;
+
+      req.on('data', chunk => {
+        if (bodyTooLarge) return;
+        bodyData += chunk;
+        if (bodyData.length > 512 * 1024) {
+          bodyTooLarge = true;
+          res.statusCode = 413;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ success: false, error: 'Payload exceeds size limit.' }));
+          if (req.pause) req.pause();
+        }
+      });
+
+      req.on('end', async () => {
+        if (bodyTooLarge) return;
+        try {
+          req.body = bodyData ? JSON.parse(bodyData) : {};
+        } catch {
+          req.body = {};
+        }
+        await coachHandler(req, res);
       });
       return;
     }

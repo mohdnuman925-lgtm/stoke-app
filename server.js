@@ -52,6 +52,7 @@ console.log('============================================================');
 import analyzeMealHandler from './api/analyze-meal.js';
 import visionStatusHandler from './api/vision/status.js';
 import coachHandler from './api/coach.js';
+import nutritionHandler from './api/nutrition.js';
 
 // ---------------------------------------------------------------------------
 // 3. SECURITY & MIME POLICY
@@ -188,6 +189,16 @@ const server = http.createServer(async (req, res) => {
         await analyzeMealHandler(req, res);
       });
       return;
+    }
+
+    // -----------------------------------------------------------------------
+    // ROUTE: /api/nutrition (Food Nutrition Lookup — GET ?q=food+name)
+    // -----------------------------------------------------------------------
+    if (rawUrl === '/api/nutrition') {
+      createServerlessAdapter(req, res);
+      // Parse query string from req.url
+      req.url = req.url; // keep full URL with query string for handler
+      return nutritionHandler(req, res);
     }
 
     // -----------------------------------------------------------------------

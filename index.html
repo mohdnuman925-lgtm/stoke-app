@@ -65,6 +65,152 @@
 // 1. VERIFIED NUTRITION DATABASE (Certified per-100g edible portion)
 // ============================================================================
 const STOKE_VERIFIED_NUTRITION_DB = {
+  // ── CORE FITNESS STAPLES (High-Priority Lookup) ──
+  "Oats": {
+    name: "Oats",
+    category: "grains",
+    dietType: "veg",
+    defaultGrams: 40,
+    per100g: { calories: 389, protein: 16.9, carbs: 66.3, fat: 6.9, fiber: 10.6 },
+    portionDesc: "1 standard serving (~40g dry)",
+    aliases: ["oats", "oat", "rolled oats", "dry oats", "quaker oats", "masala oats", "raw oats", "oat meal", "oatmeal"]
+  },
+  "Rolled Oats": {
+    name: "Rolled Oats",
+    category: "grains",
+    dietType: "veg",
+    defaultGrams: 40,
+    per100g: { calories: 389, protein: 16.9, carbs: 66.3, fat: 6.9, fiber: 10.6 },
+    portionDesc: "1 bowl (~40g)",
+    aliases: ["rolled oats", "steel cut oats", "jowar oats"]
+  },
+  "Oatmeal (Cooked)": {
+    name: "Oatmeal (Cooked)",
+    category: "grains",
+    dietType: "veg",
+    defaultGrams: 200,
+    per100g: { calories: 71, protein: 2.5, carbs: 12.0, fat: 1.4, fiber: 1.7 },
+    portionDesc: "1 bowl cooked (~200g)",
+    aliases: ["cooked oats", "oatmeal", "porridge"]
+  },
+  "Boiled Egg": {
+    name: "Boiled Egg",
+    category: "eggs",
+    dietType: "nonveg",
+    defaultGrams: 50,
+    per100g: { calories: 155, protein: 13.0, carbs: 1.1, fat: 11.0, fiber: 0 },
+    portionDesc: "1 large egg (~50g)",
+    aliases: ["egg", "eggs", "boiled egg", "boiled eggs", "whole egg", "hard boiled egg", "anda", "boiled anda", "2 eggs", "1 egg"]
+  },
+  "Egg Whites": {
+    name: "Egg Whites",
+    category: "eggs",
+    dietType: "nonveg",
+    defaultGrams: 100,
+    per100g: { calories: 52, protein: 10.9, carbs: 0.7, fat: 0.2, fiber: 0 },
+    portionDesc: "3 egg whites (~100g)",
+    aliases: ["egg white", "egg whites", "whites", "boiled egg white", "egg white only"]
+  },
+  "Chicken Breast": {
+    name: "Chicken Breast",
+    category: "poultry",
+    dietType: "nonveg",
+    defaultGrams: 100,
+    per100g: { calories: 165, protein: 31.0, carbs: 0, fat: 3.6, fiber: 0 },
+    portionDesc: "1 breast piece (~100g)",
+    aliases: ["chicken", "chicken breast", "boiled chicken", "cooked chicken", "grilled chicken", "chicken breast cooked", "murgh"]
+  },
+  "Cooked Rice": {
+    name: "Cooked Rice",
+    category: "grains",
+    dietType: "veg",
+    defaultGrams: 150,
+    per100g: { calories: 130, protein: 2.7, carbs: 28.2, fat: 0.3, fiber: 0.4 },
+    portionDesc: "1 medium bowl (~150g)",
+    aliases: ["rice", "cooked rice", "white rice", "steamed rice", "plain rice", "boiled rice", "chawal", "bhat", "basmati rice"]
+  },
+  "Banana": {
+    name: "Banana",
+    category: "fruits",
+    dietType: "veg",
+    defaultGrams: 100,
+    per100g: { calories: 89, protein: 1.1, carbs: 22.8, fat: 0.3, fiber: 2.6 },
+    portionDesc: "1 medium banana (~100g)",
+    aliases: ["banana", "bananas", "kela", "fresh banana", "ripe banana"]
+  },
+  "Paneer (Raw)": {
+    name: "Paneer (Raw)",
+    category: "dairy",
+    dietType: "veg",
+    defaultGrams: 100,
+    per100g: { calories: 265, protein: 18.3, carbs: 1.2, fat: 20.8, fiber: 0 },
+    portionDesc: "100g raw paneer",
+    aliases: ["paneer", "cottage cheese", "raw paneer", "fresh paneer", "low fat paneer"]
+  },
+  "Dal (Cooked)": {
+    name: "Dal (Cooked)",
+    category: "indian_curry",
+    dietType: "veg",
+    defaultGrams: 150,
+    per100g: { calories: 116, protein: 9.0, carbs: 20.0, fat: 0.4, fiber: 7.9 },
+    portionDesc: "1 bowl cooked dal (~150g)",
+    aliases: ["dal", "dhal", "yellow dal", "moong dal", "toor dal", "masoor dal", "cooked dal", "lentils"]
+  },
+  "Soya Chunks": {
+    name: "Soya Chunks",
+    category: "plant_protein",
+    dietType: "veg",
+    defaultGrams: 50,
+    per100g: { calories: 345, protein: 52.0, carbs: 33.0, fat: 0.5, fiber: 13.0 },
+    portionDesc: "50g dry soya chunks (~26g protein)",
+    aliases: ["soya chunks", "nutrela", "soya", "soy chunks", "meal maker"]
+  },
+  "Cow's Milk": {
+    name: "Cow's Milk",
+    category: "dairy",
+    dietType: "veg",
+    defaultGrams: 250,
+    per100g: { calories: 61, protein: 3.2, carbs: 4.8, fat: 3.3, fiber: 0 },
+    portionDesc: "1 glass (~250ml)",
+    aliases: ["milk", "cows milk", "doodh", "fresh milk", "whole milk"]
+  },
+  "Apple": {
+    name: "Apple",
+    category: "fruits",
+    dietType: "veg",
+    defaultGrams: 150,
+    per100g: { calories: 52, protein: 0.3, carbs: 13.8, fat: 0.2, fiber: 2.4 },
+    portionDesc: "1 medium apple (~150g)",
+    aliases: ["apple", "apples", "seb"]
+  },
+  "Fish (Cooked)": {
+    name: "Fish (Cooked)",
+    category: "seafood",
+    dietType: "nonveg",
+    defaultGrams: 150,
+    per100g: { calories: 110, protein: 19.5, carbs: 0, fat: 3.2, fiber: 0 },
+    portionDesc: "1 fillet / piece (~150g)",
+    aliases: ["fish", "cooked fish", "salmon", "rohu", "tuna", "machhli", "pomfret"]
+  },
+  "Almonds": {
+    name: "Almonds",
+    category: "nuts",
+    dietType: "veg",
+    defaultGrams: 28,
+    per100g: { calories: 579, protein: 21.2, carbs: 21.6, fat: 49.9, fiber: 12.5 },
+    portionDesc: "1 handful (~28g)",
+    aliases: ["almonds", "almond", "badam"]
+  },
+  "Peanut Butter": {
+    name: "Peanut Butter",
+    category: "nuts",
+    dietType: "veg",
+    defaultGrams: 32,
+    per100g: { calories: 588, protein: 25.1, carbs: 20.0, fat: 50.4, fiber: 6.0 },
+    portionDesc: "2 tbsp (~32g)",
+    aliases: ["peanut butter", "pb", "peanutbutter"]
+  },
+
   // Indian Rice & Biryani
   "Chicken Biryani": {
     name: "Chicken Biryani",
@@ -534,22 +680,133 @@ function calculateMealTotals(items) {
   }), { calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0, totalGrams: 0 });
 }
 
+
+// ============================================================================
+// STOKE AUTOMATIC FOOD NUTRITION RESOLVER (Instant Offline + Local DB)
+// ============================================================================
+
+function parseQuantityToGrams(rawVal, foodItem) {
+  if (rawVal === undefined || rawVal === null) return 0;
+  const str = String(rawVal).trim().toLowerCase();
+  if (!str) return 0;
+
+  // 1. Explicit egg unit mentions: e.g. "2 eggs", "2 egg", "2 whole eggs", "2 anda"
+  const eggMatch = str.match(/^(\d+(?:\.\d+)?)\s*(?:egg|eggs|anda|ande)/i);
+  if (eggMatch) {
+    const count = parseFloat(eggMatch[1]) || 1;
+    return Math.round(count * 50); // Standard egg is ~50g
+  }
+
+  // 2. If the food itself is an egg item and user enters small count (e.g. 1, 2, 3, 4, 5, 6)
+  const isEgg = (foodItem?.name || "").toLowerCase().includes("egg") || 
+                (foodItem?.resolvedName || "").toLowerCase().includes("egg") ||
+                (foodItem?.aliases || []).some(a => a.includes("egg"));
+  
+  // 3. Number with or without grams suffix: "30g", "30 g", "30 grams", "30"
+  const numOnlyMatch = str.match(/^(\d+(?:\.\d+)?)\s*(?:g|gm|gms|gram|grams)?$/i);
+  if (numOnlyMatch) {
+    const val = parseFloat(numOnlyMatch[1]) || 0;
+    if (isEgg && val <= 6 && !str.includes("g") && !str.includes("gm")) {
+      return Math.round(val * 50); // e.g. "2" for Boiled Egg means 2 eggs = 100g
+    }
+    return val;
+  }
+
+  // 4. Pieces / slices: "1 banana", "2 bananas", "2 rotis", "1 apple"
+  const pcMatch = str.match(/^(\d+(?:\.\d+)?)\s*(?:pc|pcs|piece|pieces|slice|slices|banana|bananas|apple|apples|roti|chapatis?)/i);
+  if (pcMatch) {
+    const count = parseFloat(pcMatch[1]) || 1;
+    const defG = foodItem?.defaultGrams || 100;
+    return Math.round(count * defG);
+  }
+
+  // 5. Fallback: extract the first valid number
+  const genericMatch = str.match(/(\d+(?:\.\d+)?)/);
+  if (genericMatch) {
+    const val = parseFloat(genericMatch[1]) || 0;
+    if (isEgg && val <= 6 && !str.includes("g") && !str.includes("gm")) {
+      return Math.round(val * 50);
+    }
+    return val;
+  }
+
+  return 0;
+}
+if (typeof window !== "undefined") {
+  window.parseQuantityToGrams = parseQuantityToGrams;
+}
+
+function findFoodNutrition(query) {
+  if (!query || typeof query !== "string") return null;
+  const raw = query.trim().toLowerCase();
+  if (raw.length < 2) return null;
+
+  // Clean numbers, punctuation, units: "30g oats" -> "oats", "2 boiled eggs" -> "boiled eggs"
+  const clean = raw.replace(/^[\d,.]+\s*(g|grams|gm|kg|pcs?|pieces?|cups?|eggs?|rotis?|slices?)?\s*/gi, "")
+                   .replace(/[\d,.]+\s*(g|grams|gm|kg|pcs?|pieces?|cups?|eggs?|rotis?|slices?)$/gi, "")
+                   .trim();
+  const searchTerms = [clean, raw].filter(Boolean);
+
+  if (typeof STOKE_VERIFIED_NUTRITION_DB !== "undefined") {
+    // 1. Direct key match (case-insensitive)
+    for (const [key, item] of Object.entries(STOKE_VERIFIED_NUTRITION_DB)) {
+      const kLow = key.toLowerCase();
+      if (searchTerms.some(term => kLow === term || (item.name && item.name.toLowerCase() === term))) {
+        return item;
+      }
+    }
+    // 2. Alias match
+    for (const item of Object.values(STOKE_VERIFIED_NUTRITION_DB)) {
+      if (item.aliases && item.aliases.some(a => searchTerms.some(term => a === term || term.startsWith(a) || term.includes(a)))) {
+        return item;
+      }
+    }
+    // 3. Substring match
+    for (const [key, item] of Object.entries(STOKE_VERIFIED_NUTRITION_DB)) {
+      const kLow = key.toLowerCase();
+      const nLow = (item.name || "").toLowerCase();
+      if (searchTerms.some(term => kLow.includes(term) || nLow.includes(term))) {
+        return item;
+      }
+    }
+    // 4. Token match (e.g. "oats", "chicken", "rice")
+    const words = clean.split(/\s+/).filter(w => w.length > 2);
+    for (const item of Object.values(STOKE_VERIFIED_NUTRITION_DB)) {
+      const itemName = (item.name || "").toLowerCase();
+      if (words.some(w => itemName.includes(w) || (item.aliases && item.aliases.some(a => a.includes(w))))) {
+        return item;
+      }
+    }
+  }
+  return null;
+}
+if (typeof window !== "undefined") window.findFoodNutrition = findFoodNutrition;
+
 function searchVerifiedFoods(query) {
   if (!query || !query.trim()) return Object.values(STOKE_VERIFIED_NUTRITION_DB).slice(0, 15);
   const q = query.toLowerCase().trim();
-  return Object.values(STOKE_VERIFIED_NUTRITION_DB).filter(f => 
-    f.name.toLowerCase().includes(q) || f.category.toLowerCase().includes(q)
-  );
-}
+  const all = Object.values(STOKE_VERIFIED_NUTRITION_DB);
+  // Ranked search: exact -> startsWith -> alias -> includes
+  const exact = [];
+  const starts = [];
+  const includes = [];
 
-// ============================================================================
-// 3. GENUINE LOCAL NEURAL EDGE VISION ENGINE (HTML5 Canvas Pixel Classifier)
-// ============================================================================
-// Analyzes genuine visual pixels from offscreen canvas:
-// - Multi-region spatial clustering (center, rim, quadrants)
-// - Color histograms (golden/crepe, saffron/yellow rice, red/gravy, green/salad, white/grain/idli)
-// - Texture gradients & edge density
-// - NEVER matches filename or static mock responses!
+  all.forEach(f => {
+    const nameLow = (f.name || "").toLowerCase();
+    const hasAlias = f.aliases && f.aliases.some(a => a.includes(q));
+    if (nameLow === q) {
+      exact.push(f);
+    } else if (nameLow.startsWith(q) || (hasAlias && f.aliases.some(a => a.startsWith(q)))) {
+      starts.push(f);
+    } else if (nameLow.includes(q) || (f.category && f.category.toLowerCase().includes(q)) || hasAlias) {
+      includes.push(f);
+    }
+  });
+
+  return [...exact, ...starts, ...includes];
+}
+if (typeof window !== "undefined") window.searchVerifiedFoods = searchVerifiedFoods;
+
 function analyzeCanvasPixels(canvas) {
   if (!canvas || !canvas.getContext) {
     throw new Error("Invalid image canvas provided for visual analysis.");
@@ -9925,16 +10182,476 @@ if (typeof window !== "undefined") {
 function _extends(){_extends=Object.assign?Object.assign.bind():function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};return _extends.apply(this,arguments);}/* ============================================================
        STOKE VECTOR IMAGE ICON SUITE (Replaces text emojis)
        ============================================================ */function StokeImgIcon({name,size=18,color="currentColor",style={}}){const s=size;const c=color;const n=String(name||"").trim().toLowerCase();// Normalize emojis or icon names
-if(n==="🏆"||n==="trophy"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"}),/*#__PURE__*/React.createElement("path",{d:"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"}),/*#__PURE__*/React.createElement("path",{d:"M4 22h16"}),/*#__PURE__*/React.createElement("path",{d:"M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"}),/*#__PURE__*/React.createElement("path",{d:"M6 4h12v7a6 6 0 0 1-12 0V4z",fill:"rgba(217,255,114,0.18)"}));}if(n==="🔥"||n==="fire"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z",fill:"rgba(255,107,74,0.2)"}));}if(n==="⚡"||n==="lightning"||n==="bolt"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:c,stroke:c,strokeWidth:"1.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("polygon",{points:"13 2 3 14 12 14 11 22 21 10 12 10 13 2"}));}if(n==="🛡️"||n==="🛡"||n==="shield"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",fill:"rgba(35,117,71,0.2)"}));}if(n==="👟"||n==="shoe"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M3.5 15.5l2-2 3.5 1 4-3 5 1.5 2.5 5.5-17-3z"}),/*#__PURE__*/React.createElement("circle",{cx:"16",cy:"18",r:"2"}));}if(n==="🏃"||n==="run"||n==="runner"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.4",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"15.5",cy:"5",r:"1.8"}),/*#__PURE__*/React.createElement("path",{d:"M9 20l2.5-5.5 2 1.8 3.5-1"}),/*#__PURE__*/React.createElement("path",{d:"M7 13.5l3.5-2.5 2 2.5-2.5 3.5"}));}if(n==="🏋️"||n==="🏋"||n==="workout"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"5",cy:"12",r:"2.2"}),/*#__PURE__*/React.createElement("circle",{cx:"19",cy:"12",r:"2.2"}),/*#__PURE__*/React.createElement("line",{x1:"7.2",y1:"12",x2:"16.8",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"5",y1:"9.3",x2:"5",y2:"14.7"}),/*#__PURE__*/React.createElement("line",{x1:"19",y1:"9.3",x2:"19",y2:"14.7"}));}if(n==="🏅"||n==="medal"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"8",r:"6"}),/*#__PURE__*/React.createElement("path",{d:"M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"}));}if(n==="⛰️"||n==="⛰"||n==="mountain"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"m8 3 4 8 5-5 5 15H2L8 3z"}));}if(n==="🌟"||n==="star"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:c,stroke:c,strokeWidth:"1.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("polygon",{points:"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"}));}if(n==="👑"||n==="crown"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"}));}if(n==="🥗"||n==="salad"||n==="nutrition"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"}),/*#__PURE__*/React.createElement("path",{d:"M3 11a9 9 0 0 0 18 0H3z"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"20",x2:"12",y2:"22"}));}if(n==="🍱"||n==="bento"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("rect",{x:"3",y:"3",width:"18",height:"18",rx:"3"}),/*#__PURE__*/React.createElement("line",{x1:"3",y1:"12",x2:"21",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"12",x2:"12",y2:"21"}));}if(n==="🥩"||n==="meat"||n==="protein"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"8"}),/*#__PURE__*/React.createElement("path",{d:"m14 8-4 8"}),/*#__PURE__*/React.createElement("path",{d:"M9.5 9.5 14 14"}));}if(n==="💧"||n==="water"||n==="🥛"||n==="glass"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z",fill:"rgba(61,220,255,0.25)"}));}if(n==="🌊"||n==="wave"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M2 12c3-4 5-4 8 0s5 4 8 0 5-4 8 0"}),/*#__PURE__*/React.createElement("path",{d:"M2 17c3-4 5-4 8 0s5 4 8 0 5-4 8 0"}));}if(n==="💎"||n==="diamond"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M6 3h12l4 6-10 12L2 9z",fill:"rgba(217,255,114,0.18)"}));}if(n==="🎮"||n==="gamepad"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("rect",{x:"2",y:"6",width:"20",height:"12",rx:"4"}),/*#__PURE__*/React.createElement("line",{x1:"6",y1:"12",x2:"10",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"8",y1:"10",x2:"8",y2:"14"}),/*#__PURE__*/React.createElement("circle",{cx:"16",cy:"11",r:"1"}),/*#__PURE__*/React.createElement("circle",{cx:"18",cy:"13",r:"1"}));}if(n==="🔱"||n==="trident"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M6 3v9a6 6 0 0 0 12 0V3"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"3",x2:"12",y2:"21"}));}if(n==="🔒"||n==="lock"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("rect",{x:"3",y:"11",width:"18",height:"11",rx:"2"}),/*#__PURE__*/React.createElement("path",{d:"M7 11V7a5 5 0 0 1 10 0v4"}));}if(n==="📷"||n==="📸"||n==="camera"||n==="scan"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"13",r:"4"}));}if(n==="🖼️"||n==="🖼"||n==="image"||n==="gallery"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("rect",{x:"3",y:"3",width:"18",height:"18",rx:"2"}),/*#__PURE__*/React.createElement("circle",{cx:"8.5",cy:"8.5",r:"1.5"}),/*#__PURE__*/React.createElement("polyline",{points:"21 15 16 10 5 21"}));}if(n==="🔎"||n==="🔍"||n==="search"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"11",cy:"11",r:"8"}),/*#__PURE__*/React.createElement("line",{x1:"21",y1:"21",x2:"16.65",y2:"16.65"}));}if(n==="🎙️"||n==="🎙"||n==="mic"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"}),/*#__PURE__*/React.createElement("path",{d:"M19 10v2a7 7 0 0 1-14 0v-2"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"19",x2:"12",y2:"23"}),/*#__PURE__*/React.createElement("line",{x1:"8",y1:"23",x2:"16",y2:"23"}));}if(n==="💡"||n==="bulb"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M9 18h6"}),/*#__PURE__*/React.createElement("path",{d:"M10 22h4"}),/*#__PURE__*/React.createElement("path",{d:"M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"}));}if(n==="🔄"||n==="refresh"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("polyline",{points:"23 4 23 10 17 10"}),/*#__PURE__*/React.createElement("path",{d:"M20.49 15a9 9 0 1 1-2.12-9.36L23 10"}));}return/*#__PURE__*/React.createElement("span",{style:style},name);}const{useState,useRef,useEffect,useMemo,useCallback}=React;const THEME={bg:"var(--bg-app)",card:"var(--surface-primary)",cardWhite:"var(--surface-elevated)",cardSecondary:"var(--surface-secondary)",primary:"var(--btn-primary-bg)",primaryText:"var(--btn-primary-text)",brandLime:"var(--brand-lime)",primaryHover:"var(--lime-hover)",primarySoft:"var(--feature-nutrition-bg)",primaryBorder:"var(--border-divider)",text:"var(--text-primary)",textMuted:"var(--text-secondary)",textFaint:"var(--text-muted)",border:"var(--border-divider)",borderSoft:"var(--border-divider)",inputBg:"var(--input-bg)",inputBorder:"var(--border-divider)",success:"var(--semantic-success)",successSoft:"var(--semantic-success-bg)",error:"var(--semantic-error)",errorSoft:"var(--semantic-error-bg)",warning:"var(--semantic-warning)",warningSoft:"var(--semantic-warning-bg)",info:"var(--semantic-info)",infoSoft:"var(--semantic-info-bg)",shadowSm:"var(--shadow-sm)",shadowMd:"var(--shadow-card)",shadowLg:"var(--shadow-lg)",shadowCard:"var(--shadow-card)",protein:"var(--feature-running)",carbs:"var(--feature-nutrition)",fat:"var(--semantic-warning)",fiber:"var(--feature-workout)",water:"var(--feature-running)",chartGrid:"var(--chart-gridlines)"};const TOKENS={bg:THEME.bg,surface:THEME.card,surface2:THEME.cardSecondary,surfaceWhite:THEME.cardWhite,border:THEME.border,text:THEME.text,muted:THEME.textMuted,mutedFaint:THEME.textFaint,ember:THEME.brandLime,primary:THEME.primary,primaryText:THEME.primaryText,lime:THEME.brandLime,protein:THEME.protein,carbs:THEME.carbs,fat:THEME.fat,fiber:THEME.fiber,water:THEME.water,teal:THEME.success,success:THEME.success,error:THEME.error,warning:THEME.warning,info:THEME.info,nutrition:"var(--feature-nutrition)",running:"var(--feature-running)",workout:"var(--feature-workout)",recovery:"var(--feature-recovery)"};const CARD_SHADOW="0 4px 16px rgba(0, 0, 0, 0.08)";const DEFAULT_PROFILE={name:"",weightKg:70,heightCm:175,age:25,sex:"male",goalType:"maintain",activity:1.55};function computeGoals(profile={}){if(profile.daily_calorie_goal&&Number(profile.daily_calorie_goal)>0){return{calories:Math.round(Number(profile.daily_calorie_goal)),protein:Math.round(Number(profile.daily_protein_goal||140)),carbs:Math.round(Number(profile.daily_carbs_goal||200)),fat:Math.round(Number(profile.daily_fat_goal||60)),fiber:Math.round(Number(profile.daily_fiber_goal||28)),water:Number(profile.daily_water_goal||3.0)};}const weightKg=Number(profile.weight||profile.weightKg||70);const heightCm=Number(profile.height||profile.heightCm||175);const age=Number(profile.age||25);const gender=(profile.gender||profile.sex||"male").toLowerCase();const goalType=profile.goalType||(profile.fitness_goal==="Lose Weight"?"cut":profile.fitness_goal==="Build Muscle"?"gain":"maintain");let activityMult=1.55;if(typeof profile.activity==="number")activityMult=profile.activity;else if(profile.activity_level==="Sedentary")activityMult=1.2;else if(profile.activity_level==="Lightly Active")activityMult=1.375;else if(profile.activity_level==="Moderately Active")activityMult=1.55;else if(profile.activity_level==="Very Active")activityMult=1.725;const bmr=gender==="female"?10*weightKg+6.25*heightCm-5*age-161:10*weightKg+6.25*heightCm-5*age+5;const tdee=bmr*activityMult;const calculatedCal=Math.round(goalType==="cut"?tdee-500:goalType==="gain"?tdee+300:tdee);const calories=profile.customCalories?Number(profile.customCalories):calculatedCal;const protein=profile.customProtein?Number(profile.customProtein):Math.round(weightKg*(goalType==="cut"?2.0:1.8));const fat=profile.customFat?Number(profile.customFat):Math.round(calories*0.25/9);const carbs=profile.customCarbs?Number(profile.customCarbs):Math.max(0,Math.round((calories-protein*4-fat*9)/4));const fiber=Math.round(calories/1000*14);const water=profile.customWater?Number(profile.customWater):Math.round((weightKg*0.033+0.3)*10)/10;return{calories:isNaN(calories)?2200:calories,protein:isNaN(protein)?140:protein,carbs:isNaN(carbs)?200:carbs,fat:isNaN(fat)?60:fat,fiber:isNaN(fiber)?28:fiber,water:isNaN(water)?3.0:water};}const MOCK_FOODS=(()=>{if(typeof STOKE_VERIFIED_NUTRITION_DB!=="undefined"){return Object.values(STOKE_VERIFIED_NUTRITION_DB).map(f=>({name:f.name,grams:f.defaultGrams||100,calories:Math.round((f.per100g.calories||0)*(f.defaultGrams||100)/100),protein:Math.round((f.per100g.protein||0)*(f.defaultGrams||100)/100*10)/10,carbs:Math.round((f.per100g.carbs||0)*(f.defaultGrams||100)/100*10)/10,fat:Math.round((f.per100g.fat||0)*(f.defaultGrams||100)/100*10)/10,fiber:Math.round((f.per100g.fiber||0)*(f.defaultGrams||100)/100*10)/10,dietType:f.dietType||"veg",per100g:f.per100g,portionDesc:f.portionDesc||""}));}return[{name:"Grilled Chicken Breast",calories:165,protein:31,carbs:0,fat:4,fiber:0,grams:100,dietType:"nonveg",per100g:{calories:165,protein:31,carbs:0,fat:4,fiber:0}},{name:"Steamed Basmati Rice",calories:130,protein:2.7,carbs:28.2,fat:0.3,fiber:0.4,grams:100,dietType:"veg",per100g:{calories:130,protein:2.7,carbs:28.2,fat:0.3,fiber:0.4}},{name:"Whole Boiled Egg",calories:155,protein:13,carbs:1.1,fat:11,fiber:0,grams:100,dietType:"nonveg",per100g:{calories:155,protein:13,carbs:1.1,fat:11,fiber:0}},{name:"Banana",calories:89,protein:1.1,carbs:23,fat:0.3,fiber:2.6,grams:100,dietType:"veg",per100g:{calories:89,protein:1.1,carbs:23,fat:0.3,fiber:2.6}},{name:"Oats (Dry)",calories:389,protein:16.9,carbs:66.3,fat:6.9,fiber:10.6,grams:100,dietType:"veg",per100g:{calories:389,protein:16.9,carbs:66.3,fat:6.9,fiber:10.6}}];})();const DEFAULT_MEAL_SLOTS=[{key:"breakfast",label:"Breakfast"},{key:"lunch",label:"Lunch"},{key:"workout",label:"Pre Workout"},{key:"postworkout",label:"Post Workout"},{key:"dinner",label:"Dinner"}];const WORKOUT_PROGRAMS={"Classic Split":{Mon:{label:"Chest + Triceps",rest:false,variants:[[{name:"Bench Press",targetSets:3,targetReps:10},{name:"Incline Press",targetSets:3,targetReps:10},{name:"Chest Fly",targetSets:3,targetReps:12},{name:"Dips",targetSets:3,targetReps:10},{name:"Cable Crossover",targetSets:3,targetReps:12},{name:"Triceps Pushdown",targetSets:3,targetReps:12},{name:"Overhead Triceps Extension",targetSets:3,targetReps:12},{name:"Close-Grip Push-up",targetSets:2,targetReps:15}],[{name:"Incline Dumbbell Press",targetSets:4,targetReps:8},{name:"Flat Dumbbell Press",targetSets:3,targetReps:10},{name:"Pec Deck",targetSets:3,targetReps:12},{name:"Weighted Dip",targetSets:3,targetReps:10},{name:"Low-to-High Cable Fly",targetSets:3,targetReps:12},{name:"Rope Pushdown",targetSets:3,targetReps:12},{name:"Diamond Push-up",targetSets:2,targetReps:15},{name:"JM Press",targetSets:3,targetReps:10}],[{name:"Decline Bench Press",targetSets:4,targetReps:8},{name:"Machine Chest Press",targetSets:3,targetReps:10},{name:"High-to-Low Cable Fly",targetSets:3,targetReps:12},{name:"Ring Dip",targetSets:3,targetReps:10},{name:"Svend Press",targetSets:3,targetReps:15},{name:"Single-Arm Pushdown",targetSets:3,targetReps:12},{name:"Tate Press",targetSets:3,targetReps:12},{name:"Bench Dip",targetSets:2,targetReps:15}],[{name:"Floor Press",targetSets:4,targetReps:8},{name:"Smith Machine Incline Press",targetSets:3,targetReps:10},{name:"Dumbbell Pullover",targetSets:3,targetReps:12},{name:"Weighted Push-up",targetSets:3,targetReps:12},{name:"Landmine Press",targetSets:3,targetReps:12},{name:"EZ-Bar Skull Crusher",targetSets:3,targetReps:12},{name:"Triceps Kickback",targetSets:3,targetReps:15},{name:"Close-Grip Bench Press",targetSets:3,targetReps:10}]]},Tue:{label:"Back + Biceps",rest:false,variants:[[{name:"Deadlift",targetSets:3,targetReps:8},{name:"Pull-up",targetSets:3,targetReps:8},{name:"Lat Pulldown",targetSets:3,targetReps:10},{name:"Barbell Row",targetSets:3,targetReps:10},{name:"Seated Cable Row",targetSets:3,targetReps:12},{name:"Bicep Curl",targetSets:3,targetReps:12},{name:"Hammer Curl",targetSets:3,targetReps:12},{name:"Face Pull",targetSets:2,targetReps:15}],[{name:"Rack Pull",targetSets:3,targetReps:6},{name:"Chin-up",targetSets:3,targetReps:8},{name:"Single-Arm Lat Pulldown",targetSets:3,targetReps:10},{name:"T-Bar Row",targetSets:3,targetReps:10},{name:"Chest-Supported Row",targetSets:3,targetReps:12},{name:"Preacher Curl",targetSets:3,targetReps:12},{name:"Cable Curl",targetSets:3,targetReps:12},{name:"Rear Delt Row",targetSets:2,targetReps:15}],[{name:"Trap Bar Deadlift",targetSets:3,targetReps:6},{name:"Neutral-Grip Pull-up",targetSets:3,targetReps:8},{name:"Straight-Arm Pulldown",targetSets:3,targetReps:12},{name:"Pendlay Row",targetSets:3,targetReps:8},{name:"One-Arm Dumbbell Row",targetSets:3,targetReps:10},{name:"Incline Dumbbell Curl",targetSets:3,targetReps:12},{name:"Spider Curl",targetSets:3,targetReps:12},{name:"Reverse Fly",targetSets:2,targetReps:15}],[{name:"Sumo Deadlift",targetSets:3,targetReps:6},{name:"Assisted Pull-up",targetSets:3,targetReps:10},{name:"Wide-Grip Lat Pulldown",targetSets:3,targetReps:10},{name:"Meadows Row",targetSets:3,targetReps:10},{name:"Machine Row",targetSets:3,targetReps:12},{name:"21s Bicep Curl",targetSets:3,targetReps:21},{name:"Zottman Curl",targetSets:3,targetReps:12},{name:"Band Pull-Apart",targetSets:2,targetReps:20}]]},Wed:{label:"Legs",rest:false,variants:[[{name:"Squat",targetSets:4,targetReps:8},{name:"Romanian Deadlift",targetSets:3,targetReps:10},{name:"Leg Press",targetSets:3,targetReps:12},{name:"Walking Lunge",targetSets:3,targetReps:12},{name:"Leg Curl",targetSets:3,targetReps:12},{name:"Leg Extension",targetSets:3,targetReps:12},{name:"Calf Raise",targetSets:4,targetReps:15},{name:"Hip Thrust",targetSets:3,targetReps:10}],[{name:"Front Squat",targetSets:4,targetReps:6},{name:"Stiff-Leg Deadlift",targetSets:3,targetReps:10},{name:"Hack Squat",targetSets:3,targetReps:12},{name:"Bulgarian Split Squat",targetSets:3,targetReps:10},{name:"Seated Leg Curl",targetSets:3,targetReps:12},{name:"Sissy Squat",targetSets:3,targetReps:12},{name:"Seated Calf Raise",targetSets:4,targetReps:15},{name:"Glute Bridge",targetSets:3,targetReps:12}],[{name:"Box Squat",targetSets:4,targetReps:8},{name:"Single-Leg RDL",targetSets:3,targetReps:10},{name:"Pendulum Squat",targetSets:3,targetReps:12},{name:"Reverse Lunge",targetSets:3,targetReps:12},{name:"Nordic Curl",targetSets:3,targetReps:8},{name:"Step-up",targetSets:3,targetReps:12},{name:"Standing Calf Raise",targetSets:4,targetReps:15},{name:"Cable Kickback",targetSets:3,targetReps:12}],[{name:"Pause Squat",targetSets:4,targetReps:6},{name:"Good Morning",targetSets:3,targetReps:10},{name:"Belt Squat",targetSets:3,targetReps:12},{name:"Lateral Lunge",targetSets:3,targetReps:12},{name:"Glute-Ham Raise",targetSets:3,targetReps:10},{name:"Curtsy Lunge",targetSets:3,targetReps:12},{name:"Donkey Calf Raise",targetSets:4,targetReps:15},{name:"Frog Pump",targetSets:3,targetReps:15}]]},Thu:{label:"Core + Active Recovery",rest:false,variants:[[{name:"Plank",targetSets:3,targetReps:45},{name:"Hanging Leg Raise",targetSets:3,targetReps:12},{name:"Russian Twist",targetSets:3,targetReps:20},{name:"Cable Crunch",targetSets:3,targetReps:15},{name:"Bird Dog",targetSets:3,targetReps:12},{name:"Light Cycling",targetSets:1,targetReps:20}],[{name:"Side Plank",targetSets:3,targetReps:30},{name:"Toes-to-Bar",targetSets:3,targetReps:10},{name:"Cable Woodchopper",targetSets:3,targetReps:15},{name:"Ab Wheel Rollout",targetSets:3,targetReps:10},{name:"Dead Bug",targetSets:3,targetReps:12},{name:"Light Elliptical",targetSets:1,targetReps:20}],[{name:"Weighted Plank",targetSets:3,targetReps:40},{name:"V-Ups",targetSets:3,targetReps:15},{name:"Landmine Rotation",targetSets:3,targetReps:15},{name:"Reverse Crunch",targetSets:3,targetReps:15},{name:"Pallof Press",targetSets:3,targetReps:12},{name:"Light Swimming",targetSets:1,targetReps:20}],[{name:"Plank Shoulder Tap",targetSets:3,targetReps:20},{name:"Hollow Body Hold",targetSets:3,targetReps:30},{name:"Medicine Ball Twist",targetSets:3,targetReps:20},{name:"Decline Sit-up",targetSets:3,targetReps:15},{name:"Stir-the-Pot",targetSets:3,targetReps:10},{name:"Light Rowing",targetSets:1,targetReps:20}]]},Fri:{label:"Shoulders + Arms",rest:false,variants:[[{name:"Overhead Press",targetSets:3,targetReps:10},{name:"Arnold Press",targetSets:3,targetReps:10},{name:"Lateral Raise",targetSets:3,targetReps:15},{name:"Rear Delt Fly",targetSets:3,targetReps:15},{name:"Shrugs",targetSets:3,targetReps:12},{name:"Hammer Curl",targetSets:3,targetReps:12},{name:"Skull Crushers",targetSets:3,targetReps:12},{name:"Face Pull",targetSets:2,targetReps:15}],[{name:"Push Press",targetSets:4,targetReps:6},{name:"Seated Dumbbell Press",targetSets:3,targetReps:10},{name:"Cable Lateral Raise",targetSets:3,targetReps:15},{name:"Reverse Pec Deck",targetSets:3,targetReps:15},{name:"Upright Row",targetSets:3,targetReps:12},{name:"Concentration Curl",targetSets:3,targetReps:12},{name:"Overhead Triceps Extension",targetSets:3,targetReps:12},{name:"Cable Face Pull",targetSets:2,targetReps:15}],[{name:"Behind-the-Neck Press",targetSets:3,targetReps:8},{name:"Landmine Press",targetSets:3,targetReps:10},{name:"Leaning Cable Lateral Raise",targetSets:3,targetReps:15},{name:"Bent-Over Dumbbell Fly",targetSets:3,targetReps:15},{name:"Barbell Shrug",targetSets:3,targetReps:12},{name:"Preacher Curl",targetSets:3,targetReps:12},{name:"Cable Kickback",targetSets:3,targetReps:12},{name:"Band Pull-Apart",targetSets:2,targetReps:20}],[{name:"Z-Press",targetSets:3,targetReps:8},{name:"Single-Arm Dumbbell Press",targetSets:3,targetReps:10},{name:"Cable Y-Raise",targetSets:3,targetReps:15},{name:"Chest-Supported Rear Delt Fly",targetSets:3,targetReps:15},{name:"Cable Shrug",targetSets:3,targetReps:12},{name:"Drag Curl",targetSets:3,targetReps:12},{name:"Close-Grip Bench Press",targetSets:3,targetReps:10},{name:"Rear Delt Row",targetSets:2,targetReps:15}]]},Sat:{label:"Full Body / Cardio",rest:false,variants:[[{name:"Kettlebell Swing",targetSets:3,targetReps:15},{name:"Goblet Squat",targetSets:3,targetReps:12},{name:"Push-up",targetSets:3,targetReps:15},{name:"Dumbbell Row",targetSets:3,targetReps:12},{name:"Mountain Climbers",targetSets:3,targetReps:20},{name:"Plank",targetSets:3,targetReps:45},{name:"Burpees",targetSets:3,targetReps:12},{name:"Incline Treadmill Walk",targetSets:1,targetReps:20}],[{name:"Battle Ropes",targetSets:3,targetReps:30},{name:"Box Jump",targetSets:3,targetReps:10},{name:"Renegade Row",targetSets:3,targetReps:12},{name:"Medicine Ball Slam",targetSets:3,targetReps:15},{name:"Jump Rope",targetSets:3,targetReps:45},{name:"Farmer's Carry",targetSets:3,targetReps:20},{name:"Rowing Machine",targetSets:1,targetReps:15},{name:"Stair Climber",targetSets:1,targetReps:15}],[{name:"Sled Push",targetSets:3,targetReps:20},{name:"Thruster",targetSets:3,targetReps:12},{name:"Man Maker",targetSets:3,targetReps:10},{name:"Wall Ball",targetSets:3,targetReps:15},{name:"Sandbag Carry",targetSets:3,targetReps:20},{name:"Bear Crawl",targetSets:3,targetReps:15},{name:"Assault Bike",targetSets:1,targetReps:15},{name:"Sled Pull",targetSets:1,targetReps:15}],[{name:"Turkish Get-Up",targetSets:3,targetReps:6},{name:"Devil Press",targetSets:3,targetReps:10},{name:"Kettlebell Clean and Press",targetSets:3,targetReps:10},{name:"Broad Jump",targetSets:3,targetReps:10},{name:"Suitcase Carry",targetSets:3,targetReps:20},{name:"Battle Rope Slam",targetSets:3,targetReps:30},{name:"Row Erg Sprint",targetSets:1,targetReps:10},{name:"Shuttle Run",targetSets:1,targetReps:10}]]},Sun:{label:"Rest",rest:true,variants:[[]]}},"Push / Pull / Legs":{Mon:{label:"Push (Chest, Shoulders, Triceps)",rest:false,variants:[[{name:"Bench Press",targetSets:4,targetReps:8},{name:"Overhead Press",targetSets:3,targetReps:10},{name:"Incline Dumbbell Press",targetSets:3,targetReps:10},{name:"Lateral Raise",targetSets:3,targetReps:15},{name:"Triceps Pushdown",targetSets:3,targetReps:12}]]},Tue:{label:"Pull (Back, Biceps)",rest:false,variants:[[{name:"Deadlift",targetSets:3,targetReps:6},{name:"Pull-up",targetSets:4,targetReps:8},{name:"Barbell Row",targetSets:3,targetReps:10},{name:"Face Pull",targetSets:3,targetReps:15},{name:"Bicep Curl",targetSets:3,targetReps:12}]]},Wed:{label:"Legs",rest:false,variants:[[{name:"Squat",targetSets:4,targetReps:8},{name:"Romanian Deadlift",targetSets:3,targetReps:10},{name:"Leg Press",targetSets:3,targetReps:12},{name:"Calf Raise",targetSets:4,targetReps:15}]]},Thu:{label:"Rest",rest:true,variants:[[]]},Fri:{label:"Push (Chest, Shoulders, Triceps)",rest:false,variants:[[{name:"Incline Press",targetSets:4,targetReps:8},{name:"Arnold Press",targetSets:3,targetReps:10},{name:"Chest Fly",targetSets:3,targetReps:12},{name:"Skull Crushers",targetSets:3,targetReps:12}]]},Sat:{label:"Pull (Back, Biceps)",rest:false,variants:[[{name:"Lat Pulldown",targetSets:4,targetReps:10},{name:"Seated Cable Row",targetSets:3,targetReps:12},{name:"Hammer Curl",targetSets:3,targetReps:12},{name:"Shrugs",targetSets:3,targetReps:12}]]},Sun:{label:"Rest",rest:true,variants:[[]]}},"Upper / Lower":{Mon:{label:"Upper Body",rest:false,variants:[[{name:"Bench Press",targetSets:4,targetReps:8},{name:"Barbell Row",targetSets:4,targetReps:8},{name:"Overhead Press",targetSets:3,targetReps:10},{name:"Lat Pulldown",targetSets:3,targetReps:10},{name:"Bicep Curl",targetSets:2,targetReps:12}]]},Tue:{label:"Lower Body",rest:false,variants:[[{name:"Squat",targetSets:4,targetReps:8},{name:"Romanian Deadlift",targetSets:3,targetReps:10},{name:"Walking Lunge",targetSets:3,targetReps:12},{name:"Calf Raise",targetSets:3,targetReps:15}]]},Wed:{label:"Rest",rest:true,variants:[[]]},Thu:{label:"Upper Body",rest:false,variants:[[{name:"Incline Press",targetSets:4,targetReps:8},{name:"Pull-up",targetSets:3,targetReps:8},{name:"Lateral Raise",targetSets:3,targetReps:15},{name:"Triceps Pushdown",targetSets:3,targetReps:12}]]},Fri:{label:"Lower Body",rest:false,variants:[[{name:"Deadlift",targetSets:3,targetReps:6},{name:"Leg Press",targetSets:3,targetReps:12},{name:"Leg Curl",targetSets:3,targetReps:12},{name:"Hip Thrust",targetSets:3,targetReps:10}]]},Sat:{label:"Full Body / Cardio",rest:false,variants:[[{name:"Kettlebell Swing",targetSets:3,targetReps:15},{name:"Push-up",targetSets:3,targetReps:15},{name:"Mountain Climbers",targetSets:3,targetReps:20}]]},Sun:{label:"Rest",rest:true,variants:[[]]}},"Home Workout":{Mon:{label:"Full Body Foundation",rest:false,variants:[[{name:"Glute Bridge",targetSets:3,targetReps:15,restTime:"45s",isDuration:false,tips:"Lie on your back with knees bent and feet flat. Drive through your heels and squeeze your glutes at the top for 2 seconds.",voice:"Glute Bridges. Lie on your back with knees bent. Drive through your heels, squeeze your glutes at the top for two seconds, and lower with control."},{name:"Bodyweight Squat",targetSets:3,targetReps:15,restTime:"45s",isDuration:false,tips:"Feet shoulder-width apart. Sit hips back and down, keeping chest upright and knees tracking over toes.",voice:"Bodyweight Squats. Feet shoulder-width apart. Keep your chest high, sit back into your hips, and drive up through your whole foot."},{name:"Incline / Knee Push-up",targetSets:3,targetReps:10,restTime:"45s",isDuration:false,tips:"Hands slightly wider than shoulders on wall, counter, or mat. Keep body in a straight line from head to heels.",voice:"Incline Push-ups. Keep your core locked in a straight line, lower chest towards your hands, and exhale as you press up."},{name:"Standing Calf Raises",targetSets:3,targetReps:20,restTime:"30s",isDuration:false,tips:"Feet hip-width apart. Rise up high onto the balls of your feet, pause 1 second, then lower slowly.",voice:"Standing Calf Raises. Push up tall onto your toes, hold for a brief pause at the peak, and slowly lower down."},{name:"Wall Sit Hold",targetSets:3,targetReps:30,restTime:"45s",isDuration:true,tips:"Back flat against wall, slide down until thighs are parallel to floor. Knees at 90 degrees. Breathe steadily.",voice:"Wall Sit Hold. Press your lower back into the wall, keep thighs parallel to the ground, and hold your breath steady."}]]},Tue:{label:"Core & Posture Stability",rest:false,variants:[[{name:"Dead Bug",targetSets:3,targetReps:12,restTime:"30s",isDuration:false,tips:"Lie on back with knees at 90 degrees and arms up. Lower opposite arm and leg while pressing lower back flat.",voice:"Dead Bugs. Keep your lower back glued firmly into the floor as you extend your opposite arm and leg smoothly."},{name:"Bird Dog",targetSets:3,targetReps:12,restTime:"30s",isDuration:false,tips:"On all fours, extend opposite arm and leg straight out. Hold 2 seconds, keep pelvis parallel to mat.",voice:"Bird Dog. Extend your right arm and left leg simultaneously, forming a long straight line from fingertips to heel."},{name:"Prone Cobra Back Extension",targetSets:3,targetReps:12,restTime:"30s",isDuration:false,tips:"Lie face down, rotate thumbs outward, lift chest and squeeze upper back for 2 seconds. Strengthens spine.",voice:"Prone Cobra. Rotate thumbs up towards the ceiling, gently elevate your chest, and engage the whole posterior chain."},{name:"Glute Bridge Isometric Hold",targetSets:3,targetReps:30,restTime:"30s",isDuration:true,tips:"Hold top of glute bridge, maintaining pelvis tuck and abdominal engagement. Do not arch lower back.",voice:"Glute Bridge Isometric Hold. Drive hips high, lock in your glutes, and hold this bridge with calm diaphragmatic breaths."},{name:"Plank Shoulder Taps",targetSets:3,targetReps:16,restTime:"45s",isDuration:false,tips:"High plank position, feet wide for balance. Tap opposite shoulder without rocking your hips.",voice:"Plank Shoulder Taps. Maintain a solid push-up plank, resist hip swaying, and tap your opposite shoulder with control."},{name:"Cat-Cow Spine Mobility",targetSets:2,targetReps:10,restTime:"30s",isDuration:false,tips:"Alternate between arching back on inhale and rounding spine on exhale to mobilize vertebrae.",voice:"Cat-Cow Mobility. Inhale as you drop your belly and lift your gaze, then exhale as you tuck your chin and round your spine."}]]},Wed:{label:"Lower Body & Balance",rest:false,variants:[[{name:"Reverse Lunges",targetSets:3,targetReps:12,restTime:"45s",isDuration:false,tips:"Step back with one leg, lower both knees to 90 degrees. Keep front heel planted and torso tall.",voice:"Reverse Lunges. Step backwards with control, drop your back knee close to the floor, and press through your front heel."},{name:"Sumo Squat",targetSets:3,targetReps:15,restTime:"45s",isDuration:false,tips:"Wide stance, toes pointed 45 degrees out. Lower hips down focusing on inner thighs and glutes.",voice:"Sumo Squats. Take a wide stance with toes turned outward. Lower your hips down, keeping knees pressed wide over toes."},{name:"Donkey Kicks",targetSets:3,targetReps:15,restTime:"30s",isDuration:false,tips:"On all fours, kick one heel toward ceiling keeping knee bent at 90 degrees. Squeeze glute at top.",voice:"Donkey Kicks. Hands under shoulders, knees under hips. Kick one heel toward the ceiling and squeeze the top of your glute."},{name:"Single-Leg Balance Hold",targetSets:3,targetReps:20,restTime:"30s",isDuration:true,tips:"Stand tall near wall or chair for safety. Lift one foot off ground and balance smoothly. Switch sides.",voice:"Single-Leg Balance. Keep a hand ready for balance if needed, lift one foot, and focus your gaze on a steady point ahead."},{name:"Floor Tricep Dips",targetSets:3,targetReps:12,restTime:"45s",isDuration:false,tips:"Sit on floor, knees bent, hands behind hips with fingers pointing forward. Lift hips and bend elbows.",voice:"Floor Tricep Dips. Fingers pointed towards your heels, bend your elbows straight back, and press through your palms."}]]},Thu:{label:"Low-Impact Cardio & Circulation",rest:false,variants:[[{name:"Low-Impact Step Jacks",targetSets:3,targetReps:25,restTime:"30s",isDuration:false,tips:"Step one foot out to side while raising arms overhead, then return. Zero jumping required.",voice:"Low-Impact Step Jacks. Step wide to alternating sides with sweeping arm raises, keeping impact zero on joints."},{name:"High Knee March in Place",targetSets:3,targetReps:35,restTime:"30s",isDuration:false,tips:"Stand tall, drive knees up to hip height with rhythmic arm pumping. Great cardio booster.",voice:"High Knee March. Stand tall with your shoulders back, driving your knees up to hip height with confident strides."},{name:"Skater Step Touches",targetSets:3,targetReps:20,restTime:"30s",isDuration:false,tips:"Step laterally to one side, tap trailing toe behind. Swing arms gently for rhythm.",voice:"Skater Step Touches. Step smoothly from side to side, sweeping your arms and engaging your outer hips and glutes."},{name:"Standing Oblique Crunches",targetSets:3,targetReps:16,restTime:"30s",isDuration:false,tips:"Hands behind head, lift knee up and out to side while crunching elbow toward knee.",voice:"Standing Oblique Crunches. Draw your elbow towards your lateral knee, feeling a deep contraction along your waistline."},{name:"Butt Kick Steps",targetSets:3,targetReps:30,restTime:"30s",isDuration:false,tips:"Step and kick heel back toward glutes. Activates hamstrings while keeping heart rate elevated.",voice:"Butt Kick Steps. Step rhythmically and kick your heels up toward your glutes to stretch quads and warm hamstrings."}]]},Fri:{label:"Full Body Sculpt & Core",rest:false,variants:[[{name:"Bodyweight Push-up / Knee Push-up",targetSets:3,targetReps:10,restTime:"45s",isDuration:false,tips:"Hands slightly wider than shoulders. Keep torso in straight line from head to knees/heels.",voice:"Push-ups. Keep your core engaged and hips flat as you lower your chest between your hands and press away."},{name:"Floor Y-T-W Scapular Raises",targetSets:3,targetReps:12,restTime:"30s",isDuration:false,tips:"Lie on stomach. Form Y, T, and W shapes with arms, pinching shoulder blades together to fix posture.",voice:"Y-T-W Raises. Lie face down, engage your upper back, and raise your arms while pinching shoulder blades together."},{name:"Slow Controlled Mountain Climbers",targetSets:3,targetReps:16,restTime:"30s",isDuration:false,tips:"High plank, slowly drive one knee to chest without bouncing. Focus on deep core activation.",voice:"Slow Mountain Climbers. In a high plank, drive each knee forward slowly and deliberately, squeezing your lower abdominals."},{name:"Side Plank (Knee Support)",targetSets:3,targetReps:25,restTime:"30s",isDuration:true,tips:"Elbow under shoulder, bend bottom knee for support. Lift hips into straight line, brace side obliques.",voice:"Side Plank with Knee Support. Lift your hips, create a straight diagonal line from shoulder to knee, and brace your side core."},{name:"Inchworm Walkouts",targetSets:3,targetReps:8,restTime:"45s",isDuration:false,tips:"From standing, hinge at hips, touch floor, walk hands out to plank, then walk back to feet.",voice:"Inchworm Walkouts. Hinge forward from your hips, walk your hands into a strong plank, and reverse smoothly to standing."}]]},Sat:{label:"Mobility & Deep Stretch",rest:false,variants:[[{name:"World's Greatest Stretch",targetSets:2,targetReps:6,restTime:"30s",isDuration:false,tips:"Lunge forward, place hands inside front foot, rotate torso reaching arm to ceiling.",voice:"World's Greatest Stretch. Step into a deep lunge, plant your hand, and rotate your chest up to open thoracic spine and hips."},{name:"Child's Pose Deep Breathing",targetSets:3,targetReps:30,restTime:"20s",isDuration:true,tips:"Sit back onto heels, reach arms forward on floor, rest forehead down and breathe into ribs.",voice:"Child's Pose. Sit back onto your heels, reach long through your fingertips, and take slow, relaxing belly breaths."},{name:"Seated Hamstring Stretch",targetSets:3,targetReps:25,restTime:"20s",isDuration:true,tips:"Sit on edge of chair or floor, extend one leg with heel down. Gently hinge forward until mild stretch.",voice:"Seated Hamstring Stretch. Extend one leg forward with heel on floor, hinge gently at the waist, and feel a soothing stretch."},{name:"Seated Butterfly Stretch",targetSets:2,targetReps:30,restTime:"20s",isDuration:true,tips:"Soles of feet together, let knees fall outward gently. Hold feet and lengthen spine.",voice:"Butterfly Stretch. Bring the soles of your feet together, sit tall, and allow gravity to gently open your inner thighs."},{name:"Thoracic Spine Openers",targetSets:2,targetReps:10,restTime:"20s",isDuration:false,tips:"Side-lying with knees bent, open top arm across like opening a book to mobilize mid-back.",voice:"Thoracic Spine Openers. Lie on your side and trace a big rainbow arc with your top arm to release tight upper back muscles."}]]},Sun:{label:"Rest & Hydration Recovery",rest:true,variants:[[]]}}};const PROGRAM_NAMES=["Classic Split","Push / Pull / Legs","Upper / Lower","Home Workout"];const DAY_ORDER=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];const TODAY_KEY=DAY_ORDER[(new Date().getDay()+6)%7];function getWeekIndex(){const now=new Date();const start=new Date(now.getFullYear(),0,1);const days=Math.floor((now-start)/86400000);return Math.floor(days/7);}function resolveWeek(program,weekIndex){const resolved={};DAY_ORDER.forEach(d=>{const day=program[d];const variantIdx=weekIndex%day.variants.length;const rotating=day.variants.length>1;resolved[d]={label:day.label+(rotating&&!day.rest?` · Week ${String.fromCharCode(65+variantIdx)}`:""),rest:day.rest,exercises:day.variants[variantIdx]};});return resolved;}function macroSum(meals){const totals={calories:0,protein:0,carbs:0,fat:0,fiber:0};Object.keys(meals).forEach(k=>{meals[k].forEach(item=>{totals.calories+=item.calories;totals.protein+=item.protein;totals.carbs+=item.carbs;totals.fat+=item.fat;totals.fiber+=item.fiber;});});return totals;}function makeEmptyLog(targetSets){return Array.from({length:targetSets},()=>({reps:"",weight:""}));}function buildLogs(week){const init={};DAY_ORDER.forEach(d=>{init[d]={};week[d].exercises.forEach(ex=>{init[d][ex.name]={sets:makeEmptyLog(ex.targetSets),completed:false};});});return init;}/* ---------- shared small components ---------- */function Ring({pct,size=168,stroke=14,color,trackColor}){const r=(size-stroke)/2;const c=2*Math.PI*r;const clamped=Math.max(0,Math.min(1,pct));return/*#__PURE__*/React.createElement("svg",{width:size,height:size,style:{transform:"rotate(-90deg)"}},/*#__PURE__*/React.createElement("circle",{cx:size/2,cy:size/2,r:r,fill:"none",stroke:trackColor,strokeWidth:stroke}),/*#__PURE__*/React.createElement("circle",{cx:size/2,cy:size/2,r:r,fill:"none",stroke:color,strokeWidth:stroke,strokeDasharray:c,strokeDashoffset:c*(1-clamped),strokeLinecap:"round",style:{transition:"stroke-dashoffset 0.5s ease"}}));}function SmallRing({pct,size=44,stroke=5,color}){const r=(size-stroke)/2;const c=2*Math.PI*r;return/*#__PURE__*/React.createElement("svg",{width:size,height:size,style:{transform:"rotate(-90deg)"}},/*#__PURE__*/React.createElement("circle",{cx:size/2,cy:size/2,r:r,fill:"none",stroke:TOKENS.surface2,strokeWidth:stroke}),/*#__PURE__*/React.createElement("circle",{cx:size/2,cy:size/2,r:r,fill:"none",stroke:color,strokeWidth:stroke,strokeDasharray:c,strokeDashoffset:c*(1-Math.max(0,Math.min(1,pct))),strokeLinecap:"round",style:{transition:"stroke-dashoffset 0.3s ease"}}));}function MacroBar({label,value,goal,color}){const pct=Math.min(100,value/goal*100);return/*#__PURE__*/React.createElement("div",{style:{marginBottom:14}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:6,fontSize:13}},/*#__PURE__*/React.createElement("span",{style:{color:TOKENS.muted,fontWeight:500}},label),/*#__PURE__*/React.createElement("span",{style:{color:TOKENS.text,fontVariantNumeric:"tabular-nums"}},Math.round(value),/*#__PURE__*/React.createElement("span",{style:{color:TOKENS.mutedFaint}}," / ",goal,"g"))),/*#__PURE__*/React.createElement("div",{style:{height:6,background:TOKENS.surface2,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",borderRadius:3,overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:`${pct}%`,background:color,borderRadius:3,transition:"width 0.4s ease"}})));}function VegDot({type}){const isVeg=type!=="nonveg";return/*#__PURE__*/React.createElement("span",{title:isVeg?"Veg":"Non-veg",style:{display:"inline-flex",width:13,height:13,border:`1.5px solid ${isVeg?"#2E7D32":"#B71C1C"}`,borderRadius:3,alignItems:"center",justifyContent:"center",flexShrink:0}},/*#__PURE__*/React.createElement("span",{style:{width:6,height:6,borderRadius:isVeg?3:"50%",background:isVeg?"#2E7D32":"#B71C1C"}}));}function EstimateEditor({item,onChange,onConfirm,onCancel,confirmLabel,hideActions}){const[nameSuggestions,setNameSuggestions]=useState([]);const[lookupState,setLookupState]=useState("idle");// "idle"|"loading"|"found"|"not_found"
-const[nutritionSource,setNutritionSource]=useState(item.per100g?"db":"manual");const per100gRef=useRef(item.per100g||null);// If item already has per100g (from search pick), use it
-// Otherwise compute from initial values (for scan results which already have correct macros)
-if(!per100gRef.current&&(item.calories||item.protein)){const g=item.grams||100;per100gRef.current={calories:(item.calories||0)/g*100,protein:(item.protein||0)/g*100,carbs:(item.carbs||0)/g*100,fat:(item.fat||0)/g*100,fiber:(item.fiber||0)/g*100};}const lookupTimerRef=useRef(null);function recalcFromPer100g(newGrams,p100){if(!p100)return{};const g=Number(newGrams)||0;return{grams:g,calories:Math.round(p100.calories*g/100),protein:Math.round(p100.protein*g/100*10)/10,carbs:Math.round(p100.carbs*g/100*10)/10,fat:Math.round(p100.fat*g/100*10)/10,fiber:Math.round(p100.fiber*g/100*10)/10};}function handleChange(key,rawValue){if(key==="grams"){const newGrams=Number(rawValue)||0;if(per100gRef.current&&nutritionSource!=="manual"){const recalc=recalcFromPer100g(newGrams,per100gRef.current);onChange({...item,...recalc});}else{onChange({...item,grams:newGrams});}}else if(key==="name"){onChange({...item,name:rawValue});// Debounce search: local DB first, then optionally /api/nutrition
-clearTimeout(lookupTimerRef.current);if(!rawValue||rawValue.trim().length<2){setNameSuggestions([]);setLookupState("idle");return;}// Instant local DB search
-if(typeof STOKE_VERIFIED_NUTRITION_DB!=="undefined"){const q=rawValue.toLowerCase().trim();const localMatches=Object.values(STOKE_VERIFIED_NUTRITION_DB).filter(f=>f.name.toLowerCase().includes(q)||(f.category&&f.category.toLowerCase().includes(q)));if(localMatches.length>0){setNameSuggestions(localMatches.slice(0,8));setLookupState("idle");return;}}// Debounced server lookup for foods not in local DB
-setLookupState("loading");lookupTimerRef.current=setTimeout(()=>{if(!rawValue||rawValue.trim().length<2){setLookupState("idle");return;}fetch("/api/nutrition?q="+encodeURIComponent(rawValue.trim())).then(r=>r.json()).then(data=>{if(data.results&&data.results.length>0){setNameSuggestions(data.results.slice(0,8));setLookupState("found");}else{setNameSuggestions([]);setLookupState("not_found");}}).catch(()=>{setNameSuggestions([]);setLookupState("idle");});},600);}else{const type="number";onChange({...item,[key]:Number(rawValue)});}}function pickSuggestion(food){const g=item.grams||food.defaultGrams||100;const p100=food.per100g;per100gRef.current=p100;setNutritionSource("db");setNameSuggestions([]);setLookupState("found");const recalc=recalcFromPer100g(g,p100);onChange({...item,name:food.name,dietType:food.dietType||item.dietType,...recalc,per100g:p100});}const fields=[["name","Food","text"],["grams","Grams (g)","number"],["calories","Calories (kcal)","number"],["protein","Protein (g)","number"],["carbs","Carbs (g)","number"],["fat","Fat (g)","number"],["fiber","Fibre (g)","number"]];const hasNutrition=nutritionSource!=="manual"&&per100gRef.current;return React.createElement("div",{style:{background:TOKENS.surface2,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:"1px solid "+TOKENS.border,borderRadius:12,padding:16,marginTop:10}},React.createElement("div",{style:{marginBottom:10}},React.createElement("label",{style:{fontSize:11,color:TOKENS.mutedFaint,display:"block",marginBottom:4}},"Type"),React.createElement("div",{style:{display:"flex",gap:8}},[["veg","🟢 Veg"],["nonveg","🟤 Non-veg"]].map(([val,lbl])=>{const active=(item.dietType||"veg")===val;return React.createElement("button",{key:val,onClick:()=>onChange({...item,dietType:val}),style:{flex:1,background:active?TOKENS.ember:TOKENS.bg,color:active?"#FFFFFF":TOKENS.text,border:"1px solid "+(active?TOKENS.ember:TOKENS.border),borderRadius:8,padding:"8px 0",fontSize:13,fontWeight:600,cursor:"pointer"}},lbl);}))),React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}},fields.map(([key,label,type])=>React.createElement("div",{key:key,style:{gridColumn:key==="name"?"1 / 3":"auto",position:"relative"}},React.createElement("label",{style:{fontSize:11,color:TOKENS.mutedFaint,display:"block",marginBottom:4}},label,key==="grams"&&React.createElement("span",{style:{color:hasNutrition?"#237547":TOKENS.mutedFaint}},hasNutrition?" (auto-calculates macros)":" (enter macros manually)")),React.createElement("input",{type:type,value:item[key]??"",placeholder:key==="name"?"Search food (e.g. Oats, Chicken, Rice)...":"",onChange:e=>handleChange(key,e.target.value),autoComplete:"off",style:{width:"100%",background:TOKENS.bg,border:"1px solid "+(key==="name"&&lookupState==="not_found"?"#D14343":TOKENS.border),borderRadius:8,padding:"8px 10px",color:TOKENS.text,fontSize:14,boxSizing:"border-box"}}),key==="name"&&lookupState==="loading"&&React.createElement("div",{style:{position:"absolute",right:10,top:28,fontSize:11,color:TOKENS.mutedFaint}},"Searching..."),key==="name"&&lookupState==="not_found"&&React.createElement("div",{style:{fontSize:11,color:"#D14343",marginTop:3}},"Food not found in database — enter macros manually below."),key==="name"&&nameSuggestions.length>0&&React.createElement("div",{style:{position:"absolute",top:"100%",left:0,right:0,background:TOKENS.bg,border:"1px solid "+TOKENS.border,borderRadius:8,zIndex:200,maxHeight:220,overflowY:"auto",boxShadow:"0 8px 24px rgba(0,0,0,0.3)",marginTop:2}},nameSuggestions.map((f,i)=>React.createElement("div",{key:i,onClick:()=>pickSuggestion(f),style:{display:"flex",alignItems:"center",gap:8,padding:"9px 12px",cursor:"pointer",borderBottom:i<nameSuggestions.length-1?"1px solid "+TOKENS.border:"none",fontSize:13,color:TOKENS.text}},React.createElement(VegDot,{type:f.dietType}),React.createElement("div",null,React.createElement("div",{style:{fontWeight:600}},f.name),React.createElement("div",{style:{fontSize:11,color:TOKENS.mutedFaint}},Math.round(f.per100g.calories)+" kcal · P"+f.per100g.protein+"g · C"+f.per100g.carbs+"g · F"+f.per100g.fat+"g per 100g"+(f.portionDesc?" · "+f.portionDesc:""))))))))),hasNutrition&&React.createElement("div",{style:{marginTop:8,padding:"8px 10px",background:"rgba(35,117,71,0.08)",border:"1px solid rgba(35,117,71,0.25)",borderRadius:8,fontSize:11.5,color:"#237547",display:"flex",alignItems:"center",gap:6}},React.createElement("span",null,"✓"),"Auto-calculated from verified nutrition data · Change grams to recalculate"),!hideActions&&React.createElement("div",{style:{display:"flex",gap:10,marginTop:14}},React.createElement("button",{onClick:onConfirm,style:{flex:1,background:TOKENS.ember,color:"var(--text-primary)",border:"none",borderRadius:8,padding:"10px 0",fontWeight:700,fontSize:14,cursor:"pointer"}},confirmLabel),React.createElement("button",{onClick:onCancel,style:{flex:"0 0 auto",background:"transparent",color:TOKENS.muted,border:"1px solid "+TOKENS.border,borderRadius:8,padding:"10px 16px",fontSize:14,cursor:"pointer"}},"Cancel")));}
+if(n==="🏆"||n==="trophy"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"}),/*#__PURE__*/React.createElement("path",{d:"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"}),/*#__PURE__*/React.createElement("path",{d:"M4 22h16"}),/*#__PURE__*/React.createElement("path",{d:"M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"}),/*#__PURE__*/React.createElement("path",{d:"M6 4h12v7a6 6 0 0 1-12 0V4z",fill:"rgba(217,255,114,0.18)"}));}if(n==="🔥"||n==="fire"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z",fill:"rgba(255,107,74,0.2)"}));}if(n==="⚡"||n==="lightning"||n==="bolt"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:c,stroke:c,strokeWidth:"1.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("polygon",{points:"13 2 3 14 12 14 11 22 21 10 12 10 13 2"}));}if(n==="🛡️"||n==="🛡"||n==="shield"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",fill:"rgba(35,117,71,0.2)"}));}if(n==="👟"||n==="shoe"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M3.5 15.5l2-2 3.5 1 4-3 5 1.5 2.5 5.5-17-3z"}),/*#__PURE__*/React.createElement("circle",{cx:"16",cy:"18",r:"2"}));}if(n==="🏃"||n==="run"||n==="runner"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.4",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"15.5",cy:"5",r:"1.8"}),/*#__PURE__*/React.createElement("path",{d:"M9 20l2.5-5.5 2 1.8 3.5-1"}),/*#__PURE__*/React.createElement("path",{d:"M7 13.5l3.5-2.5 2 2.5-2.5 3.5"}));}if(n==="🏋️"||n==="🏋"||n==="workout"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"5",cy:"12",r:"2.2"}),/*#__PURE__*/React.createElement("circle",{cx:"19",cy:"12",r:"2.2"}),/*#__PURE__*/React.createElement("line",{x1:"7.2",y1:"12",x2:"16.8",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"5",y1:"9.3",x2:"5",y2:"14.7"}),/*#__PURE__*/React.createElement("line",{x1:"19",y1:"9.3",x2:"19",y2:"14.7"}));}if(n==="🏅"||n==="medal"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"8",r:"6"}),/*#__PURE__*/React.createElement("path",{d:"M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"}));}if(n==="⛰️"||n==="⛰"||n==="mountain"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"m8 3 4 8 5-5 5 15H2L8 3z"}));}if(n==="🌟"||n==="star"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:c,stroke:c,strokeWidth:"1.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("polygon",{points:"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"}));}if(n==="👑"||n==="crown"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"}));}if(n==="🥗"||n==="salad"||n==="nutrition"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"}),/*#__PURE__*/React.createElement("path",{d:"M3 11a9 9 0 0 0 18 0H3z"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"20",x2:"12",y2:"22"}));}if(n==="🍱"||n==="bento"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("rect",{x:"3",y:"3",width:"18",height:"18",rx:"3"}),/*#__PURE__*/React.createElement("line",{x1:"3",y1:"12",x2:"21",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"12",x2:"12",y2:"21"}));}if(n==="🥩"||n==="meat"||n==="protein"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"8"}),/*#__PURE__*/React.createElement("path",{d:"m14 8-4 8"}),/*#__PURE__*/React.createElement("path",{d:"M9.5 9.5 14 14"}));}if(n==="💧"||n==="water"||n==="🥛"||n==="glass"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z",fill:"rgba(61,220,255,0.25)"}));}if(n==="🌊"||n==="wave"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M2 12c3-4 5-4 8 0s5 4 8 0 5-4 8 0"}),/*#__PURE__*/React.createElement("path",{d:"M2 17c3-4 5-4 8 0s5 4 8 0 5-4 8 0"}));}if(n==="💎"||n==="diamond"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M6 3h12l4 6-10 12L2 9z",fill:"rgba(217,255,114,0.18)"}));}if(n==="🎮"||n==="gamepad"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("rect",{x:"2",y:"6",width:"20",height:"12",rx:"4"}),/*#__PURE__*/React.createElement("line",{x1:"6",y1:"12",x2:"10",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"8",y1:"10",x2:"8",y2:"14"}),/*#__PURE__*/React.createElement("circle",{cx:"16",cy:"11",r:"1"}),/*#__PURE__*/React.createElement("circle",{cx:"18",cy:"13",r:"1"}));}if(n==="🔱"||n==="trident"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M6 3v9a6 6 0 0 0 12 0V3"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"3",x2:"12",y2:"21"}));}if(n==="🔒"||n==="lock"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("rect",{x:"3",y:"11",width:"18",height:"11",rx:"2"}),/*#__PURE__*/React.createElement("path",{d:"M7 11V7a5 5 0 0 1 10 0v4"}));}if(n==="📷"||n==="📸"||n==="camera"||n==="scan"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"13",r:"4"}));}if(n==="🖼️"||n==="🖼"||n==="image"||n==="gallery"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("rect",{x:"3",y:"3",width:"18",height:"18",rx:"2"}),/*#__PURE__*/React.createElement("circle",{cx:"8.5",cy:"8.5",r:"1.5"}),/*#__PURE__*/React.createElement("polyline",{points:"21 15 16 10 5 21"}));}if(n==="🔎"||n==="🔍"||n==="search"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("circle",{cx:"11",cy:"11",r:"8"}),/*#__PURE__*/React.createElement("line",{x1:"21",y1:"21",x2:"16.65",y2:"16.65"}));}if(n==="🎙️"||n==="🎙"||n==="mic"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"}),/*#__PURE__*/React.createElement("path",{d:"M19 10v2a7 7 0 0 1-14 0v-2"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"19",x2:"12",y2:"23"}),/*#__PURE__*/React.createElement("line",{x1:"8",y1:"23",x2:"16",y2:"23"}));}if(n==="💡"||n==="bulb"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("path",{d:"M9 18h6"}),/*#__PURE__*/React.createElement("path",{d:"M10 22h4"}),/*#__PURE__*/React.createElement("path",{d:"M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"}));}if(n==="🔄"||n==="refresh"){return/*#__PURE__*/React.createElement("svg",{width:s,height:s,viewBox:"0 0 24 24",fill:"none",stroke:c,strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:style},/*#__PURE__*/React.createElement("polyline",{points:"23 4 23 10 17 10"}),/*#__PURE__*/React.createElement("path",{d:"M20.49 15a9 9 0 1 1-2.12-9.36L23 10"}));}return/*#__PURE__*/React.createElement("span",{style:style},name);}const{useState,useRef,useEffect,useMemo,useCallback}=React;const THEME={bg:"var(--bg-app)",card:"var(--surface-primary)",cardWhite:"var(--surface-elevated)",cardSecondary:"var(--surface-secondary)",primary:"var(--btn-primary-bg)",primaryText:"var(--btn-primary-text)",brandLime:"var(--brand-lime)",primaryHover:"var(--lime-hover)",primarySoft:"var(--feature-nutrition-bg)",primaryBorder:"var(--border-divider)",text:"var(--text-primary)",textMuted:"var(--text-secondary)",textFaint:"var(--text-muted)",border:"var(--border-divider)",borderSoft:"var(--border-divider)",inputBg:"var(--input-bg)",inputBorder:"var(--border-divider)",success:"var(--semantic-success)",successSoft:"var(--semantic-success-bg)",error:"var(--semantic-error)",errorSoft:"var(--semantic-error-bg)",warning:"var(--semantic-warning)",warningSoft:"var(--semantic-warning-bg)",info:"var(--semantic-info)",infoSoft:"var(--semantic-info-bg)",shadowSm:"var(--shadow-sm)",shadowMd:"var(--shadow-card)",shadowLg:"var(--shadow-lg)",shadowCard:"var(--shadow-card)",protein:"var(--feature-running)",carbs:"var(--feature-nutrition)",fat:"var(--semantic-warning)",fiber:"var(--feature-workout)",water:"var(--feature-running)",chartGrid:"var(--chart-gridlines)"};const TOKENS={bg:THEME.bg,surface:THEME.card,surface2:THEME.cardSecondary,surfaceWhite:THEME.cardWhite,border:THEME.border,text:THEME.text,muted:THEME.textMuted,mutedFaint:THEME.textFaint,ember:THEME.brandLime,primary:THEME.primary,primaryText:THEME.primaryText,lime:THEME.brandLime,protein:THEME.protein,carbs:THEME.carbs,fat:THEME.fat,fiber:THEME.fiber,water:THEME.water,teal:THEME.success,success:THEME.success,error:THEME.error,warning:THEME.warning,info:THEME.info,nutrition:"var(--feature-nutrition)",running:"var(--feature-running)",workout:"var(--feature-workout)",recovery:"var(--feature-recovery)"};const CARD_SHADOW="0 4px 16px rgba(0, 0, 0, 0.08)";const DEFAULT_PROFILE={name:"",weightKg:70,heightCm:175,age:25,sex:"male",goalType:"maintain",activity:1.55};function computeGoals(profile={}){if(profile.daily_calorie_goal&&Number(profile.daily_calorie_goal)>0){return{calories:Math.round(Number(profile.daily_calorie_goal)),protein:Math.round(Number(profile.daily_protein_goal||140)),carbs:Math.round(Number(profile.daily_carbs_goal||200)),fat:Math.round(Number(profile.daily_fat_goal||60)),fiber:Math.round(Number(profile.daily_fiber_goal||28)),water:Number(profile.daily_water_goal||3.0)};}const weightKg=Number(profile.weight||profile.weightKg||70);const heightCm=Number(profile.height||profile.heightCm||175);const age=Number(profile.age||25);const gender=(profile.gender||profile.sex||"male").toLowerCase();const goalType=profile.goalType||(profile.fitness_goal==="Lose Weight"?"cut":profile.fitness_goal==="Build Muscle"?"gain":"maintain");let activityMult=1.55;if(typeof profile.activity==="number")activityMult=profile.activity;else if(profile.activity_level==="Sedentary")activityMult=1.2;else if(profile.activity_level==="Lightly Active")activityMult=1.375;else if(profile.activity_level==="Moderately Active")activityMult=1.55;else if(profile.activity_level==="Very Active")activityMult=1.725;const bmr=gender==="female"?10*weightKg+6.25*heightCm-5*age-161:10*weightKg+6.25*heightCm-5*age+5;const tdee=bmr*activityMult;const calculatedCal=Math.round(goalType==="cut"?tdee-500:goalType==="gain"?tdee+300:tdee);const calories=profile.customCalories?Number(profile.customCalories):calculatedCal;const protein=profile.customProtein?Number(profile.customProtein):Math.round(weightKg*(goalType==="cut"?2.0:1.8));const fat=profile.customFat?Number(profile.customFat):Math.round(calories*0.25/9);const carbs=profile.customCarbs?Number(profile.customCarbs):Math.max(0,Math.round((calories-protein*4-fat*9)/4));const fiber=Math.round(calories/1000*14);const water=profile.customWater?Number(profile.customWater):Math.round((weightKg*0.033+0.3)*10)/10;return{calories:isNaN(calories)?2200:calories,protein:isNaN(protein)?140:protein,carbs:isNaN(carbs)?200:carbs,fat:isNaN(fat)?60:fat,fiber:isNaN(fiber)?28:fiber,water:isNaN(water)?3.0:water};}const MOCK_FOODS=(()=>{if(typeof STOKE_VERIFIED_NUTRITION_DB!=="undefined"){return Object.values(STOKE_VERIFIED_NUTRITION_DB).map(f=>({name:f.name,grams:f.defaultGrams||100,calories:Math.round((f.per100g.calories||0)*(f.defaultGrams||100)/100),protein:Math.round((f.per100g.protein||0)*(f.defaultGrams||100)/100*10)/10,carbs:Math.round((f.per100g.carbs||0)*(f.defaultGrams||100)/100*10)/10,fat:Math.round((f.per100g.fat||0)*(f.defaultGrams||100)/100*10)/10,fiber:Math.round((f.per100g.fiber||0)*(f.defaultGrams||100)/100*10)/10,dietType:f.dietType||"veg",per100g:f.per100g,portionDesc:f.portionDesc||""}));}return[{name:"Grilled Chicken Breast",calories:165,protein:31,carbs:0,fat:4,fiber:0,grams:100,dietType:"nonveg",per100g:{calories:165,protein:31,carbs:0,fat:4,fiber:0}},{name:"Steamed Basmati Rice",calories:130,protein:2.7,carbs:28.2,fat:0.3,fiber:0.4,grams:100,dietType:"veg",per100g:{calories:130,protein:2.7,carbs:28.2,fat:0.3,fiber:0.4}},{name:"Whole Boiled Egg",calories:155,protein:13,carbs:1.1,fat:11,fiber:0,grams:100,dietType:"nonveg",per100g:{calories:155,protein:13,carbs:1.1,fat:11,fiber:0}},{name:"Banana",calories:89,protein:1.1,carbs:23,fat:0.3,fiber:2.6,grams:100,dietType:"veg",per100g:{calories:89,protein:1.1,carbs:23,fat:0.3,fiber:2.6}},{name:"Oats (Dry)",calories:389,protein:16.9,carbs:66.3,fat:6.9,fiber:10.6,grams:100,dietType:"veg",per100g:{calories:389,protein:16.9,carbs:66.3,fat:6.9,fiber:10.6}}];})();const DEFAULT_MEAL_SLOTS=[{key:"breakfast",label:"Breakfast"},{key:"lunch",label:"Lunch"},{key:"workout",label:"Pre Workout"},{key:"postworkout",label:"Post Workout"},{key:"dinner",label:"Dinner"}];const WORKOUT_PROGRAMS={"Classic Split":{Mon:{label:"Chest + Triceps",rest:false,variants:[[{name:"Bench Press",targetSets:3,targetReps:10},{name:"Incline Press",targetSets:3,targetReps:10},{name:"Chest Fly",targetSets:3,targetReps:12},{name:"Dips",targetSets:3,targetReps:10},{name:"Cable Crossover",targetSets:3,targetReps:12},{name:"Triceps Pushdown",targetSets:3,targetReps:12},{name:"Overhead Triceps Extension",targetSets:3,targetReps:12},{name:"Close-Grip Push-up",targetSets:2,targetReps:15}],[{name:"Incline Dumbbell Press",targetSets:4,targetReps:8},{name:"Flat Dumbbell Press",targetSets:3,targetReps:10},{name:"Pec Deck",targetSets:3,targetReps:12},{name:"Weighted Dip",targetSets:3,targetReps:10},{name:"Low-to-High Cable Fly",targetSets:3,targetReps:12},{name:"Rope Pushdown",targetSets:3,targetReps:12},{name:"Diamond Push-up",targetSets:2,targetReps:15},{name:"JM Press",targetSets:3,targetReps:10}],[{name:"Decline Bench Press",targetSets:4,targetReps:8},{name:"Machine Chest Press",targetSets:3,targetReps:10},{name:"High-to-Low Cable Fly",targetSets:3,targetReps:12},{name:"Ring Dip",targetSets:3,targetReps:10},{name:"Svend Press",targetSets:3,targetReps:15},{name:"Single-Arm Pushdown",targetSets:3,targetReps:12},{name:"Tate Press",targetSets:3,targetReps:12},{name:"Bench Dip",targetSets:2,targetReps:15}],[{name:"Floor Press",targetSets:4,targetReps:8},{name:"Smith Machine Incline Press",targetSets:3,targetReps:10},{name:"Dumbbell Pullover",targetSets:3,targetReps:12},{name:"Weighted Push-up",targetSets:3,targetReps:12},{name:"Landmine Press",targetSets:3,targetReps:12},{name:"EZ-Bar Skull Crusher",targetSets:3,targetReps:12},{name:"Triceps Kickback",targetSets:3,targetReps:15},{name:"Close-Grip Bench Press",targetSets:3,targetReps:10}]]},Tue:{label:"Back + Biceps",rest:false,variants:[[{name:"Deadlift",targetSets:3,targetReps:8},{name:"Pull-up",targetSets:3,targetReps:8},{name:"Lat Pulldown",targetSets:3,targetReps:10},{name:"Barbell Row",targetSets:3,targetReps:10},{name:"Seated Cable Row",targetSets:3,targetReps:12},{name:"Bicep Curl",targetSets:3,targetReps:12},{name:"Hammer Curl",targetSets:3,targetReps:12},{name:"Face Pull",targetSets:2,targetReps:15}],[{name:"Rack Pull",targetSets:3,targetReps:6},{name:"Chin-up",targetSets:3,targetReps:8},{name:"Single-Arm Lat Pulldown",targetSets:3,targetReps:10},{name:"T-Bar Row",targetSets:3,targetReps:10},{name:"Chest-Supported Row",targetSets:3,targetReps:12},{name:"Preacher Curl",targetSets:3,targetReps:12},{name:"Cable Curl",targetSets:3,targetReps:12},{name:"Rear Delt Row",targetSets:2,targetReps:15}],[{name:"Trap Bar Deadlift",targetSets:3,targetReps:6},{name:"Neutral-Grip Pull-up",targetSets:3,targetReps:8},{name:"Straight-Arm Pulldown",targetSets:3,targetReps:12},{name:"Pendlay Row",targetSets:3,targetReps:8},{name:"One-Arm Dumbbell Row",targetSets:3,targetReps:10},{name:"Incline Dumbbell Curl",targetSets:3,targetReps:12},{name:"Spider Curl",targetSets:3,targetReps:12},{name:"Reverse Fly",targetSets:2,targetReps:15}],[{name:"Sumo Deadlift",targetSets:3,targetReps:6},{name:"Assisted Pull-up",targetSets:3,targetReps:10},{name:"Wide-Grip Lat Pulldown",targetSets:3,targetReps:10},{name:"Meadows Row",targetSets:3,targetReps:10},{name:"Machine Row",targetSets:3,targetReps:12},{name:"21s Bicep Curl",targetSets:3,targetReps:21},{name:"Zottman Curl",targetSets:3,targetReps:12},{name:"Band Pull-Apart",targetSets:2,targetReps:20}]]},Wed:{label:"Legs",rest:false,variants:[[{name:"Squat",targetSets:4,targetReps:8},{name:"Romanian Deadlift",targetSets:3,targetReps:10},{name:"Leg Press",targetSets:3,targetReps:12},{name:"Walking Lunge",targetSets:3,targetReps:12},{name:"Leg Curl",targetSets:3,targetReps:12},{name:"Leg Extension",targetSets:3,targetReps:12},{name:"Calf Raise",targetSets:4,targetReps:15},{name:"Hip Thrust",targetSets:3,targetReps:10}],[{name:"Front Squat",targetSets:4,targetReps:6},{name:"Stiff-Leg Deadlift",targetSets:3,targetReps:10},{name:"Hack Squat",targetSets:3,targetReps:12},{name:"Bulgarian Split Squat",targetSets:3,targetReps:10},{name:"Seated Leg Curl",targetSets:3,targetReps:12},{name:"Sissy Squat",targetSets:3,targetReps:12},{name:"Seated Calf Raise",targetSets:4,targetReps:15},{name:"Glute Bridge",targetSets:3,targetReps:12}],[{name:"Box Squat",targetSets:4,targetReps:8},{name:"Single-Leg RDL",targetSets:3,targetReps:10},{name:"Pendulum Squat",targetSets:3,targetReps:12},{name:"Reverse Lunge",targetSets:3,targetReps:12},{name:"Nordic Curl",targetSets:3,targetReps:8},{name:"Step-up",targetSets:3,targetReps:12},{name:"Standing Calf Raise",targetSets:4,targetReps:15},{name:"Cable Kickback",targetSets:3,targetReps:12}],[{name:"Pause Squat",targetSets:4,targetReps:6},{name:"Good Morning",targetSets:3,targetReps:10},{name:"Belt Squat",targetSets:3,targetReps:12},{name:"Lateral Lunge",targetSets:3,targetReps:12},{name:"Glute-Ham Raise",targetSets:3,targetReps:10},{name:"Curtsy Lunge",targetSets:3,targetReps:12},{name:"Donkey Calf Raise",targetSets:4,targetReps:15},{name:"Frog Pump",targetSets:3,targetReps:15}]]},Thu:{label:"Core + Active Recovery",rest:false,variants:[[{name:"Plank",targetSets:3,targetReps:45},{name:"Hanging Leg Raise",targetSets:3,targetReps:12},{name:"Russian Twist",targetSets:3,targetReps:20},{name:"Cable Crunch",targetSets:3,targetReps:15},{name:"Bird Dog",targetSets:3,targetReps:12},{name:"Light Cycling",targetSets:1,targetReps:20}],[{name:"Side Plank",targetSets:3,targetReps:30},{name:"Toes-to-Bar",targetSets:3,targetReps:10},{name:"Cable Woodchopper",targetSets:3,targetReps:15},{name:"Ab Wheel Rollout",targetSets:3,targetReps:10},{name:"Dead Bug",targetSets:3,targetReps:12},{name:"Light Elliptical",targetSets:1,targetReps:20}],[{name:"Weighted Plank",targetSets:3,targetReps:40},{name:"V-Ups",targetSets:3,targetReps:15},{name:"Landmine Rotation",targetSets:3,targetReps:15},{name:"Reverse Crunch",targetSets:3,targetReps:15},{name:"Pallof Press",targetSets:3,targetReps:12},{name:"Light Swimming",targetSets:1,targetReps:20}],[{name:"Plank Shoulder Tap",targetSets:3,targetReps:20},{name:"Hollow Body Hold",targetSets:3,targetReps:30},{name:"Medicine Ball Twist",targetSets:3,targetReps:20},{name:"Decline Sit-up",targetSets:3,targetReps:15},{name:"Stir-the-Pot",targetSets:3,targetReps:10},{name:"Light Rowing",targetSets:1,targetReps:20}]]},Fri:{label:"Shoulders + Arms",rest:false,variants:[[{name:"Overhead Press",targetSets:3,targetReps:10},{name:"Arnold Press",targetSets:3,targetReps:10},{name:"Lateral Raise",targetSets:3,targetReps:15},{name:"Rear Delt Fly",targetSets:3,targetReps:15},{name:"Shrugs",targetSets:3,targetReps:12},{name:"Hammer Curl",targetSets:3,targetReps:12},{name:"Skull Crushers",targetSets:3,targetReps:12},{name:"Face Pull",targetSets:2,targetReps:15}],[{name:"Push Press",targetSets:4,targetReps:6},{name:"Seated Dumbbell Press",targetSets:3,targetReps:10},{name:"Cable Lateral Raise",targetSets:3,targetReps:15},{name:"Reverse Pec Deck",targetSets:3,targetReps:15},{name:"Upright Row",targetSets:3,targetReps:12},{name:"Concentration Curl",targetSets:3,targetReps:12},{name:"Overhead Triceps Extension",targetSets:3,targetReps:12},{name:"Cable Face Pull",targetSets:2,targetReps:15}],[{name:"Behind-the-Neck Press",targetSets:3,targetReps:8},{name:"Landmine Press",targetSets:3,targetReps:10},{name:"Leaning Cable Lateral Raise",targetSets:3,targetReps:15},{name:"Bent-Over Dumbbell Fly",targetSets:3,targetReps:15},{name:"Barbell Shrug",targetSets:3,targetReps:12},{name:"Preacher Curl",targetSets:3,targetReps:12},{name:"Cable Kickback",targetSets:3,targetReps:12},{name:"Band Pull-Apart",targetSets:2,targetReps:20}],[{name:"Z-Press",targetSets:3,targetReps:8},{name:"Single-Arm Dumbbell Press",targetSets:3,targetReps:10},{name:"Cable Y-Raise",targetSets:3,targetReps:15},{name:"Chest-Supported Rear Delt Fly",targetSets:3,targetReps:15},{name:"Cable Shrug",targetSets:3,targetReps:12},{name:"Drag Curl",targetSets:3,targetReps:12},{name:"Close-Grip Bench Press",targetSets:3,targetReps:10},{name:"Rear Delt Row",targetSets:2,targetReps:15}]]},Sat:{label:"Full Body / Cardio",rest:false,variants:[[{name:"Kettlebell Swing",targetSets:3,targetReps:15},{name:"Goblet Squat",targetSets:3,targetReps:12},{name:"Push-up",targetSets:3,targetReps:15},{name:"Dumbbell Row",targetSets:3,targetReps:12},{name:"Mountain Climbers",targetSets:3,targetReps:20},{name:"Plank",targetSets:3,targetReps:45},{name:"Burpees",targetSets:3,targetReps:12},{name:"Incline Treadmill Walk",targetSets:1,targetReps:20}],[{name:"Battle Ropes",targetSets:3,targetReps:30},{name:"Box Jump",targetSets:3,targetReps:10},{name:"Renegade Row",targetSets:3,targetReps:12},{name:"Medicine Ball Slam",targetSets:3,targetReps:15},{name:"Jump Rope",targetSets:3,targetReps:45},{name:"Farmer's Carry",targetSets:3,targetReps:20},{name:"Rowing Machine",targetSets:1,targetReps:15},{name:"Stair Climber",targetSets:1,targetReps:15}],[{name:"Sled Push",targetSets:3,targetReps:20},{name:"Thruster",targetSets:3,targetReps:12},{name:"Man Maker",targetSets:3,targetReps:10},{name:"Wall Ball",targetSets:3,targetReps:15},{name:"Sandbag Carry",targetSets:3,targetReps:20},{name:"Bear Crawl",targetSets:3,targetReps:15},{name:"Assault Bike",targetSets:1,targetReps:15},{name:"Sled Pull",targetSets:1,targetReps:15}],[{name:"Turkish Get-Up",targetSets:3,targetReps:6},{name:"Devil Press",targetSets:3,targetReps:10},{name:"Kettlebell Clean and Press",targetSets:3,targetReps:10},{name:"Broad Jump",targetSets:3,targetReps:10},{name:"Suitcase Carry",targetSets:3,targetReps:20},{name:"Battle Rope Slam",targetSets:3,targetReps:30},{name:"Row Erg Sprint",targetSets:1,targetReps:10},{name:"Shuttle Run",targetSets:1,targetReps:10}]]},Sun:{label:"Rest",rest:true,variants:[[]]}},"Push / Pull / Legs":{Mon:{label:"Push (Chest, Shoulders, Triceps)",rest:false,variants:[[{name:"Bench Press",targetSets:4,targetReps:8},{name:"Overhead Press",targetSets:3,targetReps:10},{name:"Incline Dumbbell Press",targetSets:3,targetReps:10},{name:"Lateral Raise",targetSets:3,targetReps:15},{name:"Triceps Pushdown",targetSets:3,targetReps:12}]]},Tue:{label:"Pull (Back, Biceps)",rest:false,variants:[[{name:"Deadlift",targetSets:3,targetReps:6},{name:"Pull-up",targetSets:4,targetReps:8},{name:"Barbell Row",targetSets:3,targetReps:10},{name:"Face Pull",targetSets:3,targetReps:15},{name:"Bicep Curl",targetSets:3,targetReps:12}]]},Wed:{label:"Legs",rest:false,variants:[[{name:"Squat",targetSets:4,targetReps:8},{name:"Romanian Deadlift",targetSets:3,targetReps:10},{name:"Leg Press",targetSets:3,targetReps:12},{name:"Calf Raise",targetSets:4,targetReps:15}]]},Thu:{label:"Rest",rest:true,variants:[[]]},Fri:{label:"Push (Chest, Shoulders, Triceps)",rest:false,variants:[[{name:"Incline Press",targetSets:4,targetReps:8},{name:"Arnold Press",targetSets:3,targetReps:10},{name:"Chest Fly",targetSets:3,targetReps:12},{name:"Skull Crushers",targetSets:3,targetReps:12}]]},Sat:{label:"Pull (Back, Biceps)",rest:false,variants:[[{name:"Lat Pulldown",targetSets:4,targetReps:10},{name:"Seated Cable Row",targetSets:3,targetReps:12},{name:"Hammer Curl",targetSets:3,targetReps:12},{name:"Shrugs",targetSets:3,targetReps:12}]]},Sun:{label:"Rest",rest:true,variants:[[]]}},"Upper / Lower":{Mon:{label:"Upper Body",rest:false,variants:[[{name:"Bench Press",targetSets:4,targetReps:8},{name:"Barbell Row",targetSets:4,targetReps:8},{name:"Overhead Press",targetSets:3,targetReps:10},{name:"Lat Pulldown",targetSets:3,targetReps:10},{name:"Bicep Curl",targetSets:2,targetReps:12}]]},Tue:{label:"Lower Body",rest:false,variants:[[{name:"Squat",targetSets:4,targetReps:8},{name:"Romanian Deadlift",targetSets:3,targetReps:10},{name:"Walking Lunge",targetSets:3,targetReps:12},{name:"Calf Raise",targetSets:3,targetReps:15}]]},Wed:{label:"Rest",rest:true,variants:[[]]},Thu:{label:"Upper Body",rest:false,variants:[[{name:"Incline Press",targetSets:4,targetReps:8},{name:"Pull-up",targetSets:3,targetReps:8},{name:"Lateral Raise",targetSets:3,targetReps:15},{name:"Triceps Pushdown",targetSets:3,targetReps:12}]]},Fri:{label:"Lower Body",rest:false,variants:[[{name:"Deadlift",targetSets:3,targetReps:6},{name:"Leg Press",targetSets:3,targetReps:12},{name:"Leg Curl",targetSets:3,targetReps:12},{name:"Hip Thrust",targetSets:3,targetReps:10}]]},Sat:{label:"Full Body / Cardio",rest:false,variants:[[{name:"Kettlebell Swing",targetSets:3,targetReps:15},{name:"Push-up",targetSets:3,targetReps:15},{name:"Mountain Climbers",targetSets:3,targetReps:20}]]},Sun:{label:"Rest",rest:true,variants:[[]]}},"Home Workout":{Mon:{label:"Full Body Foundation",rest:false,variants:[[{name:"Glute Bridge",targetSets:3,targetReps:15,restTime:"45s",isDuration:false,tips:"Lie on your back with knees bent and feet flat. Drive through your heels and squeeze your glutes at the top for 2 seconds.",voice:"Glute Bridges. Lie on your back with knees bent. Drive through your heels, squeeze your glutes at the top for two seconds, and lower with control."},{name:"Bodyweight Squat",targetSets:3,targetReps:15,restTime:"45s",isDuration:false,tips:"Feet shoulder-width apart. Sit hips back and down, keeping chest upright and knees tracking over toes.",voice:"Bodyweight Squats. Feet shoulder-width apart. Keep your chest high, sit back into your hips, and drive up through your whole foot."},{name:"Incline / Knee Push-up",targetSets:3,targetReps:10,restTime:"45s",isDuration:false,tips:"Hands slightly wider than shoulders on wall, counter, or mat. Keep body in a straight line from head to heels.",voice:"Incline Push-ups. Keep your core locked in a straight line, lower chest towards your hands, and exhale as you press up."},{name:"Standing Calf Raises",targetSets:3,targetReps:20,restTime:"30s",isDuration:false,tips:"Feet hip-width apart. Rise up high onto the balls of your feet, pause 1 second, then lower slowly.",voice:"Standing Calf Raises. Push up tall onto your toes, hold for a brief pause at the peak, and slowly lower down."},{name:"Wall Sit Hold",targetSets:3,targetReps:30,restTime:"45s",isDuration:true,tips:"Back flat against wall, slide down until thighs are parallel to floor. Knees at 90 degrees. Breathe steadily.",voice:"Wall Sit Hold. Press your lower back into the wall, keep thighs parallel to the ground, and hold your breath steady."}]]},Tue:{label:"Core & Posture Stability",rest:false,variants:[[{name:"Dead Bug",targetSets:3,targetReps:12,restTime:"30s",isDuration:false,tips:"Lie on back with knees at 90 degrees and arms up. Lower opposite arm and leg while pressing lower back flat.",voice:"Dead Bugs. Keep your lower back glued firmly into the floor as you extend your opposite arm and leg smoothly."},{name:"Bird Dog",targetSets:3,targetReps:12,restTime:"30s",isDuration:false,tips:"On all fours, extend opposite arm and leg straight out. Hold 2 seconds, keep pelvis parallel to mat.",voice:"Bird Dog. Extend your right arm and left leg simultaneously, forming a long straight line from fingertips to heel."},{name:"Prone Cobra Back Extension",targetSets:3,targetReps:12,restTime:"30s",isDuration:false,tips:"Lie face down, rotate thumbs outward, lift chest and squeeze upper back for 2 seconds. Strengthens spine.",voice:"Prone Cobra. Rotate thumbs up towards the ceiling, gently elevate your chest, and engage the whole posterior chain."},{name:"Glute Bridge Isometric Hold",targetSets:3,targetReps:30,restTime:"30s",isDuration:true,tips:"Hold top of glute bridge, maintaining pelvis tuck and abdominal engagement. Do not arch lower back.",voice:"Glute Bridge Isometric Hold. Drive hips high, lock in your glutes, and hold this bridge with calm diaphragmatic breaths."},{name:"Plank Shoulder Taps",targetSets:3,targetReps:16,restTime:"45s",isDuration:false,tips:"High plank position, feet wide for balance. Tap opposite shoulder without rocking your hips.",voice:"Plank Shoulder Taps. Maintain a solid push-up plank, resist hip swaying, and tap your opposite shoulder with control."},{name:"Cat-Cow Spine Mobility",targetSets:2,targetReps:10,restTime:"30s",isDuration:false,tips:"Alternate between arching back on inhale and rounding spine on exhale to mobilize vertebrae.",voice:"Cat-Cow Mobility. Inhale as you drop your belly and lift your gaze, then exhale as you tuck your chin and round your spine."}]]},Wed:{label:"Lower Body & Balance",rest:false,variants:[[{name:"Reverse Lunges",targetSets:3,targetReps:12,restTime:"45s",isDuration:false,tips:"Step back with one leg, lower both knees to 90 degrees. Keep front heel planted and torso tall.",voice:"Reverse Lunges. Step backwards with control, drop your back knee close to the floor, and press through your front heel."},{name:"Sumo Squat",targetSets:3,targetReps:15,restTime:"45s",isDuration:false,tips:"Wide stance, toes pointed 45 degrees out. Lower hips down focusing on inner thighs and glutes.",voice:"Sumo Squats. Take a wide stance with toes turned outward. Lower your hips down, keeping knees pressed wide over toes."},{name:"Donkey Kicks",targetSets:3,targetReps:15,restTime:"30s",isDuration:false,tips:"On all fours, kick one heel toward ceiling keeping knee bent at 90 degrees. Squeeze glute at top.",voice:"Donkey Kicks. Hands under shoulders, knees under hips. Kick one heel toward the ceiling and squeeze the top of your glute."},{name:"Single-Leg Balance Hold",targetSets:3,targetReps:20,restTime:"30s",isDuration:true,tips:"Stand tall near wall or chair for safety. Lift one foot off ground and balance smoothly. Switch sides.",voice:"Single-Leg Balance. Keep a hand ready for balance if needed, lift one foot, and focus your gaze on a steady point ahead."},{name:"Floor Tricep Dips",targetSets:3,targetReps:12,restTime:"45s",isDuration:false,tips:"Sit on floor, knees bent, hands behind hips with fingers pointing forward. Lift hips and bend elbows.",voice:"Floor Tricep Dips. Fingers pointed towards your heels, bend your elbows straight back, and press through your palms."}]]},Thu:{label:"Low-Impact Cardio & Circulation",rest:false,variants:[[{name:"Low-Impact Step Jacks",targetSets:3,targetReps:25,restTime:"30s",isDuration:false,tips:"Step one foot out to side while raising arms overhead, then return. Zero jumping required.",voice:"Low-Impact Step Jacks. Step wide to alternating sides with sweeping arm raises, keeping impact zero on joints."},{name:"High Knee March in Place",targetSets:3,targetReps:35,restTime:"30s",isDuration:false,tips:"Stand tall, drive knees up to hip height with rhythmic arm pumping. Great cardio booster.",voice:"High Knee March. Stand tall with your shoulders back, driving your knees up to hip height with confident strides."},{name:"Skater Step Touches",targetSets:3,targetReps:20,restTime:"30s",isDuration:false,tips:"Step laterally to one side, tap trailing toe behind. Swing arms gently for rhythm.",voice:"Skater Step Touches. Step smoothly from side to side, sweeping your arms and engaging your outer hips and glutes."},{name:"Standing Oblique Crunches",targetSets:3,targetReps:16,restTime:"30s",isDuration:false,tips:"Hands behind head, lift knee up and out to side while crunching elbow toward knee.",voice:"Standing Oblique Crunches. Draw your elbow towards your lateral knee, feeling a deep contraction along your waistline."},{name:"Butt Kick Steps",targetSets:3,targetReps:30,restTime:"30s",isDuration:false,tips:"Step and kick heel back toward glutes. Activates hamstrings while keeping heart rate elevated.",voice:"Butt Kick Steps. Step rhythmically and kick your heels up toward your glutes to stretch quads and warm hamstrings."}]]},Fri:{label:"Full Body Sculpt & Core",rest:false,variants:[[{name:"Bodyweight Push-up / Knee Push-up",targetSets:3,targetReps:10,restTime:"45s",isDuration:false,tips:"Hands slightly wider than shoulders. Keep torso in straight line from head to knees/heels.",voice:"Push-ups. Keep your core engaged and hips flat as you lower your chest between your hands and press away."},{name:"Floor Y-T-W Scapular Raises",targetSets:3,targetReps:12,restTime:"30s",isDuration:false,tips:"Lie on stomach. Form Y, T, and W shapes with arms, pinching shoulder blades together to fix posture.",voice:"Y-T-W Raises. Lie face down, engage your upper back, and raise your arms while pinching shoulder blades together."},{name:"Slow Controlled Mountain Climbers",targetSets:3,targetReps:16,restTime:"30s",isDuration:false,tips:"High plank, slowly drive one knee to chest without bouncing. Focus on deep core activation.",voice:"Slow Mountain Climbers. In a high plank, drive each knee forward slowly and deliberately, squeezing your lower abdominals."},{name:"Side Plank (Knee Support)",targetSets:3,targetReps:25,restTime:"30s",isDuration:true,tips:"Elbow under shoulder, bend bottom knee for support. Lift hips into straight line, brace side obliques.",voice:"Side Plank with Knee Support. Lift your hips, create a straight diagonal line from shoulder to knee, and brace your side core."},{name:"Inchworm Walkouts",targetSets:3,targetReps:8,restTime:"45s",isDuration:false,tips:"From standing, hinge at hips, touch floor, walk hands out to plank, then walk back to feet.",voice:"Inchworm Walkouts. Hinge forward from your hips, walk your hands into a strong plank, and reverse smoothly to standing."}]]},Sat:{label:"Mobility & Deep Stretch",rest:false,variants:[[{name:"World's Greatest Stretch",targetSets:2,targetReps:6,restTime:"30s",isDuration:false,tips:"Lunge forward, place hands inside front foot, rotate torso reaching arm to ceiling.",voice:"World's Greatest Stretch. Step into a deep lunge, plant your hand, and rotate your chest up to open thoracic spine and hips."},{name:"Child's Pose Deep Breathing",targetSets:3,targetReps:30,restTime:"20s",isDuration:true,tips:"Sit back onto heels, reach arms forward on floor, rest forehead down and breathe into ribs.",voice:"Child's Pose. Sit back onto your heels, reach long through your fingertips, and take slow, relaxing belly breaths."},{name:"Seated Hamstring Stretch",targetSets:3,targetReps:25,restTime:"20s",isDuration:true,tips:"Sit on edge of chair or floor, extend one leg with heel down. Gently hinge forward until mild stretch.",voice:"Seated Hamstring Stretch. Extend one leg forward with heel on floor, hinge gently at the waist, and feel a soothing stretch."},{name:"Seated Butterfly Stretch",targetSets:2,targetReps:30,restTime:"20s",isDuration:true,tips:"Soles of feet together, let knees fall outward gently. Hold feet and lengthen spine.",voice:"Butterfly Stretch. Bring the soles of your feet together, sit tall, and allow gravity to gently open your inner thighs."},{name:"Thoracic Spine Openers",targetSets:2,targetReps:10,restTime:"20s",isDuration:false,tips:"Side-lying with knees bent, open top arm across like opening a book to mobilize mid-back.",voice:"Thoracic Spine Openers. Lie on your side and trace a big rainbow arc with your top arm to release tight upper back muscles."}]]},Sun:{label:"Rest & Hydration Recovery",rest:true,variants:[[]]}}};const PROGRAM_NAMES=["Classic Split","Push / Pull / Legs","Upper / Lower","Home Workout"];const DAY_ORDER=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];const TODAY_KEY=DAY_ORDER[(new Date().getDay()+6)%7];function getWeekIndex(){const now=new Date();const start=new Date(now.getFullYear(),0,1);const days=Math.floor((now-start)/86400000);return Math.floor(days/7);}function resolveWeek(program,weekIndex){const resolved={};DAY_ORDER.forEach(d=>{const day=program[d];const variantIdx=weekIndex%day.variants.length;const rotating=day.variants.length>1;resolved[d]={label:day.label+(rotating&&!day.rest?` · Week ${String.fromCharCode(65+variantIdx)}`:""),rest:day.rest,exercises:day.variants[variantIdx]};});return resolved;}function macroSum(meals){const totals={calories:0,protein:0,carbs:0,fat:0,fiber:0};Object.keys(meals).forEach(k=>{meals[k].forEach(item=>{totals.calories+=item.calories;totals.protein+=item.protein;totals.carbs+=item.carbs;totals.fat+=item.fat;totals.fiber+=item.fiber;});});return totals;}function makeEmptyLog(targetSets){return Array.from({length:targetSets},()=>({reps:"",weight:""}));}function buildLogs(week){const init={};DAY_ORDER.forEach(d=>{init[d]={};week[d].exercises.forEach(ex=>{init[d][ex.name]={sets:makeEmptyLog(ex.targetSets),completed:false};});});return init;}/* ---------- shared small components ---------- */function Ring({pct,size=168,stroke=14,color,trackColor}){const r=(size-stroke)/2;const c=2*Math.PI*r;const clamped=Math.max(0,Math.min(1,pct));return/*#__PURE__*/React.createElement("svg",{width:size,height:size,style:{transform:"rotate(-90deg)"}},/*#__PURE__*/React.createElement("circle",{cx:size/2,cy:size/2,r:r,fill:"none",stroke:trackColor,strokeWidth:stroke}),/*#__PURE__*/React.createElement("circle",{cx:size/2,cy:size/2,r:r,fill:"none",stroke:color,strokeWidth:stroke,strokeDasharray:c,strokeDashoffset:c*(1-clamped),strokeLinecap:"round",style:{transition:"stroke-dashoffset 0.5s ease"}}));}function SmallRing({pct,size=44,stroke=5,color}){const r=(size-stroke)/2;const c=2*Math.PI*r;return/*#__PURE__*/React.createElement("svg",{width:size,height:size,style:{transform:"rotate(-90deg)"}},/*#__PURE__*/React.createElement("circle",{cx:size/2,cy:size/2,r:r,fill:"none",stroke:TOKENS.surface2,strokeWidth:stroke}),/*#__PURE__*/React.createElement("circle",{cx:size/2,cy:size/2,r:r,fill:"none",stroke:color,strokeWidth:stroke,strokeDasharray:c,strokeDashoffset:c*(1-Math.max(0,Math.min(1,pct))),strokeLinecap:"round",style:{transition:"stroke-dashoffset 0.3s ease"}}));}function MacroBar({label,value,goal,color}){const pct=Math.min(100,value/goal*100);return/*#__PURE__*/React.createElement("div",{style:{marginBottom:14}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:6,fontSize:13}},/*#__PURE__*/React.createElement("span",{style:{color:TOKENS.muted,fontWeight:500}},label),/*#__PURE__*/React.createElement("span",{style:{color:TOKENS.text,fontVariantNumeric:"tabular-nums"}},Math.round(value),/*#__PURE__*/React.createElement("span",{style:{color:TOKENS.mutedFaint}}," / ",goal,"g"))),/*#__PURE__*/React.createElement("div",{style:{height:6,background:TOKENS.surface2,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",borderRadius:3,overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:`${pct}%`,background:color,borderRadius:3,transition:"width 0.4s ease"}})));}function VegDot({type}){const isVeg=type!=="nonveg";return/*#__PURE__*/React.createElement("span",{title:isVeg?"Veg":"Non-veg",style:{display:"inline-flex",width:13,height:13,border:`1.5px solid ${isVeg?"#2E7D32":"#B71C1C"}`,borderRadius:3,alignItems:"center",justifyContent:"center",flexShrink:0}},/*#__PURE__*/React.createElement("span",{style:{width:6,height:6,borderRadius:isVeg?3:"50%",background:isVeg?"#2E7D32":"#B71C1C"}}));}function EstimateEditor({item,onChange,onConfirm,onCancel,confirmLabel,hideActions}){
+  const [nameSuggestions, setNameSuggestions] = useState([]);
+  const [lookupState, setLookupState] = useState("idle"); // "idle" | "loading" | "found" | "not_found"
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [rawQuantity, setRawQuantity] = useState(
+    item.quantityText !== undefined ? item.quantityText : (item.grams ? item.grams + "g" : "100g")
+  );
+  const lookupTimerRef = useRef(null);
+
+  useEffect(() => {
+    if (item.quantityText !== undefined && item.quantityText !== rawQuantity) {
+      setRawQuantity(item.quantityText);
+    }
+  }, [item.quantityText]);
+
+  // Helper: Recalculate all macros from per100g data and grams
+  function computeMacros(grams, per100g) {
+    const g = Number(grams) || 0;
+    if (!per100g) return {};
+    return {
+      grams: g,
+      calories: Math.round((per100g.calories || 0) * g / 100),
+      protein: Math.round((per100g.protein || 0) * g / 100 * 10) / 10,
+      carbs: Math.round((per100g.carbs || 0) * g / 100 * 10) / 10,
+      fat: Math.round((per100g.fat || 0) * g / 100 * 10) / 10,
+      fiber: Math.round((per100g.fiber || 0) * g / 100 * 10) / 10
+    };
+  }
+
+  function parseGrams(str, currentItem) {
+    if (typeof parseQuantityToGrams === "function") {
+      return parseQuantityToGrams(str, currentItem);
+    }
+    const m = String(str || "").match(/(\d+(?:\.\d+)?)/);
+    return m ? parseFloat(m[1]) : 0;
+  }
+
+  // Auto-resolve food nutrition if name is already provided (e.g. on mount or paste)
+  useEffect(() => {
+    if (item.name && (!item.per100g || (item.calories === 0 && item.protein === 0))) {
+      const match = typeof findFoodNutrition === "function" ? findFoodNutrition(item.name) : null;
+      if (match && match.per100g) {
+        const g = parseGrams(rawQuantity, match) || item.grams || match.defaultGrams || 100;
+        const macros = computeMacros(g, match.per100g);
+        onChange({
+          ...item,
+          ...macros,
+          dietType: match.dietType || item.dietType,
+          per100g: match.per100g,
+          resolvedName: match.name,
+          quantityText: rawQuantity
+        });
+        setLookupState("found");
+      }
+    }
+  }, []);
+
+  function handleNameChange(val) {
+    const updated = { ...item, name: val };
+    clearTimeout(lookupTimerRef.current);
+
+    if (!val || val.trim().length < 2) {
+      setNameSuggestions([]);
+      setShowSuggestions(false);
+      setLookupState("idle");
+      onChange(updated);
+      return;
+    }
+
+    // 1. INSTANT LOCAL AUTO-MATCH
+    const matched = typeof findFoodNutrition === "function" ? findFoodNutrition(val) : null;
+    let newPer100g = item.per100g;
+
+    if (matched && matched.per100g) {
+      newPer100g = matched.per100g;
+      const g = parseGrams(rawQuantity, matched) || item.grams || matched.defaultGrams || 100;
+      const macros = computeMacros(g, newPer100g);
+      updated.calories = macros.calories;
+      updated.protein = macros.protein;
+      updated.carbs = macros.carbs;
+      updated.fat = macros.fat;
+      updated.fiber = macros.fiber;
+      updated.grams = g;
+      updated.per100g = newPer100g;
+      updated.dietType = matched.dietType || item.dietType;
+      updated.resolvedName = matched.name;
+      setLookupState("found");
+    }
+
+    // 2. Instant Local Suggestions
+    if (typeof searchVerifiedFoods === "function") {
+      const suggestions = searchVerifiedFoods(val);
+      if (suggestions && suggestions.length > 0) {
+        setNameSuggestions(suggestions.slice(0, 8));
+        setShowSuggestions(true);
+      } else {
+        setNameSuggestions([]);
+      }
+    }
+
+    onChange(updated);
+
+    // 3. Debounced API fallback if no local match
+    if (!matched) {
+      setLookupState("loading");
+      lookupTimerRef.current = setTimeout(() => {
+        if (!val || val.trim().length < 2) return;
+        fetch("/api/nutrition?q=" + encodeURIComponent(val.trim()))
+          .then(r => r.json())
+          .then(data => {
+            if (data.results && data.results.length > 0) {
+              setNameSuggestions(data.results.slice(0, 8));
+              setShowSuggestions(true);
+              setLookupState("found");
+              const top = data.results[0];
+              if (top && top.per100g) {
+                const g = parseGrams(rawQuantity, top) || item.grams || top.defaultGrams || 100;
+                const macros = computeMacros(g, top.per100g);
+                onChange({
+                  ...item,
+                  name: val,
+                  ...macros,
+                  dietType: top.dietType || item.dietType,
+                  per100g: top.per100g,
+                  resolvedName: top.name,
+                  quantityText: rawQuantity
+                });
+              }
+            } else {
+              setLookupState("not_found");
+            }
+          })
+          .catch(() => setLookupState("idle"));
+      }, 400);
+    }
+  }
+
+  function handleQuantityChange(val) {
+    setRawQuantity(val);
+    const newGrams = parseGrams(val, item);
+    let p100 = item.per100g;
+
+    // If per100g not saved on item, look it up by name
+    if (!p100 && item.name) {
+      const match = typeof findFoodNutrition === "function" ? findFoodNutrition(item.name) : null;
+      if (match && match.per100g) p100 = match.per100g;
+    }
+
+    // If still no per100g, but calories exist from initial scan, calculate ratio
+    if (!p100 && item.calories > 0 && item.grams > 0) {
+      p100 = {
+        calories: item.calories / item.grams * 100,
+        protein: (item.protein || 0) / item.grams * 100,
+        carbs: (item.carbs || 0) / item.grams * 100,
+        fat: (item.fat || 0) / item.grams * 100,
+        fiber: (item.fiber || 0) / item.grams * 100
+      };
+    }
+
+    if (p100 && newGrams > 0) {
+      const macros = computeMacros(newGrams, p100);
+      onChange({
+        ...item,
+        ...macros,
+        grams: newGrams,
+        per100g: p100,
+        quantityText: val
+      });
+    } else {
+      onChange({
+        ...item,
+        grams: newGrams,
+        quantityText: val,
+        ...(newGrams === 0 ? { calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 } : {})
+      });
+    }
+  }
+
+  function handleFieldChange(field, val) {
+    if (field === "name") {
+      handleNameChange(val);
+    } else if (field === "grams") {
+      handleQuantityChange(val);
+    } else {
+      // Direct numeric edit of calories, protein, carbs, fat, fiber
+      onChange({ ...item, [field]: Number(val) || 0 });
+    }
+  }
+
+  function pickSuggestion(food) {
+    const g = parseGrams(rawQuantity, food) || food.defaultGrams || 100;
+    const p100 = food.per100g;
+    const macros = computeMacros(g, p100);
+    const newQty = rawQuantity || (g + "g");
+    setRawQuantity(newQty);
+    onChange({
+      ...item,
+      name: food.name,
+      dietType: food.dietType || item.dietType,
+      ...macros,
+      grams: g,
+      per100g: p100,
+      resolvedName: food.name,
+      quantityText: newQty
+    });
+    setNameSuggestions([]);
+    setShowSuggestions(false);
+    setLookupState("found");
+  }
+
+  function handleBlurName() {
+    setTimeout(() => setShowSuggestions(false), 250);
+
+    // If user typed food name and macros are still zero, resolve right now
+    if (item.name && item.name.trim() && (!item.calories || item.calories === 0)) {
+      const match = typeof findFoodNutrition === "function" ? findFoodNutrition(item.name) : null;
+      if (match && match.per100g) {
+        const g = parseGrams(rawQuantity, match) || item.grams || match.defaultGrams || 100;
+        const macros = computeMacros(g, match.per100g);
+        onChange({
+          ...item,
+          ...macros,
+          dietType: match.dietType || item.dietType,
+          per100g: match.per100g,
+          resolvedName: match.name,
+          quantityText: rawQuantity
+        });
+        setLookupState("found");
+      }
+    }
+  }
+
+  const fields = [
+    ["name", "Food Name", "text", "Search food (e.g. Oats, Egg, Chicken, Rice, Banana)"],
+    ["grams", "Quantity / Grams", "text", "e.g. 30g, 100g, 2 eggs"],
+    ["calories", "Calories (kcal)", "number", "0"],
+    ["protein", "Protein (g)", "number", "0"],
+    ["carbs", "Carbs (g)", "number", "0"],
+    ["fat", "Fat (g)", "number", "0"],
+    ["fiber", "Fibre (g)", "number", "0"]
+  ];
+
+  const hasAutoMacros = Boolean(item.per100g || (item.calories > 0 && item.protein > 0));
+
+  return React.createElement("div", {
+    style: {
+      background: TOKENS.surface2,
+      backdropFilter: "blur(16px) saturate(180%)",
+      WebkitBackdropFilter: "blur(16px) saturate(180%)",
+      border: "1px solid " + TOKENS.border,
+      borderRadius: 12,
+      padding: 16,
+      marginTop: 10
+    }
+  },
+    // Diet Type Toggle
+    React.createElement("div", { style: { marginBottom: 10 } },
+      React.createElement("label", { style: { fontSize: 11, color: TOKENS.mutedFaint, display: "block", marginBottom: 4 } }, "Type"),
+      React.createElement("div", { style: { display: "flex", gap: 8 } },
+        [["veg", "🟢 Veg"], ["nonveg", "🟤 Non-veg"]].map(([val, lbl]) => {
+          const active = (item.dietType || "veg") === val;
+          return React.createElement("button", {
+            key: val,
+            onClick: () => onChange({ ...item, dietType: val }),
+            style: {
+              flex: 1,
+              background: active ? TOKENS.ember : TOKENS.bg,
+              color: active ? "#FFFFFF" : TOKENS.text,
+              border: "1px solid " + (active ? TOKENS.ember : TOKENS.border),
+              borderRadius: 8,
+              padding: "8px 0",
+              fontSize: 13,
+              fontWeight: 600,
+              cursor: "pointer"
+            }
+          }, lbl);
+        })
+      )
+    ),
+
+    // Grid of Inputs
+    React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 } },
+      fields.map(([key, label, type, placeholder]) =>
+        React.createElement("div", {
+          key: key,
+          style: {
+            gridColumn: key === "name" ? "1 / 3" : "auto",
+            position: "relative"
+          }
+        },
+          React.createElement("label", {
+            style: {
+              fontSize: 11,
+              color: TOKENS.mutedFaint,
+              display: "block",
+              marginBottom: 4,
+              fontWeight: 600
+            }
+          },
+            label,
+            key === "grams" && React.createElement("span", {
+              style: { color: hasAutoMacros ? "#237547" : TOKENS.mutedFaint, fontWeight: 500 }
+            }, hasAutoMacros ? " (auto-calculates macros)" : " (adjusts macros)")
+          ),
+          React.createElement("input", {
+            type: key === "name" || key === "grams" ? "text" : "number",
+            inputMode: key === "grams" ? "text" : key === "name" ? "text" : "decimal",
+            value: key === "grams" ? rawQuantity : (item[key] !== undefined && item[key] !== null ? item[key] : ""),
+            placeholder: placeholder,
+            onChange: e => handleFieldChange(key, e.target.value),
+            onBlur: key === "name" ? handleBlurName : undefined,
+            onFocus: key === "name" ? () => { if (nameSuggestions.length > 0) setShowSuggestions(true); } : undefined,
+            autoComplete: "off",
+            style: {
+              width: "100%",
+              background: TOKENS.bg,
+              border: "1.5px solid " + (key === "name" && lookupState === "not_found" ? "#D14343" : hasAutoMacros && key === "grams" ? "rgba(35, 117, 71, 0.4)" : TOKENS.border),
+              borderRadius: 8,
+              padding: "8px 10px",
+              color: TOKENS.text,
+              fontSize: 14,
+              boxSizing: "border-box",
+              fontWeight: (key === "name" || key === "grams" || key === "calories") ? 700 : 400
+            }
+          }),
+          // Searching spinner
+          key === "name" && lookupState === "loading" && React.createElement("div", {
+            style: { position: "absolute", right: 10, top: 28, fontSize: 11, color: TOKENS.mutedFaint }
+          }, "Searching..."),
+
+          // Suggestions Dropdown
+          key === "name" && showSuggestions && nameSuggestions.length > 0 && React.createElement("div", {
+            style: {
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              background: "#161B22",
+              border: "1.5px solid #237547",
+              borderRadius: 8,
+              zIndex: 9999,
+              maxHeight: 220,
+              overflowY: "auto",
+              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+              marginTop: 2
+            }
+          },
+            nameSuggestions.map((f, i) => React.createElement("div", {
+              key: i,
+              onMouseDown: (e) => { e.preventDefault(); pickSuggestion(f); },
+              style: {
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "9px 12px",
+                cursor: "pointer",
+                borderBottom: i < nameSuggestions.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                fontSize: 13,
+                color: "#FFFFFF",
+                background: "transparent"
+              }
+            },
+              React.createElement(VegDot, { type: f.dietType }),
+              React.createElement("div", null,
+                React.createElement("div", { style: { fontWeight: 700 } }, f.name),
+                React.createElement("div", { style: { fontSize: 11, color: "rgba(255,255,255,0.6)" } },
+                  Math.round(f.per100g.calories) + " kcal · P:" + f.per100g.protein + "g · C:" + f.per100g.carbs + "g · F:" + f.per100g.fat + "g per 100g"
+                )
+              )
+            ))
+          )
+        )
+      )
+    ),
+
+    // Live Status Pill
+    hasAutoMacros && React.createElement("div", {
+      style: {
+        marginTop: 10,
+        padding: "8px 10px",
+        background: "rgba(35, 117, 71, 0.12)",
+        border: "1px solid rgba(35, 117, 71, 0.35)",
+        borderRadius: 8,
+        fontSize: 11.5,
+        color: "#237547",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+        fontWeight: 600
+      }
+    },
+      React.createElement("span", null, "⚡"),
+      "Auto-calculated: " + (item.grams || 100) + "g = " + (item.calories || 0) + " kcal · P" + (item.protein || 0) + "g · C" + (item.carbs || 0) + "g · F" + (item.fat || 0) + "g · Fib" + (item.fiber || 0) + "g"
+    ),
+
+    // Not found notice
+    lookupState === "not_found" && React.createElement("div", {
+      style: {
+        marginTop: 8,
+        fontSize: 11.5,
+        color: "#D14343",
+        background: "rgba(209, 67, 67, 0.08)",
+        padding: "6px 10px",
+        borderRadius: 6,
+        border: "1px solid rgba(209, 67, 67, 0.25)"
+      }
+    },
+      "Food not found in database — enter values manually above."
+    ),
+
+    // Action Buttons
+    !hideActions && React.createElement("div", { style: { display: "flex", gap: 10, marginTop: 14 } },
+      React.createElement("button", {
+        onClick: () => {
+          if (!item.name || !item.name.trim()) {
+            alert("Please enter a food name.");
+            return;
+          }
+          const finalGrams = parseGrams(rawQuantity, item) || item.grams || 100;
+          onConfirm({ ...item, grams: finalGrams, quantityText: rawQuantity });
+        },
+        style: {
+          flex: 1,
+          background: TOKENS.ember,
+          color: "#000000",
+          border: "none",
+          borderRadius: 8,
+          padding: "10px 0",
+          fontWeight: 800,
+          fontSize: 14,
+          cursor: "pointer"
+        }
+      }, confirmLabel || "Add to log"),
+      React.createElement("button", {
+        onClick: onCancel,
+        style: {
+          background: "transparent",
+          color: TOKENS.muted,
+          border: "1px solid " + TOKENS.border,
+          borderRadius: 8,
+          padding: "10px 16px",
+          fontSize: 14,
+          cursor: "pointer"
+        }
+      }, "Cancel")
+    )
+  );
+}
+
+function actionBtnStyle(bg, color) {
+  return {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    background: bg || "transparent",
+    color: color || "inherit",
+    border: "1px solid " + (bg === "transparent" ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.08)"),
+    borderRadius: 8,
+    padding: "6px 12px",
+    fontSize: 12,
+    fontWeight: 600,
+    cursor: "pointer",
+    transition: "all 0.15s ease"
+  };
+}
+
 function MealSection({mealKey,label,items,onAdd,onRemove,onRemoveSlot}){const[mode,setMode]=useState(null);const[scanning,setScanning]=useState(false);const[scanError,setScanError]=useState(null);const[photoPreview,setPhotoPreview]=useState(null);const[uploadedPhotoUrl,setUploadedPhotoUrl]=useState(null);const[scanItems,setScanItems]=useState(null);const[draft,setDraft]=useState(null);const[searchTerm,setSearchTerm]=useState("");const fileInputRef=useRef(null);const galleryInputRef=useRef(null);const mealTotal=items.reduce((s,i)=>s+i.calories,0);function startScan(){setMode("scan");setScanning(false);setScanError(null);setPhotoPreview(null);setUploadedPhotoUrl(null);setScanItems(null);setDraft(null);fileInputRef.current?.click();}function startGallery(){setMode("scan");setScanning(false);setScanError(null);setPhotoPreview(null);setUploadedPhotoUrl(null);setScanItems(null);setDraft(null);galleryInputRef.current?.click();}async function handlePhotoSelected(e){const file=e.target.files?.[0];if(!file)return;setScanning(true);setScanError(null);try{const{dataUrl,base64,mediaType,canvas}=await resizeImageToBase64(file);setPhotoPreview(dataUrl);// Async upload to Supabase Storage if authenticated
 if(typeof dbUploadMealPhoto==="function"){const client=typeof getSupabaseClient==="function"?getSupabaseClient():null;if(client?.auth?.getUser){client.auth.getUser().then(({data})=>{if(data?.user?.id){dbUploadMealPhoto(data.user.id,file).then(res=>{if(res?.publicUrl)setUploadedPhotoUrl(res.publicUrl);}).catch(()=>{});}}).catch(()=>{});}}// Analyze image using genuine vision engine (Multi-model Cloud Vision or Local Edge Neural Vision)
-const visionResult=await analyzeMealVisionImage({file,dataUrl,base64,mimeType:mediaType,canvas,mealKey});if(visionResult.error&&(!visionResult.items||visionResult.items.length===0)){setScanError(visionResult.error);setScanItems([]);}else{setScanItems((visionResult.items||[]).map((it,i)=>({_id:i,name:it.name??"Identified Food",grams:Number(it.grams)||100,calories:Number(it.calories)||100,protein:Number(it.protein)||5,carbs:Number(it.carbs)||10,fat:Number(it.fat)||2,fiber:Number(it.fiber)||1,dietType:it.dietType==="nonveg"?"nonveg":"veg",confidence:it.confidence,needsConfirmation:it.needsConfirmation,reason:it.reason})));if(visionResult.error){setScanError(visionResult.error);}}}catch(err){console.error("Meal Vision Error:",err);setScanError(err.message||"Failed to analyze meal image. Please try again or enter details manually.");setScanItems([]);}finally{setScanning(false);if(e.target)e.target.value="";}}function pickSearchResult(food){const g=food.grams||food.defaultGrams||100;const p100=food.per100g||(food.grams?{calories:food.calories/food.grams*100,protein:food.protein/food.grams*100,carbs:food.carbs/food.grams*100,fat:food.fat/food.grams*100,fiber:food.fiber/food.grams*100}:null);const recalc=p100?{calories:Math.round(p100.calories*g/100),protein:Math.round(p100.protein*g/100*10)/10,carbs:Math.round(p100.carbs*g/100*10)/10,fat:Math.round(p100.fat*g/100*10)/10,fiber:Math.round(p100.fiber*g/100*10)/10}:{};setDraft({...food,...recalc,grams:g,per100g:p100});setMode("manual-review");}function startManual(){setDraft({name:"",grams:100,calories:0,protein:0,carbs:0,fat:0,fiber:0,dietType:"veg",per100g:null});setMode("manual-review");}function confirmAdd(){onAdd({...draft,image_url:uploadedPhotoUrl||null});setMode(null);setDraft(null);setSearchTerm("");setPhotoPreview(null);setUploadedPhotoUrl(null);}function updateScanItem(idx,updated){setScanItems(prev=>prev.map((it,i)=>i===idx?updated:it));}function removeScanItem(idx){setScanItems(prev=>prev.filter((_,i)=>i!==idx));}function confirmAddAll(){scanItems.forEach(it=>onAdd({...it,image_url:uploadedPhotoUrl||null}));setMode(null);setScanItems(null);setPhotoPreview(null);setUploadedPhotoUrl(null);}function cancel(){setMode(null);setDraft(null);setScanItems(null);setSearchTerm("");setPhotoPreview(null);setUploadedPhotoUrl(null);setScanError(null);}const allSearchFoods=(()=>{if(typeof STOKE_VERIFIED_NUTRITION_DB!=="undefined"){return Object.values(STOKE_VERIFIED_NUTRITION_DB).map(f=>({...f,grams:f.defaultGrams||100,calories:Math.round((f.per100g.calories||0)*(f.defaultGrams||100)/100),protein:Math.round((f.per100g.protein||0)*(f.defaultGrams||100)/100*10)/10,carbs:Math.round((f.per100g.carbs||0)*(f.defaultGrams||100)/100*10)/10,fat:Math.round((f.per100g.fat||0)*(f.defaultGrams||100)/100*10)/10,fiber:Math.round((f.per100g.fiber||0)*(f.defaultGrams||100)/100*10)/10}));}return MOCK_FOODS;})();const filteredFoods=allSearchFoods.filter(f=>f.name.toLowerCase().includes(searchTerm.toLowerCase()));return/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:14,padding:18,marginBottom:14,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("input",{ref:fileInputRef,type:"file",accept:"image/*",capture:"environment",onChange:handlePhotoSelected,style:{display:"none"}}),/*#__PURE__*/React.createElement("input",{ref:galleryInputRef,type:"file",accept:"image/*",onChange:handlePhotoSelected,style:{display:"none"}}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:10}},/*#__PURE__*/React.createElement("h3",{style:{margin:0,fontSize:16,fontWeight:600,color:TOKENS.text}},label),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontVariantNumeric:"tabular-nums"}},mealTotal>0?`${Math.round(mealTotal)} kcal`:""),onRemoveSlot&&/*#__PURE__*/React.createElement("button",{onClick:onRemoveSlot,title:"Remove this meal",style:{background:"none",border:"none",color:TOKENS.mutedFaint,cursor:"pointer",fontSize:15,lineHeight:1,padding:2}},"\xD7"))),items.length>0&&/*#__PURE__*/React.createElement("div",{style:{marginBottom:12}},items.map((item,idx)=>/*#__PURE__*/React.createElement("div",{key:idx,style:{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"8px 0",borderBottom:idx<items.length-1?`1px solid ${TOKENS.border}`:"none"}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:14,color:TOKENS.text,display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement(VegDot,{type:item.dietType}),item.name),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.mutedFaint}},item.grams,"g \xB7 ",Math.round(item.calories)," kcal \xB7 P",Math.round(item.protein)," C",Math.round(item.carbs)," F",Math.round(item.fat))),/*#__PURE__*/React.createElement("button",{onClick:()=>onRemove(idx),style:{background:"none",border:"none",color:TOKENS.mutedFaint,cursor:"pointer",fontSize:18,lineHeight:1,padding:4},"aria-label":"Remove"},"\xD7")))),mode===null&&/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("button",{onClick:startScan,style:actionBtnStyle("#111111","#FFFFFF")},/*#__PURE__*/React.createElement(StokeImgIcon,{name:"camera",size:15,style:{marginRight:5,verticalAlign:'middle'}}),"Scan"),/*#__PURE__*/React.createElement("button",{onClick:startGallery,style:actionBtnStyle(TOKENS.surface2,TOKENS.text)},/*#__PURE__*/React.createElement(StokeImgIcon,{name:"image",size:15,style:{marginRight:5,verticalAlign:'middle'}}),"Gallery"),/*#__PURE__*/React.createElement("button",{onClick:()=>setMode("search"),style:actionBtnStyle(TOKENS.surface2,TOKENS.text)},/*#__PURE__*/React.createElement(StokeImgIcon,{name:"search",size:15,style:{marginRight:5,verticalAlign:'middle'}}),"Search"),/*#__PURE__*/React.createElement("button",{onClick:startManual,style:actionBtnStyle(TOKENS.surface2,TOKENS.text)},"+ Manual")),mode==="scan"&&scanning&&/*#__PURE__*/React.createElement("div",{style:{padding:"18px 0",textAlign:"center"}},photoPreview&&/*#__PURE__*/React.createElement("img",{src:photoPreview,alt:"Captured food",style:{width:120,height:120,objectFit:"cover",borderRadius:16,marginBottom:12,border:`1px solid rgba(35, 117, 71,0.3)`,boxShadow:"0 0 20px rgba(35, 117, 71,0.2)"}}),/*#__PURE__*/React.createElement("div",{style:{fontSize:14,fontWeight:900,color:TOKENS.text,marginBottom:4,display:"flex",alignItems:"center",justifyContent:"center",gap:6}},/*#__PURE__*/React.createElement("span",null,"\u26A1 STOKE Neural Vision")),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.muted,marginBottom:12}},"Scanning plate components, portion volume & macros\u2026"),/*#__PURE__*/React.createElement("div",{style:{height:4,background:"rgba(255,255,255,0.08)",borderRadius:999,overflow:"hidden",maxWidth:220,margin:"0 auto"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:"85%",background:"linear-gradient(90deg, #237547, #237547)",borderRadius:999}}))),mode==="scan"&&!scanning&&scanError&&/*#__PURE__*/React.createElement("div",{style:{padding:"14px 0",textAlign:"center"}},/*#__PURE__*/React.createElement("div",{style:{fontSize:12.5,color:"var(--semantic-error)",marginBottom:12,maxWidth:360,margin:"0 auto 12px",lineHeight:1.45,fontWeight:600}},scanError),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}},/*#__PURE__*/React.createElement("button",{onClick:startScan,style:{...actionBtnStyle("var(--btn-primary-bg)","var(--btn-primary-text)"),flex:"0 0 auto",padding:"8px 16px"}},"Try again"),/*#__PURE__*/React.createElement("button",{onClick:()=>{alert("GEMINI_API_KEY is configured securely on the server via .env.local.\nIf you updated your key, restart the backend server to apply changes.");},style:{...actionBtnStyle("var(--surface-secondary)","var(--text-primary)"),flex:"0 0 auto",padding:"8px 16px",border:"1px solid var(--border-divider)"}},"Server Key Info"),/*#__PURE__*/React.createElement("button",{onClick:cancel,style:{...actionBtnStyle("transparent","var(--text-muted)"),flex:"0 0 auto",padding:"8px 16px"}},"Cancel"))),mode==="scan"&&!scanning&&!scanError&&scanItems&&/*#__PURE__*/React.createElement("div",null,photoPreview&&/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:12,alignItems:"center",marginBottom:12,background:"rgba(255,255,255,0.02)",padding:10,borderRadius:14,border:`1px solid ${TOKENS.border}`}},/*#__PURE__*/React.createElement("img",{src:photoPreview,alt:"Captured food",style:{width:72,height:72,objectFit:"cover",borderRadius:10,border:`1px solid ${TOKENS.border}`,flexShrink:0}}),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{display:"inline-flex",alignItems:"center",gap:6,background:"rgba(35, 117, 71,0.15)",border:"1px solid rgba(35, 117, 71,0.4)",borderRadius:999,padding:"2px 8px",marginBottom:4}},/*#__PURE__*/React.createElement("span",{style:{fontSize:10,fontWeight:900,color:"#237547"}},"\u26A1 STOKE Neural Vision")),/*#__PURE__*/React.createElement("div",{style:{fontSize:13,fontWeight:700,color:TOKENS.text}},scanItems.length," components detected"),/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:TOKENS.mutedFaint}},"Edit portions or tap components to calibrate"))),scanItems.map((it,idx)=>/*#__PURE__*/React.createElement("div",{key:it._id,style:{position:"relative"}},/*#__PURE__*/React.createElement(EstimateEditor,{item:it,onChange:updated=>updateScanItem(idx,updated),hideActions:true}),scanItems.length>1&&/*#__PURE__*/React.createElement("button",{onClick:()=>removeScanItem(idx),style:{position:"absolute",top:20,right:10,background:"none",border:"none",color:TOKENS.mutedFaint,cursor:"pointer",fontSize:18,lineHeight:1},"aria-label":"Remove component"},"\xD7"))),scanItems.length>0?/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:10,marginTop:4}},/*#__PURE__*/React.createElement("button",{onClick:confirmAddAll,style:{flex:1,background:TOKENS.ember,color:"var(--text-primary)",border:"none",borderRadius:8,padding:"10px 0",fontWeight:700,fontSize:14,cursor:"pointer"}},"Add all to log"),/*#__PURE__*/React.createElement("button",{onClick:cancel,style:{background:"transparent",color:TOKENS.muted,border:`1px solid ${TOKENS.border}`,borderRadius:8,padding:"10px 16px",fontSize:14,cursor:"pointer"}},"Cancel")):/*#__PURE__*/React.createElement("div",{style:{fontSize:13,color:TOKENS.mutedFaint,textAlign:"center",padding:"8px 0"}},"All components removed. ",/*#__PURE__*/React.createElement("span",{onClick:cancel,style:{color:TOKENS.ember,cursor:"pointer",fontWeight:600}},"Cancel"))),mode==="search"&&/*#__PURE__*/React.createElement("div",{style:{marginTop:6}},/*#__PURE__*/React.createElement("input",{autoFocus:true,placeholder:"Search foods\u2026",value:searchTerm,onChange:e=>setSearchTerm(e.target.value),style:{width:"100%",background:TOKENS.bg,border:`1px solid ${TOKENS.border}`,borderRadius:8,padding:"9px 12px",color:TOKENS.text,fontSize:14,boxSizing:"border-box",marginBottom:8}}),/*#__PURE__*/React.createElement("div",{style:{maxHeight:160,overflowY:"auto"}},filteredFoods.map(f=>/*#__PURE__*/React.createElement("div",{key:f.name,onClick:()=>pickSearchResult(f),style:{padding:"8px 4px",fontSize:14,color:TOKENS.text,cursor:"pointer",borderBottom:`1px solid ${TOKENS.border}`,display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement(VegDot,{type:f.dietType}),f.name," ",React.createElement("span",{style:{color:TOKENS.mutedFaint,fontSize:12}},"· ",Math.round(f.calories)," kcal · P",Math.round(f.protein||0),"g · C",Math.round(f.carbs||0),"g · ",f.grams,"g"))),filteredFoods.length===0&&/*#__PURE__*/React.createElement("div",{style:{color:TOKENS.mutedFaint,fontSize:13,padding:"8px 4px"}},"No matches.")),/*#__PURE__*/React.createElement("button",{onClick:cancel,style:{...actionBtnStyle(TOKENS.surface2,TOKENS.text),marginTop:8}},"Cancel")),mode==="manual-review"&&draft&&/*#__PURE__*/React.createElement(EstimateEditor,{item:draft,onChange:updated=>setDraft(updated),onConfirm:confirmAdd,onCancel:cancel,confirmLabel:"Add to log"}));}/* ============================================================
+const visionResult=await analyzeMealVisionImage({file,dataUrl,base64,mimeType:mediaType,canvas,mealKey});if(visionResult.error&&(!visionResult.items||visionResult.items.length===0)){setScanError(visionResult.error);setScanItems([]);}else{setScanItems((visionResult.items||[]).map((it,i)=>({_id:i,name:it.name??"Identified Food",grams:Number(it.grams)||100,calories:Number(it.calories)||100,protein:Number(it.protein)||5,carbs:Number(it.carbs)||10,fat:Number(it.fat)||2,fiber:Number(it.fiber)||1,dietType:it.dietType==="nonveg"?"nonveg":"veg",confidence:it.confidence,needsConfirmation:it.needsConfirmation,reason:it.reason})));if(visionResult.error){setScanError(visionResult.error);}}}catch(err){console.error("Meal Vision Error:",err);setScanError(err.message||"Failed to analyze meal image. Please try again or enter details manually.");setScanItems([]);}finally{setScanning(false);if(e.target)e.target.value="";}}function pickSearchResult(food){const g=food.grams||food.defaultGrams||100;const p100=food.per100g||(food.grams?{calories:food.calories/food.grams*100,protein:food.protein/food.grams*100,carbs:food.carbs/food.grams*100,fat:food.fat/food.grams*100,fiber:food.fiber/food.grams*100}:null);const recalc=p100?{calories:Math.round(p100.calories*g/100),protein:Math.round(p100.protein*g/100*10)/10,carbs:Math.round(p100.carbs*g/100*10)/10,fat:Math.round(p100.fat*g/100*10)/10,fiber:Math.round(p100.fiber*g/100*10)/10}:{};setDraft({...food,...recalc,grams:g,per100g:p100});setMode("manual-review");}function startManual(){setDraft({name:"",grams:100,calories:0,protein:0,carbs:0,fat:0,fiber:0,dietType:"veg",per100g:null,quantityText:"100g"});setMode("manual-review");}function confirmAdd(customDraft){const d=customDraft||draft;if(!d||!d.name||!d.name.trim()){alert("Please enter a food name.");return;}const finalG=typeof parseQuantityToGrams==="function"?parseQuantityToGrams(d.quantityText||d.grams,d)||d.grams||100:d.grams||100;onAdd({...d,name:d.name.trim(),grams:finalG,image_url:uploadedPhotoUrl||null});setMode(null);setDraft(null);setSearchTerm("");setPhotoPreview(null);setUploadedPhotoUrl(null);}function updateScanItem(idx,updated){setScanItems(prev=>prev.map((it,i)=>i===idx?updated:it));}function removeScanItem(idx){setScanItems(prev=>prev.filter((_,i)=>i!==idx));}function confirmAddAll(){scanItems.forEach(it=>onAdd({...it,image_url:uploadedPhotoUrl||null}));setMode(null);setScanItems(null);setPhotoPreview(null);setUploadedPhotoUrl(null);}function cancel(){setMode(null);setDraft(null);setScanItems(null);setSearchTerm("");setPhotoPreview(null);setUploadedPhotoUrl(null);setScanError(null);}const allSearchFoods=(()=>{if(typeof STOKE_VERIFIED_NUTRITION_DB!=="undefined"){return Object.values(STOKE_VERIFIED_NUTRITION_DB).map(f=>({...f,grams:f.defaultGrams||100,calories:Math.round((f.per100g.calories||0)*(f.defaultGrams||100)/100),protein:Math.round((f.per100g.protein||0)*(f.defaultGrams||100)/100*10)/10,carbs:Math.round((f.per100g.carbs||0)*(f.defaultGrams||100)/100*10)/10,fat:Math.round((f.per100g.fat||0)*(f.defaultGrams||100)/100*10)/10,fiber:Math.round((f.per100g.fiber||0)*(f.defaultGrams||100)/100*10)/10}));}return MOCK_FOODS;})();const filteredFoods=allSearchFoods.filter(f=>f.name.toLowerCase().includes(searchTerm.toLowerCase()));return/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:14,padding:18,marginBottom:14,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("input",{ref:fileInputRef,type:"file",accept:"image/*",capture:"environment",onChange:handlePhotoSelected,style:{display:"none"}}),/*#__PURE__*/React.createElement("input",{ref:galleryInputRef,type:"file",accept:"image/*",onChange:handlePhotoSelected,style:{display:"none"}}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:10}},/*#__PURE__*/React.createElement("h3",{style:{margin:0,fontSize:16,fontWeight:600,color:TOKENS.text}},label),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontVariantNumeric:"tabular-nums"}},mealTotal>0?`${Math.round(mealTotal)} kcal`:""),onRemoveSlot&&/*#__PURE__*/React.createElement("button",{onClick:onRemoveSlot,title:"Remove this meal",style:{background:"none",border:"none",color:TOKENS.mutedFaint,cursor:"pointer",fontSize:15,lineHeight:1,padding:2}},"\xD7"))),items.length>0&&/*#__PURE__*/React.createElement("div",{style:{marginBottom:12}},items.map((item,idx)=>/*#__PURE__*/React.createElement("div",{key:idx,style:{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"8px 0",borderBottom:idx<items.length-1?`1px solid ${TOKENS.border}`:"none"}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:14,color:TOKENS.text,display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement(VegDot,{type:item.dietType}),item.name),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.mutedFaint}},item.grams,"g \xB7 ",Math.round(item.calories)," kcal \xB7 P",Math.round(item.protein)," C",Math.round(item.carbs)," F",Math.round(item.fat))),/*#__PURE__*/React.createElement("button",{onClick:()=>onRemove(idx),style:{background:"none",border:"none",color:TOKENS.mutedFaint,cursor:"pointer",fontSize:18,lineHeight:1,padding:4},"aria-label":"Remove"},"\xD7")))),mode===null&&/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("button",{onClick:startScan,style:actionBtnStyle("#111111","#FFFFFF")},/*#__PURE__*/React.createElement(StokeImgIcon,{name:"camera",size:15,style:{marginRight:5,verticalAlign:'middle'}}),"Scan"),/*#__PURE__*/React.createElement("button",{onClick:startGallery,style:actionBtnStyle(TOKENS.surface2,TOKENS.text)},/*#__PURE__*/React.createElement(StokeImgIcon,{name:"image",size:15,style:{marginRight:5,verticalAlign:'middle'}}),"Gallery"),/*#__PURE__*/React.createElement("button",{onClick:()=>setMode("search"),style:actionBtnStyle(TOKENS.surface2,TOKENS.text)},/*#__PURE__*/React.createElement(StokeImgIcon,{name:"search",size:15,style:{marginRight:5,verticalAlign:'middle'}}),"Search"),/*#__PURE__*/React.createElement("button",{onClick:startManual,style:actionBtnStyle(TOKENS.surface2,TOKENS.text)},"+ Manual")),mode==="scan"&&scanning&&/*#__PURE__*/React.createElement("div",{style:{padding:"18px 0",textAlign:"center"}},photoPreview&&/*#__PURE__*/React.createElement("img",{src:photoPreview,alt:"Captured food",style:{width:120,height:120,objectFit:"cover",borderRadius:16,marginBottom:12,border:`1px solid rgba(35, 117, 71,0.3)`,boxShadow:"0 0 20px rgba(35, 117, 71,0.2)"}}),/*#__PURE__*/React.createElement("div",{style:{fontSize:14,fontWeight:900,color:TOKENS.text,marginBottom:4,display:"flex",alignItems:"center",justifyContent:"center",gap:6}},/*#__PURE__*/React.createElement("span",null,"\u26A1 STOKE Neural Vision")),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.muted,marginBottom:12}},"Scanning plate components, portion volume & macros\u2026"),/*#__PURE__*/React.createElement("div",{style:{height:4,background:"rgba(255,255,255,0.08)",borderRadius:999,overflow:"hidden",maxWidth:220,margin:"0 auto"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:"85%",background:"linear-gradient(90deg, #237547, #237547)",borderRadius:999}}))),mode==="scan"&&!scanning&&scanError&&/*#__PURE__*/React.createElement("div",{style:{padding:"14px 0",textAlign:"center"}},/*#__PURE__*/React.createElement("div",{style:{fontSize:12.5,color:"var(--semantic-error)",marginBottom:12,maxWidth:360,margin:"0 auto 12px",lineHeight:1.45,fontWeight:600}},scanError),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}},/*#__PURE__*/React.createElement("button",{onClick:startScan,style:{...actionBtnStyle("var(--btn-primary-bg)","var(--btn-primary-text)"),flex:"0 0 auto",padding:"8px 16px"}},"Try again"),/*#__PURE__*/React.createElement("button",{onClick:()=>{alert("GEMINI_API_KEY is configured securely on the server via .env.local.\nIf you updated your key, restart the backend server to apply changes.");},style:{...actionBtnStyle("var(--surface-secondary)","var(--text-primary)"),flex:"0 0 auto",padding:"8px 16px",border:"1px solid var(--border-divider)"}},"Server Key Info"),/*#__PURE__*/React.createElement("button",{onClick:cancel,style:{...actionBtnStyle("transparent","var(--text-muted)"),flex:"0 0 auto",padding:"8px 16px"}},"Cancel"))),mode==="scan"&&!scanning&&!scanError&&scanItems&&/*#__PURE__*/React.createElement("div",null,photoPreview&&/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:12,alignItems:"center",marginBottom:12,background:"rgba(255,255,255,0.02)",padding:10,borderRadius:14,border:`1px solid ${TOKENS.border}`}},/*#__PURE__*/React.createElement("img",{src:photoPreview,alt:"Captured food",style:{width:72,height:72,objectFit:"cover",borderRadius:10,border:`1px solid ${TOKENS.border}`,flexShrink:0}}),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{display:"inline-flex",alignItems:"center",gap:6,background:"rgba(35, 117, 71,0.15)",border:"1px solid rgba(35, 117, 71,0.4)",borderRadius:999,padding:"2px 8px",marginBottom:4}},/*#__PURE__*/React.createElement("span",{style:{fontSize:10,fontWeight:900,color:"#237547"}},"\u26A1 STOKE Neural Vision")),/*#__PURE__*/React.createElement("div",{style:{fontSize:13,fontWeight:700,color:TOKENS.text}},scanItems.length," components detected"),/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:TOKENS.mutedFaint}},"Edit portions or tap components to calibrate"))),scanItems.map((it,idx)=>/*#__PURE__*/React.createElement("div",{key:it._id,style:{position:"relative"}},/*#__PURE__*/React.createElement(EstimateEditor,{item:it,onChange:updated=>updateScanItem(idx,updated),hideActions:true}),scanItems.length>1&&/*#__PURE__*/React.createElement("button",{onClick:()=>removeScanItem(idx),style:{position:"absolute",top:20,right:10,background:"none",border:"none",color:TOKENS.mutedFaint,cursor:"pointer",fontSize:18,lineHeight:1},"aria-label":"Remove component"},"\xD7"))),scanItems.length>0?/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:10,marginTop:4}},/*#__PURE__*/React.createElement("button",{onClick:confirmAddAll,style:{flex:1,background:TOKENS.ember,color:"var(--text-primary)",border:"none",borderRadius:8,padding:"10px 0",fontWeight:700,fontSize:14,cursor:"pointer"}},"Add all to log"),/*#__PURE__*/React.createElement("button",{onClick:cancel,style:{background:"transparent",color:TOKENS.muted,border:`1px solid ${TOKENS.border}`,borderRadius:8,padding:"10px 16px",fontSize:14,cursor:"pointer"}},"Cancel")):/*#__PURE__*/React.createElement("div",{style:{fontSize:13,color:TOKENS.mutedFaint,textAlign:"center",padding:"8px 0"}},"All components removed. ",/*#__PURE__*/React.createElement("span",{onClick:cancel,style:{color:TOKENS.ember,cursor:"pointer",fontWeight:600}},"Cancel"))),mode==="search"&&/*#__PURE__*/React.createElement("div",{style:{marginTop:6}},/*#__PURE__*/React.createElement("input",{autoFocus:true,placeholder:"Search foods\u2026",value:searchTerm,onChange:e=>setSearchTerm(e.target.value),style:{width:"100%",background:TOKENS.bg,border:`1px solid ${TOKENS.border}`,borderRadius:8,padding:"9px 12px",color:TOKENS.text,fontSize:14,boxSizing:"border-box",marginBottom:8}}),/*#__PURE__*/React.createElement("div",{style:{maxHeight:160,overflowY:"auto"}},filteredFoods.map(f=>/*#__PURE__*/React.createElement("div",{key:f.name,onClick:()=>pickSearchResult(f),style:{padding:"8px 4px",fontSize:14,color:TOKENS.text,cursor:"pointer",borderBottom:`1px solid ${TOKENS.border}`,display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement(VegDot,{type:f.dietType}),f.name," ",React.createElement("span",{style:{color:TOKENS.mutedFaint,fontSize:12}},"· ",Math.round(f.calories)," kcal · P",Math.round(f.protein||0),"g · C",Math.round(f.carbs||0),"g · ",f.grams,"g"))),filteredFoods.length===0&&/*#__PURE__*/React.createElement("div",{style:{color:TOKENS.mutedFaint,fontSize:13,padding:"8px 4px"}},"No matches.")),/*#__PURE__*/React.createElement("button",{onClick:cancel,style:{...actionBtnStyle(TOKENS.surface2,TOKENS.text),marginTop:8}},"Cancel")),mode==="manual-review"&&draft&&/*#__PURE__*/React.createElement(EstimateEditor,{item:draft,onChange:updated=>setDraft(updated),onConfirm:confirmAdd,onCancel:cancel,confirmLabel:"Add to log"}));}/* ============================================================
        STOKE WORKOUT & EXERCISE SECTION - DYNAMIC YOUTUBE SHORTS SYSTEM
        For every exercise in ALL workout programs:
        - Dynamic search: `${exercise.name} exercise shorts`
@@ -11362,7 +12079,7 @@ useEffect(()=>{if(resendCooldown<=0)return;const timer=setInterval(()=>{setResen
        */const handleGoogleSignIn=async()=>{setLoading(true);setError("");try{let oauthResult=null;if(typeof dbSignInWithOAuth==="function"){oauthResult=await dbSignInWithOAuth("google");}else{const sb=typeof getSupabaseClient==="function"?getSupabaseClient():typeof window!=="undefined"?window.sb:null;if(sb?.auth?.signInWithOAuth){const redirectUrl=window.location.origin+window.location.pathname;oauthResult=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:redirectUrl,queryParams:{access_type:"offline",prompt:"select_account"}}});}}if(oauthResult?.data?.url){// Direct the user's browser to the official Google account chooser
 window.location.href=oauthResult.data.url;return;}if(oauthResult?.error){const msg=oauthResult.error.message||String(oauthResult.error);console.warn("Supabase Google OAuth status:",msg);setLoading(false);setError("Google OAuth provider is not yet enabled in your Supabase Dashboard. See setup instructions.");setShowGoogleModal(true);return;}}catch(e){console.error("Google sign-in exception:",e);setLoading(false);setError("Unable to connect to Google authentication. Please check network connection.");setShowGoogleModal(true);return;}setLoading(false);};/*
        * INSTANT 1-CLICK DEMO ACCESS
-       */const handleQuickDemoAccess=()=>{setLoading(true);setError("");setTimeout(()=>{setLoading(false);const demoEmail="demo.athlete@stoke.app";const demoProfile={name:"Alex Vance",age:26,gender:"Male",height:178,weight:74,goal:"Build Muscle",level:"Intermediate",activity:"Moderate",frequency:"4-5 days / week"};const demoUserObj={id:"demo-athlete-quick-001",email:demoEmail,user_metadata:{name:"Alex Vance"}};onSignIn(demoEmail,demoProfile,demoUserObj);},300);};/*
+       */const handleQuickDemoAccess=()=>{setLoading(true);setError("");setTimeout(()=>{setLoading(false);const demoEmail="demo.athlete@stoke.app";const demoProfile={name:"Alex Vance",age:26,gender:"Male",height:178,weight:74,goal:"Build Muscle",level:"Intermediate",activity:"Moderate",frequency:"4-5 days / week"};const demoUserObj={id:"demo-athlete-quick-001",email:demoEmail,user_metadata:{name:"Alex Vance"}};onSignIn(demoEmail,demoProfile,demoUserObj);},300);};if(typeof window!=="undefined"){window.stokeQuickDemo=handleQuickDemoAccess;try{const up=new URLSearchParams(window.location.search);if(up.get("demo")==="1"||up.get("guest")==="1"){setTimeout(handleQuickDemoAccess,150);}}catch(e){}}/*
        * LOGIN (Requirement 1, 4: Rate Limited & Anti-Enumeration Protected)
        */const handleLogin=async customEmail=>{const emailToUse=(customEmail||form.email||"").trim();if(!emailToUse||!customEmail&&!form.password){setError("Please enter your email and password.");return;}// Client-side rate limit check (5 attempts per 15 minutes)
 if(typeof checkAuthRateLimit==="function"){const rate=checkAuthRateLimit(emailToUse,5,15*60*1000);if(!rate.allowed){setError(`Security notice: Account temporarily throttled due to multiple failed attempts. Please retry in ${rate.retryAfterSeconds}s.`);return;}}setLoading(true);setError("");try{if(typeof dbSignIn==="function"){const res=await dbSignIn(emailToUse,form.password||"");if(res&&res.requiresEmailVerification){setLoading(false);setScreen("verify_email");return;}if(res&&res.error){setError(res.error.message||"Invalid login credentials. If you haven't registered this account yet, click 'Create account' below.");setLoading(false);return;}const userObj=res?.data?.user||res?.user||null;const localProf=typeof localStorage!=="undefined"&&localStorage.getItem("stoke_profile")?JSON.parse(localStorage.getItem("stoke_profile")):null;const profToUse=localProf||{...DEFAULT_PROFILE,name:userObj?.user_metadata?.name||userObj?.user_metadata?.full_name||emailToUse.split("@")[0]||"Athlete"};onSignIn(emailToUse,profToUse,userObj);return;}onSignIn(emailToUse);}catch(err){setError(err?.message||"Invalid login credentials. If you haven't registered this account yet, click 'Create account' below.");}finally{setLoading(false);}};/*

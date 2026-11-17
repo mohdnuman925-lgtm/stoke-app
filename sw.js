@@ -1,5 +1,5 @@
 // STOKE Service Worker (v1.3.5) - High performance offline shell cache with 95% transparent nav bar
-const CACHE_NAME = 'stoke-shell-v12';
+const CACHE_NAME = 'stoke-shell-v13';
 const CORE_ASSETS = [
   './',
   './index.html',

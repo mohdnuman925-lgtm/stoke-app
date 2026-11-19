@@ -138,7 +138,7 @@ const server = http.createServer(async (req, res) => {
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-XSS-Protection', '1; mode=block');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-    res.setHeader('Permissions-Policy', 'camera=(self), geolocation=(self), microphone=()');
+    res.setHeader('Permissions-Policy', 'camera=(self), geolocation=(self), microphone=(), vibration=(self)');
     res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;");
 
     if (req.method === 'OPTIONS') {

@@ -45,7 +45,7 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <script>
     /* STOKE MEAL VISION ENGINE */
     /**
@@ -3349,6 +3349,34 @@ if (typeof window !== "undefined") {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Kaushan+Script&display=swap" rel="stylesheet">
+
+
+  <style>
+    #stoke-barcode-reader {
+      width: 100% !important;
+      height: 100% !important;
+      position: absolute !important;
+      inset: 0 !important;
+      border: none !important;
+      background: #000000 !important;
+      overflow: hidden !important;
+    }
+    #stoke-barcode-reader video {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+    }
+    #stoke-barcode-reader__scan_region {
+      border: none !important;
+      background: transparent !important;
+    }
+    #stoke-barcode-reader__dashboard,
+    #stoke-barcode-reader__dashboard_section,
+    #stoke-barcode-reader__status_span,
+    #stoke-barcode-reader__header_message {
+      display: none !important;
+    }
+  </style>
 
 </head>
 
@@ -10765,7 +10793,7 @@ function playBarcodeSuccessSound() {
       gain.connect(ctx.destination);
       osc.type = "sine";
       osc.frequency.setValueAtTime(1760, ctx.currentTime);
-      gain.gain.setValueAtTime(0.3, ctx.currentTime);
+      gain.gain.setValueAtTime(0.35, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.14);
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.14);
@@ -10779,7 +10807,6 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
   const [barcodeInput, setBarcodeInput] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [scanStatus, setScanStatus] = useState("aim");
-  const [lastScannedCode, setLastScannedCode] = useState("");
   const [foundProduct, setFoundProduct] = useState(null);
   const [portionGrams, setPortionGrams] = useState(100);
   const [mealCategory, setMealCategory] = useState("lunch");
@@ -10787,144 +10814,140 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
   const [cameraError, setCameraError] = useState(null);
   const [toastMsg, setToastMsg] = useState(null);
 
-  const videoRef = useRef(null);
-  const streamRef = useRef(null);
+  const scannerRef = useRef(null);
   const fileInputRef = useRef(null);
-  const codeReaderRef = useRef(null);
-  const isScanningRef = useRef(true);
+  const isHandlingScanRef = useRef(false);
 
   const showToast = (msg) => {
     setToastMsg(msg);
     setTimeout(() => setToastMsg(null), 3000);
   };
 
-  // 1. Initialize Camera
+  // 1. Initialize Html5Qrcode Scanner
   useEffect(() => {
-    let active = true;
-    isScanningRef.current = true;
-    setCameraError(null);
+    if (!isOpen) return;
+    let isMounted = true;
+    isHandlingScanRef.current = false;
 
-    if (isOpen && typeof navigator !== "undefined" && navigator.mediaDevices?.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } }
-      })
-        .then(stream => {
-          if (!active) { stream.getTracks().forEach(t => t.stop()); return; }
-          streamRef.current = stream;
-          if (videoRef.current) {
-            videoRef.current.srcObject = stream;
-            videoRef.current.play().catch(e => console.warn("Video play notice:", e));
-          }
-          setCameraActive(true);
-        })
-        .catch(err => {
-          console.warn("Camera init warning:", err.message);
-          setCameraError("Camera unavailable. You can enter barcode digits manually below or upload a photo.");
-          setCameraActive(false);
+    const startScanner = async () => {
+      // Wait for container element #stoke-barcode-reader to be in DOM
+      let retries = 0;
+      while (!document.getElementById("stoke-barcode-reader") && retries < 25) {
+        await new Promise(r => setTimeout(r, 60));
+        retries++;
+      }
+
+      if (!isMounted || !document.getElementById("stoke-barcode-reader")) return;
+
+      if (typeof window.Html5Qrcode === "undefined") {
+        console.warn("Html5Qrcode script not ready yet");
+        setCameraError("Scanner module loading... If camera does not start, please enter barcode digits manually.");
+        return;
+      }
+
+      try {
+        const html5QrCode = new window.Html5Qrcode("stoke-barcode-reader", {
+          experimentalFeatures: {
+            useBarCodeDetectorIfSupported: true
+          },
+          verbose: false
         });
-    }
+        scannerRef.current = html5QrCode;
+
+        const config = {
+          fps: 15,
+          qrbox: (w, h) => ({ width: Math.min(Math.round(w * 0.85), 320), height: Math.min(Math.round(h * 0.5), 180) }),
+          aspectRatio: 1.7777778
+        };
+
+        await html5QrCode.start(
+          { facingMode: "environment" },
+          config,
+          (decodedText, decodedResult) => {
+            if (!isMounted || isHandlingScanRef.current) return;
+            isHandlingScanRef.current = true;
+            playBarcodeSuccessSound();
+            handleLookupBarcode(decodedText);
+            // Re-allow scanning after 2.5s delay
+            setTimeout(() => { isHandlingScanRef.current = false; }, 2500);
+          },
+          (errorMessage) => {
+            // frame decode miss, harmless
+          }
+        );
+
+        if (isMounted) {
+          setCameraActive(true);
+          setCameraError(null);
+        }
+      } catch (err) {
+        console.warn("Html5Qrcode camera error:", err);
+        if (isMounted) {
+          setCameraActive(false);
+          setCameraError("Camera unavailable (" + (err.message || "permission needed") + "). Point photo or type digits below.");
+        }
+      }
+    };
+
+    startScanner();
 
     return () => {
-      active = false;
-      isScanningRef.current = false;
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach(t => t.stop());
-        streamRef.current = null;
-      }
-      if (codeReaderRef.current) {
-        try { codeReaderRef.current.reset(); } catch(e) {}
-        codeReaderRef.current = null;
+      isMounted = false;
+      if (scannerRef.current) {
+        try {
+          if (scannerRef.current.isScanning) {
+            scannerRef.current.stop().then(() => {
+              scannerRef.current.clear();
+            }).catch(e => {});
+          } else {
+            scannerRef.current.clear();
+          }
+        } catch(e) {}
+        scannerRef.current = null;
       }
     };
   }, [isOpen]);
 
-  // 2. Continuous Real-Time Barcode Detection Loop
-  useEffect(() => {
-    if (!isOpen || !cameraActive) return;
-    let localActive = true;
-    let scanInterval = null;
-
-    // Strategy A: Native BarcodeDetector API (fastest, built into Chrome/Android)
-    if ("BarcodeDetector" in window) {
-      try {
-        const detector = new window.BarcodeDetector({
-          formats: ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "qr_code"]
-        });
-
-        scanInterval = setInterval(async () => {
-          if (!localActive || !videoRef.current || videoRef.current.readyState < 2) return;
-          try {
-            const barcodes = await detector.detect(videoRef.current);
-            if (barcodes && barcodes.length > 0) {
-              const code = String(barcodes[0].rawValue || "").trim();
-              if (code && code !== lastScannedCode) {
-                setLastScannedCode(code);
-                playBarcodeSuccessSound();
-                handleLookupBarcode(code);
-              }
-            }
-          } catch(e) {}
-        }, 180);
-      } catch(e) {
-        console.warn("Native BarcodeDetector init error:", e);
-      }
-    }
-
-    // Strategy B: ZXing Universal Decoder (runs on iOS Safari, WebViews, Desktop)
-    if (window.ZXing && window.ZXing.BrowserMultiFormatReader && videoRef.current) {
-      try {
-        const reader = new window.ZXing.BrowserMultiFormatReader();
-        codeReaderRef.current = reader;
-        reader.decodeFromVideoElement(videoRef.current, (result, err) => {
-          if (!localActive) return;
-          if (result && result.getText()) {
-            const code = String(result.getText()).trim();
-            if (code && code !== lastScannedCode) {
-              setLastScannedCode(code);
-              playBarcodeSuccessSound();
-              handleLookupBarcode(code);
-            }
-          }
-        });
-      } catch(e) {
-        console.warn("ZXing scanner init error:", e);
-      }
-    }
-
-    return () => {
-      localActive = false;
-      if (scanInterval) clearInterval(scanInterval);
-      if (codeReaderRef.current) {
-        try { codeReaderRef.current.reset(); } catch(e) {}
-        codeReaderRef.current = null;
-      }
-    };
-  }, [isOpen, cameraActive, lastScannedCode]);
-
-  // 3. Lookup Barcode (Database + Open Food Facts API)
+  // 2. Barcode Lookup (Local Database + Open Food Facts API)
   const handleLookupBarcode = async (codeToSearch) => {
     const rawCode = String(codeToSearch || "").trim().replace(/[^0-9]/g, "");
     if (!rawCode) return;
     setIsSearching(true);
     setScanStatus("searching");
 
-    // Check built-in database
+    // Check local athletic products
     if (POPULAR_ATHLETIC_BARCODES[rawCode]) {
       const p = POPULAR_ATHLETIC_BARCODES[rawCode];
       setFoundProduct({ ...p, barcode: rawCode });
       setPortionGrams(p.grams || 100);
       setScanStatus("found");
       setIsSearching(false);
-      showToast("✓ Found: " + p.name);
+      showToast("✓ Scanned: " + p.name);
       return;
     }
 
     // Query Open Food Facts API
     try {
-      const resp = await fetch("https://world.openfoodfacts.org/api/v2/product/" + encodeURIComponent(rawCode) + ".json");
-      const data = await resp.json();
-      if (data && (data.status === 1 || data.status === "success") && data.product) {
-        const prod = data.product;
+      const urls = [
+        "https://world.openfoodfacts.org/api/v2/product/" + rawCode + ".json",
+        "https://world.openfoodfacts.net/api/v2/product/" + rawCode + ".json"
+      ];
+      
+      let prod = null;
+      for (const url of urls) {
+        try {
+          const resp = await fetch(url, { headers: { "Accept": "application/json" } });
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data && (data.status === 1 || data.status === "success") && data.product) {
+              prod = data.product;
+              break;
+            }
+          }
+        } catch(e) {}
+      }
+
+      if (prod) {
         const n = prod.nutriments || {};
         const cal = Math.round(Number(n["energy-kcal_100g"] || n["energy-kcal"] || ((n["energy_100g"] || 0) / 4.184) || 200));
         const pVal = Math.round((Number(n.proteins_100g || n.proteins || 10)) * 10) / 10;
@@ -10936,7 +10959,7 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
         const matched = {
           barcode: rawCode,
           name: prod.product_name || prod.product_name_en || ("Food Item #" + rawCode),
-          brand: prod.brands || "Food Product",
+          brand: prod.brands || "Packaged Grocery",
           grams: 100,
           calories: cal,
           protein: pVal,
@@ -10950,10 +10973,10 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
         setScanStatus("found");
         showToast("✓ Scanned: " + matched.name);
       } else {
-        // Smart fallback with exact scanned barcode number
+        // Smart editable fallback with the scanned barcode number
         setFoundProduct({
           barcode: rawCode,
-          name: "Scanned Food (#" + rawCode + ")",
+          name: "Scanned Item (#" + rawCode + ")",
           brand: "Packaged Product",
           grams: 100,
           calories: 220,
@@ -10966,11 +10989,10 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
         setScanStatus("found");
         showToast("✓ Barcode #" + rawCode + " captured!");
       }
-    } catch (err) {
-      console.warn("OpenFoodFacts lookup error:", err);
+    } catch(err) {
       setFoundProduct({
         barcode: rawCode,
-        name: "Scanned Food (#" + rawCode + ")",
+        name: "Scanned Item (#" + rawCode + ")",
         brand: "Packaged Product",
         grams: 100,
         calories: 220,
@@ -10987,50 +11009,30 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
     }
   };
 
-  // 4. File / Photo Upload Barcode Reader
+  // 3. Photo / Image file scanner
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const img = new Image();
-    const objectUrl = URL.createObjectURL(file);
-    img.src = objectUrl;
-
-    img.onload = async () => {
-      // Try Native BarcodeDetector
-      if ("BarcodeDetector" in window) {
-        try {
-          const detector = new window.BarcodeDetector({
-            formats: ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "qr_code"]
-          });
-          const barcodes = await detector.detect(img);
-          if (barcodes && barcodes.length > 0) {
-            const code = barcodes[0].rawValue;
-            playBarcodeSuccessSound();
-            handleLookupBarcode(code);
-            return;
-          }
-        } catch(e) {}
-      }
-
-      // Try ZXing
-      if (window.ZXing && window.ZXing.BrowserMultiFormatReader) {
-        try {
-          const reader = new window.ZXing.BrowserMultiFormatReader();
-          const res = await reader.decodeFromImageElement(img);
-          if (res && res.getText()) {
-            playBarcodeSuccessSound();
-            handleLookupBarcode(res.getText());
-            return;
-          }
-        } catch(e) {}
-      }
-
-      showToast("Could not detect barcode from image. Try manual entry below.");
-    };
+    if (window.Html5Qrcode) {
+      const html5QrCode = new window.Html5Qrcode("stoke-barcode-file-reader");
+      html5QrCode.scanFile(file, true)
+        .then(decodedText => {
+          playBarcodeSuccessSound();
+          handleLookupBarcode(decodedText);
+          try { html5QrCode.clear(); } catch(e) {}
+        })
+        .catch(err => {
+          console.warn("Scan file error:", err);
+          showToast("No barcode found in image. Try manual entry below.");
+          try { html5QrCode.clear(); } catch(e) {}
+        });
+    } else {
+      showToast("Photo scanner loading... try manual entry below.");
+    }
   };
 
-  // 5. Add to daily diary
+  // 4. Save to daily diary
   const handleSaveToLog = () => {
     if (!foundProduct) return;
     const ratio = (portionGrams || 100) / (foundProduct.grams || 100);
@@ -11106,7 +11108,7 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
         }, "Barcode Scanner"),
         React.createElement("div", {
           style: { fontSize: 10, color: "#10B981", fontWeight: 700 }
-        }, cameraActive ? "● Camera Active & Decoding" : "Manual / Photo Mode")
+        }, cameraActive ? "● Live Camera Scanning Active" : "Manual / Photo Mode")
       ),
       React.createElement("button", {
         type: "button",
@@ -11131,7 +11133,8 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
         accept: "image/*",
         style: { display: "none" },
         onChange: handleFileUpload
-      })
+      }),
+      React.createElement("div", { id: "stoke-barcode-file-reader", style: { display: "none" } })
     ),
 
     // Toast feedback
@@ -11153,31 +11156,22 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
       }
     }, toastMsg),
 
-    // Viewfinder Container
+    // Camera Viewfinder Container
     React.createElement("div", {
       style: {
         flex: 1,
         position: "relative",
-        background: "#111111",
+        background: "#000000",
         overflow: "hidden",
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
       }
     },
-      React.createElement("video", {
-        ref: videoRef,
-        playsInline: true,
-        muted: true,
-        style: {
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          display: cameraActive ? "block" : "none"
-        }
-      }),
+      // Target container where Html5Qrcode mounts
+      React.createElement("div", { id: "stoke-barcode-reader" }),
 
-      // Camera fallback message if camera inactive or permission denied
+      // Camera fallback if permission denied
       !cameraActive && React.createElement("div", {
         style: {
           position: "absolute",
@@ -11188,7 +11182,8 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           alignItems: "center",
           justifyContent: "center",
           padding: 24,
-          textAlign: "center"
+          textAlign: "center",
+          zIndex: 2
         }
       },
         React.createElement("span", { style: { fontSize: 44, marginBottom: 12 } }, "🏷️"),
@@ -11198,7 +11193,7 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
         )
       ),
 
-      // Reticle / Laser Viewfinder
+      // Laser Reticle Overlay
       React.createElement("div", {
         style: {
           position: "absolute",
@@ -11212,6 +11207,8 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
+          pointerEvents: "none",
+          zIndex: 5,
           transition: "border 0.2s ease"
         }
       },
@@ -11240,7 +11237,8 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           left: 14,
           right: 14,
           display: "flex",
-          gap: 6
+          gap: 6,
+          zIndex: 15
         }
       },
         React.createElement("input", {
@@ -11288,7 +11286,8 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           display: "flex",
           gap: 6,
           overflowX: "auto",
-          scrollbarWidth: "none"
+          scrollbarWidth: "none",
+          zIndex: 15
         }
       },
         [

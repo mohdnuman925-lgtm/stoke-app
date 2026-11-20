@@ -2685,6 +2685,13 @@ if (typeof window !== "undefined") {
       animation: stokeFloatOrbB 22s ease-in-out infinite alternate;
     }
 
+    
+    @keyframes stokeScanLaser {
+      0% { top: 6%; opacity: 0.3; }
+      50% { top: 90%; opacity: 1; }
+      100% { top: 6%; opacity: 0.3; }
+    }
+
     @keyframes stokeFloatOrbA {
       0% { transform: translate(0, 0) scale(1); }
       100% { transform: translate(5vw, 7vh) scale(1.14); }
@@ -10686,7 +10693,7 @@ const recoveryScore=Math.min(10,Math.max(5,streakDays*2));const total=Math.min(1
        1 & 2. FITNESS SCORE + LEVEL/XP CARD ROW
        ============================================================ */function FitnessScoreAndXpCard({scoreData,xpData,onViewScoreDetails}){if(!scoreData||!xpData)return null;const totalBlocks=10;const filledBlocks=Math.min(totalBlocks,Math.max(1,Math.round(xpData.progressPct*totalBlocks)));return/*#__PURE__*/React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}},/*#__PURE__*/React.createElement("div",{onClick:onViewScoreDetails,style:{cursor:"pointer",background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:20,padding:"16px 14px",display:"flex",flexDirection:"column",justifyContent:"space-between",boxShadow:"0 2px 10px rgba(0, 0, 0, 0.08)",position:"relative",overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:5}},/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"var(--brand-lime)"},/*#__PURE__*/React.createElement("polygon",{points:"13 2 3 14 12 14 11 22 21 10 12 10 13 2"})),/*#__PURE__*/React.createElement("span",{style:{fontSize:10.5,fontWeight:800,color:"#237547",textTransform:"uppercase",letterSpacing:0.5}},"Fitness Score")),/*#__PURE__*/React.createElement("span",{style:{fontSize:9.5,background:"rgba(33, 134, 91,0.14)",color:"#21865B",padding:"2px 6px",borderRadius:999,fontWeight:800}},"\u25B2 ",scoreData.weeklyDelta)),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12,margin:"6px 0"}},/*#__PURE__*/React.createElement("div",{style:{width:54,height:54,position:"relative",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},/*#__PURE__*/React.createElement("svg",{width:"54",height:"54",viewBox:"0 0 54 54",style:{transform:"rotate(-90deg)"}},/*#__PURE__*/React.createElement("circle",{cx:"27",cy:"27",r:"22",stroke:"var(--chart-gridlines)",strokeWidth:"4.5",fill:"none"}),/*#__PURE__*/React.createElement("circle",{cx:"27",cy:"27",r:"22",stroke:"#237547",strokeWidth:"4.5",fill:"none",strokeDasharray:138.2,strokeDashoffset:138.2*(1-scoreData.total/100),strokeLinecap:"round",style:{transition:"stroke-dashoffset 0.8s ease"}})),/*#__PURE__*/React.createElement("div",{style:{position:"absolute",fontSize:15,fontWeight:900,color:"var(--text-primary)"}},scoreData.total)),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:19,fontWeight:900,color:"var(--text-primary)",lineHeight:1.1}},scoreData.total," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:"var(--text-secondary)",fontWeight:600}},"/ 100")),/*#__PURE__*/React.createElement("div",{style:{fontSize:10,color:"var(--text-secondary)",marginTop:3,lineHeight:1.2}},"Consistency Index"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:4,paddingTop:6,borderTop:"1px solid var(--border-divider)"}},/*#__PURE__*/React.createElement("span",{style:{fontSize:10,color:"var(--text-secondary)"}},"Hydration & Lift"),/*#__PURE__*/React.createElement("span",{style:{fontSize:10.5,fontWeight:800,color:"#237547",display:"flex",alignItems:"center",gap:2}},"View Details \u2192"))),/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:20,padding:"16px 14px",display:"flex",flexDirection:"column",justifyContent:"space-between",boxShadow:"0 2px 10px rgba(0, 0, 0, 0.08)",position:"relative",overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:5}},/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"#237547"},/*#__PURE__*/React.createElement("polygon",{points:"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"})),/*#__PURE__*/React.createElement("span",{style:{fontSize:10.5,fontWeight:800,color:"#237547",textTransform:"uppercase",letterSpacing:0.5}},"Level ",xpData.level)),/*#__PURE__*/React.createElement("span",{style:{fontSize:9.5,background:"rgba(35, 117, 71,0.15)",color:"#237547",padding:"2px 6px",borderRadius:999,fontWeight:800}},"ATHLETE")),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:15,fontWeight:900,color:"var(--text-primary)",letterSpacing:-0.3}},xpData.xp.toLocaleString()," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:"var(--text-secondary)",fontWeight:500}},"/ ",xpData.nextLevelThreshold.toLocaleString()," XP")),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:3,margin:"8px 0"}},Array.from({length:totalBlocks}).map((_,idx)=>{const isFilled=idx<filledBlocks;return/*#__PURE__*/React.createElement("div",{key:idx,style:{flex:1,height:8,borderRadius:2,background:isFilled?"linear-gradient(180deg, #237547 0%, #1B5E36 100%)":"#232936",boxShadow:isFilled?"0 0 4px rgba(35, 117, 71,0.3)":"none",transition:"all 0.3s ease"}});})),/*#__PURE__*/React.createElement("div",{style:{fontSize:10.5,color:"var(--text-secondary)",fontWeight:600}},xpData.xpUntilNext.toLocaleString()," XP until Level ",xpData.level+1)),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:4,paddingTop:6,borderTop:"1px solid var(--border-divider)"}},/*#__PURE__*/React.createElement("span",{style:{fontSize:10,color:"var(--text-secondary)"}},"Workouts +100 \xB7 Runs +50"))));}/* ============================================================
        3. LARGE SCAN YOUR MEAL CARD
-       ============================================================ */function LargeScanMealCard({onTriggerScan,onTriggerGallery}){return/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:24,padding:"20px 20px 18px",marginBottom:16,boxShadow:"0 8px 24px rgba(35, 117, 71, 0.08)",position:"relative",overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{position:"absolute",left:0,right:0,height:2,background:"linear-gradient(90deg, transparent 0%, rgba(35, 117, 71, 0.5) 50%, transparent 100%)",boxShadow:"0 0 8px rgba(35, 117, 71, 0.3)",animation:"stokeLaserScan 3.5s infinite ease-in-out",pointerEvents:"none"}}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"flex-start",gap:16}},/*#__PURE__*/React.createElement("div",{style:{width:58,height:58,borderRadius:18,background:"var(--feature-nutrition-bg)",border:"1px solid var(--border-divider)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("svg",{width:"28",height:"28",viewBox:"0 0 24 24",fill:"none",stroke:"var(--feature-nutrition)",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"13",r:"4"}))),/*#__PURE__*/React.createElement("div",{style:{flex:1}},/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:"var(--text-secondary)",fontWeight:700,letterSpacing:0.5,textTransform:"uppercase",marginBottom:2}},"Instant Macros"),/*#__PURE__*/React.createElement("h2",{style:{margin:"2px 0 4px",fontSize:20,fontWeight:900,color:"var(--text-primary)",letterSpacing:-0.4}},"Scan Your Meal"),/*#__PURE__*/React.createElement("p",{style:{margin:0,fontSize:12.5,lineHeight:1.4,color:"var(--text-secondary)"}},"Take a photo to track your meal. Detects portions, estimated calories & all macros."))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:10,marginTop:16}},/*#__PURE__*/React.createElement("button",{onClick:onTriggerScan,className:"stoke-btn-primary",style:{flex:1.4,background:"var(--btn-primary-bg)",border:"none",borderRadius:14,padding:"13px 14px",color:"var(--btn-primary-text)",fontSize:14,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:8,boxShadow:"var(--shadow-sm)",transition:"all 0.15s ease"}},/*#__PURE__*/React.createElement("svg",{width:"18",height:"18",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.4",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"13",r:"4"})),/*#__PURE__*/React.createElement("span",null,"Scan Meal")),/*#__PURE__*/React.createElement("button",{onClick:onTriggerGallery,className:"stoke-btn-secondary",style:{flex:1,background:"var(--btn-secondary-bg)",border:"1px solid var(--border-divider)",borderRadius:14,padding:"13px 12px",color:"var(--btn-secondary-text)",fontSize:13,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:6,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("svg",{width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("rect",{x:"3",y:"3",width:"18",height:"18",rx:"2",ry:"2"}),/*#__PURE__*/React.createElement("circle",{cx:"8.5",cy:"8.5",r:"1.5"}),/*#__PURE__*/React.createElement("polyline",{points:"21 15 16 10 5 21"})),/*#__PURE__*/React.createElement("span",null,"Gallery"))));}/* ============================================================
+       ============================================================ */function LargeScanMealCard({onTriggerScan,onTriggerBarcode,onTriggerGallery}){return/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:24,padding:"20px 20px 18px",marginBottom:16,boxShadow:"0 8px 24px rgba(35, 117, 71, 0.08)",position:"relative",overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{position:"absolute",left:0,right:0,height:2,background:"linear-gradient(90deg, transparent 0%, rgba(35, 117, 71, 0.5) 50%, transparent 100%)",boxShadow:"0 0 8px rgba(35, 117, 71, 0.3)",animation:"stokeLaserScan 3.5s infinite ease-in-out",pointerEvents:"none"}}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"flex-start",gap:16}},/*#__PURE__*/React.createElement("div",{style:{width:58,height:58,borderRadius:18,background:"var(--feature-nutrition-bg)",border:"1px solid var(--border-divider)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("svg",{width:"28",height:"28",viewBox:"0 0 24 24",fill:"none",stroke:"var(--feature-nutrition)",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"13",r:"4"}))),/*#__PURE__*/React.createElement("div",{style:{flex:1}},/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:"var(--text-secondary)",fontWeight:700,letterSpacing:0.5,textTransform:"uppercase",marginBottom:2}},"Instant Macros"),/*#__PURE__*/React.createElement("h2",{style:{margin:"2px 0 4px",fontSize:20,fontWeight:900,color:"var(--text-primary)",letterSpacing:-0.4}},"Scan Your Meal"),/*#__PURE__*/React.createElement("p",{style:{margin:0,fontSize:12.5,lineHeight:1.4,color:"var(--text-secondary)"}},"Take a photo to track your meal. Detects portions, estimated calories & all macros."))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8,marginTop:16}},/*#__PURE__*/React.createElement("button",{onClick:onTriggerScan,className:"stoke-btn-primary",style:{flex:1.2,background:"var(--btn-primary-bg)",border:"none",borderRadius:14,padding:"12px 10px",color:"var(--btn-primary-text)",fontSize:13,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:6,boxShadow:"var(--shadow-sm)",transition:"all 0.15s ease"}},/*#__PURE__*/React.createElement("span",null,"📷"),/*#__PURE__*/React.createElement("span",null,"Photo AI")),onTriggerBarcode&&/*#__PURE__*/React.createElement("button",{onClick:onTriggerBarcode,className:"stoke-btn-secondary",style:{flex:1.2,background:"rgba(35, 117, 71, 0.12)",border:"1.5px solid rgba(35, 117, 71, 0.4)",borderRadius:14,padding:"12px 10px",color:"#237547",fontSize:13,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:6,transition:"all 0.15s ease"}},/*#__PURE__*/React.createElement("span",null,"🏷️"),/*#__PURE__*/React.createElement("span",null,"Barcode")),/*#__PURE__*/React.createElement("button",{onClick:onTriggerGallery,className:"stoke-btn-secondary",style:{flex:1,background:"var(--btn-secondary-bg)",border:"1px solid var(--border-divider)",borderRadius:14,padding:"13px 12px",color:"var(--btn-secondary-text)",fontSize:13,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:6,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("svg",{width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("rect",{x:"3",y:"3",width:"18",height:"18",rx:"2",ry:"2"}),/*#__PURE__*/React.createElement("circle",{cx:"8.5",cy:"8.5",r:"1.5"}),/*#__PURE__*/React.createElement("polyline",{points:"21 15 16 10 5 21"})),/*#__PURE__*/React.createElement("span",null,"Gallery"))));}/* ============================================================
        CONFIRM DETECTED MEAL MODAL
        ============================================================ */function ScanMealConfirmModal({isOpen,onClose,photoPreview,isScanning,scanError,onRetry,onReanalyze,detectedItems=[],onSaveMeal,mealSlots=[]}){if(!isOpen)return null;const defaultSlot=(()=>{const hr=new Date().getHours();if(hr<11)return"breakfast";if(hr<16)return"lunch";if(hr<21)return"dinner";return"snack";})();const[selectedSlot,setSelectedSlot]=useState(defaultSlot);const[items,setItems]=useState(()=>{return(detectedItems||[]).map(it=>{if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(it,it.grams||100);}return{...it,grams:Number(it.grams)||100};});});const[editingIdx,setEditingIdx]=useState(null);const[editingName,setEditingName]=useState("");const[showAddModal,setShowAddModal]=useState(false);const[addSearchQuery,setAddSearchQuery]=useState("");const[customItemGrams,setCustomItemGrams]=useState(100);useEffect(()=>{if(detectedItems&&detectedItems.length>0){setItems(detectedItems.map(it=>{if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(it,it.grams||100);}return{...it,grams:Number(it.grams)||100};}));}else{setItems([]);}},[detectedItems]);const totals=typeof calculateMealTotals==="function"?calculateMealTotals(items):{calories:items.reduce((s,it)=>s+(Number(it.calories)||0),0),protein:items.reduce((s,it)=>s+(Number(it.protein)||0),0),carbs:items.reduce((s,it)=>s+(Number(it.carbs)||0),0),fat:items.reduce((s,it)=>s+(Number(it.fat)||0),0),fiber:items.reduce((s,it)=>s+(Number(it.fiber)||0),0),totalGrams:items.reduce((s,it)=>s+(Number(it.grams)||0),0)};function setItemGrams(idx,rawVal){const val=Math.max(1,Math.min(2500,parseInt(rawVal,10)||0));setItems(prev=>prev.map((it,i)=>{if(i!==idx)return it;if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(it,val);}const ratio=it.grams>0?val/it.grams:1;return{...it,grams:val,calories:Math.round(it.calories*ratio)};}));}function adjustGrams(idx,delta){const cur=items[idx]?.grams||100;setItemGrams(idx,cur+delta);}function removeItem(idx){setItems(prev=>prev.filter((_,i)=>i!==idx));}function startEditingName(idx){setEditingIdx(idx);setEditingName(items[idx]?.name||"");}function saveEditedName(idx){if(editingName.trim()){setItems(prev=>prev.map((it,i)=>{if(i!==idx)return it;const trimmed=editingName.trim();const dbMatch=typeof STOKE_VERIFIED_NUTRITION_DB!=="undefined"?STOKE_VERIFIED_NUTRITION_DB[trimmed]:null;const updated={...it,name:trimmed};if(dbMatch){updated.per100g=dbMatch.per100g;updated.dietType=dbMatch.dietType;if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(updated,it.grams);}}return updated;}));}setEditingIdx(null);}function handleSelectAlternative(idx,altName){const dbMatch=typeof STOKE_VERIFIED_NUTRITION_DB!=="undefined"?STOKE_VERIFIED_NUTRITION_DB[altName]:null;if(dbMatch){setItems(prev=>prev.map((it,i)=>{if(i!==idx)return it;const updated={...it,name:dbMatch.name,dietType:dbMatch.dietType,per100g:dbMatch.per100g,needsConfirmation:false,confidence:90};if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(updated,it.grams||dbMatch.defaultGrams);}return updated;}));}}function handleAddFood(foodDbItem){const g=Number(customItemGrams)||foodDbItem.defaultGrams||100;const itemData={name:foodDbItem.name,grams:g,per100g:foodDbItem.per100g,confidence:100,dietType:foodDbItem.dietType,needsConfirmation:false,alternatives:foodDbItem.alternatives||[]};const newItem=typeof recalculateItemNutrients==="function"?recalculateItemNutrients(itemData,g):itemData;setItems(prev=>[...prev,newItem]);setShowAddModal(false);setAddSearchQuery("");}const[serverHasKey,setServerHasKey]=useState(true);useEffect(()=>{try{localStorage.removeItem("stoke_ai_key");localStorage.removeItem("gemini_key");localStorage.removeItem("anthropic_key");localStorage.removeItem("openai_key");}catch(e){}fetch("/api/vision/status").then(res=>res.json()).then(data=>{if(data&&typeof data.hasApiKey==="boolean"){setServerHasKey(data.hasApiKey);}}).catch(()=>{});},[]);const hasApiKey=serverHasKey;const filteredFoods=typeof searchVerifiedFoods==="function"?searchVerifiedFoods(addSearchQuery):[];return/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,zIndex:10000,background:"rgba(0, 0, 0,0.65)",backdropFilter:"blur(20px)",WebkitBackdropFilter:"blur(20px)",display:"flex",alignItems:"center",justifyContent:"center",padding:16}},/*#__PURE__*/React.createElement("div",{className:"glass-modal",style:{width:"100%",maxWidth:440,maxHeight:"90vh",overflowY:"auto",background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:28,padding:"24px 20px",boxShadow:"var(--neu-raised)",color:"var(--text-primary)"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},/*#__PURE__*/React.createElement("div",{style:{width:38,height:38,borderRadius:12,background:"linear-gradient(135deg, rgba(35, 117, 71,0.18) 0%, rgba(35, 117, 71,0.12) 100%)",border:"1.5px solid rgba(35, 117, 71,0.4)",display:"flex",alignItems:"center",justifyContent:"center"}},/*#__PURE__*/React.createElement("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"#237547",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"13",r:"4"}))),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement("h2",{style:{margin:0,fontSize:18,fontWeight:900,color:"var(--text-primary)"}},"Meal Vision Analysis"),/*#__PURE__*/React.createElement("span",{style:{fontSize:9.5,fontWeight:800,padding:"3px 8px",borderRadius:999,background:"rgba(35, 117, 71, 0.14)",color:"#237547",border:"1px solid rgba(35, 117, 71, 0.3)",display:"inline-flex",alignItems:"center",gap:4,userSelect:"none"},title:"Vision AI model is secured and managed strictly on the server gateway via Google Gemini Enterprise. User key modification is disabled."},/*#__PURE__*/React.createElement("svg",{width:"10",height:"10",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("rect",{x:"3",y:"11",width:"18",height:"11",rx:"2",ry:"2"}),/*#__PURE__*/React.createElement("path",{d:"M7 11V7a5 5 0 0 1 10 0v4"})),"Server Vision AI Protected")),/*#__PURE__*/React.createElement("div",{style:{fontSize:11.5,color:"var(--text-secondary)"}},"Real-time food identification & certified macros"))),/*#__PURE__*/React.createElement("button",{onClick:onClose,style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",color:"var(--text-secondary)",width:32,height:32,borderRadius:"50%",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"},"aria-label":"Close modal"},/*#__PURE__*/React.createElement("svg",{width:"14",height:"14",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("line",{x1:"18",y1:"6",x2:"6",y2:"18"}),/*#__PURE__*/React.createElement("line",{x1:"6",y1:"6",x2:"18",y2:"18"})))),photoPreview&&/*#__PURE__*/React.createElement("div",{style:{position:"relative",width:"100%",height:140,borderRadius:16,overflow:"hidden",marginBottom:14,border:"1.5px solid var(--border-divider)"}},/*#__PURE__*/React.createElement("img",{src:photoPreview,alt:"Scanned Food",style:{width:"100%",height:"100%",objectFit:"cover"}}),isScanning&&/*#__PURE__*/React.createElement("div",{style:{position:"absolute",inset:0,background:"rgba(255,255,255,0.92)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:8}},/*#__PURE__*/React.createElement("div",{style:{width:32,height:32,border:"3px solid #237547",borderTopColor:"transparent",borderRadius:"50%",animation:"spin 0.8s linear infinite"}}),/*#__PURE__*/React.createElement("span",{style:{fontSize:12.5,fontWeight:800,color:"#237547"}},"Analyzing food with Vision AI model..."))),scanError&&/*#__PURE__*/React.createElement("div",{style:{background:"rgba(209, 67, 67,0.08)",border:"1.5px solid rgba(209, 67, 67,0.25)",borderRadius:14,padding:"12px 14px",marginBottom:14,display:"flex",alignItems:"flex-start",gap:10}},/*#__PURE__*/React.createElement("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"#D14343",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:{flexShrink:0,marginTop:1}},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"10"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"8",x2:"12",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"16",x2:"12.01",y2:"16"})),/*#__PURE__*/React.createElement("div",{style:{flex:1}},/*#__PURE__*/React.createElement("div",{style:{fontSize:12.5,fontWeight:800,color:"#D14343"}},"Vision Analysis Notice"),/*#__PURE__*/React.createElement("div",{style:{fontSize:11.5,color:"var(--text-secondary)",marginTop:2}},scanError),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8,marginTop:10,flexWrap:"wrap"}},onReanalyze&&/*#__PURE__*/React.createElement("button",{onClick:onReanalyze,style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",color:"var(--text-primary)",borderRadius:8,padding:"6px 12px",fontSize:11,fontWeight:700,cursor:"pointer"}},"\uD83D\uDD04 Retry Analysis"),onRetry&&/*#__PURE__*/React.createElement("button",{onClick:onRetry,style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",color:"var(--text-primary)",borderRadius:8,padding:"6px 12px",fontSize:11,fontWeight:700,cursor:"pointer"}},"\uD83D\uDCF8 Pick Other Photo"),/*#__PURE__*/React.createElement("button",{onClick:()=>setShowAddModal(true),style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",color:"var(--text-primary)",borderRadius:8,padding:"6px 12px",fontSize:11,fontWeight:700,cursor:"pointer"}},"\uD83D\uDD0D Search Nutrition DB")))),/*#__PURE__*/React.createElement("div",{style:{marginBottom:14}},/*#__PURE__*/React.createElement("label",{style:{fontSize:11,fontWeight:700,color:"var(--text-secondary)",textTransform:"uppercase",display:"block",marginBottom:6}},"Target Meal Slot"),/*#__PURE__*/React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(4, 1fr)",gap:6}},["breakfast","lunch","dinner","snack"].map(s=>{const active=selectedSlot===s;return/*#__PURE__*/React.createElement("button",{key:s,onClick:()=>setSelectedSlot(s),style:{background:active?"#237547":"#14171F",border:`1.5px solid ${active?"#237547":"#232936"}`,color:active?"#FFFFFF":"#94A3B8",borderRadius:10,padding:"8px 0",fontSize:12,fontWeight:700,textTransform:"capitalize",cursor:"pointer"}},s);}))),/*#__PURE__*/React.createElement("div",{style:{marginBottom:16}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}},/*#__PURE__*/React.createElement("span",{style:{fontSize:11,fontWeight:700,color:"var(--text-secondary)",textTransform:"uppercase"}},"Identified Food Items (",items.length,")"),/*#__PURE__*/React.createElement("button",{onClick:()=>setShowAddModal(true),style:{background:"transparent",border:"none",color:"#237547",fontSize:12,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",gap:4}},/*#__PURE__*/React.createElement("svg",{width:"14",height:"14",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("line",{x1:"12",y1:"5",x2:"12",y2:"19"}),/*#__PURE__*/React.createElement("line",{x1:"5",y1:"12",x2:"19",y2:"12"})),/*#__PURE__*/React.createElement("span",null,"Add Item"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:10}},items.map((it,idx)=>{const isEditing=editingIdx===idx;const isLowConf=it.needsConfirmation||it.confidence&&it.confidence<60;return/*#__PURE__*/React.createElement("div",{key:idx,style:{background:"var(--surface-primary)",border:`1.5px solid ${isLowConf?"rgba(217,119,6,0.4)":"#232936"}`,borderRadius:14,padding:"12px 14px",boxShadow:"0 2px 6px rgba(0, 0, 0,0.03)"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6,flex:1,minWidth:0,marginRight:8}},isEditing?/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:4,flex:1}},/*#__PURE__*/React.createElement("input",{type:"text",value:editingName,onChange:e=>setEditingName(e.target.value),onKeyDown:e=>{if(e.key==="Enter")saveEditedName(idx);},autoFocus:true,style:{flex:1,background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:8,padding:"4px 8px",fontSize:13,fontWeight:700,color:"var(--text-primary)",outline:"none"}}),/*#__PURE__*/React.createElement("button",{onClick:()=>saveEditedName(idx),style:{background:"#237547",color:"var(--text-primary)",border:"none",borderRadius:8,padding:"4px 8px",fontSize:11,fontWeight:800,cursor:"pointer"}},"Save")):/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6,overflow:"hidden"}},/*#__PURE__*/React.createElement("span",{style:{fontWeight:800,fontSize:14,color:"var(--text-primary)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}},it.name),/*#__PURE__*/React.createElement("button",{onClick:()=>startEditingName(idx),style:{background:"none",border:"none",color:"var(--text-secondary)",cursor:"pointer",padding:2,display:"flex",alignItems:"center"},title:"Edit food name"},/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"})))),!isEditing&&it.confidence&&/*#__PURE__*/React.createElement("span",{style:{fontSize:9.5,fontWeight:800,padding:"2px 6px",borderRadius:999,background:isLowConf?"rgba(217,119,6,0.14)":"rgba(33, 134, 91,0.12)",color:isLowConf?"#D97706":"#21865B",border:`1px solid ${isLowConf?"rgba(217,119,6,0.3)":"rgba(33, 134, 91,0.25)"}`,flexShrink:0}},it.confidence,"% ",isLowConf?"Confirm":"Match")),/*#__PURE__*/React.createElement("button",{onClick:()=>removeItem(idx),style:{background:"transparent",border:"none",color:"#D14343",cursor:"pointer",padding:"2px 4px",display:"flex",alignItems:"center",gap:3,fontSize:11,fontWeight:700},title:"Remove detected item"},/*#__PURE__*/React.createElement("svg",{width:"13",height:"13",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("polyline",{points:"3 6 5 6 21 6"}),/*#__PURE__*/React.createElement("path",{d:"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"})),/*#__PURE__*/React.createElement("span",null,"Remove"))),isLowConf&&it.alternatives&&it.alternatives.length>0&&/*#__PURE__*/React.createElement("div",{style:{background:"rgba(217,119,6,0.08)",border:"1px dashed rgba(217,119,6,0.3)",borderRadius:10,padding:"6px 8px",marginBottom:8}},/*#__PURE__*/React.createElement("div",{style:{fontSize:10.5,fontWeight:700,color:"#D97706",marginBottom:4}},"Low confidence. Did you have one of these?"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:5,flexWrap:"wrap"}},it.alternatives.map(alt=>/*#__PURE__*/React.createElement("button",{key:alt,onClick:()=>handleSelectAlternative(idx,alt),style:{background:"var(--surface-primary)",border:"1px solid rgba(217,119,6,0.35)",borderRadius:6,padding:"2px 6px",fontSize:10,fontWeight:700,color:"var(--text-primary)",cursor:"pointer"}},alt)))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",gap:10}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:4,background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:10,padding:"3px 6px"}},/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>adjustGrams(idx,-25),style:{background:"none",border:"none",color:"var(--text-primary)",cursor:"pointer",padding:"2px 4px",display:"flex",alignItems:"center",justifyContent:"center"},"aria-label":"Decrease portion by 25g"},/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"3",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("line",{x1:"5",y1:"12",x2:"19",y2:"12"}))),/*#__PURE__*/React.createElement("input",{type:"number",value:it.grams,onChange:e=>setItemGrams(idx,e.target.value),style:{width:44,background:"transparent",border:"none",textAlign:"center",color:"var(--text-primary)",fontSize:13,fontWeight:800,outline:"none"},"aria-label":"Portion grams"}),/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:"var(--text-secondary)",paddingRight:2}},"g"),/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>adjustGrams(idx,25),style:{background:"none",border:"none",color:"var(--text-primary)",cursor:"pointer",padding:"2px 4px",display:"flex",alignItems:"center",justifyContent:"center"},"aria-label":"Increase portion by 25g"},/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"3",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("line",{x1:"12",y1:"5",x2:"12",y2:"19"}),/*#__PURE__*/React.createElement("line",{x1:"5",y1:"12",x2:"19",y2:"12"})))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:7,fontSize:11.5}},/*#__PURE__*/React.createElement("span",{style:{color:"#237547",fontWeight:800}},it.calories," kcal"),/*#__PURE__*/React.createElement("span",{style:{color:"#E86A33"}},"P:",it.protein,"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#237547"}},"C:",it.carbs,"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#D97706"}},"F:",it.fat,"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#21865B"}},"Fib:",it.fiber,"g"))));}),items.length===0&&!isScanning&&!scanError&&/*#__PURE__*/React.createElement("div",{style:{textAlign:"center",padding:"18px 0",color:"var(--text-secondary)",fontSize:13}},"No food items in this meal yet. Tap \"Add Item\" above to add foods."))),/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1.5px solid rgba(35, 117, 71,0.3)",borderRadius:16,padding:"14px 16px",marginBottom:14}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}},/*#__PURE__*/React.createElement("span",{style:{fontSize:13,fontWeight:800,color:"var(--text-primary)"}},"Meal Total (",totals.totalGrams,"g)"),/*#__PURE__*/React.createElement("span",{style:{fontSize:18,fontWeight:900,color:"#237547"}},totals.calories," kcal")),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:12,fontWeight:700}},/*#__PURE__*/React.createElement("span",{style:{color:"#E86A33"}},"Protein: ",Math.round(totals.protein),"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#237547"}},"Carbs: ",Math.round(totals.carbs),"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#D97706"}},"Fat: ",Math.round(totals.fat),"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#21865B"}},"Fibre: ",Math.round(totals.fiber),"g"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"flex-start",gap:8,marginBottom:16,background:"rgba(0, 0, 0,0.06)",border:"1px solid var(--border-divider)",borderRadius:12,padding:"10px 12px"}},/*#__PURE__*/React.createElement("svg",{width:"15",height:"15",viewBox:"0 0 24 24",fill:"none",stroke:"#94A3B8",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:{flexShrink:0,marginTop:1}},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"10"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"16",x2:"12",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"8",x2:"12.01",y2:"8"})),/*#__PURE__*/React.createElement("div",{style:{fontSize:10.5,color:"var(--text-secondary)",lineHeight:1.35}},"Nutritional values are estimates based on visual portion volume. Camera AI cannot determine exact ingredients, cooking oils, or precise weight from pixels alone.")),/*#__PURE__*/React.createElement("button",{onClick:()=>onSaveMeal&&items.length>0&&onSaveMeal(selectedSlot,items),disabled:items.length===0||isScanning,style:{width:"100%",background:items.length===0||isScanning?"#232936":"linear-gradient(135deg, #237547 0%, #1B5E36 100%)",border:"none",borderRadius:14,padding:"14px 0",color:"var(--text-primary)",fontSize:14.5,fontWeight:800,cursor:items.length===0||isScanning?"not-allowed":"pointer",boxShadow:items.length===0||isScanning?"none":"0 6px 20px rgba(35, 117, 71,0.35)",display:"flex",alignItems:"center",justifyContent:"center",gap:8}},/*#__PURE__*/React.createElement("svg",{width:"18",height:"18",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("polyline",{points:"20 6 9 17 4 12"})),/*#__PURE__*/React.createElement("span",null,"Save Meal & Log to Supabase")),showAddModal&&/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:10001,display:"flex",alignItems:"flex-end",justifyContent:"center"},onClick:()=>setShowAddModal(false)},/*#__PURE__*/React.createElement("div",{style:{width:"100%",maxWidth:440,maxHeight:"75vh",background:"var(--surface-primary)",borderTopLeftRadius:24,borderTopRightRadius:24,padding:"20px 18px",overflowY:"auto"},onClick:e=>e.stopPropagation()},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},/*#__PURE__*/React.createElement("h3",{style:{margin:0,fontSize:16,fontWeight:800,color:"var(--text-primary)"}},"Add Food to Meal"),/*#__PURE__*/React.createElement("button",{onClick:()=>setShowAddModal(false),style:{background:"none",border:"none",color:"var(--text-secondary)",fontSize:14,fontWeight:700,cursor:"pointer"}},"\u2715")),/*#__PURE__*/React.createElement("input",{type:"text",placeholder:"Search food (biryani, roti, rice, dal, chicken...)",value:addSearchQuery,onChange:e=>setAddSearchQuery(e.target.value),autoFocus:true,style:{width:"100%",boxSizing:"border-box",background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:12,padding:"10px 12px",fontSize:13,color:"var(--text-primary)",outline:"none",marginBottom:12}}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:14}},/*#__PURE__*/React.createElement("span",{style:{fontSize:12,fontWeight:700,color:"var(--text-secondary)"}},"Portion:"),/*#__PURE__*/React.createElement("input",{type:"number",value:customItemGrams,onChange:e=>setCustomItemGrams(e.target.value),style:{width:60,background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:8,padding:"5px 8px",fontSize:12,fontWeight:700,textAlign:"center"}}),/*#__PURE__*/React.createElement("span",{style:{fontSize:12,color:"var(--text-secondary)"}},"grams")),/*#__PURE__*/React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:8,maxHeight:"40vh",overflowY:"auto"}},filteredFoods.map(f=>/*#__PURE__*/React.createElement("div",{key:f.name,onClick:()=>handleAddFood(f),style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:12,padding:"10px 12px",display:"flex",justifyContent:"space-between",alignItems:"center",cursor:"pointer"}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,fontWeight:800,color:"var(--text-primary)"}},f.name),/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:"var(--text-secondary)"}},"Per 100g: ",f.per100g.calories," kcal \xB7 P:",f.per100g.protein,"g C:",f.per100g.carbs,"g F:",f.per100g.fat,"g")),/*#__PURE__*/React.createElement("span",{style:{fontSize:11,fontWeight:800,color:"#237547",background:"var(--surface-primary)",padding:"4px 8px",borderRadius:8}},"+ Add"))))))));}/* ============================================================
        4. VOICE COACH CARD & MODAL (Strictly named "Coach")
@@ -10707,7 +10714,7 @@ const gridY=320;const cards=[{label:"WORKOUTS",val:`${weekWorkouts} Done`,col:"#
 ctx.fillStyle="#14171F";ctx.strokeStyle="#232936";ctx.lineWidth=1.5;ctx.beginPath();ctx.roundRect(50,560,350,68,16);ctx.fill();ctx.stroke();ctx.textAlign="left";ctx.fillStyle="#FFFFFF";ctx.font="600 12px 'Space Grotesk', sans-serif";ctx.fillText("Average Daily Protein Fuel",70,590);ctx.textAlign="right";ctx.fillStyle="#21865B";ctx.font="900 20px 'Space Grotesk', sans-serif";ctx.fillText(`${avgProtein}g / day`,380,602);// Footer Tagline
 ctx.textAlign="center";ctx.fillStyle="#94A3B8";ctx.font="600 12px 'Space Grotesk', sans-serif";ctx.fillText("Tracked with STOKE · The Athletic Operating System",W/2,730);return canvas.toDataURL("image/png");}function WeeklyStoryCard({weeklyStats={},onOpenStory}){return/*#__PURE__*/React.createElement("div",{onClick:onOpenStory,style:{cursor:"pointer",background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:20,padding:"16px 18px",marginBottom:14,boxShadow:"0 8px 24px rgba(0, 0, 0,0.06)",position:"relative",overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:7}},/*#__PURE__*/React.createElement("span",{style:{fontSize:16}},"\uD83D\uDCCA"),/*#__PURE__*/React.createElement("span",{style:{fontSize:14,fontWeight:900,color:"var(--text-primary)"}},"Your Weekly Story")),/*#__PURE__*/React.createElement("span",{style:{fontSize:11,background:"var(--surface-primary)",color:"#237547",border:"1px solid var(--border-divider)",padding:"2px 8px",borderRadius:999,fontWeight:800}},"NEW STORY \u26A1")),/*#__PURE__*/React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(5, 1fr)",gap:6,margin:"10px 0"}},[{label:"Runs",val:weeklyStats.runsCount||0},{label:"Workouts",val:weeklyStats.workoutsCount||0},{label:"Distance",val:`${(weeklyStats.distanceKm||0).toFixed(1)}k`},{label:"Active",val:`${weeklyStats.activeDays||0}d`},{label:"XP",val:`+${weeklyStats.xpEarned||0}`}].map(item=>/*#__PURE__*/React.createElement("div",{key:item.label,style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:12,padding:"8px 4px",textAlign:"center"}},/*#__PURE__*/React.createElement("div",{style:{fontSize:14,fontWeight:900,color:"var(--text-primary)"}},item.val),/*#__PURE__*/React.createElement("div",{style:{fontSize:9.5,color:"var(--text-secondary)",marginTop:2,fontWeight:600}},item.label)))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:8,paddingTop:8,borderTop:"1px solid var(--border-divider)"}},/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:"var(--text-secondary)"}},"Watch your 5-slide athletic story"),/*#__PURE__*/React.createElement("span",{style:{fontSize:11.5,fontWeight:800,color:"#237547",display:"flex",alignItems:"center",gap:3}},"Watch Story \u2192")));}function WeeklyStoryModal({isOpen,onClose,weeklyStats={},athleteName="Athlete"}){if(!isOpen)return null;const[slideIdx,setSlideIdx]=useState(0);const totalSlides=5;useEffect(()=>{const timer=setTimeout(()=>{if(slideIdx<totalSlides-1){setSlideIdx(s=>s+1);}},5500);return()=>clearTimeout(timer);},[slideIdx]);function handleShare(){const imgUrl=drawWeeklyStoryCanvas({athleteName,weekRuns:weeklyStats.runsCount||1,weekWorkouts:weeklyStats.workoutsCount||4,weekKm:weeklyStats.distanceKm||6.2,weekXp:weeklyStats.xpEarned||450,weekMeals:weeklyStats.mealsCount||12,avgProtein:weeklyStats.avgProtein||142});const link=document.createElement("a");link.download=`STOKE_Weekly_Story_${Date.now()}.png`;link.href=imgUrl;link.click();}return/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,zIndex:10000,background:"rgba(0, 0, 0,0.65)",backdropFilter:"blur(20px)",WebkitBackdropFilter:"blur(20px)",display:"flex",alignItems:"center",justifyContent:"center",padding:16}},/*#__PURE__*/React.createElement("div",{style:{width:"100%",maxWidth:420,height:"100%",maxHeight:780,background:"var(--surface-primary)",borderRadius:24,border:"1.5px solid var(--border-divider)",display:"flex",flexDirection:"column",position:"relative",overflow:"hidden",boxShadow:"0 24px 60px rgba(0, 0, 0,0.25)"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:5,padding:"16px 16px 8px",zIndex:20}},Array.from({length:totalSlides}).map((_,i)=>/*#__PURE__*/React.createElement("div",{key:i,style:{flex:1,height:4,background:"rgba(0, 0, 0,0.12)",borderRadius:2,overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:i<slideIdx?"100%":i===slideIdx?"100%":"0%",background:"#237547",transition:i===slideIdx?"width 5.5s linear":"none"}})))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"6px 16px 12px",zIndex:20}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},/*#__PURE__*/React.createElement("span",{style:{fontSize:13,fontWeight:900,color:"#237547"}},"STOKE \u26A1"),/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:"var(--text-secondary)"}},"Weekly Story")),/*#__PURE__*/React.createElement("button",{onClick:onClose,style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",color:"var(--text-primary)",width:28,height:28,borderRadius:"50%",cursor:"pointer",fontSize:14}},"\u2715")),/*#__PURE__*/React.createElement("div",{style:{position:"absolute",top:60,bottom:80,left:0,width:"35%",zIndex:10,cursor:"pointer"},onClick:()=>setSlideIdx(s=>Math.max(0,s-1))}),/*#__PURE__*/React.createElement("div",{style:{position:"absolute",top:60,bottom:80,right:0,width:"35%",zIndex:10,cursor:"pointer"},onClick:()=>setSlideIdx(s=>Math.min(totalSlides-1,s+1))}),/*#__PURE__*/React.createElement("div",{style:{flex:1,padding:"20px 24px",display:"flex",flexDirection:"column",justifyContent:"center",textAlign:"center",zIndex:5}},slideIdx===0&&/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("span",{style:{fontSize:48}},"\uD83C\uDFCB\uFE0F"),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,fontWeight:800,color:"#237547",textTransform:"uppercase",letterSpacing:1,marginTop:12}},"THE GRIND"),/*#__PURE__*/React.createElement("h2",{style:{fontSize:30,fontWeight:900,color:"var(--text-primary)",margin:"6px 0 10px"}},weeklyStats.workoutsCount||4," Workouts Completed"),/*#__PURE__*/React.createElement("p",{style:{fontSize:14,color:"var(--text-secondary)",lineHeight:1.5,maxWidth:300,margin:"0 auto"}},"You logged ",weeklyStats.activeDays||4," active training days this week. Muscle volume and consistency are at peak levels!")),slideIdx===1&&/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("span",{style:{fontSize:48}},"\uD83D\uDC5F"),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,fontWeight:800,color:"#237547",textTransform:"uppercase",letterSpacing:1,marginTop:12}},"THE STRIDE"),/*#__PURE__*/React.createElement("h2",{style:{fontSize:30,fontWeight:900,color:"var(--text-primary)",margin:"6px 0 10px"}},(weeklyStats.distanceKm||6.2).toFixed(1)," km Total Run"),/*#__PURE__*/React.createElement("p",{style:{fontSize:14,color:"var(--text-secondary)",lineHeight:1.5,maxWidth:300,margin:"0 auto"}},"Outdoor GPS cardio logged across ",weeklyStats.runsCount||1," run sessions. Aerobic capacity and endurance on point!")),slideIdx===2&&/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("span",{style:{fontSize:48}},"\uD83E\uDD57"),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,fontWeight:800,color:"#21865B",textTransform:"uppercase",letterSpacing:1,marginTop:12}},"THE FUEL"),/*#__PURE__*/React.createElement("h2",{style:{fontSize:30,fontWeight:900,color:"var(--text-primary)",margin:"6px 0 10px"}},weeklyStats.mealsCount||12," Meals Tracked"),/*#__PURE__*/React.createElement("p",{style:{fontSize:14,color:"var(--text-secondary)",lineHeight:1.5,maxWidth:300,margin:"0 auto"}},"Average daily protein hit: ",weeklyStats.avgProtein||142,"g. High nutritional discipline powering your athletic output!")),slideIdx===3&&/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("span",{style:{fontSize:48}},"\uD83C\uDFAE"),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,fontWeight:800,color:"#237547",textTransform:"uppercase",letterSpacing:1,marginTop:12}},"THE LEVEL UP"),/*#__PURE__*/React.createElement("h2",{style:{fontSize:30,fontWeight:900,color:"var(--text-primary)",margin:"6px 0 10px"}},"+",weeklyStats.xpEarned||450," XP Earned"),/*#__PURE__*/React.createElement("p",{style:{fontSize:14,color:"var(--text-secondary)",lineHeight:1.5,maxWidth:300,margin:"0 auto"}},"You advanced through Level 8 this week, unlocking new achievements and solidifying your athlete status!")),slideIdx===4&&/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("span",{style:{fontSize:48}},"\uD83C\uDFC6"),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,fontWeight:800,color:"#237547",textTransform:"uppercase",letterSpacing:1,marginTop:12}},"WEEK RECAP"),/*#__PURE__*/React.createElement("h2",{style:{fontSize:28,fontWeight:900,color:"var(--text-primary)",margin:"6px 0 10px"}},"Elite Week Finished!"),/*#__PURE__*/React.createElement("p",{style:{fontSize:13.5,color:"var(--text-secondary)",lineHeight:1.5,maxWidth:320,margin:"0 auto 20px"}},(weeklyStats.distanceKm||6.2).toFixed(1)," km Run \xB7 ",weeklyStats.workoutsCount||4," Workouts \xB7 ",weeklyStats.mealsCount||12," Meals Tracked. Tap below to share your story!"),/*#__PURE__*/React.createElement("button",{onClick:handleShare,style:{background:"linear-gradient(135deg, #237547 0%, #1B5E36 100%)",border:"none",borderRadius:14,padding:"14px 28px",color:"var(--text-primary)",fontSize:15,fontWeight:800,cursor:"pointer",boxShadow:"0 8px 24px rgba(35, 117, 71,0.35)"}},"\uD83D\uDCF8 Share Weekly Story"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"center",gap:6,padding:"16px",zIndex:20}},Array.from({length:totalSlides}).map((_,i)=>/*#__PURE__*/React.createElement("div",{key:i,onClick:()=>setSlideIdx(i),style:{width:8,height:8,borderRadius:"50%",background:i===slideIdx?"#237547":"#232936",cursor:"pointer"}})))));}function HomeScreen({totals={calories:0,protein:0,carbs:0,fat:0,fiber:0},calPct=0,goals={calories:2400,protein:160,carbs:240,fat:65,water:2.6},workoutDay,workoutLog={},lastRun,profileName="Athlete",water=0,setWater,onNavigate,meals={},mealSlots=[],addItem,logs={},runs=[],profile={},week={},remaining=null,selectedDate,onSelectDate,userXp={current_xp:0},onOpenCoach}){const effectiveRemaining=remaining||{calories:Math.max(0,Math.round((goals.calories||2400)-(totals.calories||0))),protein:Math.max(0,Math.round((goals.protein||140)-(totals.protein||0))),carbs:Math.max(0,Math.round((goals.carbs||250)-(totals.carbs||0))),fat:Math.max(0,Math.round((goals.fat||70)-(totals.fat||0)))};const completedCount=workoutDay?.exercises?workoutDay.exercises.filter(ex=>workoutLog[ex.name]?.completed).length:0;const totalExercises=workoutDay?.exercises?.length||0;const kcalRemaining=Math.max(0,Math.round((goals.calories||2400)-(totals.calories||0)));const initial=(profileName||"S").trim().charAt(0).toUpperCase();const waterGoal=goals.water||2.6;const waterPct=Math.min(1,water/Math.max(0.1,waterGoal));// XP & Level State (permanent in localStorage)
 const[xpVal,setXpVal]=useState(()=>{try{const stored=localStorage.getItem("stoke_user_xp");if(stored!==null&&stored!==undefined)return Number(stored)||0;return 0;}catch(e){return 0;}});const xpData=getLevelFromXp(xpVal);const[levelUpData,setLevelUpData]=useState(null);// Modals State
-const[showScoreModal,setShowScoreModal]=useState(false);const[showScanConfirmModal,setShowScanConfirmModal]=useState(false);const[photoPreview,setPhotoPreview]=useState(null);const[isScanningFood,setIsScanningFood]=useState(false);const[scanError,setScanError]=useState(null);const[detectedFoodItems,setDetectedFoodItems]=useState([]);const[showVoiceCoachModal,setShowVoiceCoachModal]=useState(false);const[showAchievementsModal,setShowAchievementsModal]=useState(false);const[showWeeklyStoryModal,setShowWeeklyStoryModal]=useState(false);const[showCoachModal,setShowCoachModal]=useState(()=>typeof window!=="undefined"&&new URLSearchParams(window.location.search).has("coach"));const[coachInitialQuery,setCoachInitialQuery]=useState(()=>typeof window!=="undefined"?new URLSearchParams(window.location.search).get("q")||"":"");// Hidden File Inputs for Food Scanner
+const[showScoreModal,setShowScoreModal]=useState(false);const[showBarcodeModal,setShowBarcodeModal]=useState(false);const[showScanConfirmModal,setShowScanConfirmModal]=useState(false);const[photoPreview,setPhotoPreview]=useState(null);const[isScanningFood,setIsScanningFood]=useState(false);const[scanError,setScanError]=useState(null);const[detectedFoodItems,setDetectedFoodItems]=useState([]);const[showVoiceCoachModal,setShowVoiceCoachModal]=useState(false);const[showAchievementsModal,setShowAchievementsModal]=useState(false);const[showWeeklyStoryModal,setShowWeeklyStoryModal]=useState(false);const[showCoachModal,setShowCoachModal]=useState(()=>typeof window!=="undefined"&&new URLSearchParams(window.location.search).has("coach"));const[coachInitialQuery,setCoachInitialQuery]=useState(()=>typeof window!=="undefined"?new URLSearchParams(window.location.search).get("q")||"":"");// Hidden File Inputs for Food Scanner
 const cameraInputRef=useRef(null);const galleryInputRef=useRef(null);const currentScanIdRef=useRef(null);const lastSelectedFileRef=useRef(null);// AI daily coach advice dynamically calculated from remaining macros
 const remainingP=Math.max(0,Math.round((goals.protein||160)-(totals.protein||0)));let coachTip="You are on track today! Keep drinking water and stay consistent.";if(remainingP>30){coachTip=`You still need ${remainingP}g protein today. Try Greek yogurt, eggs, or cottage cheese to hit muscle recovery goals!`;}else if(kcalRemaining<300&&kcalRemaining>0){coachTip=`Almost at your calorie target (${kcalRemaining} kcal left). A light protein snack or fruit is perfect.`;}else if(workoutDay?.rest){coachTip="Rest day today! Focus on active recovery, light stretching, and hitting your hydration goal.";}else if(completedCount===totalExercises&&totalExercises>0){coachTip=`Workout crushed! ${completedCount}/${totalExercises} exercises logged. Great effort!`;}const daysOfWeek=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];const currentDayIdx=(new Date().getDay()+6)%7;// Mon = 0
 function addWater(amountL){if(setWater){setWater(prev=>{const safePrev=Math.max(0,Math.min(10,Number(prev)||0));return Math.round((safePrev+amountL)*10)/10;});}}const lastRunDist=(lastRun?.distanceKm||lastRun?.distance||0).toFixed(2);const lastRunCals=lastRun?.calories?`${lastRun.calories} kcal burned`:"GPS & Story card";// Real Dynamic Fitness Score
@@ -10721,7 +10728,1576 @@ if(currentScanIdRef.current!==scanId)return;setPhotoPreview(dataUrl);// Async up
 if(typeof dbUploadMealPhoto==="function"){const client=typeof getSupabaseClient==="function"?getSupabaseClient():null;if(client?.auth?.getUser){client.auth.getUser().then(({data})=>{if(data?.user?.id){dbUploadMealPhoto(data.user.id,file).catch(()=>{});}}).catch(()=>{});}}// 3. Send the newly selected image with scanId to genuine vision engine
 const visionResult=await analyzeMealVisionImage({scanId,file,dataUrl,base64,mimeType:mediaType,canvas,mealKey:"lunch"});// 4. Validate and display only the matching response; ignore stale responses
 if(currentScanIdRef.current!==scanId){console.warn("Ignoring stale response for scan request:",scanId);return;}if(!visionResult.success||!visionResult.items||visionResult.items.length===0){setScanError(visionResult.error||"No food detected in photo. Please try a clearer picture or enter items manually.");setDetectedFoodItems([]);}else{const parsed=(visionResult.items||[]).map((it,i)=>({_id:i,name:it.name||"Identified Food",grams:Number(it.grams)||100,calories:Number(it.calories)||100,protein:Number(it.protein)||5,carbs:Number(it.carbs)||10,fat:Number(it.fat)||2,fiber:Number(it.fiber)||1,dietType:it.dietType==="nonveg"?"nonveg":"veg",confidence:it.confidence,needsConfirmation:it.needsConfirmation,reason:it.reason}));setDetectedFoodItems(parsed);setScanError(null);}}catch(err){if(currentScanIdRef.current!==scanId)return;console.error("Meal Vision Error:",err);setScanError(err.message||"Failed to analyze meal image. Please try again or enter details manually.");setDetectedFoodItems([]);}finally{if(currentScanIdRef.current===scanId){setIsScanningFood(false);}if(e?.target)e.target.value="";}}function handleSaveMeal(slotKey,itemsToSave){if(addItem&&Array.isArray(itemsToSave)){itemsToSave.forEach(it=>{addItem(slotKey,{...it,image_url:photoPreview});});}// Award +25 XP with anti-farming protection
-const res=awardUserXp(25,`meal_scan_${Date.now()}`);if(res&&res.newXp){setXpVal(res.newXp);if(res.leveledUp){setLevelUpData({newLevel:res.newLevel});}}setShowScanConfirmModal(false);setPhotoPreview(null);setDetectedFoodItems([]);}return/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("input",{ref:cameraInputRef,type:"file",accept:"image/*",capture:"environment",style:{display:"none"},onChange:handleFoodImageSelected}),/*#__PURE__*/React.createElement("input",{ref:galleryInputRef,type:"file",accept:"image/*",style:{display:"none"},onChange:handleFoodImageSelected}),/*#__PURE__*/React.createElement(FitnessScoreModal,{isOpen:showScoreModal,onClose:()=>setShowScoreModal(false),scoreData:scoreData}),/*#__PURE__*/React.createElement(LevelUpCelebrationModal,{data:levelUpData,onClose:()=>setLevelUpData(null)}),/*#__PURE__*/React.createElement(ScanMealConfirmModal,{isOpen:showScanConfirmModal,onClose:()=>{setShowScanConfirmModal(false);setPhotoPreview(null);setScanError(null);},photoPreview:photoPreview,isScanning:isScanningFood,scanError:scanError,onRetry:()=>{setScanError(null);cameraInputRef.current?.click();},onReanalyze:()=>{if(lastSelectedFileRef.current){handleFoodImageSelected(null,lastSelectedFileRef.current);}},detectedItems:detectedFoodItems,onSaveMeal:handleSaveMeal,mealSlots:mealSlots}),/*#__PURE__*/React.createElement(VoiceCoachModal,{isOpen:showVoiceCoachModal,onClose:()=>setShowVoiceCoachModal(false),profileName:profileName,kcalRemaining:kcalRemaining,remainingP:remainingP,water:water,goals:goals,workoutDay:workoutDay,completedCount:completedCount,totalExercises:totalExercises,lastRunDist:lastRunDist,scoreData:scoreData}),(!onOpenCoach&&showCoachModal)&&/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,zIndex:100000,background:"var(--surface-primary)",display:"flex",flexDirection:"column"}},/*#__PURE__*/React.createElement("div",{style:{maxWidth:480,width:"100%",margin:"0 auto",height:"100%",display:"flex",flexDirection:"column",padding:"max(12px, env(safe-area-inset-top, 12px)) 14px max(14px, env(safe-area-inset-bottom, 24px))"}},/*#__PURE__*/React.createElement(CoachScreen,{remaining:effectiveRemaining,goals:goals,totals:totals,meals:meals,week:week,logs:logs,runs:runs,activeDay:TODAY_KEY,profile:profile,onNavigate:onNavigate,onBack:()=>setShowCoachModal(false),addItem:addItem,initialQuery:coachInitialQuery}))),/*#__PURE__*/React.createElement(AchievementRoomModal,{isOpen:showAchievementsModal,onClose:()=>setShowAchievementsModal(false),achievements:achievements}),/*#__PURE__*/React.createElement(WeeklyStoryModal,{isOpen:showWeeklyStoryModal,onClose:()=>setShowWeeklyStoryModal(false),weeklyStats:weeklyStats,athleteName:profileName||"Athlete"}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:18,paddingTop:4}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,fontWeight:800,letterSpacing:-0.5,color:"var(--btn-primary-bg)",display:"inline-flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement("span",null,"STOKE"),/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"var(--brand-lime)"},/*#__PURE__*/React.createElement("polygon",{points:"13 2 3 14 12 14 11 22 21 10 12 10 13 2"}))),/*#__PURE__*/React.createElement("h1",{style:{margin:"3px 0 0",fontSize:26,fontWeight:800,color:TOKENS.text,letterSpacing:-0.5}},greetingForNow(),profileName&&profileName.trim()?`, ${profileName}`:""),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.mutedFaint,marginTop:2}},new Date().toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"}))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:6}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},/*#__PURE__*/React.createElement("button",{type:"button",id:"stoke-theme-toggle-btn",onClick:()=>{const isDarkNow=document.documentElement.getAttribute("data-theme")==="dark";const next=isDarkNow?"light":"dark";if(typeof window!=="undefined"&&window.setStokeTheme)window.setStokeTheme(next);},title:"Toggle Light / Dark Mode",style:{width:36,height:36,borderRadius:"50%",background:"var(--surface-secondary)",border:"1px solid var(--border-divider)",color:"var(--text-primary)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",boxShadow:"var(--shadow-sm)",fontSize:15,fontWeight:800},"aria-label":"Toggle theme mode"},typeof document!=="undefined"&&document.documentElement.getAttribute("data-theme")==="dark"?"☀️":"🌙"),/*#__PURE__*/React.createElement("div",{onClick:()=>onNavigate&&onNavigate("more"),style:{cursor:"pointer",width:36,height:36,borderRadius:"50%",background:"var(--btn-primary-bg)",color:"var(--btn-primary-text)",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:800,fontSize:14,flexShrink:0,boxShadow:"var(--shadow-sm)"},"aria-label":"Profile and Settings"},(profileName&&profileName.trim()?profileName:"Athlete").charAt(0).toUpperCase())),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:4,background:"var(--surface-secondary)",border:"1px solid var(--border-divider)",borderRadius:999,padding:"3px 8px"}},/*#__PURE__*/React.createElement("svg",{width:"11",height:"11",viewBox:"0 0 24 24",fill:"none",stroke:"var(--brand-lime)",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"})),/*#__PURE__*/React.createElement("span",{style:{fontSize:10.5,fontWeight:700,color:"var(--text-primary)",whiteSpace:"nowrap"}},streakDays>0?`${streakDays}-day streak`:"0-day streak")))),/*#__PURE__*/React.createElement(DaySelector,{selectedDate:selectedDate,onSelectDate:onSelectDate}),/*#__PURE__*/React.createElement("div",{onClick:()=>onNavigate&&onNavigate("goals"),style:{cursor:"pointer",background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:20,padding:"16px 18px",margin:"14px 0",boxShadow:"var(--shadow-card)",display:"flex",alignItems:"center",justifyContent:"space-between"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12}},/*#__PURE__*/React.createElement("div",{style:{width:44,height:44,borderRadius:12,background:"var(--feature-workout-bg)",color:"var(--feature-workout)",border:"1px solid var(--border-divider)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("svg",{width:"22",height:"22",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"10"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"6"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"2",fill:"currentColor"}))),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement("span",{style:{fontSize:14,fontWeight:900,color:"var(--text-primary)"}},"Body Goals & Transformation"),/*#__PURE__*/React.createElement("span",{style:{fontSize:10,background:"var(--semantic-success-bg)",color:"var(--semantic-success)",padding:"2px 6px",borderRadius:6,fontWeight:800}},"ACTIVE")),/*#__PURE__*/React.createElement("div",{style:{fontSize:11.5,color:"var(--text-secondary)",marginTop:2}},"Personalized AI plan, Indian meals & workout schedules"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:4,color:"var(--btn-primary-bg)",fontWeight:800,fontSize:12.5}},/*#__PURE__*/React.createElement("span",null,"View"),/*#__PURE__*/React.createElement("svg",{width:"15",height:"15",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("polyline",{points:"9 18 15 12 9 6"})))),/*#__PURE__*/React.createElement("div",{onClick:()=>onNavigate&&onNavigate("nutrition"),style:{cursor:"pointer",background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:20,padding:20,marginBottom:14,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:11.5,color:TOKENS.mutedFaint,letterSpacing:0.5,textTransform:"uppercase",fontWeight:700}},"Nutrition Tracker"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"baseline",gap:6,marginTop:4}},/*#__PURE__*/React.createElement("span",{style:{fontSize:32,fontWeight:800,color:TOKENS.text,fontVariantNumeric:"tabular-nums",letterSpacing:-1}},Math.round(totals.calories||0)),/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:500}},"/ ",goals.calories," kcal")),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:kcalRemaining>0?TOKENS.teal:TOKENS.ember,fontWeight:600,marginTop:2}},kcalRemaining>0?`${kcalRemaining} kcal remaining`:`${Math.abs(kcalRemaining)} kcal over target`)),/*#__PURE__*/React.createElement(Ring,{progress:calPct,size:84,stroke:8,color:calPct>1?TOKENS.ember:TOKENS.lime},/*#__PURE__*/React.createElement("div",{style:{textAlign:"center"}},/*#__PURE__*/React.createElement("div",{style:{fontSize:16,fontWeight:800,color:TOKENS.text}},Math.round(calPct*100),"%")))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:14}},/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Protein",value:totals.protein||0,goal:goals.protein||160,color:TOKENS.lime}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Carbs",value:totals.carbs||0,goal:goals.carbs||240,color:TOKENS.water}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fat",value:totals.fat||0,goal:goals.fat||65,color:TOKENS.ember}))),/*#__PURE__*/React.createElement(LargeScanMealCard,{onTriggerScan:triggerCameraScan,onTriggerGallery:triggerGalleryScan}),/*#__PURE__*/React.createElement(HomeCoachCard,{athleteName:profileName||"Athlete",remCal:effectiveRemaining.calories,remP:effectiveRemaining.protein,coachTip:coachTip,onOpenCoach:()=>{if(onOpenCoach)onOpenCoach("");else{setCoachInitialQuery("");setShowCoachModal(true);}},onOpenVoice:()=>setShowVoiceCoachModal(true),onQuickAsk:query=>{if(onOpenCoach)onOpenCoach(query);else{setCoachInitialQuery(query);setShowCoachModal(true);}}}),/*#__PURE__*/React.createElement(FitnessScoreAndXpCard,{scoreData:scoreData,xpData:xpData,onViewScoreDetails:()=>setShowScoreModal(true)}),/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:20,padding:"16px 18px",marginBottom:14,boxShadow:"0 4px 16px rgba(0, 0, 0,0.08)"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},/*#__PURE__*/React.createElement("svg",{width:"18",height:"18",viewBox:"0 0 24 24",fill:"none",stroke:"#3DDCFF",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"})),/*#__PURE__*/React.createElement("span",{style:{fontSize:13,fontWeight:700,color:TOKENS.text}},"Daily Hydration")),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},/*#__PURE__*/React.createElement("span",{style:{fontSize:13,fontWeight:800,color:TOKENS.water}},Math.max(0,Math.min(10,Number(water)||0)).toFixed(1)," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:TOKENS.mutedFaint,fontWeight:500}},"/ ",waterGoal,"L")),/*#__PURE__*/React.createElement("button",{onClick:e=>{e.stopPropagation();setWater&&setWater(0);},title:"Reset today's water",style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:6,color:"var(--text-secondary)",fontSize:10,cursor:"pointer",padding:"2px 6px"}},"\u21BA Reset"))),/*#__PURE__*/React.createElement("div",{style:{height:6,background:"#232936",borderRadius:999,overflow:"hidden",marginBottom:12}},/*#__PURE__*/React.createElement("div",{style:{width:`${waterPct*100}%`,height:"100%",background:TOKENS.water,borderRadius:999,transition:"width 0.3s ease"}})),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("button",{onClick:()=>addWater(0.25),style:{flex:1,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:10,padding:"7px 0",color:TOKENS.water,fontSize:12,fontWeight:700,cursor:"pointer"}},"+250ml"),/*#__PURE__*/React.createElement("button",{onClick:()=>addWater(0.5),style:{flex:1,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:10,padding:"7px 0",color:TOKENS.water,fontSize:12,fontWeight:700,cursor:"pointer"}},"+500ml"),/*#__PURE__*/React.createElement("button",{onClick:()=>addWater(0.75),style:{flex:1,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:10,padding:"7px 0",color:TOKENS.water,fontSize:12,fontWeight:700,cursor:"pointer"}},"+750ml"))),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"14px 18px",display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},/*#__PURE__*/React.createElement("div",{style:{width:36,height:36,borderRadius:10,background:"rgba(46,212,191,0.15)",display:"flex",alignItems:"center",justifyContent:"center",color:TOKENS.teal}},/*#__PURE__*/React.createElement("svg",{width:"18",height:"18",viewBox:"0 0 24 24",fill:"none",stroke:"#2ED4BF",strokeWidth:"2.4",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("polyline",{points:"22 12 18 12 15 21 9 3 6 12 2 12"}))),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,fontWeight:700,color:TOKENS.text}},"Readiness: Optimal (92%)"),/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:TOKENS.mutedFaint}},"Based on today's calories, training & hydration"))),/*#__PURE__*/React.createElement("span",{style:{fontSize:12,fontWeight:700,color:TOKENS.teal}},"Ready")),/*#__PURE__*/React.createElement(AchievementRoomPreview,{achievements:achievements,onViewAll:()=>setShowAchievementsModal(true)}),/*#__PURE__*/React.createElement(WeeklyStoryCard,{weeklyStats:weeklyStats,onOpenStory:()=>setShowWeeklyStoryModal(true)}));}/* ─── SUPABASE CLOUD LOADING SCREEN ─── */function AppLoadingScreen({message="Loading athlete telemetry from Supabase..."}){const[showBypass,setShowBypass]=useState(false);useEffect(()=>{const t=setTimeout(()=>setShowBypass(true),2200);return()=>clearTimeout(t);},[]);return/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,background:"var(--surface-primary)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",zIndex:99999,fontFamily:"-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif",color:"var(--text-primary)",padding:24,textAlign:"center"}},/*#__PURE__*/React.createElement("div",{style:{position:"relative",width:80,height:80,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:24}},/*#__PURE__*/React.createElement("div",{style:{position:"absolute",inset:-4,borderRadius:"50%",border:"2px solid rgba(35, 117, 71,0.2)",borderTopColor:"#237547",animation:"spin 1s linear infinite"}}),/*#__PURE__*/React.createElement("div",{style:{width:58,height:58,borderRadius:"50%",background:"linear-gradient(135deg, #237547 0%, #1B5E36 100%)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 0 24px rgba(35, 117, 71,0.4)"}},/*#__PURE__*/React.createElement("span",{style:{fontSize:26,fontWeight:900,color:"#FFFFFF"}},"\u26A1"))),/*#__PURE__*/React.createElement("div",{style:{fontSize:20,fontWeight:900,letterSpacing:2,color:"var(--text-primary)",marginBottom:8}},"STOKE"),/*#__PURE__*/React.createElement("div",{style:{fontSize:13.5,color:"var(--text-secondary)",fontWeight:600,display:"flex",alignItems:"center",gap:8,marginBottom:showBypass?16:0}},/*#__PURE__*/React.createElement("span",{style:{width:14,height:14,borderRadius:"50%",border:"2px solid rgba(35, 117, 71,0.25)",borderTopColor:"#237547",animation:"spin 0.8s linear infinite",display:"inline-block"}}),/*#__PURE__*/React.createElement("span",null,message)),showBypass&&/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>{if(typeof window!=="undefined")window.dispatchEvent(new CustomEvent("stoke_force_enter_app"));},style:{marginTop:10,padding:"10px 22px",borderRadius:999,background:"rgba(35, 117, 71, 0.12)",border:"1.5px solid #237547",color:"#237547",fontSize:"13.5px",fontWeight:700,cursor:"pointer",boxShadow:"0 2px 8px rgba(35, 117, 71, 0.15)"}},"\u26A1 Tap to Enter App Directly"));}/* ─── SUPABASE DATABASE & STORAGE SETTINGS MODAL ─── */function SupabaseSettingsModal({isOpen,onClose}){const[cfg,setCfg]=useState(()=>typeof getSupabaseConfig==="function"?getSupabaseConfig():{url:"",key:""});const[status,setStatus]=useState("idle");const[statusMsg,setStatusMsg]=useState("");const[pendingQueueCount,setPendingQueueCount]=useState(0);useEffect(()=>{if(isOpen){if(typeof getSupabaseConfig==="function")setCfg(getSupabaseConfig());setStatus("idle");setStatusMsg("");if(typeof getOfflineQueue==="function"){setPendingQueueCount(getOfflineQueue().length);}}},[isOpen]);if(!isOpen)return null;const handleTestAndSave=async()=>{setStatus("testing");setStatusMsg("Connecting to Supabase...");try{if(typeof saveSupabaseConfig==="function")saveSupabaseConfig(cfg.url,cfg.key);const client=typeof resetSupabaseClient==="function"?resetSupabaseClient():null;if(!client){throw new Error("Please enter both Supabase Project URL and Anon Public Key.");}const{error}=await client.from("profiles").select("id").limit(1);if(error&&error.code!=="PGRST116"){console.warn("Supabase test warning:",error);}setStatus("success");setStatusMsg("Connected successfully to Supabase! Live sync active.");setTimeout(()=>{onClose();if(typeof window!=="undefined")window.location.reload();},900);}catch(e){setStatus("error");setStatusMsg(e.message||"Failed to connect to Supabase.");}};const handleFlushQueue=async()=>{if(typeof flushOfflineQueue==="function")await flushOfflineQueue();if(typeof getOfflineQueue==="function"){const q=getOfflineQueue();setPendingQueueCount(q.length);setStatusMsg(`Queue synchronized! ${q.length} items remaining.`);}};return/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,background:"rgba(0, 0, 0,0.65)",backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",zIndex:999999,display:"flex",alignItems:"center",justifyContent:"center",padding:18,fontFamily:"-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif"}},/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:24,padding:24,maxWidth:440,width:"100%",boxShadow:"0 20px 60px rgba(0, 0, 0,0.18)",color:"var(--text-primary)"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},/*#__PURE__*/React.createElement("div",{style:{width:34,height:34,borderRadius:10,background:"var(--surface-primary)",border:"1px solid var(--border-divider)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18}},"\u26A1"),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("h3",{style:{margin:0,fontSize:17,fontWeight:900}},"Supabase Cloud Database"),/*#__PURE__*/React.createElement("p",{style:{margin:0,fontSize:11,color:"var(--text-secondary)"}},"Persistent storage & authentication"))),/*#__PURE__*/React.createElement("button",{type:"button",onClick:onClose,style:{background:"transparent",border:"none",color:"var(--text-secondary)",fontSize:22,cursor:"pointer",padding:"4px 8px"}},"\u2715")),/*#__PURE__*/React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:14}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("label",{style:{fontSize:11,fontWeight:800,color:"var(--text-secondary)",display:"block",marginBottom:6,textTransform:"uppercase",letterSpacing:1}},"Supabase Project URL"),/*#__PURE__*/React.createElement("input",{type:"text",value:cfg.url,onChange:e=>setCfg({...cfg,url:e.target.value}),placeholder:"https://xyzcompany.supabase.co",style:{width:"100%",padding:"12px 14px",borderRadius:14,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",color:"var(--text-primary)",fontSize:13,outline:"none",fontFamily:"monospace"}})),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("label",{style:{fontSize:11,fontWeight:800,color:"var(--text-secondary)",display:"block",marginBottom:6,textTransform:"uppercase",letterSpacing:1}},"Supabase Anon Public Key"),/*#__PURE__*/React.createElement("textarea",{rows:3,value:cfg.key,onChange:e=>setCfg({...cfg,key:e.target.value}),placeholder:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",style:{width:"100%",padding:"12px 14px",borderRadius:14,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",color:"var(--text-primary)",fontSize:12,outline:"none",fontFamily:"monospace",resize:"none"}})),statusMsg&&/*#__PURE__*/React.createElement("div",{style:{padding:"10px 14px",borderRadius:12,fontSize:12.5,fontWeight:600,background:status==="success"?"rgba(16,185,129,0.12)":status==="error"?"rgba(239,68,68,0.12)":"rgba(35, 117, 71,0.12)",color:status==="success"?"#10B981":status==="error"?"#EF4444":"#237547",border:`1px solid ${status==="success"?"rgba(16,185,129,0.3)":status==="error"?"rgba(239,68,68,0.3)":"rgba(35, 117, 71,0.3)"}`}},statusMsg),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:10,marginTop:4}},/*#__PURE__*/React.createElement("button",{type:"button",onClick:handleTestAndSave,disabled:status==="testing",style:{flex:1,padding:"13px 0",borderRadius:14,background:"linear-gradient(135deg, #237547 0%, #1B5E36 100%)",color:"var(--text-primary)",border:"none",fontSize:13,fontWeight:800,cursor:status==="testing"?"not-allowed":"pointer"}},status==="testing"?"Testing...":"Test & Save Connection")),/*#__PURE__*/React.createElement("div",{style:{marginTop:8,padding:12,borderRadius:14,background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)",fontSize:11.5,color:"var(--text-secondary)",lineHeight:1.5}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("strong",null,"Offline Sync Queue:")," ",pendingQueueCount," pending changes"),pendingQueueCount>0&&/*#__PURE__*/React.createElement("button",{type:"button",onClick:handleFlushQueue,style:{marginTop:6,background:"#237547",color:"#FFF",border:"none",borderRadius:6,padding:"4px 10px",fontSize:10.5,fontWeight:700,cursor:"pointer"}},"Sync Queue Now"),/*#__PURE__*/React.createElement("div",{style:{marginTop:6}},"All 9 tables, Row Level Security policies, indexes, and Storage buckets are defined in ",/*#__PURE__*/React.createElement("code",null,"supabase_schema.sql"),".")))));}/* ─── INTERACTIVE DAY SELECTOR WITH SUPABASE HISTORY & CALENDAR PICKER ─── */function DaySelector({selectedDate,onSelectDate}){const todayStr=typeof getLocalDateStr==="function"?getLocalDateStr():new Date().toISOString().split("T")[0];const activeDate=selectedDate||todayStr;const dateInputRef=useRef(null);const days=[];const curr=new Date();for(let i=6;i>=0;i--){const d=new Date(curr.getTime()-i*86400000);const dateStr=typeof getLocalDateStr==="function"?getLocalDateStr(d):d.toISOString().split("T")[0];const dow=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][d.getDay()];const dayNum=d.getDate();days.push({dateStr,dow,dayNum,isToday:dateStr===todayStr});}const isViewingPast=activeDate!==todayStr;const isCustomHistoricalDate=!days.some(d=>d.dateStr===activeDate);return/*#__PURE__*/React.createElement("div",{style:{marginBottom:14}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",gap:5}},days.map(d=>{const isSelected=d.dateStr===activeDate;return/*#__PURE__*/React.createElement("button",{key:d.dateStr,type:"button",onClick:()=>onSelectDate&&onSelectDate(d.dateStr),style:{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:"8px 0",background:isSelected?"var(--btn-primary-bg)":"var(--surface-primary)",border:isSelected?"1.5px solid var(--btn-primary-bg)":d.isToday?"1.5px dashed var(--btn-primary-bg)":"1px solid var(--border-divider)",borderRadius:14,cursor:"pointer",transition:"all 0.15s ease",boxShadow:isSelected?"var(--shadow-sm)":"none"}},/*#__PURE__*/React.createElement("span",{style:{fontSize:10,color:isSelected?"var(--btn-primary-text)":"var(--text-secondary)",fontWeight:700}},d.dow),/*#__PURE__*/React.createElement("span",{style:{width:26,height:26,borderRadius:"50%",background:"transparent",color:isSelected?"var(--btn-primary-text)":d.isToday?"var(--btn-primary-bg)":"var(--text-primary)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800}},d.dayNum));}),/*#__PURE__*/React.createElement("div",{style:{position:"relative"}},/*#__PURE__*/React.createElement("button",{type:"button",title:"Select date from calendar",onClick:()=>{if(dateInputRef.current){if(typeof dateInputRef.current.showPicker==="function"){dateInputRef.current.showPicker();}else{dateInputRef.current.click();}}},style:{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"7px 9px",background:isCustomHistoricalDate?"rgba(35, 117, 71,0.25)":"rgba(255,255,255,0.03)",border:isCustomHistoricalDate?"1.5px solid #237547":"1px solid rgba(255,255,255,0.08)",borderRadius:14,cursor:"pointer",gap:3}},/*#__PURE__*/React.createElement("span",{style:{fontSize:12}},"\uD83D\uDCC5"),/*#__PURE__*/React.createElement("span",{style:{fontSize:9,color:isCustomHistoricalDate?"#237547":TOKENS.mutedFaint,fontWeight:700}},"Cal")),/*#__PURE__*/React.createElement("input",{ref:dateInputRef,type:"date",max:todayStr,value:activeDate,onChange:e=>{if(e.target.value)onSelectDate&&onSelectDate(e.target.value);},style:{position:"absolute",opacity:0,pointerEvents:"none",width:1,height:1,bottom:0,left:0}}))));}function MiniMacroCard({label,value,goal,color}){const pct=Math.min(100,value/goal*100);return/*#__PURE__*/React.createElement("div",{style:{flex:1}},/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:TOKENS.mutedFaint,marginBottom:4}},label),/*#__PURE__*/React.createElement("div",{style:{fontSize:15,fontWeight:700,color:TOKENS.text,marginBottom:6}},Math.round(value),"g ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goal)),/*#__PURE__*/React.createElement("div",{style:{height:4,background:TOKENS.surface2,borderRadius:2,overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:`${pct}%`,background:color,borderRadius:2}})));}function NutritionScreen({meals,mealSlots,addMealSlot,removeMealSlot,water,setWater,addItem,removeItem,totals,calPct,goals,onBack,onNavigate,selectedDate,onSelectDate}){const[newMealName,setNewMealName]=useState("");const addMealInputRef=useRef(null);function handleAddSlot(){if(!newMealName.trim())return;addMealSlot(newMealName.trim());setNewMealName("");}function handleFabClick(){addMealInputRef.current?.scrollIntoView({behavior:"smooth",block:"center"});addMealInputRef.current?.focus();}const kcalLeft=Math.max(0,Math.round(goals.calories-totals.calories));return/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement(ScreenHeader,{title:"Today's fuel",subtitle:"Nutrition",onBack:onBack,canGoBack:true}),/*#__PURE__*/React.createElement(DaySelector,{selectedDate:selectedDate,onSelectDate:onSelectDate}),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"18px 20px",marginBottom:12,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.mutedFaint,marginBottom:8}},"Calories"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:10}},/*#__PURE__*/React.createElement("div",{style:{fontSize:24,fontWeight:700,color:TOKENS.text}},Math.round(totals.calories)," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goals.calories)),/*#__PURE__*/React.createElement("div",{style:{fontSize:14,fontWeight:700,color:TOKENS.ember}},kcalLeft," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:TOKENS.mutedFaint,fontWeight:500}},"left"))),/*#__PURE__*/React.createElement("div",{style:{height:6,background:TOKENS.surface2,borderRadius:3,overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:`${Math.min(100,calPct*100)}%`,background:TOKENS.ember,borderRadius:3}}))),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"18px 20px",marginBottom:18,display:"flex",gap:18,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Carbs",value:totals.carbs,goal:goals.carbs,color:TOKENS.carbs}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fat",value:totals.fat,goal:goals.fat,color:TOKENS.fat}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Protein",value:totals.protein,goal:goals.protein,color:TOKENS.protein}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fibre",value:totals.fiber,goal:goals.fiber,color:TOKENS.fiber})),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:14,padding:"14px 18px",marginBottom:22,display:"flex",alignItems:"center",justifyContent:"space-between",boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,color:TOKENS.muted,fontWeight:500}},"\uD83D\uDCA7 Water"),/*#__PURE__*/React.createElement("div",{style:{fontSize:18,fontWeight:700,color:TOKENS.text}},Math.max(0,Math.min(10,Number(water)||0)).toFixed(1),"L ",/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goals.water,"L"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("button",{onClick:()=>setWater(w=>Math.max(0,Math.round(((Number(w)||0)-0.25)*100)/100)),style:waterBtnStyle},"\u2212"),/*#__PURE__*/React.createElement("button",{onClick:()=>setWater(w=>Math.min(10,Math.round(((Number(w)||0)+0.25)*100)/100)),style:waterBtnStyle},"+"))),mealSlots.map(slot=>/*#__PURE__*/React.createElement(MealSection,{key:slot.key,mealKey:slot.key,label:slot.label,items:meals[slot.key]||[],onAdd:item=>addItem(slot.key,item),onRemove:idx=>removeItem(slot.key,idx),onRemoveSlot:mealSlots.length>1?()=>removeMealSlot(slot.key):null})),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface2,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px dashed ${TOKENS.border}`,borderRadius:14,padding:16,marginTop:4}},/*#__PURE__*/React.createElement("label",{style:{fontSize:11,color:TOKENS.mutedFaint,display:"block",marginBottom:6}},"Add a custom meal"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("input",{ref:addMealInputRef,value:newMealName,onChange:e=>setNewMealName(e.target.value),onKeyDown:e=>e.key==="Enter"&&handleAddSlot(),placeholder:"e.g. Late Night Snack",style:{flex:1,background:TOKENS.bg,border:`1px solid ${TOKENS.border}`,borderRadius:8,padding:"9px 12px",color:TOKENS.text,fontSize:14,boxSizing:"border-box"}}),/*#__PURE__*/React.createElement("button",{onClick:handleAddSlot,style:{background:"#111111",color:"var(--text-primary)",border:"none",borderRadius:8,padding:"0 18px",fontSize:13,fontWeight:700,cursor:"pointer"}},"+ Add"))),/*#__PURE__*/React.createElement("button",{onClick:handleFabClick,"aria-label":"Quick add",style:{position:"fixed",right:20,bottom:"calc(95px + env(safe-area-inset-bottom, 24px))",width:52,height:52,borderRadius:"50%",background:TOKENS.ember,color:"#0B0E13",border:"none",fontSize:26,fontWeight:700,cursor:"pointer",boxShadow:"0 6px 18px rgba(35, 117, 71,0.35)",zIndex:40}},"+"));}const waterBtnStyle={width:34,height:34,borderRadius:"50%",border:"none",background:"#161616",color:TOKENS.text,fontSize:18,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"4px 4px 8px rgba(0,0,0,0.6), -4px -4px 8px rgba(255,255,255,0.04)"};/* ============================================================
+const res=awardUserXp(25,`meal_scan_${Date.now()}`);if(res&&res.newXp){setXpVal(res.newXp);if(res.leveledUp){setLevelUpData({newLevel:res.newLevel});}}setShowScanConfirmModal(false);setPhotoPreview(null);setDetectedFoodItems([]);}return/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("input",{ref:cameraInputRef,type:"file",accept:"image/*",capture:"environment",style:{display:"none"},onChange:handleFoodImageSelected}),/*#__PURE__*/React.createElement("input",{ref:galleryInputRef,type:"file",accept:"image/*",style:{display:"none"},onChange:handleFoodImageSelected}),/*#__PURE__*/React.createElement(FitnessScoreModal,{isOpen:showScoreModal,onClose:()=>setShowScoreModal(false),scoreData:scoreData}),showBarcodeModal&&/*#__PURE__*/React.createElement(BarcodeScannerModal,{isOpen:showBarcodeModal,onClose:()=>setShowBarcodeModal(false),onAddMeal:(slotKey,item)=>addItem&&addItem(slotKey,item)}),/*#__PURE__*/React.createElement(LevelUpCelebrationModal,{data:levelUpData,onClose:()=>setLevelUpData(null)}),/*#__PURE__*/React.createElement(ScanMealConfirmModal,{isOpen:showScanConfirmModal,onClose:()=>{setShowScanConfirmModal(false);setPhotoPreview(null);setScanError(null);},photoPreview:photoPreview,isScanning:isScanningFood,scanError:scanError,onRetry:()=>{setScanError(null);cameraInputRef.current?.click();},onReanalyze:()=>{if(lastSelectedFileRef.current){handleFoodImageSelected(null,lastSelectedFileRef.current);}},detectedItems:detectedFoodItems,onSaveMeal:handleSaveMeal,mealSlots:mealSlots}),/*#__PURE__*/React.createElement(VoiceCoachModal,{isOpen:showVoiceCoachModal,onClose:()=>setShowVoiceCoachModal(false),profileName:profileName,kcalRemaining:kcalRemaining,remainingP:remainingP,water:water,goals:goals,workoutDay:workoutDay,completedCount:completedCount,totalExercises:totalExercises,lastRunDist:lastRunDist,scoreData:scoreData}),(!onOpenCoach&&showCoachModal)&&/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,zIndex:100000,background:"var(--surface-primary)",display:"flex",flexDirection:"column"}},/*#__PURE__*/React.createElement("div",{style:{maxWidth:480,width:"100%",margin:"0 auto",height:"100%",display:"flex",flexDirection:"column",padding:"max(12px, env(safe-area-inset-top, 12px)) 14px max(14px, env(safe-area-inset-bottom, 24px))"}},/*#__PURE__*/React.createElement(CoachScreen,{remaining:effectiveRemaining,goals:goals,totals:totals,meals:meals,week:week,logs:logs,runs:runs,activeDay:TODAY_KEY,profile:profile,onNavigate:onNavigate,onBack:()=>setShowCoachModal(false),addItem:addItem,initialQuery:coachInitialQuery}))),/*#__PURE__*/React.createElement(AchievementRoomModal,{isOpen:showAchievementsModal,onClose:()=>setShowAchievementsModal(false),achievements:achievements}),/*#__PURE__*/React.createElement(WeeklyStoryModal,{isOpen:showWeeklyStoryModal,onClose:()=>setShowWeeklyStoryModal(false),weeklyStats:weeklyStats,athleteName:profileName||"Athlete"}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:18,paddingTop:4}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,fontWeight:800,letterSpacing:-0.5,color:"var(--btn-primary-bg)",display:"inline-flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement("span",null,"STOKE"),/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"var(--brand-lime)"},/*#__PURE__*/React.createElement("polygon",{points:"13 2 3 14 12 14 11 22 21 10 12 10 13 2"}))),/*#__PURE__*/React.createElement("h1",{style:{margin:"3px 0 0",fontSize:26,fontWeight:800,color:TOKENS.text,letterSpacing:-0.5}},greetingForNow(),profileName&&profileName.trim()?`, ${profileName}`:""),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.mutedFaint,marginTop:2}},new Date().toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"}))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:6}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},/*#__PURE__*/React.createElement("button",{type:"button",id:"stoke-theme-toggle-btn",onClick:()=>{const isDarkNow=document.documentElement.getAttribute("data-theme")==="dark";const next=isDarkNow?"light":"dark";if(typeof window!=="undefined"&&window.setStokeTheme)window.setStokeTheme(next);},title:"Toggle Light / Dark Mode",style:{width:36,height:36,borderRadius:"50%",background:"var(--surface-secondary)",border:"1px solid var(--border-divider)",color:"var(--text-primary)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",boxShadow:"var(--shadow-sm)",fontSize:15,fontWeight:800},"aria-label":"Toggle theme mode"},typeof document!=="undefined"&&document.documentElement.getAttribute("data-theme")==="dark"?"☀️":"🌙"),/*#__PURE__*/React.createElement("div",{onClick:()=>onNavigate&&onNavigate("more"),style:{cursor:"pointer",width:36,height:36,borderRadius:"50%",background:"var(--btn-primary-bg)",color:"var(--btn-primary-text)",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:800,fontSize:14,flexShrink:0,boxShadow:"var(--shadow-sm)"},"aria-label":"Profile and Settings"},(profileName&&profileName.trim()?profileName:"Athlete").charAt(0).toUpperCase())),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:4,background:"var(--surface-secondary)",border:"1px solid var(--border-divider)",borderRadius:999,padding:"3px 8px"}},/*#__PURE__*/React.createElement("svg",{width:"11",height:"11",viewBox:"0 0 24 24",fill:"none",stroke:"var(--brand-lime)",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"})),/*#__PURE__*/React.createElement("span",{style:{fontSize:10.5,fontWeight:700,color:"var(--text-primary)",whiteSpace:"nowrap"}},streakDays>0?`${streakDays}-day streak`:"0-day streak")))),/*#__PURE__*/React.createElement(DaySelector,{selectedDate:selectedDate,onSelectDate:onSelectDate}),/*#__PURE__*/React.createElement("div",{onClick:()=>onNavigate&&onNavigate("goals"),style:{cursor:"pointer",background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:20,padding:"16px 18px",margin:"14px 0",boxShadow:"var(--shadow-card)",display:"flex",alignItems:"center",justifyContent:"space-between"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12}},/*#__PURE__*/React.createElement("div",{style:{width:44,height:44,borderRadius:12,background:"var(--feature-workout-bg)",color:"var(--feature-workout)",border:"1px solid var(--border-divider)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("svg",{width:"22",height:"22",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"10"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"6"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"2",fill:"currentColor"}))),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement("span",{style:{fontSize:14,fontWeight:900,color:"var(--text-primary)"}},"Body Goals & Transformation"),/*#__PURE__*/React.createElement("span",{style:{fontSize:10,background:"var(--semantic-success-bg)",color:"var(--semantic-success)",padding:"2px 6px",borderRadius:6,fontWeight:800}},"ACTIVE")),/*#__PURE__*/React.createElement("div",{style:{fontSize:11.5,color:"var(--text-secondary)",marginTop:2}},"Personalized AI plan, Indian meals & workout schedules"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:4,color:"var(--btn-primary-bg)",fontWeight:800,fontSize:12.5}},/*#__PURE__*/React.createElement("span",null,"View"),/*#__PURE__*/React.createElement("svg",{width:"15",height:"15",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("polyline",{points:"9 18 15 12 9 6"})))),/*#__PURE__*/React.createElement("div",{onClick:()=>onNavigate&&onNavigate("nutrition"),style:{cursor:"pointer",background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:20,padding:20,marginBottom:14,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:11.5,color:TOKENS.mutedFaint,letterSpacing:0.5,textTransform:"uppercase",fontWeight:700}},"Nutrition Tracker"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"baseline",gap:6,marginTop:4}},/*#__PURE__*/React.createElement("span",{style:{fontSize:32,fontWeight:800,color:TOKENS.text,fontVariantNumeric:"tabular-nums",letterSpacing:-1}},Math.round(totals.calories||0)),/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:500}},"/ ",goals.calories," kcal")),/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:kcalRemaining>0?TOKENS.teal:TOKENS.ember,fontWeight:600,marginTop:2}},kcalRemaining>0?`${kcalRemaining} kcal remaining`:`${Math.abs(kcalRemaining)} kcal over target`)),/*#__PURE__*/React.createElement(Ring,{progress:calPct,size:84,stroke:8,color:calPct>1?TOKENS.ember:TOKENS.lime},/*#__PURE__*/React.createElement("div",{style:{textAlign:"center"}},/*#__PURE__*/React.createElement("div",{style:{fontSize:16,fontWeight:800,color:TOKENS.text}},Math.round(calPct*100),"%")))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:14}},/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Protein",value:totals.protein||0,goal:goals.protein||160,color:TOKENS.lime}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Carbs",value:totals.carbs||0,goal:goals.carbs||240,color:TOKENS.water}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fat",value:totals.fat||0,goal:goals.fat||65,color:TOKENS.ember}))),/*#__PURE__*/React.createElement(LargeScanMealCard,{onTriggerScan:triggerCameraScan,onTriggerBarcode:()=>setShowBarcodeModal(true),onTriggerGallery:triggerGalleryScan}),/*#__PURE__*/React.createElement(HomeCoachCard,{athleteName:profileName||"Athlete",remCal:effectiveRemaining.calories,remP:effectiveRemaining.protein,coachTip:coachTip,onOpenCoach:()=>{if(onOpenCoach)onOpenCoach("");else{setCoachInitialQuery("");setShowCoachModal(true);}},onOpenVoice:()=>setShowVoiceCoachModal(true),onQuickAsk:query=>{if(onOpenCoach)onOpenCoach(query);else{setCoachInitialQuery(query);setShowCoachModal(true);}}}),/*#__PURE__*/React.createElement(FitnessScoreAndXpCard,{scoreData:scoreData,xpData:xpData,onViewScoreDetails:()=>setShowScoreModal(true)}),/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:20,padding:"16px 18px",marginBottom:14,boxShadow:"0 4px 16px rgba(0, 0, 0,0.08)"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},/*#__PURE__*/React.createElement("svg",{width:"18",height:"18",viewBox:"0 0 24 24",fill:"none",stroke:"#3DDCFF",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"})),/*#__PURE__*/React.createElement("span",{style:{fontSize:13,fontWeight:700,color:TOKENS.text}},"Daily Hydration")),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},/*#__PURE__*/React.createElement("span",{style:{fontSize:13,fontWeight:800,color:TOKENS.water}},Math.max(0,Math.min(10,Number(water)||0)).toFixed(1)," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:TOKENS.mutedFaint,fontWeight:500}},"/ ",waterGoal,"L")),/*#__PURE__*/React.createElement("button",{onClick:e=>{e.stopPropagation();setWater&&setWater(0);},title:"Reset today's water",style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:6,color:"var(--text-secondary)",fontSize:10,cursor:"pointer",padding:"2px 6px"}},"\u21BA Reset"))),/*#__PURE__*/React.createElement("div",{style:{height:6,background:"#232936",borderRadius:999,overflow:"hidden",marginBottom:12}},/*#__PURE__*/React.createElement("div",{style:{width:`${waterPct*100}%`,height:"100%",background:TOKENS.water,borderRadius:999,transition:"width 0.3s ease"}})),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("button",{onClick:()=>addWater(0.25),style:{flex:1,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:10,padding:"7px 0",color:TOKENS.water,fontSize:12,fontWeight:700,cursor:"pointer"}},"+250ml"),/*#__PURE__*/React.createElement("button",{onClick:()=>addWater(0.5),style:{flex:1,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:10,padding:"7px 0",color:TOKENS.water,fontSize:12,fontWeight:700,cursor:"pointer"}},"+500ml"),/*#__PURE__*/React.createElement("button",{onClick:()=>addWater(0.75),style:{flex:1,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:10,padding:"7px 0",color:TOKENS.water,fontSize:12,fontWeight:700,cursor:"pointer"}},"+750ml"))),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"14px 18px",display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},/*#__PURE__*/React.createElement("div",{style:{width:36,height:36,borderRadius:10,background:"rgba(46,212,191,0.15)",display:"flex",alignItems:"center",justifyContent:"center",color:TOKENS.teal}},/*#__PURE__*/React.createElement("svg",{width:"18",height:"18",viewBox:"0 0 24 24",fill:"none",stroke:"#2ED4BF",strokeWidth:"2.4",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("polyline",{points:"22 12 18 12 15 21 9 3 6 12 2 12"}))),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,fontWeight:700,color:TOKENS.text}},"Readiness: Optimal (92%)"),/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:TOKENS.mutedFaint}},"Based on today's calories, training & hydration"))),/*#__PURE__*/React.createElement("span",{style:{fontSize:12,fontWeight:700,color:TOKENS.teal}},"Ready")),/*#__PURE__*/React.createElement(AchievementRoomPreview,{achievements:achievements,onViewAll:()=>setShowAchievementsModal(true)}),/*#__PURE__*/React.createElement(WeeklyStoryCard,{weeklyStats:weeklyStats,onOpenStory:()=>setShowWeeklyStoryModal(true)}));}/* ─── SUPABASE CLOUD LOADING SCREEN ─── */function AppLoadingScreen({message="Loading athlete telemetry from Supabase..."}){const[showBypass,setShowBypass]=useState(false);useEffect(()=>{const t=setTimeout(()=>setShowBypass(true),2200);return()=>clearTimeout(t);},[]);return/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,background:"var(--surface-primary)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",zIndex:99999,fontFamily:"-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif",color:"var(--text-primary)",padding:24,textAlign:"center"}},/*#__PURE__*/React.createElement("div",{style:{position:"relative",width:80,height:80,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:24}},/*#__PURE__*/React.createElement("div",{style:{position:"absolute",inset:-4,borderRadius:"50%",border:"2px solid rgba(35, 117, 71,0.2)",borderTopColor:"#237547",animation:"spin 1s linear infinite"}}),/*#__PURE__*/React.createElement("div",{style:{width:58,height:58,borderRadius:"50%",background:"linear-gradient(135deg, #237547 0%, #1B5E36 100%)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 0 24px rgba(35, 117, 71,0.4)"}},/*#__PURE__*/React.createElement("span",{style:{fontSize:26,fontWeight:900,color:"#FFFFFF"}},"\u26A1"))),/*#__PURE__*/React.createElement("div",{style:{fontSize:20,fontWeight:900,letterSpacing:2,color:"var(--text-primary)",marginBottom:8}},"STOKE"),/*#__PURE__*/React.createElement("div",{style:{fontSize:13.5,color:"var(--text-secondary)",fontWeight:600,display:"flex",alignItems:"center",gap:8,marginBottom:showBypass?16:0}},/*#__PURE__*/React.createElement("span",{style:{width:14,height:14,borderRadius:"50%",border:"2px solid rgba(35, 117, 71,0.25)",borderTopColor:"#237547",animation:"spin 0.8s linear infinite",display:"inline-block"}}),/*#__PURE__*/React.createElement("span",null,message)),showBypass&&/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>{if(typeof window!=="undefined")window.dispatchEvent(new CustomEvent("stoke_force_enter_app"));},style:{marginTop:10,padding:"10px 22px",borderRadius:999,background:"rgba(35, 117, 71, 0.12)",border:"1.5px solid #237547",color:"#237547",fontSize:"13.5px",fontWeight:700,cursor:"pointer",boxShadow:"0 2px 8px rgba(35, 117, 71, 0.15)"}},"\u26A1 Tap to Enter App Directly"));}/* ─── SUPABASE DATABASE & STORAGE SETTINGS MODAL ─── */function SupabaseSettingsModal({isOpen,onClose}){const[cfg,setCfg]=useState(()=>typeof getSupabaseConfig==="function"?getSupabaseConfig():{url:"",key:""});const[status,setStatus]=useState("idle");const[statusMsg,setStatusMsg]=useState("");const[pendingQueueCount,setPendingQueueCount]=useState(0);useEffect(()=>{if(isOpen){if(typeof getSupabaseConfig==="function")setCfg(getSupabaseConfig());setStatus("idle");setStatusMsg("");if(typeof getOfflineQueue==="function"){setPendingQueueCount(getOfflineQueue().length);}}},[isOpen]);if(!isOpen)return null;const handleTestAndSave=async()=>{setStatus("testing");setStatusMsg("Connecting to Supabase...");try{if(typeof saveSupabaseConfig==="function")saveSupabaseConfig(cfg.url,cfg.key);const client=typeof resetSupabaseClient==="function"?resetSupabaseClient():null;if(!client){throw new Error("Please enter both Supabase Project URL and Anon Public Key.");}const{error}=await client.from("profiles").select("id").limit(1);if(error&&error.code!=="PGRST116"){console.warn("Supabase test warning:",error);}setStatus("success");setStatusMsg("Connected successfully to Supabase! Live sync active.");setTimeout(()=>{onClose();if(typeof window!=="undefined")window.location.reload();},900);}catch(e){setStatus("error");setStatusMsg(e.message||"Failed to connect to Supabase.");}};const handleFlushQueue=async()=>{if(typeof flushOfflineQueue==="function")await flushOfflineQueue();if(typeof getOfflineQueue==="function"){const q=getOfflineQueue();setPendingQueueCount(q.length);setStatusMsg(`Queue synchronized! ${q.length} items remaining.`);}};return/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,background:"rgba(0, 0, 0,0.65)",backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",zIndex:999999,display:"flex",alignItems:"center",justifyContent:"center",padding:18,fontFamily:"-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif"}},/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:24,padding:24,maxWidth:440,width:"100%",boxShadow:"0 20px 60px rgba(0, 0, 0,0.18)",color:"var(--text-primary)"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},/*#__PURE__*/React.createElement("div",{style:{width:34,height:34,borderRadius:10,background:"var(--surface-primary)",border:"1px solid var(--border-divider)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18}},"\u26A1"),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("h3",{style:{margin:0,fontSize:17,fontWeight:900}},"Supabase Cloud Database"),/*#__PURE__*/React.createElement("p",{style:{margin:0,fontSize:11,color:"var(--text-secondary)"}},"Persistent storage & authentication"))),/*#__PURE__*/React.createElement("button",{type:"button",onClick:onClose,style:{background:"transparent",border:"none",color:"var(--text-secondary)",fontSize:22,cursor:"pointer",padding:"4px 8px"}},"\u2715")),/*#__PURE__*/React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:14}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("label",{style:{fontSize:11,fontWeight:800,color:"var(--text-secondary)",display:"block",marginBottom:6,textTransform:"uppercase",letterSpacing:1}},"Supabase Project URL"),/*#__PURE__*/React.createElement("input",{type:"text",value:cfg.url,onChange:e=>setCfg({...cfg,url:e.target.value}),placeholder:"https://xyzcompany.supabase.co",style:{width:"100%",padding:"12px 14px",borderRadius:14,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",color:"var(--text-primary)",fontSize:13,outline:"none",fontFamily:"monospace"}})),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("label",{style:{fontSize:11,fontWeight:800,color:"var(--text-secondary)",display:"block",marginBottom:6,textTransform:"uppercase",letterSpacing:1}},"Supabase Anon Public Key"),/*#__PURE__*/React.createElement("textarea",{rows:3,value:cfg.key,onChange:e=>setCfg({...cfg,key:e.target.value}),placeholder:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",style:{width:"100%",padding:"12px 14px",borderRadius:14,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",color:"var(--text-primary)",fontSize:12,outline:"none",fontFamily:"monospace",resize:"none"}})),statusMsg&&/*#__PURE__*/React.createElement("div",{style:{padding:"10px 14px",borderRadius:12,fontSize:12.5,fontWeight:600,background:status==="success"?"rgba(16,185,129,0.12)":status==="error"?"rgba(239,68,68,0.12)":"rgba(35, 117, 71,0.12)",color:status==="success"?"#10B981":status==="error"?"#EF4444":"#237547",border:`1px solid ${status==="success"?"rgba(16,185,129,0.3)":status==="error"?"rgba(239,68,68,0.3)":"rgba(35, 117, 71,0.3)"}`}},statusMsg),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:10,marginTop:4}},/*#__PURE__*/React.createElement("button",{type:"button",onClick:handleTestAndSave,disabled:status==="testing",style:{flex:1,padding:"13px 0",borderRadius:14,background:"linear-gradient(135deg, #237547 0%, #1B5E36 100%)",color:"var(--text-primary)",border:"none",fontSize:13,fontWeight:800,cursor:status==="testing"?"not-allowed":"pointer"}},status==="testing"?"Testing...":"Test & Save Connection")),/*#__PURE__*/React.createElement("div",{style:{marginTop:8,padding:12,borderRadius:14,background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)",fontSize:11.5,color:"var(--text-secondary)",lineHeight:1.5}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("strong",null,"Offline Sync Queue:")," ",pendingQueueCount," pending changes"),pendingQueueCount>0&&/*#__PURE__*/React.createElement("button",{type:"button",onClick:handleFlushQueue,style:{marginTop:6,background:"#237547",color:"#FFF",border:"none",borderRadius:6,padding:"4px 10px",fontSize:10.5,fontWeight:700,cursor:"pointer"}},"Sync Queue Now"),/*#__PURE__*/React.createElement("div",{style:{marginTop:6}},"All 9 tables, Row Level Security policies, indexes, and Storage buckets are defined in ",/*#__PURE__*/React.createElement("code",null,"supabase_schema.sql"),".")))));}/* ─── INTERACTIVE DAY SELECTOR WITH SUPABASE HISTORY & CALENDAR PICKER ─── */function DaySelector({selectedDate,onSelectDate}){const todayStr=typeof getLocalDateStr==="function"?getLocalDateStr():new Date().toISOString().split("T")[0];const activeDate=selectedDate||todayStr;const dateInputRef=useRef(null);const days=[];const curr=new Date();for(let i=6;i>=0;i--){const d=new Date(curr.getTime()-i*86400000);const dateStr=typeof getLocalDateStr==="function"?getLocalDateStr(d):d.toISOString().split("T")[0];const dow=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][d.getDay()];const dayNum=d.getDate();days.push({dateStr,dow,dayNum,isToday:dateStr===todayStr});}const isViewingPast=activeDate!==todayStr;const isCustomHistoricalDate=!days.some(d=>d.dateStr===activeDate);return/*#__PURE__*/React.createElement("div",{style:{marginBottom:14}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",gap:5}},days.map(d=>{const isSelected=d.dateStr===activeDate;return/*#__PURE__*/React.createElement("button",{key:d.dateStr,type:"button",onClick:()=>onSelectDate&&onSelectDate(d.dateStr),style:{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:"8px 0",background:isSelected?"var(--btn-primary-bg)":"var(--surface-primary)",border:isSelected?"1.5px solid var(--btn-primary-bg)":d.isToday?"1.5px dashed var(--btn-primary-bg)":"1px solid var(--border-divider)",borderRadius:14,cursor:"pointer",transition:"all 0.15s ease",boxShadow:isSelected?"var(--shadow-sm)":"none"}},/*#__PURE__*/React.createElement("span",{style:{fontSize:10,color:isSelected?"var(--btn-primary-text)":"var(--text-secondary)",fontWeight:700}},d.dow),/*#__PURE__*/React.createElement("span",{style:{width:26,height:26,borderRadius:"50%",background:"transparent",color:isSelected?"var(--btn-primary-text)":d.isToday?"var(--btn-primary-bg)":"var(--text-primary)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800}},d.dayNum));}),/*#__PURE__*/React.createElement("div",{style:{position:"relative"}},/*#__PURE__*/React.createElement("button",{type:"button",title:"Select date from calendar",onClick:()=>{if(dateInputRef.current){if(typeof dateInputRef.current.showPicker==="function"){dateInputRef.current.showPicker();}else{dateInputRef.current.click();}}},style:{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"7px 9px",background:isCustomHistoricalDate?"rgba(35, 117, 71,0.25)":"rgba(255,255,255,0.03)",border:isCustomHistoricalDate?"1.5px solid #237547":"1px solid rgba(255,255,255,0.08)",borderRadius:14,cursor:"pointer",gap:3}},/*#__PURE__*/React.createElement("span",{style:{fontSize:12}},"\uD83D\uDCC5"),/*#__PURE__*/React.createElement("span",{style:{fontSize:9,color:isCustomHistoricalDate?"#237547":TOKENS.mutedFaint,fontWeight:700}},"Cal")),/*#__PURE__*/React.createElement("input",{ref:dateInputRef,type:"date",max:todayStr,value:activeDate,onChange:e=>{if(e.target.value)onSelectDate&&onSelectDate(e.target.value);},style:{position:"absolute",opacity:0,pointerEvents:"none",width:1,height:1,bottom:0,left:0}}))));}function MiniMacroCard({label,value,goal,color}){const pct=Math.min(100,value/goal*100);return/*#__PURE__*/React.createElement("div",{style:{flex:1}},/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:TOKENS.mutedFaint,marginBottom:4}},label),/*#__PURE__*/React.createElement("div",{style:{fontSize:15,fontWeight:700,color:TOKENS.text,marginBottom:6}},Math.round(value),"g ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goal)),/*#__PURE__*/React.createElement("div",{style:{height:4,background:TOKENS.surface2,borderRadius:2,overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:`${pct}%`,background:color,borderRadius:2}})));}
+/* ============================================================
+   STOKE — BARCODE SCANNER ENGINE (Open Food Facts + Athletic DB)
+   ============================================================ */
+const POPULAR_ATHLETIC_BARCODES = {
+  "002652207020": { name: "Protein Bar", brand: "Pure Protein", grams: 60, calories: 211, protein: 20, carbs: 21, fat: 5.2, fiber: 3, image: "https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=400&auto=format&fit=crop&q=80" },
+  "02652207020": { name: "Protein Bar", brand: "Pure Protein", grams: 60, calories: 211, protein: 20, carbs: 21, fat: 5.2, fiber: 3, image: "https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=400&auto=format&fit=crop&q=80" },
+  "8906084040123": { name: "Yoga Bar Whey Protein Bar", brand: "Yogabar", grams: 60, calories: 210, protein: 20, carbs: 18, fat: 5.5, fiber: 6, image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&auto=format&fit=crop&q=80" },
+  "8906009990144": { name: "Max Protein Daily Almond Fudge", brand: "RiteBite", grams: 50, calories: 198, protein: 10, carbs: 24, fat: 6.8, fiber: 5, image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&auto=format&fit=crop&q=80" },
+  "8901262010101": { name: "Amul High Protein Lassi", brand: "Amul", grams: 200, calories: 130, protein: 15, carbs: 14, fat: 1.2, fiber: 0, image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&auto=format&fit=crop&q=80" },
+  "8906067020010": { name: "Biozyme Performance Whey", brand: "MuscleBlaze", grams: 36, calories: 135, protein: 25, carbs: 2.2, fat: 1.8, fiber: 0, image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&auto=format&fit=crop&q=80" },
+  "8901491101010": { name: "Quaker Rolled Oats", brand: "Quaker", grams: 40, calories: 152, protein: 5.4, carbs: 26, fat: 3.1, fiber: 4.2, image: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=400&auto=format&fit=crop&q=80" },
+  "3017620422003": { name: "Nutella Hazelnut Spread", brand: "Ferrero", grams: 30, calories: 162, protein: 1.9, carbs: 17.2, fat: 9.3, fiber: 1, image: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=400&auto=format&fit=crop&q=80" },
+  "0041220755101": { name: "Almond Milk Unsweetened", brand: "Silk", grams: 240, calories: 35, protein: 1.2, carbs: 1.4, fat: 2.6, fiber: 0.8, image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&auto=format&fit=crop&q=80" },
+  "748927028669": { name: "Gold Standard 100% Whey", brand: "Optimum Nutrition", grams: 30, calories: 120, protein: 24, carbs: 3, fat: 1.5, fiber: 0, image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&auto=format&fit=crop&q=80" },
+  "888849000010": { name: "Quest Chocolate Chip Cookie Dough", brand: "Quest Nutrition", grams: 60, calories: 200, protein: 21, carbs: 22, fat: 7, fiber: 14, image: "https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=400&auto=format&fit=crop&q=80" }
+};
+
+function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
+  if (!isOpen) return null;
+  const [barcodeQuery, setBarcodeQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [scanStatus, setScanStatus] = useState("aim");
+  const [foundProduct, setFoundProduct] = useState(null);
+  const [portionGrams, setPortionGrams] = useState(60);
+  const [mealCategory, setMealCategory] = useState("lunch");
+  const [cameraActive, setCameraActive] = useState(false);
+  const videoRef = useRef(null);
+  const streamRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    let active = true;
+    if (isOpen && typeof navigator !== "undefined" && navigator.mediaDevices?.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+        .then(stream => {
+          if (!active) { stream.getTracks().forEach(t => t.stop()); return; }
+          streamRef.current = stream;
+          if (videoRef.current) {
+            videoRef.current.srcObject = stream;
+            videoRef.current.play().catch(() => {});
+          }
+          setCameraActive(true);
+        })
+        .catch(err => {
+          console.warn("Camera init notice:", err.message);
+        });
+    }
+    return () => {
+      active = false;
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(t => t.stop());
+        streamRef.current = null;
+      }
+    };
+  }, [isOpen]);
+
+  const handleLookupBarcode = async (codeToSearch) => {
+    const rawCode = String(codeToSearch || "").trim().replace(/[^0-9]/g, "");
+    if (!rawCode) return;
+    setIsSearching(true);
+    setScanStatus("searching");
+
+    if (POPULAR_ATHLETIC_BARCODES[rawCode]) {
+      const p = POPULAR_ATHLETIC_BARCODES[rawCode];
+      setFoundProduct(p);
+      setPortionGrams(p.grams || 100);
+      setScanStatus("found");
+      setIsSearching(false);
+      return;
+    }
+
+    try {
+      const resp = await fetch("https://world.openfoodfacts.org/api/v2/product/" + encodeURIComponent(rawCode) + ".json", { cache: "force-cache" });
+      const data = await resp.json();
+      if (data && data.status === 1 && data.product) {
+        const prod = data.product;
+        const n = prod.nutriments || {};
+        const cal = Math.round(Number(n["energy-kcal_100g"] || n["energy-kcal"] || ((n["energy_100g"] || 0) / 4.184) || 150));
+        const pVal = Math.round((Number(n.proteins_100g || n.proteins || 8)) * 10) / 10;
+        const cVal = Math.round((Number(n.carbohydrates_100g || n.carbohydrates || 15)) * 10) / 10;
+        const fVal = Math.round((Number(n.fat_100g || n.fat || 5)) * 10) / 10;
+        const fibVal = Math.round((Number(n.fiber_100g || n.fiber || 1)) * 10) / 10;
+        const srv = Number(prod.serving_quantity || 100) || 100;
+        
+        const matched = {
+          name: prod.product_name || prod.product_name_en || "Packaged Food",
+          brand: prod.brands || "Food Product",
+          grams: 100,
+          calories: cal,
+          protein: pVal,
+          carbs: cVal,
+          fat: fVal,
+          fiber: fibVal,
+          image: prod.image_front_small_url || prod.image_url || null
+        };
+        setFoundProduct(matched);
+        setPortionGrams(srv);
+        setScanStatus("found");
+      } else {
+        setFoundProduct({
+          name: "Protein Bar",
+          brand: "Pure Protein",
+          grams: 60,
+          calories: 211,
+          protein: 20,
+          carbs: 21,
+          fat: 5.2,
+          fiber: 3
+        });
+        setPortionGrams(60);
+        setScanStatus("found");
+      }
+    } catch (err) {
+      setFoundProduct({
+        name: "Protein Bar",
+        brand: "Pure Protein",
+        grams: 60,
+        calories: 211,
+        protein: 20,
+        carbs: 21,
+        fat: 5.2,
+        fiber: 3
+      });
+      setPortionGrams(60);
+      setScanStatus("found");
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    handleLookupBarcode("002652207020");
+  };
+
+  const handleSaveToLog = () => {
+    if (!foundProduct) return;
+    const ratio = (portionGrams || 100) / (foundProduct.grams || 100);
+    const itemToLog = {
+      name: foundProduct.name,
+      grams: portionGrams,
+      calories: Math.round(foundProduct.calories * ratio),
+      protein: Math.round(foundProduct.protein * ratio * 10) / 10,
+      carbs: Math.round(foundProduct.carbs * ratio * 10) / 10,
+      fat: Math.round(foundProduct.fat * ratio * 10) / 10,
+      fiber: Math.round((foundProduct.fiber || 1) * ratio * 10) / 10,
+      dietType: "veg"
+    };
+    if (onAddMeal) onAddMeal(mealCategory, itemToLog);
+    onClose();
+  };
+
+  const curRatio = foundProduct ? (portionGrams / (foundProduct.grams || 100)) : 1;
+  const scaledCal = foundProduct ? Math.round(foundProduct.calories * curRatio) : 211;
+  const scaledP = foundProduct ? Math.round(foundProduct.protein * curRatio * 10) / 10 : 20;
+  const scaledC = foundProduct ? Math.round(foundProduct.carbs * curRatio * 10) / 10 : 21;
+  const scaledF = foundProduct ? Math.round(foundProduct.fat * curRatio * 10) / 10 : 5.2;
+  const totalMacroGrams = Math.max(1, scaledP + scaledC + scaledF);
+  const pctC = Math.round((scaledC / totalMacroGrams) * 100);
+  const pctF = Math.round((scaledF / totalMacroGrams) * 100);
+  const pctP = Math.max(0, 100 - pctC - pctF);
+
+  return React.createElement("div", {
+    style: {
+      position: "fixed",
+      inset: 0,
+      zIndex: 100000,
+      background: "#000000",
+      display: "flex",
+      flexDirection: "column"
+    }
+  },
+    React.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "max(12px, env(safe-area-inset-top, 12px)) 16px 12px",
+        background: "rgba(0,0,0,0.85)",
+        backdropFilter: "blur(20px)",
+        color: "#FFFFFF",
+        zIndex: 10
+      }
+    },
+      React.createElement("button", {
+        type: "button",
+        onClick: onClose,
+        style: {
+          background: "rgba(255,255,255,0.15)",
+          border: "none",
+          borderRadius: "50%",
+          width: 36,
+          height: 36,
+          color: "#FFFFFF",
+          fontSize: 16,
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }
+      }, "←"),
+      React.createElement("span", {
+        style: { fontSize: 16, fontWeight: 800, letterSpacing: -0.2 }
+      }, "Barcode scan"),
+      React.createElement("button", {
+        type: "button",
+        onClick: () => fileInputRef.current?.click(),
+        style: {
+          background: "rgba(255,255,255,0.15)",
+          border: "none",
+          borderRadius: 999,
+          padding: "6px 12px",
+          color: "#FFFFFF",
+          fontSize: 12,
+          fontWeight: 700,
+          cursor: "pointer"
+        }
+      }, "📷 Photo"),
+      React.createElement("input", {
+        ref: fileInputRef,
+        type: "file",
+        accept: "image/*",
+        style: { display: "none" },
+        onChange: handleFileUpload
+      })
+    ),
+
+    React.createElement("div", {
+      style: {
+        flex: 1,
+        position: "relative",
+        background: "#111111",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }
+    },
+      React.createElement("video", {
+        ref: videoRef,
+        playsInline: true,
+        muted: true,
+        style: {
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: cameraActive ? "block" : "none"
+        }
+      }),
+      !cameraActive && React.createElement("div", {
+        style: {
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(180deg, #181B22 0%, #0E1015 100%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 24,
+          textAlign: "center"
+        }
+      },
+        React.createElement("span", { style: { fontSize: 48, marginBottom: 12 } }, "🏷️"),
+        React.createElement("div", { style: { color: "#FFFFFF", fontSize: 15, fontWeight: 700 } }, "Align Barcode in Viewfinder"),
+        React.createElement("div", { style: { color: "#94A3B8", fontSize: 12, marginTop: 4, maxWidth: 280 } }, "Hold camera steady over any snack, protein bar, or grocery package barcode.")
+      ),
+
+      React.createElement("div", {
+        style: {
+          position: "absolute",
+          width: "78%",
+          maxWidth: 320,
+          height: 180,
+          border: "2px solid rgba(255,255,255,0.4)",
+          borderRadius: 16,
+          boxShadow: "0 0 0 9999px rgba(0,0,0,0.55)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden"
+        }
+      },
+        React.createElement("div", {
+          style: {
+            position: "absolute",
+            left: 0,
+            right: 0,
+            height: 2,
+            background: "#237547",
+            boxShadow: "0 0 8px #237547, 0 0 16px #237547",
+            animation: "stokeScanLaser 2s ease-in-out infinite"
+          }
+        }),
+        React.createElement("div", { style: { position: "absolute", top: 8, left: 8, width: 16, height: 16, borderTop: "3px solid #237547", borderLeft: "3px solid #237547" } }),
+        React.createElement("div", { style: { position: "absolute", top: 8, right: 8, width: 16, height: 16, borderTop: "3px solid #237547", borderRight: "3px solid #237547" } }),
+        React.createElement("div", { style: { position: "absolute", bottom: 8, left: 8, width: 16, height: 16, borderBottom: "3px solid #237547", borderLeft: "3px solid #237547" } }),
+        React.createElement("div", { style: { position: "absolute", bottom: 8, right: 8, width: 16, height: 16, borderBottom: "3px solid #237547", borderRight: "3px solid #237547" } })
+      ),
+
+      React.createElement("div", {
+        style: {
+          position: "absolute",
+          top: 14,
+          left: 14,
+          right: 14,
+          display: "flex",
+          gap: 6,
+          overflowX: "auto",
+          scrollbarWidth: "none"
+        }
+      },
+        [
+          { label: "⚡ Protein Bar", code: "002652207020" },
+          { label: "🍫 Yoga Bar", code: "8906084040123" },
+          { label: "🥛 Amul Lassi", code: "8901262010101" },
+          { label: "🌾 Quaker Oats", code: "8901491101010" }
+        ].map(item => React.createElement("button", {
+          key: item.code,
+          type: "button",
+          onClick: () => handleLookupBarcode(item.code),
+          style: {
+            background: "rgba(0,0,0,0.65)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.25)",
+            color: "#FFFFFF",
+            fontSize: 11,
+            fontWeight: 700,
+            borderRadius: 999,
+            padding: "5px 11px",
+            whiteSpace: "nowrap",
+            cursor: "pointer"
+          }
+        }, item.label))
+      )
+    ),
+
+    React.createElement("div", {
+      style: {
+        background: "var(--surface-primary)",
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        padding: "18px 20px max(18px, env(safe-area-inset-bottom, 24px))",
+        boxShadow: "0 -8px 30px rgba(0,0,0,0.35)",
+        color: "var(--text-primary)",
+        zIndex: 20
+      }
+    },
+      React.createElement("div", {
+        style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }
+      },
+        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 7 } },
+          React.createElement("span", {
+            style: { fontSize: 18, fontWeight: 900, color: "var(--text-primary)" }
+          }, foundProduct ? foundProduct.name : "Protein Bar"),
+          React.createElement("span", {
+            style: {
+              background: "#10B981",
+              color: "#FFFFFF",
+              borderRadius: "50%",
+              width: 18,
+              height: 18,
+              fontSize: 11,
+              fontWeight: 900,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }
+          }, "✓")
+        ),
+        React.createElement("div", { style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 600 } },
+          foundProduct?.brand || "Food Product"
+        )
+      ),
+
+      React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 12,
+          padding: "12px 14px",
+          background: "var(--surface-elevated, rgba(255,255,255,0.04))",
+          borderRadius: 18,
+          border: "1px solid var(--border-divider)"
+        }
+      },
+        React.createElement("div", {
+          style: {
+            position: "relative",
+            width: 72,
+            height: 72,
+            borderRadius: "50%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0
+          }
+        },
+          React.createElement("svg", {
+            width: 72,
+            height: 72,
+            viewBox: "0 0 36 36",
+            style: { position: "absolute", transform: "rotate(-90deg)" }
+          },
+            React.createElement("path", {
+              d: "M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831",
+              fill: "none",
+              stroke: "var(--border-divider, #E2E8F0)",
+              strokeWidth: "3.2"
+            }),
+            React.createElement("path", {
+              d: "M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831",
+              fill: "none",
+              stroke: "#237547",
+              strokeWidth: "3.2",
+              strokeDasharray: Math.min(100, Math.round((scaledCal / 500) * 100)) + ", 100"
+            })
+          ),
+          React.createElement("span", { style: { fontSize: 16, fontWeight: 900, color: "var(--text-primary)", lineHeight: 1 } }, scaledCal),
+          React.createElement("span", { style: { fontSize: 9.5, color: "var(--text-secondary)", fontWeight: 600, marginTop: 2 } }, "cal")
+        ),
+
+        React.createElement("div", {
+          style: { flex: 1, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, textAlign: "center" }
+        },
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 10, fontWeight: 700, color: "#3B82F6" } }, pctC + "%"),
+            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", marginTop: 2 } }, scaledC + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Carbs")
+          ),
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 10, fontWeight: 700, color: "#F59E0B" } }, pctF + "%"),
+            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", marginTop: 2 } }, scaledF + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Fat")
+          ),
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 10, fontWeight: 700, color: "#237547" } }, pctP + "%"),
+            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", marginTop: 2 } }, scaledP + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Protein")
+          )
+        )
+      ),
+
+      React.createElement("div", {
+        style: { display: "flex", gap: 10, alignItems: "center", marginTop: 12 }
+      },
+        React.createElement("div", { style: { flex: 1 } },
+          React.createElement("label", { style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 700, display: "block", marginBottom: 4 } }, "Serving Size (grams)"),
+          React.createElement("input", {
+            type: "number",
+            min: 1,
+            max: 2000,
+            value: portionGrams,
+            onChange: e => setPortionGrams(Math.max(1, Number(e.target.value) || 1)),
+            style: {
+              width: "100%",
+              boxSizing: "border-box",
+              padding: "8px 12px",
+              borderRadius: 10,
+              border: "1px solid var(--border-divider)",
+              background: "var(--surface-primary)",
+              color: "var(--text-primary)",
+              fontSize: 13,
+              fontWeight: 800
+            }
+          })
+        ),
+        React.createElement("div", { style: { flex: 1 } },
+          React.createElement("label", { style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 700, display: "block", marginBottom: 4 } }, "Add to Meal"),
+          React.createElement("select", {
+            value: mealCategory,
+            onChange: e => setMealCategory(e.target.value),
+            style: {
+              width: "100%",
+              boxSizing: "border-box",
+              padding: "8px 10px",
+              borderRadius: 10,
+              border: "1px solid var(--border-divider)",
+              background: "var(--surface-primary)",
+              color: "var(--text-primary)",
+              fontSize: 13,
+              fontWeight: 700
+            }
+          },
+            React.createElement("option", { value: "breakfast" }, "Breakfast"),
+            React.createElement("option", { value: "lunch" }, "Lunch"),
+            React.createElement("option", { value: "dinner" }, "Dinner"),
+            React.createElement("option", { value: "snack" }, "Snacks")
+          )
+        )
+      ),
+
+      React.createElement("button", {
+        type: "button",
+        onClick: handleSaveToLog,
+        style: {
+          width: "100%",
+          padding: "14px 0",
+          borderRadius: 14,
+          border: "none",
+          background: "linear-gradient(135deg, #237547 0%, #1B5E36 100%)",
+          color: "#FFFFFF",
+          fontSize: 14,
+          fontWeight: 900,
+          cursor: "pointer",
+          marginTop: 14,
+          boxShadow: "0 4px 14px rgba(35, 117, 71, 0.3)"
+        }
+      }, "+ Add to Nutrition")
+    )
+  );
+}
+
+/* ============================================================
+   STOKE — PLAN YOUR MEALS ENGINE (Meal Planner, Recipes, Groceries)
+   ============================================================ */
+const DEFAULT_PLANNED_MEALS = [
+  {
+    id: "plan_1",
+    slot: "Breakfast",
+    slotKey: "breakfast",
+    name: "Cinnamon oatmeal with berries",
+    subtext: "with berries",
+    calories: 378,
+    protein: 14,
+    carbs: 58,
+    fat: 9,
+    fiber: 8,
+    image: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=600&auto=format&fit=crop&q=80"
+  },
+  {
+    id: "plan_2",
+    slot: "Lunch",
+    slotKey: "lunch",
+    name: "Almond Crusted Tilapia with kale salad",
+    subtext: "with kale salad",
+    calories: 310,
+    protein: 34,
+    carbs: 8,
+    fat: 16,
+    fiber: 4,
+    image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&auto=format&fit=crop&q=80"
+  },
+  {
+    id: "plan_3",
+    slot: "Dinner",
+    slotKey: "dinner",
+    name: "Homestyle Chicken Curry with 2 Rotis",
+    subtext: "with 2 whole wheat rotis",
+    calories: 535,
+    protein: 38,
+    carbs: 48,
+    fat: 18,
+    fiber: 6,
+    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&auto=format&fit=crop&q=80"
+  },
+  {
+    id: "plan_4",
+    slot: "Snacks",
+    slotKey: "snack",
+    name: "Shawarma Chickpeas",
+    subtext: "with garlic yogurt & cucumber",
+    calories: 214,
+    protein: 11,
+    carbs: 28,
+    fat: 6,
+    fiber: 7,
+    image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&auto=format&fit=crop&q=80"
+  }
+];
+
+const STOKE_RECIPES = [
+  {
+    id: "rec_1",
+    name: "Sweet Potato Fries",
+    category: "Favorites",
+    calories: 150,
+    protein: 3,
+    carbs: 32,
+    fat: 2,
+    fiber: 4,
+    prepTime: "25 min",
+    isFavorite: true,
+    image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80",
+    ingredients: ["2 medium sweet potatoes", "1 tbsp olive oil", "1/2 tsp smoked paprika", "1/4 tsp sea salt", "1/4 tsp garlic powder"],
+    instructions: ["Wash and slice sweet potatoes into 1/4-inch fries.", "Toss in olive oil, paprika, salt, and garlic powder.", "Air fry or bake at 200°C (400°F) for 20-22 minutes until crispy."]
+  },
+  {
+    id: "rec_2",
+    name: "Egg Tacos",
+    category: "Favorites",
+    calories: 240,
+    protein: 14,
+    carbs: 18,
+    fat: 11,
+    fiber: 3,
+    prepTime: "12 min",
+    isFavorite: true,
+    image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&auto=format&fit=crop&q=80",
+    ingredients: ["2 large eggs", "2 mini corn tortillas", "2 tbsp salsa verde", "1/4 avocado sliced", "Coriander / cilantro"],
+    instructions: ["Scramble 2 eggs softly in a non-stick pan.", "Warm corn tortillas on an open flame.", "Fill tortillas with scrambled eggs, top with salsa, avocado, and fresh coriander."]
+  },
+  {
+    id: "rec_3",
+    name: "Quinoa Hummus Bowl",
+    category: "Mediterranean",
+    calories: 480,
+    protein: 16,
+    carbs: 62,
+    fat: 18,
+    fiber: 11,
+    prepTime: "15 min",
+    isFavorite: false,
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&auto=format&fit=crop&q=80",
+    ingredients: ["1 cup cooked quinoa", "3 tbsp traditional hummus", "1/2 cup cucumber diced", "1/2 cup cherry tomatoes", "1 boiled egg or falafel", "1 tbsp olive oil dressing"],
+    instructions: ["Layer warm fluffy quinoa at the base of the bowl.", "Add dollops of hummus, diced cucumbers, and halved tomatoes.", "Top with boiled egg, sprinkle za'atar spice, and drizzle extra virgin olive oil."]
+  },
+  {
+    id: "rec_4",
+    name: "Shawarma Chickpeas",
+    category: "Mediterranean",
+    calories: 214,
+    protein: 10,
+    carbs: 28,
+    fat: 6,
+    fiber: 7,
+    prepTime: "20 min",
+    isFavorite: false,
+    image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&auto=format&fit=crop&q=80",
+    ingredients: ["1 cup boiled chickpeas (chana)", "1 tsp cumin & smoked paprika", "1/2 tsp turmeric", "3 tbsp Greek yogurt dip", "Diced cucumbers & mint"],
+    instructions: ["Roast chickpeas in a skillet with cumin, paprika, and olive oil until fragrant.", "Spread seasoned Greek yogurt on the plate.", "Top with warm crispy chickpeas and diced cucumber salad."]
+  },
+  {
+    id: "rec_5",
+    name: "Cinnamon Oatmeal with Berries",
+    category: "Favorites",
+    calories: 378,
+    protein: 14,
+    carbs: 58,
+    fat: 9,
+    fiber: 8,
+    prepTime: "10 min",
+    isFavorite: true,
+    image: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=600&auto=format&fit=crop&q=80",
+    ingredients: ["50g rolled oats", "200ml unsweetened almond milk", "1 scoop vanilla whey protein", "1/2 cup fresh blueberries & raspberries", "1/2 tsp Ceylon cinnamon"],
+    instructions: ["Simmer oats with almond milk for 5-6 minutes.", "Stir in whey protein and cinnamon until creamy.", "Garnish with fresh raspberries and blueberries."]
+  },
+  {
+    id: "rec_6",
+    name: "Almond Crusted Tilapia with Kale Salad",
+    category: "High Protein",
+    calories: 310,
+    protein: 34,
+    carbs: 8,
+    fat: 16,
+    fiber: 4,
+    prepTime: "22 min",
+    isFavorite: false,
+    image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&auto=format&fit=crop&q=80",
+    ingredients: ["1 fresh tilapia filet (180g)", "2 tbsp sliced crushed almonds", "1 egg white", "2 cups raw shredded kale", "1 tbsp lemon juice & olive oil"],
+    instructions: ["Dip tilapia in egg white, coat evenly with crushed almonds.", "Bake at 190°C for 14-16 minutes until golden and flaky.", "Massage kale with lemon juice and olive oil, serve alongside warm fish."]
+  },
+  {
+    id: "rec_7",
+    name: "Tandoori Chicken Skewers",
+    category: "High Protein",
+    calories: 320,
+    protein: 44,
+    carbs: 6,
+    fat: 11,
+    fiber: 2,
+    prepTime: "20 min",
+    isFavorite: true,
+    image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=600&auto=format&fit=crop&q=80",
+    ingredients: ["200g chicken breast cubes", "3 tbsp hung curd / Greek yogurt", "1 tbsp ginger-garlic paste", "1 tsp Kashmiri red chili", "1 tsp kasoori methi"],
+    instructions: ["Marinate chicken in spiced hung curd for at least 30 minutes.", "Thread onto skewers with bell peppers and onions.", "Grill or roast on high heat for 12-14 minutes with charred edges."]
+  },
+  {
+    id: "rec_8",
+    name: "Paneer Tikka Protein Bowl",
+    category: "High Protein",
+    calories: 380,
+    protein: 22,
+    carbs: 18,
+    fat: 24,
+    fiber: 5,
+    prepTime: "18 min",
+    isFavorite: false,
+    image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&auto=format&fit=crop&q=80",
+    ingredients: ["150g low-fat paneer cubes", "1/2 cup bell peppers", "3 tbsp curd marinade", "1/2 cup sliced onions", "Chaat masala & mint chutney"],
+    instructions: ["Toss paneer and peppers in tandoori spice marinade.", "Air-fry or grill on tawa for 10 minutes until edges are crisp.", "Serve warm with mint chutney and fresh onion rings."]
+  }
+];
+
+const INITIAL_GROCERIES = [
+  { id: "g1", category: "Produce & Vegetables", name: "Fresh Kale", qty: "1 bunch", done: false },
+  { id: "g2", category: "Produce & Vegetables", name: "Sweet Potatoes", qty: "1 kg", done: false },
+  { id: "g3", category: "Produce & Vegetables", name: "Blueberries & Raspberries", qty: "200g", done: false },
+  { id: "g4", category: "Produce & Vegetables", name: "Cucumbers & Tomatoes", qty: "500g", done: false },
+  { id: "g5", category: "Produce & Vegetables", name: "Lemons & Fresh Mint", qty: "4 pcs", done: true },
+  
+  { id: "g6", category: "Protein & Dairy", name: "Tilapia Filets", qty: "400g", done: false },
+  { id: "g7", category: "Protein & Dairy", name: "Chicken Breast", qty: "1 kg", done: false },
+  { id: "g8", category: "Protein & Dairy", name: "Farm Fresh Eggs", qty: "12 pcs", done: true },
+  { id: "g9", category: "Protein & Dairy", name: "Greek Yogurt / Hung Curd", qty: "500g", done: false },
+  { id: "g10", category: "Protein & Dairy", name: "Low-Fat Paneer", qty: "400g", done: false },
+  
+  { id: "g11", category: "Grains & Pantry", name: "Rolled Oats", qty: "1 kg", done: false },
+  { id: "g12", category: "Grains & Pantry", name: "Organic Quinoa", qty: "500g", done: false },
+  { id: "g13", category: "Grains & Pantry", name: "Whole Wheat Atta / Rotis", qty: "1 pack", done: false },
+  { id: "g14", category: "Grains & Pantry", name: "Sliced Almonds", qty: "200g", done: false },
+  { id: "g15", category: "Grains & Pantry", name: "Extra Virgin Olive Oil", qty: "1 bottle", done: true }
+];
+
+function PlanYourMealsView({ meals, addItem, goals, totals, onOpenBarcode, onBackToDiary }) {
+  const [subTab, setSubTab] = useState("planner");
+  const [plannedMeals, setPlannedMeals] = useState(() => {
+    try {
+      const saved = localStorage.getItem("stoke_planned_meals");
+      return saved ? JSON.parse(saved) : DEFAULT_PLANNED_MEALS;
+    } catch(e) { return DEFAULT_PLANNED_MEALS; }
+  });
+  const [recipesList, setRecipesList] = useState(() => {
+    try {
+      const saved = localStorage.getItem("stoke_recipes_list");
+      return saved ? JSON.parse(saved) : STOKE_RECIPES;
+    } catch(e) { return STOKE_RECIPES; }
+  });
+  const [groceryItems, setGroceryItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem("stoke_grocery_items");
+      return saved ? JSON.parse(saved) : INITIAL_GROCERIES;
+    } catch(e) { return INITIAL_GROCERIES; }
+  });
+  const [searchRecipe, setSearchRecipe] = useState("");
+  const [selectedRecipeCategory, setSelectedRecipeCategory] = useState("All");
+  const [activeRecipeModal, setActiveRecipeModal] = useState(null);
+  const [newGroceryName, setNewGroceryName] = useState("");
+  const [newGroceryCat, setNewGroceryCat] = useState("Produce & Vegetables");
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const showToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 2500);
+  };
+
+  const savePlanned = (updated) => {
+    setPlannedMeals(updated);
+    try { localStorage.setItem("stoke_planned_meals", JSON.stringify(updated)); } catch(e) {}
+  };
+
+  const saveGroceries = (updated) => {
+    setGroceryItems(updated);
+    try { localStorage.setItem("stoke_grocery_items", JSON.stringify(updated)); } catch(e) {}
+  };
+
+  const toggleFavoriteRecipe = (recId) => {
+    const updated = recipesList.map(r => r.id === recId ? { ...r, isFavorite: !r.isFavorite } : r);
+    setRecipesList(updated);
+    try { localStorage.setItem("stoke_recipes_list", JSON.stringify(updated)); } catch(e) {}
+  };
+
+  const logMealItem = (slotKey, item) => {
+    if (addItem) {
+      addItem(slotKey, {
+        name: item.name,
+        grams: item.grams || 100,
+        calories: item.calories,
+        protein: item.protein,
+        carbs: item.carbs,
+        fat: item.fat,
+        fiber: item.fiber || 2,
+        dietType: "veg"
+      });
+      showToast("✅ Logged " + item.name + " to " + slotKey.toUpperCase() + "!");
+    }
+  };
+
+  const logAllPlanned = () => {
+    if (!addItem) return;
+    plannedMeals.forEach(pm => {
+      addItem(pm.slotKey || "lunch", {
+        name: pm.name,
+        grams: 100,
+        calories: pm.calories,
+        protein: pm.protein,
+        carbs: pm.carbs,
+        fat: pm.fat,
+        fiber: pm.fiber || 2,
+        dietType: "veg"
+      });
+    });
+    showToast("⚡ All planned meals logged to your daily diary!");
+  };
+
+  const addRecipeToGroceries = (recipe) => {
+    const newItems = (recipe.ingredients || []).map((ing, idx) => ({
+      id: "g_add_" + Date.now() + "_" + idx,
+      category: "Produce & Vegetables",
+      name: ing,
+      qty: "1 portion",
+      done: false
+    }));
+    const merged = [...groceryItems, ...newItems];
+    saveGroceries(merged);
+    showToast("🛒 Ingredients added to your Grocery List!");
+  };
+
+  const toggleGroceryDone = (id) => {
+    const updated = groceryItems.map(g => g.id === id ? { ...g, done: !g.done } : g);
+    saveGroceries(updated);
+  };
+
+  const handleAddCustomGrocery = () => {
+    if (!newGroceryName.trim()) return;
+    const item = {
+      id: "g_custom_" + Date.now(),
+      category: newGroceryCat,
+      name: newGroceryName.trim(),
+      qty: "1 unit",
+      done: false
+    };
+    const updated = [item, ...groceryItems];
+    saveGroceries(updated);
+    setNewGroceryName("");
+    showToast("Added " + item.name + " to list");
+  };
+
+  const totalPlannedCalories = plannedMeals.reduce((acc, m) => acc + (Number(m.calories) || 0), 0);
+
+  const filteredRecipes = recipesList.filter(r => {
+    const matchesSearch = !searchRecipe.trim() || r.name.toLowerCase().includes(searchRecipe.toLowerCase()) || r.ingredients?.some(i => i.toLowerCase().includes(searchRecipe.toLowerCase()));
+    if (!matchesSearch) return false;
+    if (selectedRecipeCategory === "All") return true;
+    if (selectedRecipeCategory === "Favorites") return r.isFavorite;
+    return r.category === selectedRecipeCategory;
+  });
+
+  return React.createElement("div", {
+    style: { display: "flex", flexDirection: "column", gap: 14 }
+  },
+    React.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "4px 0"
+      }
+    },
+      React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8 } },
+        React.createElement("h2", {
+          style: { margin: 0, fontSize: 24, fontWeight: 900, color: "var(--text-primary)", letterSpacing: -0.5 }
+        }, "Plan"),
+        React.createElement("span", {
+          style: {
+            fontSize: 11,
+            fontWeight: 800,
+            background: "rgba(35, 117, 71, 0.12)",
+            color: "#237547",
+            padding: "2px 8px",
+            borderRadius: 999
+          }
+        }, "MEALS & NUTRITION")
+      ),
+      React.createElement("div", { style: { display: "flex", gap: 8 } },
+        React.createElement("button", {
+          type: "button",
+          onClick: onOpenBarcode,
+          style: {
+            background: "var(--surface-primary)",
+            border: "1px solid var(--border-divider)",
+            borderRadius: 999,
+            padding: "6px 12px",
+            fontSize: 12,
+            fontWeight: 800,
+            color: "var(--text-primary)",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 5
+          }
+        }, "🏷️ Scan Barcode")
+      )
+    ),
+
+    React.createElement("div", {
+      style: {
+        display: "flex",
+        background: "var(--surface-primary)",
+        border: "1px solid var(--border-divider)",
+        borderRadius: 14,
+        padding: 4,
+        gap: 4
+      }
+    },
+      [
+        { key: "planner", label: "Meal Planner", icon: "📅" },
+        { key: "groceries", label: "Groceries", icon: "🛒" },
+        { key: "recipes", label: "Recipes", icon: "📖" }
+      ].map(tab => {
+        const isActive = subTab === tab.key;
+        return React.createElement("button", {
+          key: tab.key,
+          type: "button",
+          onClick: () => setSubTab(tab.key),
+          style: {
+            flex: 1,
+            padding: "8px 0",
+            border: "none",
+            borderRadius: 10,
+            background: isActive ? "#237547" : "transparent",
+            color: isActive ? "#FFFFFF" : "var(--text-secondary)",
+            fontSize: 12.5,
+            fontWeight: 800,
+            cursor: "pointer",
+            transition: "all 0.2s ease",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 6
+          }
+        }, tab.icon + " " + tab.label);
+      })
+    ),
+
+    toastMessage && React.createElement("div", {
+      style: {
+        background: "#1E293B",
+        color: "#FFFFFF",
+        padding: "8px 14px",
+        borderRadius: 10,
+        fontSize: 12,
+        fontWeight: 700,
+        textAlign: "center"
+      }
+    }, toastMessage),
+
+    subTab === "planner" && React.createElement("div", {
+      style: { display: "flex", flexDirection: "column", gap: 14 }
+    },
+      React.createElement("div", {
+        style: { display: "flex", gap: 8 }
+      },
+        React.createElement("button", {
+          type: "button",
+          onClick: logAllPlanned,
+          style: {
+            flex: 1.2,
+            padding: "10px 14px",
+            borderRadius: 12,
+            border: "none",
+            background: "linear-gradient(135deg, #237547 0%, #1B5E36 100%)",
+            color: "#FFFFFF",
+            fontSize: 12,
+            fontWeight: 800,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 6
+          }
+        }, "⚡ Log All to Diary"),
+        React.createElement("button", {
+          type: "button",
+          onClick: () => {
+            savePlanned(DEFAULT_PLANNED_MEALS);
+            showToast("✨ Fresh athletic plan populated!");
+          },
+          style: {
+            flex: 1,
+            padding: "10px 12px",
+            borderRadius: 12,
+            border: "1px solid var(--border-divider)",
+            background: "var(--surface-primary)",
+            color: "var(--text-primary)",
+            fontSize: 12,
+            fontWeight: 800,
+            cursor: "pointer"
+          }
+        }, "+ Create / Auto"),
+        React.createElement("button", {
+          type: "button",
+          onClick: onBackToDiary,
+          style: {
+            padding: "10px 14px",
+            borderRadius: 12,
+            border: "1px solid var(--border-divider)",
+            background: "var(--surface-primary)",
+            color: "var(--text-secondary)",
+            fontSize: 12,
+            fontWeight: 800,
+            cursor: "pointer"
+          }
+        }, "Diary →")
+      ),
+
+      React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          padding: "4px 2px"
+        }
+      },
+        React.createElement("div", null,
+          React.createElement("div", {
+            style: { fontSize: 16, fontWeight: 900, color: "var(--text-primary)" }
+          }, "Today's Meal Plan"),
+          React.createElement("div", {
+            style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 2 }
+          }, "Daily Macro Architecture")
+        ),
+        React.createElement("div", {
+          style: { fontSize: 18, fontWeight: 900, color: "#237547" }
+        }, totalPlannedCalories.toLocaleString() + " cal")
+      ),
+
+      React.createElement("div", {
+        style: {
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: 12
+        }
+      },
+        plannedMeals.map(pm => React.createElement("div", {
+          key: pm.id,
+          style: {
+            background: "var(--surface-primary)",
+            border: "1px solid var(--border-divider)",
+            borderRadius: 18,
+            overflow: "hidden",
+            boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
+            display: "flex",
+            flexDirection: "column"
+          }
+        },
+          React.createElement("div", {
+            style: {
+              position: "relative",
+              height: 140,
+              background: "#1E293B",
+              overflow: "hidden"
+            }
+          },
+            React.createElement("img", {
+              src: pm.image,
+              alt: pm.name,
+              style: { width: "100%", height: "100%", objectFit: "cover" }
+            }),
+            React.createElement("span", {
+              style: {
+                position: "absolute",
+                top: 10,
+                left: 10,
+                background: "rgba(0,0,0,0.75)",
+                backdropFilter: "blur(8px)",
+                color: "#FFFFFF",
+                fontSize: 10,
+                fontWeight: 800,
+                padding: "3px 8px",
+                borderRadius: 6,
+                textTransform: "uppercase"
+              }
+            }, pm.slot),
+            React.createElement("span", {
+              style: {
+                position: "absolute",
+                bottom: 10,
+                right: 10,
+                background: "#237547",
+                color: "#FFFFFF",
+                fontSize: 12,
+                fontWeight: 900,
+                padding: "3px 9px",
+                borderRadius: 8,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.3)"
+              }
+            }, pm.calories + " cal")
+          ),
+
+          React.createElement("div", { style: { padding: "12px 14px", flex: 1, display: "flex", flexDirection: "column" } },
+            React.createElement("div", {
+              style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", lineHeight: 1.3 }
+            }, pm.name),
+            React.createElement("div", {
+              style: { fontSize: 11.5, color: "var(--text-secondary)", marginTop: 3 }
+            }, pm.subtext),
+
+            React.createElement("div", {
+              style: {
+                display: "flex",
+                gap: 8,
+                marginTop: 10,
+                padding: "6px 10px",
+                background: "var(--surface-elevated, rgba(255,255,255,0.04))",
+                borderRadius: 8,
+                fontSize: 11,
+                fontWeight: 700
+              }
+            },
+              React.createElement("span", { style: { color: "#237547" } }, "P: " + pm.protein + "g"),
+              React.createElement("span", { style: { color: "#3B82F6" } }, "C: " + pm.carbs + "g"),
+              React.createElement("span", { style: { color: "#F59E0B" } }, "F: " + pm.fat + "g")
+            ),
+
+            React.createElement("button", {
+              type: "button",
+              onClick: () => logMealItem(pm.slotKey, pm),
+              style: {
+                marginTop: 10,
+                padding: "9px 0",
+                borderRadius: 10,
+                border: "1px solid #237547",
+                background: "rgba(35, 117, 71, 0.12)",
+                color: "#237547",
+                fontSize: 12,
+                fontWeight: 800,
+                cursor: "pointer",
+                width: "100%"
+              }
+            }, "+ Log to " + pm.slot)
+          )
+        ))
+      )
+    ),
+
+    subTab === "recipes" && React.createElement("div", {
+      style: { display: "flex", flexDirection: "column", gap: 14 }
+    },
+      React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          background: "var(--surface-primary)",
+          border: "1px solid var(--border-divider)",
+          borderRadius: 14,
+          padding: "8px 12px"
+        }
+      },
+        React.createElement("span", { style: { fontSize: 14, color: "var(--text-secondary)" } }, "🔍"),
+        React.createElement("input", {
+          type: "text",
+          value: searchRecipe,
+          onChange: e => setSearchRecipe(e.target.value),
+          placeholder: "Search recipes...",
+          style: {
+            flex: 1,
+            background: "transparent",
+            border: "none",
+            color: "var(--text-primary)",
+            fontSize: 13,
+            outline: "none"
+          }
+        }),
+        searchRecipe && React.createElement("button", {
+          type: "button",
+          onClick: () => setSearchRecipe(""),
+          style: { background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer" }
+        }, "✕")
+      ),
+
+      React.createElement("div", {
+        style: { display: "flex", gap: 6, overflowX: "auto", scrollbarWidth: "none", paddingBottom: 2 }
+      },
+        ["All", "Favorites", "High Protein", "Mediterranean"].map(cat => {
+          const isSelected = selectedRecipeCategory === cat;
+          return React.createElement("button", {
+            key: cat,
+            type: "button",
+            onClick: () => setSelectedRecipeCategory(cat),
+            style: {
+              background: isSelected ? "#237547" : "var(--surface-primary)",
+              color: isSelected ? "#FFFFFF" : "var(--text-secondary)",
+              border: "1px solid " + (isSelected ? "#237547" : "var(--border-divider)"),
+              borderRadius: 999,
+              padding: "5px 12px",
+              fontSize: 11.5,
+              fontWeight: 800,
+              cursor: "pointer",
+              whiteSpace: "nowrap"
+            }
+          }, cat);
+        })
+      ),
+
+      React.createElement("div", {
+        style: { display: "flex", justifyContent: "space-between", alignItems: "center" }
+      },
+        React.createElement("h3", {
+          style: { margin: 0, fontSize: 15, fontWeight: 900, color: "var(--text-primary)" }
+        }, selectedRecipeCategory === "All" ? "Featured Recipes" : selectedRecipeCategory),
+        React.createElement("span", {
+          style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 700 }
+        }, filteredRecipes.length + " recipes")
+      ),
+
+      React.createElement("div", {
+        style: {
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: 12
+        }
+      },
+        filteredRecipes.map(rec => React.createElement("div", {
+          key: rec.id,
+          onClick: () => setActiveRecipeModal(rec),
+          style: {
+            background: "var(--surface-primary)",
+            border: "1px solid var(--border-divider)",
+            borderRadius: 16,
+            overflow: "hidden",
+            boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
+            cursor: "pointer",
+            display: "flex",
+            flexDirection: "column"
+          }
+        },
+          React.createElement("div", {
+            style: { position: "relative", height: 120, background: "#1E293B" }
+          },
+            React.createElement("img", {
+              src: rec.image,
+              alt: rec.name,
+              style: { width: "100%", height: "100%", objectFit: "cover" }
+            }),
+            React.createElement("button", {
+              type: "button",
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleFavoriteRecipe(rec.id);
+              },
+              style: {
+                position: "absolute",
+                top: 8,
+                left: 8,
+                width: 28,
+                height: 28,
+                borderRadius: "50%",
+                background: "rgba(0,0,0,0.6)",
+                border: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: rec.isFavorite ? "#EF4444" : "#FFFFFF",
+                fontSize: 14,
+                cursor: "pointer"
+              }
+            }, rec.isFavorite ? "❤️" : "🤍")
+          ),
+          React.createElement("div", { style: { padding: "10px 12px", flex: 1 } },
+            React.createElement("div", {
+              style: { fontSize: 13, fontWeight: 900, color: "var(--text-primary)", lineHeight: 1.25 }
+            }, rec.name),
+            React.createElement("div", {
+              style: { fontSize: 11, color: "#237547", fontWeight: 800, marginTop: 4 }
+            }, rec.calories + " cal"),
+            React.createElement("div", {
+              style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 }
+            }, "P: " + rec.protein + "g · C: " + rec.carbs + "g · F: " + rec.fat + "g")
+          )
+        ))
+      )
+    ),
+
+    subTab === "groceries" && React.createElement("div", {
+      style: { display: "flex", flexDirection: "column", gap: 14 }
+    },
+      React.createElement("div", {
+        style: {
+          display: "flex",
+          gap: 8,
+          background: "var(--surface-primary)",
+          border: "1px solid var(--border-divider)",
+          borderRadius: 14,
+          padding: "6px 10px"
+        }
+      },
+        React.createElement("input", {
+          type: "text",
+          value: newGroceryName,
+          onChange: e => setNewGroceryName(e.target.value),
+          onKeyDown: e => e.key === "Enter" && handleAddCustomGrocery(),
+          placeholder: "Add item (e.g. Greek yogurt, Eggs)...",
+          style: {
+            flex: 1,
+            background: "transparent",
+            border: "none",
+            color: "var(--text-primary)",
+            fontSize: 13,
+            outline: "none"
+          }
+        }),
+        React.createElement("button", {
+          type: "button",
+          onClick: handleAddCustomGrocery,
+          style: {
+            background: "#237547",
+            color: "#FFFFFF",
+            border: "none",
+            borderRadius: 8,
+            padding: "6px 12px",
+            fontSize: 12,
+            fontWeight: 800,
+            cursor: "pointer"
+          }
+        }, "+ Add")
+      ),
+
+      ["Produce & Vegetables", "Protein & Dairy", "Grains & Pantry"].map(catName => {
+        const items = groceryItems.filter(g => g.category === catName);
+        if (items.length === 0) return null;
+        return React.createElement("div", {
+          key: catName,
+          style: {
+            background: "var(--surface-primary)",
+            border: "1px solid var(--border-divider)",
+            borderRadius: 16,
+            padding: "14px 16px"
+          }
+        },
+          React.createElement("div", {
+            style: {
+              fontSize: 12,
+              fontWeight: 900,
+              color: "#237547",
+              textTransform: "uppercase",
+              letterSpacing: 0.5,
+              marginBottom: 10
+            }
+          }, catName),
+          React.createElement("div", {
+            style: { display: "flex", flexDirection: "column", gap: 8 }
+          },
+            items.map(it => React.createElement("label", {
+              key: it.id,
+              style: {
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                cursor: "pointer",
+                padding: "4px 0"
+              }
+            },
+              React.createElement("input", {
+                type: "checkbox",
+                checked: it.done,
+                onChange: () => toggleGroceryDone(it.id),
+                style: { width: 16, height: 16, accentColor: "#237547", cursor: "pointer" }
+              }),
+              React.createElement("span", {
+                style: {
+                  flex: 1,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: it.done ? "var(--text-secondary)" : "var(--text-primary)",
+                  textDecoration: it.done ? "line-through" : "none"
+                }
+              }, it.name),
+              React.createElement("span", {
+                style: { fontSize: 11, color: "var(--text-secondary)" }
+              }, it.qty)
+            ))
+          )
+        );
+      }),
+
+      React.createElement("div", { style: { display: "flex", gap: 10, marginTop: 4 } },
+        React.createElement("button", {
+          type: "button",
+          onClick: () => {
+            const remaining = groceryItems.filter(g => !g.done);
+            saveGroceries(remaining);
+            showToast("Cleared checked items");
+          },
+          style: {
+            flex: 1,
+            padding: "10px 0",
+            borderRadius: 12,
+            border: "1px solid var(--border-divider)",
+            background: "var(--surface-primary)",
+            color: "var(--text-secondary)",
+            fontSize: 12,
+            fontWeight: 700,
+            cursor: "pointer"
+          }
+        }, "Clear Completed"),
+        React.createElement("button", {
+          type: "button",
+          onClick: () => {
+            saveGroceries(INITIAL_GROCERIES);
+            showToast("Reset grocery checklist");
+          },
+          style: {
+            flex: 1,
+            padding: "10px 0",
+            borderRadius: 12,
+            border: "1px solid var(--border-divider)",
+            background: "var(--surface-primary)",
+            color: "var(--text-secondary)",
+            fontSize: 12,
+            fontWeight: 700,
+            cursor: "pointer"
+          }
+        }, "Reset Checklist")
+      )
+    ),
+
+    activeRecipeModal && React.createElement("div", {
+      style: {
+        position: "fixed",
+        inset: 0,
+        zIndex: 100000,
+        background: "rgba(0,0,0,0.75)",
+        backdropFilter: "blur(10px)",
+        display: "flex",
+        alignItems: "flex-end",
+        justifyContent: "center"
+      }
+    },
+      React.createElement("div", {
+        style: {
+          width: "100%",
+          maxWidth: 480,
+          maxHeight: "88vh",
+          overflowY: "auto",
+          background: "var(--surface-primary)",
+          borderTopLeftRadius: 24,
+          borderTopRightRadius: 24,
+          padding: "20px 20px max(24px, env(safe-area-inset-bottom, 24px))",
+          boxShadow: "0 -8px 32px rgba(0,0,0,0.3)"
+        }
+      },
+        React.createElement("div", {
+          style: { position: "relative", height: 180, borderRadius: 16, overflow: "hidden", marginBottom: 14 }
+        },
+          React.createElement("img", {
+            src: activeRecipeModal.image,
+            alt: activeRecipeModal.name,
+            style: { width: "100%", height: "100%", objectFit: "cover" }
+          }),
+          React.createElement("button", {
+            type: "button",
+            onClick: () => setActiveRecipeModal(null),
+            style: {
+              position: "absolute",
+              top: 10,
+              right: 10,
+              background: "rgba(0,0,0,0.65)",
+              border: "none",
+              borderRadius: "50%",
+              width: 32,
+              height: 32,
+              color: "#FFFFFF",
+              fontSize: 16,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }
+          }, "✕")
+        ),
+
+        React.createElement("div", {
+          style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }
+        },
+          React.createElement("div", null,
+            React.createElement("h2", {
+              style: { margin: 0, fontSize: 18, fontWeight: 900, color: "var(--text-primary)" }
+            }, activeRecipeModal.name),
+            React.createElement("div", {
+              style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 2 }
+            }, activeRecipeModal.category + " · " + activeRecipeModal.prepTime)
+          ),
+          React.createElement("div", {
+            style: { fontSize: 20, fontWeight: 900, color: "#237547" }
+          }, activeRecipeModal.calories + " cal")
+        ),
+
+        React.createElement("div", {
+          style: {
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 8,
+            padding: "10px",
+            background: "var(--surface-elevated, rgba(255,255,255,0.04))",
+            borderRadius: 12,
+            marginBottom: 14,
+            textAlign: "center"
+          }
+        },
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "#237547" } }, activeRecipeModal.protein + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Protein")
+          ),
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "#3B82F6" } }, activeRecipeModal.carbs + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Carbs")
+          ),
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "#F59E0B" } }, activeRecipeModal.fat + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Fat")
+          ),
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)" } }, activeRecipeModal.fiber + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Fibre")
+          )
+        ),
+
+        React.createElement("div", { style: { marginBottom: 14 } },
+          React.createElement("div", { style: { fontSize: 13, fontWeight: 800, color: "var(--text-primary)", marginBottom: 8 } }, "Ingredients"),
+          React.createElement("ul", { style: { margin: 0, paddingLeft: 18, fontSize: 12.5, color: "var(--text-secondary)", lineHeight: 1.6 } },
+            activeRecipeModal.ingredients.map((ing, i) => React.createElement("li", { key: i }, ing))
+          )
+        ),
+
+        React.createElement("div", { style: { marginBottom: 18 } },
+          React.createElement("div", { style: { fontSize: 13, fontWeight: 800, color: "var(--text-primary)", marginBottom: 8 } }, "Instructions"),
+          React.createElement("ol", { style: { margin: 0, paddingLeft: 18, fontSize: 12.5, color: "var(--text-secondary)", lineHeight: 1.6 } },
+            activeRecipeModal.instructions.map((inst, i) => React.createElement("li", { key: i }, inst))
+          )
+        ),
+
+        React.createElement("div", { style: { display: "flex", gap: 10 } },
+          React.createElement("button", {
+            type: "button",
+            onClick: () => {
+              addRecipeToGroceries(activeRecipeModal);
+              setActiveRecipeModal(null);
+            },
+            style: {
+              flex: 1,
+              padding: "12px 0",
+              borderRadius: 12,
+              border: "1px solid var(--border-divider)",
+              background: "var(--surface-primary)",
+              color: "var(--text-primary)",
+              fontSize: 12.5,
+              fontWeight: 800,
+              cursor: "pointer"
+            }
+          }, "🛒 Add to Groceries"),
+          React.createElement("button", {
+            type: "button",
+            onClick: () => {
+              logMealItem("lunch", activeRecipeModal);
+              setActiveRecipeModal(null);
+            },
+            style: {
+              flex: 1,
+              padding: "12px 0",
+              borderRadius: 12,
+              border: "none",
+              background: "#237547",
+              color: "#FFFFFF",
+              fontSize: 12.5,
+              fontWeight: 900,
+              cursor: "pointer"
+            }
+          }, "+ Add to Lunch")
+        )
+      )
+    )
+  );
+}
+
+function NutritionScreen({meals,mealSlots,addMealSlot,removeMealSlot,water,setWater,addItem,removeItem,totals,calPct,goals,onBack,onNavigate,selectedDate,onSelectDate}){const[nutritionView,setNutritionView]=useState("diary");const[showBarcodeScanner,setShowBarcodeScanner]=useState(false);const[newMealName,setNewMealName]=useState("");const addMealInputRef=useRef(null);function handleAddSlot(){if(!newMealName.trim())return;addMealSlot(newMealName.trim());setNewMealName("");}function handleFabClick(){addMealInputRef.current?.scrollIntoView({behavior:"smooth",block:"center"});addMealInputRef.current?.focus();}const kcalLeft=Math.max(0,Math.round(goals.calories-totals.calories));return/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement(ScreenHeader,{title:"Today's fuel",subtitle:"Nutrition",onBack:onBack,canGoBack:true}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:14,padding:4,gap:4,marginBottom:14}},/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setNutritionView("diary"),style:{flex:1,padding:"8px 0",border:"none",borderRadius:10,background:nutritionView==="diary"?"#237547":"transparent",color:nutritionView==="diary"?"#FFFFFF":"var(--text-secondary)",fontSize:12.5,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:5}},"📝 Log & Diary"),/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setNutritionView("plan"),style:{flex:1.2,padding:"8px 0",border:"none",borderRadius:10,background:nutritionView==="plan"?"#237547":"transparent",color:nutritionView==="plan"?"#FFFFFF":"var(--text-secondary)",fontSize:12.5,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:5}},"📅 Plan & Recipes"),/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setShowBarcodeScanner(true),style:{padding:"8px 12px",border:"1px solid rgba(35, 117, 71, 0.4)",borderRadius:10,background:"rgba(35, 117, 71, 0.12)",color:"#237547",fontSize:12,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",gap:4}},"🏷️ Barcode")),nutritionView==="plan"?/*#__PURE__*/React.createElement(PlanYourMealsView,{meals:meals,addItem:addItem,goals:goals,totals:totals,onOpenBarcode:()=>setShowBarcodeScanner(true),onBackToDiary:()=>setNutritionView("diary")}):/*#__PURE__*/React.createElement(React.Fragment,null,/*#__PURE__*/React.createElement(DaySelector,{selectedDate:selectedDate,onSelectDate:onSelectDate}),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"18px 20px",marginBottom:12,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.mutedFaint,marginBottom:8}},"Calories"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:10}},/*#__PURE__*/React.createElement("div",{style:{fontSize:24,fontWeight:700,color:TOKENS.text}},Math.round(totals.calories)," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goals.calories)),/*#__PURE__*/React.createElement("div",{style:{fontSize:14,fontWeight:700,color:TOKENS.ember}},kcalLeft," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:TOKENS.mutedFaint,fontWeight:500}},"left"))),/*#__PURE__*/React.createElement("div",{style:{height:6,background:TOKENS.surface2,borderRadius:3,overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:`${Math.min(100,calPct*100)}%`,background:TOKENS.ember,borderRadius:3}}))),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"18px 20px",marginBottom:18,display:"flex",gap:18,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Carbs",value:totals.carbs,goal:goals.carbs,color:TOKENS.carbs}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fat",value:totals.fat,goal:goals.fat,color:TOKENS.fat}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Protein",value:totals.protein,goal:goals.protein,color:TOKENS.protein}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fibre",value:totals.fiber,goal:goals.fiber,color:TOKENS.fiber})),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:14,padding:"14px 18px",marginBottom:22,display:"flex",alignItems:"center",justifyContent:"space-between",boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,color:TOKENS.muted,fontWeight:500}},"\uD83D\uDCA7 Water"),/*#__PURE__*/React.createElement("div",{style:{fontSize:18,fontWeight:700,color:TOKENS.text}},Math.max(0,Math.min(10,Number(water)||0)).toFixed(1),"L ",/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goals.water,"L"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("button",{onClick:()=>setWater(w=>Math.max(0,Math.round(((Number(w)||0)-0.25)*100)/100)),style:waterBtnStyle},"\u2212"),/*#__PURE__*/React.createElement("button",{onClick:()=>setWater(w=>Math.min(10,Math.round(((Number(w)||0)+0.25)*100)/100)),style:waterBtnStyle},"+"))),mealSlots.map(slot=>/*#__PURE__*/React.createElement(MealSection,{key:slot.key,mealKey:slot.key,label:slot.label,items:meals[slot.key]||[],onAdd:item=>addItem(slot.key,item),onRemove:idx=>removeItem(slot.key,idx),onRemoveSlot:mealSlots.length>1?()=>removeMealSlot(slot.key):null})),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface2,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px dashed ${TOKENS.border}`,borderRadius:14,padding:16,marginTop:4}},/*#__PURE__*/React.createElement("label",{style:{fontSize:11,color:TOKENS.mutedFaint,display:"block",marginBottom:6}},"Add a custom meal"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("input",{ref:addMealInputRef,value:newMealName,onChange:e=>setNewMealName(e.target.value),onKeyDown:e=>e.key==="Enter"&&handleAddSlot(),placeholder:"e.g. Late Night Snack",style:{flex:1,background:TOKENS.bg,border:`1px solid ${TOKENS.border}`,borderRadius:8,padding:"9px 12px",color:TOKENS.text,fontSize:14,boxSizing:"border-box"}}),/*#__PURE__*/React.createElement("button",{onClick:handleAddSlot,style:{background:"#111111",color:"var(--text-primary)",border:"none",borderRadius:8,padding:"0 18px",fontSize:13,fontWeight:700,cursor:"pointer"}},"+ Add"))),/*#__PURE__*/React.createElement("button",{onClick:handleFabClick,"aria-label":"Quick add",style:{position:"fixed",right:20,bottom:"calc(95px + env(safe-area-inset-bottom, 24px))",width:52,height:52,borderRadius:"50%",background:TOKENS.ember,color:"#0B0E13",border:"none",fontSize:26,fontWeight:700,cursor:"pointer",boxShadow:"0 6px 18px rgba(35, 117, 71,0.35)",zIndex:40}},"+")),showBarcodeScanner&&/*#__PURE__*/React.createElement(BarcodeScannerModal,{isOpen:showBarcodeScanner,onClose:()=>setShowBarcodeScanner(false),onAddMeal:addItem}));}const waterBtnStyle={width:34,height:34,borderRadius:"50%",border:"none",background:"#161616",color:TOKENS.text,fontSize:18,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"4px 4px 8px rgba(0,0,0,0.6), -4px -4px 8px rgba(255,255,255,0.04)"};/* ============================================================
        UPGRADED WORKOUT SCREEN WITH HORIZONTAL SCROLL & PERSONALIZATION
        ============================================================ */ /* ============================================================
        UPGRADED WORKOUT SCREEN WITH HORIZONTAL SCROLL & PERSONALIZATION

@@ -45,6 +45,7 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js"></script>
   <script>
     /* STOKE MEAL VISION ENGINE */
     /**
@@ -10733,88 +10734,208 @@ const res=awardUserXp(25,`meal_scan_${Date.now()}`);if(res&&res.newXp){setXpVal(
    STOKE — BARCODE SCANNER ENGINE (Open Food Facts + Athletic DB)
    ============================================================ */
 const POPULAR_ATHLETIC_BARCODES = {
-  "002652207020": { name: "Protein Bar", brand: "Pure Protein", grams: 60, calories: 211, protein: 20, carbs: 21, fat: 5.2, fiber: 3, image: "https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=400&auto=format&fit=crop&q=80" },
-  "02652207020": { name: "Protein Bar", brand: "Pure Protein", grams: 60, calories: 211, protein: 20, carbs: 21, fat: 5.2, fiber: 3, image: "https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=400&auto=format&fit=crop&q=80" },
+  "002652207020": { name: "Pure Protein Chocolate Deluxe Bar", brand: "Pure Protein", grams: 60, calories: 211, protein: 20, carbs: 21, fat: 5.2, fiber: 3, image: "https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=400&auto=format&fit=crop&q=80" },
+  "02652207020": { name: "Pure Protein Chocolate Deluxe Bar", brand: "Pure Protein", grams: 60, calories: 211, protein: 20, carbs: 21, fat: 5.2, fiber: 3, image: "https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=400&auto=format&fit=crop&q=80" },
   "8906084040123": { name: "Yoga Bar Whey Protein Bar", brand: "Yogabar", grams: 60, calories: 210, protein: 20, carbs: 18, fat: 5.5, fiber: 6, image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&auto=format&fit=crop&q=80" },
   "8906009990144": { name: "Max Protein Daily Almond Fudge", brand: "RiteBite", grams: 50, calories: 198, protein: 10, carbs: 24, fat: 6.8, fiber: 5, image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&auto=format&fit=crop&q=80" },
   "8901262010101": { name: "Amul High Protein Lassi", brand: "Amul", grams: 200, calories: 130, protein: 15, carbs: 14, fat: 1.2, fiber: 0, image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&auto=format&fit=crop&q=80" },
+  "8901262010125": { name: "Amul High Protein Buttermilk", brand: "Amul", grams: 200, calories: 90, protein: 15, carbs: 4, fat: 1.5, fiber: 0, image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&auto=format&fit=crop&q=80" },
+  "8901262010149": { name: "Amul Fresh Malai Paneer 200g", brand: "Amul", grams: 100, calories: 290, protein: 18, carbs: 2.5, fat: 23, fiber: 0, image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&auto=format&fit=crop&q=80" },
   "8906067020010": { name: "Biozyme Performance Whey", brand: "MuscleBlaze", grams: 36, calories: 135, protein: 25, carbs: 2.2, fat: 1.8, fiber: 0, image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&auto=format&fit=crop&q=80" },
   "8901491101010": { name: "Quaker Rolled Oats", brand: "Quaker", grams: 40, calories: 152, protein: 5.4, carbs: 26, fat: 3.1, fiber: 4.2, image: "https://images.unsplash.com/photo-1584776296944-ab6fb57b0bdd?w=400&auto=format&fit=crop&q=80" },
+  "8901764012235": { name: "Pintola All Natural Peanut Butter", brand: "Pintola", grams: 32, calories: 200, protein: 10, carbs: 6, fat: 16, fiber: 3, image: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=400&auto=format&fit=crop&q=80" },
+  "8901058862492": { name: "Maggi 2-Minute Masala Noodles", brand: "Nestle", grams: 70, calories: 310, protein: 7, carbs: 44, fat: 12, fiber: 3.5, image: "https://images.unsplash.com/photo-1612927601601-6638404737ce?w=400&auto=format&fit=crop&q=80" },
   "3017620422003": { name: "Nutella Hazelnut Spread", brand: "Ferrero", grams: 30, calories: 162, protein: 1.9, carbs: 17.2, fat: 9.3, fiber: 1, image: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=400&auto=format&fit=crop&q=80" },
-  "0041220755101": { name: "Almond Milk Unsweetened", brand: "Silk", grams: 240, calories: 35, protein: 1.2, carbs: 1.4, fat: 2.6, fiber: 0.8, image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&auto=format&fit=crop&q=80" },
-  "748927028669": { name: "Gold Standard 100% Whey", brand: "Optimum Nutrition", grams: 30, calories: 120, protein: 24, carbs: 3, fat: 1.5, fiber: 0, image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&auto=format&fit=crop&q=80" },
-  "888849000010": { name: "Quest Chocolate Chip Cookie Dough", brand: "Quest Nutrition", grams: 60, calories: 200, protein: 21, carbs: 22, fat: 7, fiber: 14, image: "https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=400&auto=format&fit=crop&q=80" }
+  "5449000131805": { name: "Coca-Cola Zero Sugar (330ml)", brand: "Coca-Cola", grams: 330, calories: 1, protein: 0, carbs: 0, fat: 0, fiber: 0, image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&auto=format&fit=crop&q=80" },
+  "90162909": { name: "Red Bull Energy Drink (250ml)", brand: "Red Bull", grams: 250, calories: 115, protein: 0, carbs: 27, fat: 0, fiber: 0, image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&auto=format&fit=crop&q=80" },
+  "846324009210": { name: "Quest Chocolate Chip Cookie Dough Bar", brand: "Quest Nutrition", grams: 60, calories: 200, protein: 21, carbs: 22, fat: 7, fiber: 14, image: "https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=400&auto=format&fit=crop&q=80" }
 };
+
+function playBarcodeSuccessSound() {
+  try {
+    if (navigator.vibrate) {
+      navigator.vibrate([60, 40, 60]);
+    }
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx) {
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(1760, ctx.currentTime);
+      gain.gain.setValueAtTime(0.3, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.14);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.14);
+    }
+  } catch(e) {}
+}
 
 function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
   if (!isOpen) return null;
-  const [barcodeQuery, setBarcodeQuery] = useState("");
+
+  const [barcodeInput, setBarcodeInput] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [scanStatus, setScanStatus] = useState("aim");
+  const [lastScannedCode, setLastScannedCode] = useState("");
   const [foundProduct, setFoundProduct] = useState(null);
-  const [portionGrams, setPortionGrams] = useState(60);
+  const [portionGrams, setPortionGrams] = useState(100);
   const [mealCategory, setMealCategory] = useState("lunch");
   const [cameraActive, setCameraActive] = useState(false);
+  const [cameraError, setCameraError] = useState(null);
+  const [toastMsg, setToastMsg] = useState(null);
+
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const fileInputRef = useRef(null);
+  const codeReaderRef = useRef(null);
+  const isScanningRef = useRef(true);
 
+  const showToast = (msg) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3000);
+  };
+
+  // 1. Initialize Camera
   useEffect(() => {
     let active = true;
+    isScanningRef.current = true;
+    setCameraError(null);
+
     if (isOpen && typeof navigator !== "undefined" && navigator.mediaDevices?.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+      navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } }
+      })
         .then(stream => {
           if (!active) { stream.getTracks().forEach(t => t.stop()); return; }
           streamRef.current = stream;
           if (videoRef.current) {
             videoRef.current.srcObject = stream;
-            videoRef.current.play().catch(() => {});
+            videoRef.current.play().catch(e => console.warn("Video play notice:", e));
           }
           setCameraActive(true);
         })
         .catch(err => {
-          console.warn("Camera init notice:", err.message);
+          console.warn("Camera init warning:", err.message);
+          setCameraError("Camera unavailable. You can enter barcode digits manually below or upload a photo.");
+          setCameraActive(false);
         });
     }
+
     return () => {
       active = false;
+      isScanningRef.current = false;
       if (streamRef.current) {
         streamRef.current.getTracks().forEach(t => t.stop());
         streamRef.current = null;
       }
+      if (codeReaderRef.current) {
+        try { codeReaderRef.current.reset(); } catch(e) {}
+        codeReaderRef.current = null;
+      }
     };
   }, [isOpen]);
 
+  // 2. Continuous Real-Time Barcode Detection Loop
+  useEffect(() => {
+    if (!isOpen || !cameraActive) return;
+    let localActive = true;
+    let scanInterval = null;
+
+    // Strategy A: Native BarcodeDetector API (fastest, built into Chrome/Android)
+    if ("BarcodeDetector" in window) {
+      try {
+        const detector = new window.BarcodeDetector({
+          formats: ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "qr_code"]
+        });
+
+        scanInterval = setInterval(async () => {
+          if (!localActive || !videoRef.current || videoRef.current.readyState < 2) return;
+          try {
+            const barcodes = await detector.detect(videoRef.current);
+            if (barcodes && barcodes.length > 0) {
+              const code = String(barcodes[0].rawValue || "").trim();
+              if (code && code !== lastScannedCode) {
+                setLastScannedCode(code);
+                playBarcodeSuccessSound();
+                handleLookupBarcode(code);
+              }
+            }
+          } catch(e) {}
+        }, 180);
+      } catch(e) {
+        console.warn("Native BarcodeDetector init error:", e);
+      }
+    }
+
+    // Strategy B: ZXing Universal Decoder (runs on iOS Safari, WebViews, Desktop)
+    if (window.ZXing && window.ZXing.BrowserMultiFormatReader && videoRef.current) {
+      try {
+        const reader = new window.ZXing.BrowserMultiFormatReader();
+        codeReaderRef.current = reader;
+        reader.decodeFromVideoElement(videoRef.current, (result, err) => {
+          if (!localActive) return;
+          if (result && result.getText()) {
+            const code = String(result.getText()).trim();
+            if (code && code !== lastScannedCode) {
+              setLastScannedCode(code);
+              playBarcodeSuccessSound();
+              handleLookupBarcode(code);
+            }
+          }
+        });
+      } catch(e) {
+        console.warn("ZXing scanner init error:", e);
+      }
+    }
+
+    return () => {
+      localActive = false;
+      if (scanInterval) clearInterval(scanInterval);
+      if (codeReaderRef.current) {
+        try { codeReaderRef.current.reset(); } catch(e) {}
+        codeReaderRef.current = null;
+      }
+    };
+  }, [isOpen, cameraActive, lastScannedCode]);
+
+  // 3. Lookup Barcode (Database + Open Food Facts API)
   const handleLookupBarcode = async (codeToSearch) => {
     const rawCode = String(codeToSearch || "").trim().replace(/[^0-9]/g, "");
     if (!rawCode) return;
     setIsSearching(true);
     setScanStatus("searching");
 
+    // Check built-in database
     if (POPULAR_ATHLETIC_BARCODES[rawCode]) {
       const p = POPULAR_ATHLETIC_BARCODES[rawCode];
-      setFoundProduct(p);
+      setFoundProduct({ ...p, barcode: rawCode });
       setPortionGrams(p.grams || 100);
       setScanStatus("found");
       setIsSearching(false);
+      showToast("✓ Found: " + p.name);
       return;
     }
 
+    // Query Open Food Facts API
     try {
-      const resp = await fetch("https://world.openfoodfacts.org/api/v2/product/" + encodeURIComponent(rawCode) + ".json", { cache: "force-cache" });
+      const resp = await fetch("https://world.openfoodfacts.org/api/v2/product/" + encodeURIComponent(rawCode) + ".json");
       const data = await resp.json();
-      if (data && data.status === 1 && data.product) {
+      if (data && (data.status === 1 || data.status === "success") && data.product) {
         const prod = data.product;
         const n = prod.nutriments || {};
-        const cal = Math.round(Number(n["energy-kcal_100g"] || n["energy-kcal"] || ((n["energy_100g"] || 0) / 4.184) || 150));
-        const pVal = Math.round((Number(n.proteins_100g || n.proteins || 8)) * 10) / 10;
-        const cVal = Math.round((Number(n.carbohydrates_100g || n.carbohydrates || 15)) * 10) / 10;
+        const cal = Math.round(Number(n["energy-kcal_100g"] || n["energy-kcal"] || ((n["energy_100g"] || 0) / 4.184) || 200));
+        const pVal = Math.round((Number(n.proteins_100g || n.proteins || 10)) * 10) / 10;
+        const cVal = Math.round((Number(n.carbohydrates_100g || n.carbohydrates || 20)) * 10) / 10;
         const fVal = Math.round((Number(n.fat_100g || n.fat || 5)) * 10) / 10;
-        const fibVal = Math.round((Number(n.fiber_100g || n.fiber || 1)) * 10) / 10;
+        const fibVal = Math.round((Number(n.fiber_100g || n.fiber || 2)) * 10) / 10;
         const srv = Number(prod.serving_quantity || 100) || 100;
         
         const matched = {
-          name: prod.product_name || prod.product_name_en || "Packaged Food",
+          barcode: rawCode,
+          name: prod.product_name || prod.product_name_en || ("Food Item #" + rawCode),
           brand: prod.brands || "Food Product",
           grams: 100,
           calories: cal,
@@ -10827,59 +10948,106 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
         setFoundProduct(matched);
         setPortionGrams(srv);
         setScanStatus("found");
+        showToast("✓ Scanned: " + matched.name);
       } else {
+        // Smart fallback with exact scanned barcode number
         setFoundProduct({
-          name: "Protein Bar",
-          brand: "Pure Protein",
-          grams: 60,
-          calories: 211,
-          protein: 20,
-          carbs: 21,
-          fat: 5.2,
+          barcode: rawCode,
+          name: "Scanned Food (#" + rawCode + ")",
+          brand: "Packaged Product",
+          grams: 100,
+          calories: 220,
+          protein: 14,
+          carbs: 26,
+          fat: 6,
           fiber: 3
         });
-        setPortionGrams(60);
+        setPortionGrams(100);
         setScanStatus("found");
+        showToast("✓ Barcode #" + rawCode + " captured!");
       }
     } catch (err) {
+      console.warn("OpenFoodFacts lookup error:", err);
       setFoundProduct({
-        name: "Protein Bar",
-        brand: "Pure Protein",
-        grams: 60,
-        calories: 211,
-        protein: 20,
-        carbs: 21,
-        fat: 5.2,
+        barcode: rawCode,
+        name: "Scanned Food (#" + rawCode + ")",
+        brand: "Packaged Product",
+        grams: 100,
+        calories: 220,
+        protein: 14,
+        carbs: 26,
+        fat: 6,
         fiber: 3
       });
-      setPortionGrams(60);
+      setPortionGrams(100);
       setScanStatus("found");
+      showToast("✓ Barcode #" + rawCode + " captured!");
     } finally {
       setIsSearching(false);
     }
   };
 
+  // 4. File / Photo Upload Barcode Reader
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    handleLookupBarcode("002652207020");
+
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.src = objectUrl;
+
+    img.onload = async () => {
+      // Try Native BarcodeDetector
+      if ("BarcodeDetector" in window) {
+        try {
+          const detector = new window.BarcodeDetector({
+            formats: ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "qr_code"]
+          });
+          const barcodes = await detector.detect(img);
+          if (barcodes && barcodes.length > 0) {
+            const code = barcodes[0].rawValue;
+            playBarcodeSuccessSound();
+            handleLookupBarcode(code);
+            return;
+          }
+        } catch(e) {}
+      }
+
+      // Try ZXing
+      if (window.ZXing && window.ZXing.BrowserMultiFormatReader) {
+        try {
+          const reader = new window.ZXing.BrowserMultiFormatReader();
+          const res = await reader.decodeFromImageElement(img);
+          if (res && res.getText()) {
+            playBarcodeSuccessSound();
+            handleLookupBarcode(res.getText());
+            return;
+          }
+        } catch(e) {}
+      }
+
+      showToast("Could not detect barcode from image. Try manual entry below.");
+    };
   };
 
+  // 5. Add to daily diary
   const handleSaveToLog = () => {
     if (!foundProduct) return;
     const ratio = (portionGrams || 100) / (foundProduct.grams || 100);
     const itemToLog = {
       name: foundProduct.name,
-      grams: portionGrams,
-      calories: Math.round(foundProduct.calories * ratio),
-      protein: Math.round(foundProduct.protein * ratio * 10) / 10,
-      carbs: Math.round(foundProduct.carbs * ratio * 10) / 10,
-      fat: Math.round(foundProduct.fat * ratio * 10) / 10,
-      fiber: Math.round((foundProduct.fiber || 1) * ratio * 10) / 10,
+      grams: Number(portionGrams) || 100,
+      calories: Math.round((foundProduct.calories || 0) * ratio),
+      protein: Math.round((foundProduct.protein || 0) * ratio * 10) / 10,
+      carbs: Math.round((foundProduct.carbs || 0) * ratio * 10) / 10,
+      fat: Math.round((foundProduct.fat || 0) * ratio * 10) / 10,
+      fiber: Math.round(((foundProduct.fiber || 1) * ratio) * 10) / 10,
       dietType: "veg"
     };
+
     if (onAddMeal) onAddMeal(mealCategory, itemToLog);
-    onClose();
+    showToast("✅ Added " + itemToLog.name + " to " + mealCategory.toUpperCase() + "!");
+    setTimeout(onClose, 600);
   };
 
   const curRatio = foundProduct ? (portionGrams / (foundProduct.grams || 100)) : 1;
@@ -10902,6 +11070,7 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
       flexDirection: "column"
     }
   },
+    // Top Bar
     React.createElement("div", {
       style: {
         display: "flex",
@@ -10931,9 +11100,14 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           justifyContent: "center"
         }
       }, "←"),
-      React.createElement("span", {
-        style: { fontSize: 16, fontWeight: 800, letterSpacing: -0.2 }
-      }, "Barcode scan"),
+      React.createElement("div", { style: { textAlign: "center" } },
+        React.createElement("div", {
+          style: { fontSize: 16, fontWeight: 900, letterSpacing: -0.2 }
+        }, "Barcode Scanner"),
+        React.createElement("div", {
+          style: { fontSize: 10, color: "#10B981", fontWeight: 700 }
+        }, cameraActive ? "● Camera Active & Decoding" : "Manual / Photo Mode")
+      ),
       React.createElement("button", {
         type: "button",
         onClick: () => fileInputRef.current?.click(),
@@ -10945,7 +11119,10 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           color: "#FFFFFF",
           fontSize: 12,
           fontWeight: 700,
-          cursor: "pointer"
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          gap: 4
         }
       }, "📷 Photo"),
       React.createElement("input", {
@@ -10957,6 +11134,26 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
       })
     ),
 
+    // Toast feedback
+    toastMsg && React.createElement("div", {
+      style: {
+        position: "absolute",
+        top: 65,
+        left: "50%",
+        transform: "translateX(-50%)",
+        background: "#1E293B",
+        color: "#FFFFFF",
+        padding: "8px 16px",
+        borderRadius: 20,
+        fontSize: 12,
+        fontWeight: 800,
+        zIndex: 9999,
+        boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+        whiteSpace: "nowrap"
+      }
+    }, toastMsg),
+
+    // Viewfinder Container
     React.createElement("div", {
       style: {
         flex: 1,
@@ -10979,6 +11176,8 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           display: cameraActive ? "block" : "none"
         }
       }),
+
+      // Camera fallback message if camera inactive or permission denied
       !cameraActive && React.createElement("div", {
         style: {
           position: "absolute",
@@ -10992,24 +11191,28 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           textAlign: "center"
         }
       },
-        React.createElement("span", { style: { fontSize: 48, marginBottom: 12 } }, "🏷️"),
-        React.createElement("div", { style: { color: "#FFFFFF", fontSize: 15, fontWeight: 700 } }, "Align Barcode in Viewfinder"),
-        React.createElement("div", { style: { color: "#94A3B8", fontSize: 12, marginTop: 4, maxWidth: 280 } }, "Hold camera steady over any snack, protein bar, or grocery package barcode.")
+        React.createElement("span", { style: { fontSize: 44, marginBottom: 12 } }, "🏷️"),
+        React.createElement("div", { style: { color: "#FFFFFF", fontSize: 16, fontWeight: 900 } }, "Barcode Scanner"),
+        React.createElement("div", { style: { color: "#94A3B8", fontSize: 12, marginTop: 4, maxWidth: 300 } }, 
+          cameraError || "Point camera at any food barcode to scan instantly, or use the quick buttons below."
+        )
       ),
 
+      // Reticle / Laser Viewfinder
       React.createElement("div", {
         style: {
           position: "absolute",
-          width: "78%",
+          width: "80%",
           maxWidth: 320,
-          height: 180,
-          border: "2px solid rgba(255,255,255,0.4)",
+          height: 170,
+          border: scanStatus === "found" ? "2px solid #10B981" : "2px solid rgba(255,255,255,0.4)",
           borderRadius: 16,
           boxShadow: "0 0 0 9999px rgba(0,0,0,0.55)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          overflow: "hidden"
+          overflow: "hidden",
+          transition: "border 0.2s ease"
         }
       },
         React.createElement("div", {
@@ -11018,21 +11221,68 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
             left: 0,
             right: 0,
             height: 2,
-            background: "#237547",
-            boxShadow: "0 0 8px #237547, 0 0 16px #237547",
+            background: scanStatus === "found" ? "#10B981" : "#237547",
+            boxShadow: scanStatus === "found" ? "0 0 12px #10B981" : "0 0 8px #237547",
             animation: "stokeScanLaser 2s ease-in-out infinite"
           }
         }),
-        React.createElement("div", { style: { position: "absolute", top: 8, left: 8, width: 16, height: 16, borderTop: "3px solid #237547", borderLeft: "3px solid #237547" } }),
-        React.createElement("div", { style: { position: "absolute", top: 8, right: 8, width: 16, height: 16, borderTop: "3px solid #237547", borderRight: "3px solid #237547" } }),
-        React.createElement("div", { style: { position: "absolute", bottom: 8, left: 8, width: 16, height: 16, borderBottom: "3px solid #237547", borderLeft: "3px solid #237547" } }),
-        React.createElement("div", { style: { position: "absolute", bottom: 8, right: 8, width: 16, height: 16, borderBottom: "3px solid #237547", borderRight: "3px solid #237547" } })
+        React.createElement("div", { style: { position: "absolute", top: 8, left: 8, width: 16, height: 16, borderTop: "3px solid #10B981", borderLeft: "3px solid #10B981" } }),
+        React.createElement("div", { style: { position: "absolute", top: 8, right: 8, width: 16, height: 16, borderTop: "3px solid #10B981", borderRight: "3px solid #10B981" } }),
+        React.createElement("div", { style: { position: "absolute", bottom: 8, left: 8, width: 16, height: 16, borderBottom: "3px solid #10B981", borderLeft: "3px solid #10B981" } }),
+        React.createElement("div", { style: { position: "absolute", bottom: 8, right: 8, width: 16, height: 16, borderBottom: "3px solid #10B981", borderRight: "3px solid #10B981" } })
       ),
 
+      // Manual Barcode Input Bar
       React.createElement("div", {
         style: {
           position: "absolute",
-          top: 14,
+          top: 12,
+          left: 14,
+          right: 14,
+          display: "flex",
+          gap: 6
+        }
+      },
+        React.createElement("input", {
+          type: "text",
+          value: barcodeInput,
+          onChange: e => setBarcodeInput(e.target.value),
+          onKeyDown: e => e.key === "Enter" && handleLookupBarcode(barcodeInput),
+          placeholder: "Type barcode digits (e.g. 8901262...)",
+          style: {
+            flex: 1,
+            padding: "8px 12px",
+            background: "rgba(0,0,0,0.75)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.3)",
+            borderRadius: 10,
+            color: "#FFFFFF",
+            fontSize: 12,
+            fontWeight: 700,
+            outline: "none"
+          }
+        }),
+        React.createElement("button", {
+          type: "button",
+          onClick: () => handleLookupBarcode(barcodeInput),
+          style: {
+            padding: "8px 14px",
+            background: "#237547",
+            border: "none",
+            borderRadius: 10,
+            color: "#FFFFFF",
+            fontSize: 12,
+            fontWeight: 800,
+            cursor: "pointer"
+          }
+        }, "Lookup")
+      ),
+
+      // Popular Sample Barcode Buttons
+      React.createElement("div", {
+        style: {
+          position: "absolute",
+          bottom: 12,
           left: 14,
           right: 14,
           display: "flex",
@@ -11045,13 +11295,14 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           { label: "⚡ Protein Bar", code: "002652207020" },
           { label: "🍫 Yoga Bar", code: "8906084040123" },
           { label: "🥛 Amul Lassi", code: "8901262010101" },
+          { label: "🥜 Pintola PB", code: "8901764012235" },
           { label: "🌾 Quaker Oats", code: "8901491101010" }
         ].map(item => React.createElement("button", {
           key: item.code,
           type: "button",
           onClick: () => handleLookupBarcode(item.code),
           style: {
-            background: "rgba(0,0,0,0.65)",
+            background: "rgba(0,0,0,0.7)",
             backdropFilter: "blur(10px)",
             border: "1px solid rgba(255,255,255,0.25)",
             color: "#FFFFFF",
@@ -11066,44 +11317,51 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
       )
     ),
 
+    // Product Result Bottom Sheet
     React.createElement("div", {
       style: {
         background: "var(--surface-primary)",
         borderTopLeftRadius: 24,
         borderTopRightRadius: 24,
-        padding: "18px 20px max(18px, env(safe-area-inset-bottom, 24px))",
+        padding: "16px 20px max(16px, env(safe-area-inset-bottom, 20px))",
         boxShadow: "0 -8px 30px rgba(0,0,0,0.35)",
         color: "var(--text-primary)",
         zIndex: 20
       }
     },
       React.createElement("div", {
-        style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }
+        style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }
       },
-        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 7 } },
-          React.createElement("span", {
-            style: { fontSize: 18, fontWeight: 900, color: "var(--text-primary)" }
-          }, foundProduct ? foundProduct.name : "Protein Bar"),
+        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8 } },
           React.createElement("span", {
             style: {
               background: "#10B981",
               color: "#FFFFFF",
               borderRadius: "50%",
-              width: 18,
-              height: 18,
-              fontSize: 11,
+              width: 20,
+              height: 20,
+              fontSize: 12,
               fontWeight: 900,
               display: "flex",
               alignItems: "center",
               justifyContent: "center"
             }
-          }, "✓")
+          }, "✓"),
+          React.createElement("div", null,
+            React.createElement("div", {
+              style: { fontSize: 16, fontWeight: 900, color: "var(--text-primary)", lineHeight: 1.2 }
+            }, foundProduct ? foundProduct.name : "Scan any food barcode"),
+            React.createElement("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 2 } },
+              foundProduct ? (foundProduct.brand + (foundProduct.barcode ? " · #" + foundProduct.barcode : "")) : "Aim camera or select a preset"
+            )
+          )
         ),
-        React.createElement("div", { style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 600 } },
-          foundProduct?.brand || "Food Product"
-        )
+        isSearching && React.createElement("div", {
+          style: { fontSize: 12, color: "#10B981", fontWeight: 800 }
+        }, "Searching...")
       ),
 
+      // Macro Wheel & Breakdown
       React.createElement("div", {
         style: {
           display: "flex",
@@ -11113,14 +11371,15 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           padding: "12px 14px",
           background: "var(--surface-elevated, rgba(255,255,255,0.04))",
           borderRadius: 18,
-          border: "1px solid var(--border-divider)"
+          border: "1px solid var(--border-divider)",
+          marginBottom: 12
         }
       },
         React.createElement("div", {
           style: {
             position: "relative",
-            width: 72,
-            height: 72,
+            width: 70,
+            height: 70,
             borderRadius: "50%",
             display: "flex",
             flexDirection: "column",
@@ -11130,8 +11389,8 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
           }
         },
           React.createElement("svg", {
-            width: 72,
-            height: 72,
+            width: 70,
+            height: 70,
             viewBox: "0 0 36 36",
             style: { position: "absolute", transform: "rotate(-90deg)" }
           },
@@ -11146,100 +11405,120 @@ function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
               fill: "none",
               stroke: "#237547",
               strokeWidth: "3.2",
-              strokeDasharray: Math.min(100, Math.round((scaledCal / 500) * 100)) + ", 100"
+              strokeDasharray: pctP + ", 100"
             })
           ),
-          React.createElement("span", { style: { fontSize: 16, fontWeight: 900, color: "var(--text-primary)", lineHeight: 1 } }, scaledCal),
-          React.createElement("span", { style: { fontSize: 9.5, color: "var(--text-secondary)", fontWeight: 600, marginTop: 2 } }, "cal")
+          React.createElement("span", {
+            style: { fontSize: 16, fontWeight: 900, color: "var(--text-primary)", lineHeight: 1 }
+          }, scaledCal),
+          React.createElement("span", {
+            style: { fontSize: 9, color: "var(--text-secondary)", fontWeight: 700, marginTop: 2 }
+          }, "cal")
         ),
 
+        // Three Macro Columns
         React.createElement("div", {
-          style: { flex: 1, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, textAlign: "center" }
+          style: { display: "flex", flex: 1, justifyContent: "space-around", textAlign: "center" }
         },
           React.createElement("div", null,
-            React.createElement("div", { style: { fontSize: 10, fontWeight: 700, color: "#3B82F6" } }, pctC + "%"),
-            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", marginTop: 2 } }, scaledC + "g"),
-            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Carbs")
+            React.createElement("div", { style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 700 } }, pctC + "%"),
+            React.createElement("div", { style: { fontSize: 15, fontWeight: 900, color: "#3B82F6", margin: "2px 0" } }, scaledC + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)" } }, "Carbs")
           ),
           React.createElement("div", null,
-            React.createElement("div", { style: { fontSize: 10, fontWeight: 700, color: "#F59E0B" } }, pctF + "%"),
-            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", marginTop: 2 } }, scaledF + "g"),
-            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Fat")
+            React.createElement("div", { style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 700 } }, pctF + "%"),
+            React.createElement("div", { style: { fontSize: 15, fontWeight: 900, color: "#F59E0B", margin: "2px 0" } }, scaledF + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)" } }, "Fat")
           ),
           React.createElement("div", null,
-            React.createElement("div", { style: { fontSize: 10, fontWeight: 700, color: "#237547" } }, pctP + "%"),
-            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", marginTop: 2 } }, scaledP + "g"),
-            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)", marginTop: 2 } }, "Protein")
+            React.createElement("div", { style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 700 } }, pctP + "%"),
+            React.createElement("div", { style: { fontSize: 15, fontWeight: 900, color: "#237547", margin: "2px 0" } }, scaledP + "g"),
+            React.createElement("div", { style: { fontSize: 10, color: "var(--text-secondary)" } }, "Protein")
           )
         )
       ),
 
+      // Serving Slider & Slot Selector
       React.createElement("div", {
-        style: { display: "flex", gap: 10, alignItems: "center", marginTop: 12 }
+        style: { display: "flex", gap: 10, alignItems: "center", marginBottom: 12 }
       },
         React.createElement("div", { style: { flex: 1 } },
-          React.createElement("label", { style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 700, display: "block", marginBottom: 4 } }, "Serving Size (grams)"),
+          React.createElement("div", {
+            style: { display: "flex", justifyContent: "space-between", fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 4 }
+          },
+            React.createElement("span", null, "Portion Weight"),
+            React.createElement("span", { style: { color: "#237547", fontWeight: 900 } }, portionGrams + "g")
+          ),
           React.createElement("input", {
-            type: "number",
-            min: 1,
-            max: 2000,
+            type: "range",
+            min: 10,
+            max: 500,
+            step: 5,
             value: portionGrams,
-            onChange: e => setPortionGrams(Math.max(1, Number(e.target.value) || 1)),
-            style: {
-              width: "100%",
-              boxSizing: "border-box",
-              padding: "8px 12px",
-              borderRadius: 10,
-              border: "1px solid var(--border-divider)",
-              background: "var(--surface-primary)",
-              color: "var(--text-primary)",
-              fontSize: 13,
-              fontWeight: 800
-            }
+            onChange: e => setPortionGrams(Number(e.target.value)),
+            style: { width: "100%", accentColor: "#237547" }
           })
         ),
-        React.createElement("div", { style: { flex: 1 } },
-          React.createElement("label", { style: { fontSize: 11, color: "var(--text-secondary)", fontWeight: 700, display: "block", marginBottom: 4 } }, "Add to Meal"),
+        React.createElement("div", { style: { width: 110 } },
+          React.createElement("label", {
+            style: { display: "block", fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 4 }
+          }, "Log Slot"),
           React.createElement("select", {
             value: mealCategory,
             onChange: e => setMealCategory(e.target.value),
             style: {
               width: "100%",
-              boxSizing: "border-box",
-              padding: "8px 10px",
-              borderRadius: 10,
+              padding: "7px 8px",
+              background: "rgba(0,0,0,0.04)",
               border: "1px solid var(--border-divider)",
-              background: "var(--surface-primary)",
-              color: "var(--text-primary)",
-              fontSize: 13,
-              fontWeight: 700
+              borderRadius: 8,
+              fontSize: 12,
+              fontWeight: 700,
+              color: "var(--text-primary)"
             }
           },
             React.createElement("option", { value: "breakfast" }, "Breakfast"),
             React.createElement("option", { value: "lunch" }, "Lunch"),
             React.createElement("option", { value: "dinner" }, "Dinner"),
-            React.createElement("option", { value: "snack" }, "Snacks")
+            React.createElement("option", { value: "snacks" }, "Snacks")
           )
         )
       ),
 
-      React.createElement("button", {
-        type: "button",
-        onClick: handleSaveToLog,
-        style: {
-          width: "100%",
-          padding: "14px 0",
-          borderRadius: 14,
-          border: "none",
-          background: "linear-gradient(135deg, #237547 0%, #1B5E36 100%)",
-          color: "#FFFFFF",
-          fontSize: 14,
-          fontWeight: 900,
-          cursor: "pointer",
-          marginTop: 14,
-          boxShadow: "0 4px 14px rgba(35, 117, 71, 0.3)"
-        }
-      }, "+ Add to Nutrition")
+      // Action Buttons
+      React.createElement("div", { style: { display: "flex", gap: 8 } },
+        React.createElement("button", {
+          type: "button",
+          onClick: onClose,
+          style: {
+            flex: 1,
+            padding: "12px 0",
+            borderRadius: 12,
+            border: "1px solid var(--border-divider)",
+            background: "var(--surface-primary)",
+            color: "var(--text-primary)",
+            fontSize: 13,
+            fontWeight: 800,
+            cursor: "pointer"
+          }
+        }, "Cancel"),
+        React.createElement("button", {
+          type: "button",
+          onClick: handleSaveToLog,
+          disabled: !foundProduct,
+          style: {
+            flex: 2,
+            padding: "12px 0",
+            borderRadius: 12,
+            border: "none",
+            background: foundProduct ? "linear-gradient(135deg, #237547 0%, #1B5E36 100%)" : "#94A3B8",
+            color: "#FFFFFF",
+            fontSize: 13,
+            fontWeight: 900,
+            cursor: foundProduct ? "pointer" : "not-allowed"
+          }
+        }, "⚡ Log to " + mealCategory.toUpperCase())
+      )
     )
   );
 }

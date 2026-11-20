@@ -10801,6 +10801,531 @@ function playBarcodeSuccessSound() {
   } catch(e) {}
 }
 
+
+// ============================================================
+// STOKE MICRONUTRIENTS, VITAMINS & MINERALS ENGINE (FDA/ICMR)
+// ============================================================
+function calculateMicronutrientsAndVitamins(item, customGrams) {
+  if (!item) return null;
+  const name = (item.name || "").toLowerCase();
+  const rawGrams = Number(customGrams) || Number(item.grams) || 100;
+  const cal = Number(item.calories) || 0;
+  const protein = Number(item.protein) || 0;
+  const carbs = Number(item.carbs) || 0;
+  const fat = Number(item.fat) || 0;
+  const fiber = Number(item.fiber) || Math.max(0, Math.round(carbs * 0.12 * 10) / 10);
+  const type = (item.type || item.dietType || "veg").toLowerCase();
+
+  const RDA = {
+    energy_cal: 2000,
+    water_g: 2500,
+    protein_g: 65,
+    carbs_g: 275,
+    fiber_g: 28,
+    sugars_g: 50,
+    fat_g: 70,
+    omega3_g: 1.6,
+    omega6_g: 17,
+    sat_fat_g: 20,
+    b1_mg: 1.2,
+    b2_mg: 1.3,
+    b3_mg: 16.0,
+    b5_mg: 5.0,
+    b6_mg: 1.7,
+    b12_ug: 2.4,
+    folate_ug: 400,
+    vitA_ug: 900,
+    vitC_mg: 90,
+    vitD_iu: 800,
+    vitE_mg: 15,
+    vitK_ug: 120,
+    calcium_mg: 1000,
+    copper_mg: 0.9,
+    iron_mg: 18,
+    magnesium_mg: 420,
+    manganese_mg: 2.3,
+    phosphorus_mg: 700,
+    potassium_mg: 3400,
+    selenium_ug: 55,
+    sodium_mg: 2300
+  };
+
+  const nut = item.nutriments || item.nutrients || {};
+
+  const energyKcal = Math.round(cal);
+  const energyKj = Math.round(cal * 4.184);
+  const alcoholG = Number(nut.alcohol || 0);
+  const caffeineMg = name.includes("coffee") || name.includes("espresso") ? 80 :
+                     name.includes("tea") || name.includes("chai") ? 35 :
+                     name.includes("energy") ? 80 : Number(nut.caffeine || 0);
+
+  let waterG = Number(nut.water || 0);
+  if (!waterG) {
+    if (name.includes("salad") || name.includes("soup") || name.includes("juice") || name.includes("smoothie") || name.includes("cucumber")) {
+      waterG = Math.round(rawGrams * 0.88 * 10) / 10;
+    } else if (name.includes("curry") || name.includes("dal") || name.includes("stew") || name.includes("yogurt") || name.includes("curd")) {
+      waterG = Math.round(rawGrams * 0.72 * 10) / 10;
+    } else if (name.includes("chicken") || name.includes("fish") || name.includes("meat") || name.includes("paneer")) {
+      waterG = Math.round(rawGrams * 0.60 * 10) / 10;
+    } else if (name.includes("rice") || name.includes("pasta") || name.includes("oatmeal")) {
+      waterG = Math.round(rawGrams * 0.65 * 10) / 10;
+    } else if (name.includes("roti") || name.includes("bread") || name.includes("wrap")) {
+      waterG = Math.round(rawGrams * 0.35 * 10) / 10;
+    } else {
+      waterG = Math.round(Math.max(10, rawGrams - (protein + carbs + fat + 5)) * 10) / 10;
+    }
+  }
+
+  let sugarsG = Number(nut.sugars || nut["sugars_value"] || 0);
+  if (!sugarsG) {
+    if (name.includes("fruit") || name.includes("berries") || name.includes("apple") || name.includes("banana") || name.includes("smoothie") || name.includes("juice")) {
+      sugarsG = Math.round(carbs * 0.65 * 10) / 10;
+    } else if (name.includes("milk") || name.includes("yogurt") || name.includes("curd")) {
+      sugarsG = Math.round(carbs * 0.9 * 10) / 10;
+    } else if (name.includes("bar") || name.includes("cookie") || name.includes("biscuit") || name.includes("sweet")) {
+      sugarsG = Math.round(carbs * 0.45 * 10) / 10;
+    } else {
+      sugarsG = Math.round(Math.min(carbs * 0.15, 6) * 10) / 10;
+    }
+  }
+
+  let insolFiber = Math.round(fiber * 0.65 * 10) / 10;
+  let solFiber = Math.round((fiber - insolFiber) * 10) / 10;
+  let starchG = Math.max(0, Math.round((carbs - sugarsG - fiber) * 10) / 10);
+
+  let satFatG = Number(nut["saturated-fat"] || nut.saturated_fat || 0);
+  if (!satFatG) {
+    if (name.includes("paneer") || name.includes("ghee") || name.includes("butter") || name.includes("cheese") || name.includes("milk")) {
+      satFatG = Math.round(fat * 0.60 * 10) / 10;
+    } else if (type === "non-veg" || name.includes("chicken") || name.includes("meat")) {
+      satFatG = Math.round(fat * 0.35 * 10) / 10;
+    } else {
+      satFatG = Math.round(fat * 0.18 * 10) / 10;
+    }
+  }
+
+  let monoFatG = Number(nut["monounsaturated-fat"] || 0);
+  if (!monoFatG) {
+    if (name.includes("olive") || name.includes("almond") || name.includes("avocado") || name.includes("peanut")) {
+      monoFatG = Math.round(fat * 0.55 * 10) / 10;
+    } else {
+      monoFatG = Math.round(fat * 0.38 * 10) / 10;
+    }
+  }
+
+  let polyFatG = Number(nut["polyunsaturated-fat"] || 0);
+  if (!polyFatG) {
+    polyFatG = Math.max(0, Math.round((fat - satFatG - monoFatG) * 10) / 10);
+  }
+
+  let omega3G = Number(nut["omega-3"] || 0);
+  if (!omega3G) {
+    if (name.includes("salmon") || name.includes("fish") || name.includes("flax") || name.includes("chia") || name.includes("walnut")) {
+      omega3G = Math.round(polyFatG * 0.40 * 10) / 10;
+    } else if (name.includes("egg")) {
+      omega3G = 0.3;
+    } else {
+      omega3G = Math.round(Math.min(0.8, polyFatG * 0.1) * 10) / 10;
+    }
+  }
+
+  let omega6G = Number(nut["omega-6"] || 0);
+  if (!omega6G) {
+    omega6G = Math.max(0, Math.round((polyFatG - omega3G) * 10) / 10);
+  }
+
+  const isPoultry = name.includes("chicken") || name.includes("turkey");
+  const isFish = name.includes("fish") || name.includes("salmon") || name.includes("tilapia") || name.includes("tuna");
+  const isEgg = name.includes("egg");
+  const isDairy = name.includes("paneer") || name.includes("milk") || name.includes("yogurt") || name.includes("curd") || name.includes("cheese");
+  const isGreen = name.includes("spinach") || name.includes("kale") || name.includes("salad") || name.includes("palak") || name.includes("broccoli") || name.includes("methi");
+  const isDal = name.includes("dal") || name.includes("lentil") || name.includes("chickpea") || name.includes("chana") || name.includes("rajma") || name.includes("soya");
+  const isGrain = name.includes("rice") || name.includes("oat") || name.includes("roti") || name.includes("bread") || name.includes("quinoa");
+  const isFruit = name.includes("berry") || name.includes("berries") || name.includes("apple") || name.includes("banana") || name.includes("orange") || name.includes("citrus");
+
+  const scale = Math.max(0.1, rawGrams / 100);
+
+  const b1 = Math.round(((isGrain ? 0.35 : isDal ? 0.40 : 0.15) * scale) * 100) / 100;
+  const b2 = Math.round(((isDairy ? 0.45 : isEgg ? 0.50 : isPoultry ? 0.25 : 0.12) * scale) * 100) / 100;
+  const b3 = Math.round(((isPoultry ? 8.5 : isFish ? 7.0 : isDal ? 2.5 : 1.2) * scale) * 10) / 10;
+  const b5 = Math.round(((isEgg ? 1.5 : isPoultry ? 1.2 : isGrain ? 0.9 : 0.6) * scale) * 10) / 10;
+  const b6 = Math.round(((isPoultry ? 0.7 : isFish ? 0.6 : isDal ? 0.4 : 0.25) * scale) * 100) / 100;
+  const b12 = Math.round(((isFish ? 3.0 : isPoultry ? 0.6 : isDairy ? 0.8 : isEgg ? 1.1 : 0) * scale) * 10) / 10;
+  const folate = Math.round((isDal ? 180 : isGreen ? 140 : isGrain ? 60 : 30) * scale);
+  const vitA = Math.round((isGreen ? 450 : isDairy ? 180 : isEgg ? 140 : 40) * scale);
+  const vitC = Math.round((isFruit ? 35 : isGreen ? 28 : name.includes("tomato") ? 15 : 4) * scale * 10) / 10;
+  const vitD = Math.round((isFish ? 380 : isEgg ? 82 : isDairy ? 45 : 0) * scale);
+  const vitE = Math.round(((name.includes("almond") || name.includes("nut") || name.includes("oil") ? 7.5 : isGreen ? 1.8 : 0.8) * scale) * 10) / 10;
+  const vitK = Math.round((isGreen ? 120 : name.includes("oil") ? 25 : 8) * scale * 10) / 10;
+
+  let sodiumMg = Number(nut.sodium ? (nut.sodium * 1000) : nut["sodium_100g"] ? (nut["sodium_100g"] * 1000 * scale) : 0);
+  if (!sodiumMg) {
+    sodiumMg = Math.round((name.includes("soup") || name.includes("curry") || name.includes("tikka") ? 420 : 180) * scale);
+  } else {
+    sodiumMg = Math.round(sodiumMg);
+  }
+
+  let calciumMg = Number(nut.calcium ? (nut.calcium * 1000) : 0);
+  if (!calciumMg) {
+    calciumMg = Math.round((isDairy ? 320 : isGreen ? 150 : isDal ? 90 : 40) * scale);
+  }
+
+  let ironMg = Number(nut.iron ? (nut.iron * 1000) : 0);
+  if (!ironMg) {
+    ironMg = Math.round(((isDal ? 4.5 : isGreen ? 3.2 : isPoultry ? 1.8 : 1.2) * scale) * 10) / 10;
+  }
+
+  const copper = Math.round(((isDal ? 0.35 : isGrain ? 0.25 : 0.12) * scale) * 100) / 100;
+  const magnesium = Math.round((isDal ? 85 : isGreen ? 65 : isGrain ? 50 : 25) * scale);
+  const manganese = Math.round(((isGrain ? 1.2 : isDal ? 0.8 : 0.25) * scale) * 100) / 100;
+  const phosphorus = Math.round((isPoultry ? 240 : isFish ? 220 : isDairy ? 180 : isDal ? 140 : 80) * scale);
+  const potassium = Math.round((isGreen ? 450 : isDal ? 420 : isFruit ? 350 : isPoultry ? 300 : 180) * scale);
+  const selenium = Math.round((isFish ? 38 : isPoultry ? 24 : isEgg ? 16 : isGrain ? 12 : 5) * scale * 10) / 10;
+
+  return {
+    grams: rawGrams,
+    general: {
+      energy_kcal: { val: energyKcal, unit: "kcal", pct: Math.round((energyKcal / RDA.energy_cal) * 100) },
+      energy_kj: { val: energyKj, unit: "kJ" },
+      alcohol: { val: alcoholG, unit: "g" },
+      caffeine: { val: caffeineMg, unit: "mg" },
+      water: { val: waterG, unit: "g", pct: Math.round((waterG / RDA.water_g) * 100) }
+    },
+    protein: {
+      protein: { val: protein, unit: "g", pct: Math.round((protein / RDA.protein_g) * 100) }
+    },
+    carbohydrates: {
+      carbs: { val: carbs, unit: "g", pct: Math.round((carbs / RDA.carbs_g) * 100) },
+      fiber: { val: fiber, unit: "g", pct: Math.round((fiber / RDA.fiber_g) * 100) },
+      insoluble_fiber: { val: insolFiber, unit: "g" },
+      soluble_fiber: { val: solFiber, unit: "g" },
+      starch: { val: starchG, unit: "g" },
+      sugars: { val: sugarsG, unit: "g", pct: Math.round((sugarsG / RDA.sugars_g) * 100) }
+    },
+    lipids: {
+      fat: { val: fat, unit: "g", pct: Math.round((fat / RDA.fat_g) * 100) },
+      monounsaturated: { val: monoFatG, unit: "g" },
+      polyunsaturated: { val: polyFatG, unit: "g" },
+      omega3: { val: omega3G, unit: "g", pct: Math.round((omega3G / RDA.omega3_g) * 100) },
+      omega6: { val: omega6G, unit: "g", pct: Math.round((omega6G / RDA.omega6_g) * 100) },
+      saturated: { val: satFatG, unit: "g" }
+    },
+    vitamins: [
+      { name: "B1 (Thiamine)", val: b1, unit: "mg", pct: Math.round((b1 / RDA.b1_mg) * 100) },
+      { name: "B2 (Riboflavin)", val: b2, unit: "mg", pct: Math.round((b2 / RDA.b2_mg) * 100) },
+      { name: "B3 (Niacin)", val: b3, unit: "mg", pct: Math.round((b3 / RDA.b3_mg) * 100) },
+      { name: "B5 (Pantothenic Acid)", val: b5, unit: "mg", pct: Math.round((b5 / RDA.b5_mg) * 100) },
+      { name: "B6 (Pyridoxine)", val: b6, unit: "mg", pct: Math.round((b6 / RDA.b6_mg) * 100) },
+      { name: "B12 (Cobalamin)", val: b12, unit: "µg", pct: Math.round((b12 / RDA.b12_ug) * 100) },
+      { name: "Folate", val: folate, unit: "µg", pct: Math.round((folate / RDA.folate_ug) * 100) },
+      { name: "Vitamin A", val: vitA, unit: "µg", pct: Math.round((vitA / RDA.vitA_ug) * 100) },
+      { name: "Vitamin C", val: vitC, unit: "mg", pct: Math.round((vitC / RDA.vitC_mg) * 100) },
+      { name: "Vitamin D", val: vitD, unit: "IU", pct: Math.round((vitD / RDA.vitD_iu) * 100) },
+      { name: "Vitamin E", val: vitE, unit: "mg", pct: Math.round((vitE / RDA.vitE_mg) * 100) },
+      { name: "Vitamin K", val: vitK, unit: "µg", pct: Math.round((vitK / RDA.vitK_ug) * 100) }
+    ],
+    minerals: [
+      { name: "Calcium", val: calciumMg, unit: "mg", pct: Math.round((calciumMg / RDA.calcium_mg) * 100) },
+      { name: "Copper", val: copper, unit: "mg", pct: Math.round((copper / RDA.copper_mg) * 100) },
+      { name: "Iron", val: ironMg, unit: "mg", pct: Math.round((ironMg / RDA.iron_mg) * 100) },
+      { name: "Magnesium", val: magnesium, unit: "mg", pct: Math.round((magnesium / RDA.magnesium_mg) * 100) },
+      { name: "Manganese", val: manganese, unit: "mg", pct: Math.round((manganese / RDA.manganese_mg) * 100) },
+      { name: "Phosphorus", val: phosphorus, unit: "mg", pct: Math.round((phosphorus / RDA.phosphorus_mg) * 100) },
+      { name: "Potassium", val: potassium, unit: "mg", pct: Math.round((potassium / RDA.potassium_mg) * 100) },
+      { name: "Selenium", val: selenium, unit: "µg", pct: Math.round((selenium / RDA.selenium_ug) * 100) },
+      { name: "Sodium", val: sodiumMg, unit: "mg", pct: Math.round((sodiumMg / RDA.sodium_mg) * 100) }
+    ]
+  };
+}
+
+function MicronutrientsModal({ isOpen, onClose, item, grams, title }) {
+  if (!isOpen || !item) return null;
+
+  const [activeTab, setActiveTab] = React.useState("micro"); // "micro" | "vitamins"
+  
+  let data = null;
+  let displayTitle = title || item.name || "Nutritional Profile";
+  let portion = Number(grams) || Number(item.grams) || 100;
+
+  if (Array.isArray(item)) {
+    // Aggregated multi-food items (e.g. Daily Intake)
+    let agg = { calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0, name: title || "Daily Logged Fuel", grams: 0 };
+    item.forEach(i => {
+      agg.calories += Number(i.calories || 0);
+      agg.protein += Number(i.protein || 0);
+      agg.carbs += Number(i.carbs || 0);
+      agg.fat += Number(i.fat || 0);
+      agg.fiber += Number(i.fiber || 0);
+      agg.grams += Number(i.grams || 100);
+    });
+    portion = agg.grams || 100;
+    data = calculateMicronutrientsAndVitamins(agg, portion);
+    displayTitle = title || "Today's Logged Fuel (" + item.length + " items)";
+  } else {
+    data = calculateMicronutrientsAndVitamins(item, portion);
+  }
+
+  if (!data) return null;
+
+  const renderRow = (label, valStr, pct, showProgress = true) => {
+    return React.createElement("div", {
+      key: label,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "8px 0",
+        borderBottom: "1px solid var(--border-divider, rgba(0,0,0,0.05))"
+      }
+    },
+      React.createElement("span", {
+        style: { fontSize: 13, fontWeight: 600, color: "var(--text-primary, #0F172A)" }
+      }, label),
+      showProgress && pct !== null && pct !== undefined ? (
+        React.createElement("div", {
+          style: { display: "flex", alignItems: "center", gap: 8 }
+        },
+          React.createElement("span", {
+            style: { fontSize: 12.5, fontWeight: 700, color: "var(--text-primary, #0F172A)", textAlign: "right", minWidth: 60 }
+          }, valStr),
+          React.createElement("div", {
+            style: {
+              width: 58,
+              height: 5,
+              background: "var(--border-divider, #E2E8F0)",
+              borderRadius: 999,
+              overflow: "hidden"
+            }
+          },
+            React.createElement("div", {
+              style: {
+                height: "100%",
+                width: Math.min(100, Math.max(2, pct)) + "%",
+                background: pct > 115 ? "#10B981" : pct >= 70 ? "#237547" : pct >= 30 ? "#5A8E40" : "#94A3B8",
+                borderRadius: 999
+              }
+            })
+          ),
+          React.createElement("span", {
+            style: { fontSize: 11, fontWeight: 700, color: "var(--text-secondary, #64748B)", minWidth: 34, textAlign: "right" }
+          }, pct + "%")
+        )
+      ) : (
+        React.createElement("span", {
+          style: { fontSize: 12.5, fontWeight: 700, color: "var(--text-primary, #0F172A)" }
+        }, valStr)
+      )
+    );
+  };
+
+  const renderCard = (secTitle, rows) => {
+    return React.createElement("div", {
+      style: {
+        background: "var(--surface-primary, #FFFFFF)",
+        borderRadius: 16,
+        padding: "12px 16px",
+        marginBottom: 12,
+        border: "1px solid var(--border-divider, rgba(0,0,0,0.06))",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.03)"
+      }
+    },
+      React.createElement("div", {
+        style: { fontSize: 13, fontWeight: 900, color: "var(--text-primary, #0F172A)", marginBottom: 4, letterSpacing: -0.2 }
+      }, secTitle),
+      React.createElement("div", {
+        style: { display: "flex", flexDirection: "column" }
+      }, rows)
+    );
+  };
+
+  return React.createElement("div", {
+    style: {
+      position: "fixed",
+      inset: 0,
+      zIndex: 100005,
+      background: "rgba(0,0,0,0.68)",
+      backdropFilter: "blur(10px)",
+      WebkitBackdropFilter: "blur(10px)",
+      display: "flex",
+      alignItems: "flex-end",
+      justifyContent: "center",
+      animation: "fadeIn 0.2s ease"
+    },
+    onClick: onClose
+  },
+    React.createElement("div", {
+      style: {
+        width: "100%",
+        maxWidth: 480,
+        maxHeight: "88vh",
+        background: "var(--bg-app, #EDF5EE)",
+        borderTopLeftRadius: 26,
+        borderTopRightRadius: 26,
+        border: "1px solid var(--border-divider, rgba(0,0,0,0.08))",
+        boxShadow: "0 -10px 40px rgba(0,0,0,0.3)",
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden"
+      },
+      onClick: e => e.stopPropagation()
+    },
+      // Header
+      React.createElement("div", {
+        style: {
+          padding: "16px 20px 12px",
+          borderBottom: "1px solid var(--border-divider, rgba(0,0,0,0.06))",
+          background: "var(--surface-primary, #FFFFFF)",
+          flexShrink: 0
+        }
+      },
+        React.createElement("div", {
+          style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }
+        },
+          React.createElement("div", null,
+            React.createElement("h2", {
+              style: { margin: 0, fontSize: 20, fontWeight: 900, color: "var(--text-primary, #0F172A)", letterSpacing: -0.4 }
+            }, activeTab === "micro" ? "Track Micronutrients" : "Track Vitamins & Minerals"),
+            React.createElement("div", {
+              style: { fontSize: 12, color: "var(--text-secondary, #64748B)", marginTop: 2, fontWeight: 500 }
+            }, activeTab === "micro" ? "Sugar, Alcohol, Caffeine, Fiber, Omega 3" : "Daily Micronutrient & Elemental Architecture")
+          ),
+          React.createElement("button", {
+            type: "button",
+            onClick: onClose,
+            style: {
+              width: 32,
+              height: 32,
+              borderRadius: "50%",
+              border: "none",
+              background: "var(--surface-elevated, #F1F5F9)",
+              color: "var(--text-primary, #334155)",
+              fontSize: 16,
+              fontWeight: 700,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }
+          }, "✕")
+        ),
+        // Item subtitle badge
+        React.createElement("div", {
+          style: {
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+            background: "rgba(35, 117, 71, 0.08)",
+            padding: "4px 10px",
+            borderRadius: 8,
+            fontSize: 11,
+            fontWeight: 800,
+            color: "#237547",
+            marginTop: 2,
+            marginBottom: 10
+          }
+        }, "🥗 " + displayTitle + (portion ? " (" + portion + "g)" : "")),
+
+        // Segmented Switcher
+        React.createElement("div", {
+          style: {
+            display: "flex",
+            background: "var(--surface-elevated, #E2E8F0)",
+            padding: 3,
+            borderRadius: 12,
+            gap: 4
+          }
+        },
+          React.createElement("button", {
+            type: "button",
+            onClick: () => setActiveTab("micro"),
+            style: {
+              flex: 1,
+              padding: "7px 0",
+              borderRadius: 9,
+              border: "none",
+              background: activeTab === "micro" ? "var(--surface-primary, #FFFFFF)" : "transparent",
+              color: activeTab === "micro" ? "#237547" : "var(--text-secondary, #64748B)",
+              fontSize: 12,
+              fontWeight: 800,
+              cursor: "pointer",
+              boxShadow: activeTab === "micro" ? "0 2px 6px rgba(0,0,0,0.06)" : "none",
+              transition: "all 0.15s ease"
+            }
+          }, "🧪 Micronutrients"),
+          React.createElement("button", {
+            type: "button",
+            onClick: () => setActiveTab("vitamins"),
+            style: {
+              flex: 1,
+              padding: "7px 0",
+              borderRadius: 9,
+              border: "none",
+              background: activeTab === "vitamins" ? "var(--surface-primary, #FFFFFF)" : "transparent",
+              color: activeTab === "vitamins" ? "#237547" : "var(--text-secondary, #64748B)",
+              fontSize: 12,
+              fontWeight: 800,
+              cursor: "pointer",
+              boxShadow: activeTab === "vitamins" ? "0 2px 6px rgba(0,0,0,0.06)" : "none",
+              transition: "all 0.15s ease"
+            }
+          }, "🧬 Vitamins & Minerals")
+        )
+      ),
+
+      // Scrollable Body
+      React.createElement("div", {
+        style: {
+          flex: 1,
+          overflowY: "auto",
+          padding: "16px 16px calc(24px + env(safe-area-inset-bottom, 20px)) 16px",
+          WebkitOverflowScrolling: "touch"
+        }
+      },
+        activeTab === "micro" ? (
+          React.createElement(React.Fragment, null,
+            // General
+            renderCard("General", [
+              renderRow("Energy", data.general.energy_kj.val + " kJ / " + data.general.energy_kcal.val + " kcal", data.general.energy_kcal.pct, true),
+              renderRow("Alcohol", data.general.alcohol.val + " g", null, false),
+              renderRow("Caffeine", data.general.caffeine.val + " mg", null, false),
+              renderRow("Water", data.general.water.val + " g", data.general.water.pct, true)
+            ]),
+            // Protein
+            renderCard("Protein", [
+              renderRow("Protein", data.protein.protein.val + " g", data.protein.protein.pct, true)
+            ]),
+            // Carbohydrates
+            renderCard("Carbohydrates", [
+              renderRow("Carbs", data.carbohydrates.carbs.val + " g", data.carbohydrates.carbs.pct, true),
+              renderRow("Fiber", data.carbohydrates.fiber.val + " g", data.carbohydrates.fiber.pct, true),
+              renderRow("Insoluble Fiber", data.carbohydrates.insoluble_fiber.val + " g", null, false),
+              renderRow("Soluble Fiber", data.carbohydrates.soluble_fiber.val + " g", null, false),
+              renderRow("Starch", data.carbohydrates.starch.val + " g", null, false),
+              renderRow("Sugars", data.carbohydrates.sugars.val + " g", data.carbohydrates.sugars.pct, true)
+            ]),
+            // Lipids
+            renderCard("Lipids", [
+              renderRow("Fat", data.lipids.fat.val + " g", data.lipids.fat.pct, true),
+              renderRow("Monounsaturated", data.lipids.monounsaturated.val + " g", null, false),
+              renderRow("Polyunsaturated", data.lipids.polyunsaturated.val + " g", null, false),
+              renderRow("Omega-3", data.lipids.omega3.val + " g", data.lipids.omega3.pct, true),
+              renderRow("Omega-6", data.lipids.omega6.val + " g", data.lipids.omega6.pct, true),
+              renderRow("Saturated", data.lipids.saturated.val + " g", null, false)
+            ])
+          )
+        ) : (
+          React.createElement(React.Fragment, null,
+            // Vitamins
+            renderCard("Vitamins", data.vitamins.map(v => renderRow(v.name, v.val + " " + v.unit, v.pct, true))),
+            // Minerals
+            renderCard("Minerals", data.minerals.map(m => renderRow(m.name, m.val + " " + m.unit, m.pct, true)))
+          )
+        )
+      )
+    )
+  );
+}
+
 function BarcodeScannerModal({ isOpen, onClose, onAddMeal }) {
   if (!isOpen) return null;
 
@@ -16731,7 +17256,7 @@ function PlanYourMealsView({ meals, addItem, goals, totals, onOpenBarcode, onBac
   );
 }
 
-function NutritionScreen({meals,mealSlots,addMealSlot,removeMealSlot,water,setWater,addItem,removeItem,totals,calPct,goals,onBack,onNavigate,selectedDate,onSelectDate}){const[nutritionView,setNutritionView]=useState("diary");const[showBarcodeScanner,setShowBarcodeScanner]=useState(false);const[newMealName,setNewMealName]=useState("");const addMealInputRef=useRef(null);function handleAddSlot(){if(!newMealName.trim())return;addMealSlot(newMealName.trim());setNewMealName("");}function handleFabClick(){addMealInputRef.current?.scrollIntoView({behavior:"smooth",block:"center"});addMealInputRef.current?.focus();}const kcalLeft=Math.max(0,Math.round(goals.calories-totals.calories));return/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement(ScreenHeader,{title:"Today's fuel",subtitle:"Nutrition",onBack:onBack,canGoBack:true}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:14,padding:4,gap:4,marginBottom:14}},/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setNutritionView("diary"),style:{flex:1,padding:"8px 0",border:"none",borderRadius:10,background:nutritionView==="diary"?"#237547":"transparent",color:nutritionView==="diary"?"#FFFFFF":"var(--text-secondary)",fontSize:12.5,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:5}},"📝 Log & Diary"),/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setNutritionView("plan"),style:{flex:1.2,padding:"8px 0",border:"none",borderRadius:10,background:nutritionView==="plan"?"#237547":"transparent",color:nutritionView==="plan"?"#FFFFFF":"var(--text-secondary)",fontSize:12.5,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:5}},"📅 Plan & Recipes"),/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setShowBarcodeScanner(true),style:{padding:"8px 12px",border:"1px solid rgba(35, 117, 71, 0.4)",borderRadius:10,background:"rgba(35, 117, 71, 0.12)",color:"#237547",fontSize:12,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",gap:4}},"🏷️ Barcode")),nutritionView==="plan"?/*#__PURE__*/React.createElement(PlanYourMealsView,{meals:meals,addItem:addItem,goals:goals,totals:totals,onOpenBarcode:()=>setShowBarcodeScanner(true),onBackToDiary:()=>setNutritionView("diary")}):/*#__PURE__*/React.createElement(React.Fragment,null,/*#__PURE__*/React.createElement(DaySelector,{selectedDate:selectedDate,onSelectDate:onSelectDate}),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"18px 20px",marginBottom:12,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.mutedFaint,marginBottom:8}},"Calories"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:10}},/*#__PURE__*/React.createElement("div",{style:{fontSize:24,fontWeight:700,color:TOKENS.text}},Math.round(totals.calories)," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goals.calories)),/*#__PURE__*/React.createElement("div",{style:{fontSize:14,fontWeight:700,color:TOKENS.ember}},kcalLeft," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:TOKENS.mutedFaint,fontWeight:500}},"left"))),/*#__PURE__*/React.createElement("div",{style:{height:6,background:TOKENS.surface2,borderRadius:3,overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:`${Math.min(100,calPct*100)}%`,background:TOKENS.ember,borderRadius:3}}))),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"18px 20px",marginBottom:18,display:"flex",gap:18,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Carbs",value:totals.carbs,goal:goals.carbs,color:TOKENS.carbs}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fat",value:totals.fat,goal:goals.fat,color:TOKENS.fat}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Protein",value:totals.protein,goal:goals.protein,color:TOKENS.protein}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fibre",value:totals.fiber,goal:goals.fiber,color:TOKENS.fiber})),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:14,padding:"14px 18px",marginBottom:22,display:"flex",alignItems:"center",justifyContent:"space-between",boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,color:TOKENS.muted,fontWeight:500}},"\uD83D\uDCA7 Water"),/*#__PURE__*/React.createElement("div",{style:{fontSize:18,fontWeight:700,color:TOKENS.text}},Math.max(0,Math.min(10,Number(water)||0)).toFixed(1),"L ",/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goals.water,"L"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("button",{onClick:()=>setWater(w=>Math.max(0,Math.round(((Number(w)||0)-0.25)*100)/100)),style:waterBtnStyle},"\u2212"),/*#__PURE__*/React.createElement("button",{onClick:()=>setWater(w=>Math.min(10,Math.round(((Number(w)||0)+0.25)*100)/100)),style:waterBtnStyle},"+"))),mealSlots.map(slot=>/*#__PURE__*/React.createElement(MealSection,{key:slot.key,mealKey:slot.key,label:slot.label,items:meals[slot.key]||[],onAdd:item=>addItem(slot.key,item),onRemove:idx=>removeItem(slot.key,idx),onRemoveSlot:mealSlots.length>1?()=>removeMealSlot(slot.key):null})),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface2,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px dashed ${TOKENS.border}`,borderRadius:14,padding:16,marginTop:4}},/*#__PURE__*/React.createElement("label",{style:{fontSize:11,color:TOKENS.mutedFaint,display:"block",marginBottom:6}},"Add a custom meal"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("input",{ref:addMealInputRef,value:newMealName,onChange:e=>setNewMealName(e.target.value),onKeyDown:e=>e.key==="Enter"&&handleAddSlot(),placeholder:"e.g. Late Night Snack",style:{flex:1,background:TOKENS.bg,border:`1px solid ${TOKENS.border}`,borderRadius:8,padding:"9px 12px",color:TOKENS.text,fontSize:14,boxSizing:"border-box"}}),/*#__PURE__*/React.createElement("button",{onClick:handleAddSlot,style:{background:"#111111",color:"var(--text-primary)",border:"none",borderRadius:8,padding:"0 18px",fontSize:13,fontWeight:700,cursor:"pointer"}},"+ Add"))),/*#__PURE__*/React.createElement("button",{onClick:handleFabClick,"aria-label":"Quick add",style:{position:"fixed",right:20,bottom:"calc(95px + env(safe-area-inset-bottom, 24px))",width:52,height:52,borderRadius:"50%",background:TOKENS.ember,color:"#0B0E13",border:"none",fontSize:26,fontWeight:700,cursor:"pointer",boxShadow:"0 6px 18px rgba(35, 117, 71,0.35)",zIndex:40}},"+")),showBarcodeScanner&&/*#__PURE__*/React.createElement(BarcodeScannerModal,{isOpen:showBarcodeScanner,onClose:()=>setShowBarcodeScanner(false),onAddMeal:addItem}));}const waterBtnStyle={width:34,height:34,borderRadius:"50%",border:"none",background:"#161616",color:TOKENS.text,fontSize:18,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"4px 4px 8px rgba(0,0,0,0.6), -4px -4px 8px rgba(255,255,255,0.04)"};/* ============================================================
+function NutritionScreen({meals,mealSlots,addMealSlot,removeMealSlot,water,setWater,addItem,removeItem,totals,calPct,goals,onBack,onNavigate,selectedDate,onSelectDate}){const[nutritionView,setNutritionView]=useState("diary");const[showBarcodeScanner,setShowBarcodeScanner]=useState(false);const[showDailyMicroModal,setShowDailyMicroModal]=useState(false);const[newMealName,setNewMealName]=useState("");const addMealInputRef=useRef(null);function handleAddSlot(){if(!newMealName.trim())return;addMealSlot(newMealName.trim());setNewMealName("");}function handleFabClick(){addMealInputRef.current?.scrollIntoView({behavior:"smooth",block:"center"});addMealInputRef.current?.focus();}const kcalLeft=Math.max(0,Math.round(goals.calories-totals.calories));return/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement(ScreenHeader,{title:"Today's fuel",subtitle:"Nutrition",onBack:onBack,canGoBack:true}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:14,padding:4,gap:4,marginBottom:14}},/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setNutritionView("diary"),style:{flex:1,padding:"8px 0",border:"none",borderRadius:10,background:nutritionView==="diary"?"#237547":"transparent",color:nutritionView==="diary"?"#FFFFFF":"var(--text-secondary)",fontSize:12.5,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:5}},"📝 Log & Diary"),/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setNutritionView("plan"),style:{flex:1.2,padding:"8px 0",border:"none",borderRadius:10,background:nutritionView==="plan"?"#237547":"transparent",color:nutritionView==="plan"?"#FFFFFF":"var(--text-secondary)",fontSize:12.5,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:5}},"📅 Plan & Recipes"),/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setShowBarcodeScanner(true),style:{padding:"8px 12px",border:"1px solid rgba(35, 117, 71, 0.4)",borderRadius:10,background:"rgba(35, 117, 71, 0.12)",color:"#237547",fontSize:12,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",gap:4}},"🏷️ Barcode"),/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>setShowDailyMicroModal(true),title:"Track Daily Micronutrients, Vitamins & Minerals",style:{padding:"8px 10px",border:"1px solid rgba(35, 117, 71, 0.4)",borderRadius:10,background:"rgba(35, 117, 71, 0.12)",color:"#237547",fontSize:12,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",gap:4}},"🔬 Micro")),nutritionView==="plan"?/*#__PURE__*/React.createElement(PlanYourMealsView,{meals:meals,addItem:addItem,goals:goals,totals:totals,onOpenBarcode:()=>setShowBarcodeScanner(true),onBackToDiary:()=>setNutritionView("diary")}):/*#__PURE__*/React.createElement(React.Fragment,null,/*#__PURE__*/React.createElement(DaySelector,{selectedDate:selectedDate,onSelectDate:onSelectDate}),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"18px 20px",marginBottom:12,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",{style:{fontSize:12,color:TOKENS.mutedFaint,marginBottom:8}},"Calories"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:10}},/*#__PURE__*/React.createElement("div",{style:{fontSize:24,fontWeight:700,color:TOKENS.text}},Math.round(totals.calories)," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goals.calories)),/*#__PURE__*/React.createElement("div",{style:{fontSize:14,fontWeight:700,color:TOKENS.ember}},kcalLeft," ",/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:TOKENS.mutedFaint,fontWeight:500}},"left"))),/*#__PURE__*/React.createElement("div",{style:{height:6,background:TOKENS.surface2,borderRadius:3,overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{height:"100%",width:`${Math.min(100,calPct*100)}%`,background:TOKENS.ember,borderRadius:3}}))),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:18,padding:"18px 20px",marginBottom:18,display:"flex",gap:18,boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Carbs",value:totals.carbs,goal:goals.carbs,color:TOKENS.carbs}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fat",value:totals.fat,goal:goals.fat,color:TOKENS.fat}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Protein",value:totals.protein,goal:goals.protein,color:TOKENS.protein}),/*#__PURE__*/React.createElement(MiniMacroCard,{label:"Fibre",value:totals.fiber,goal:goals.fiber,color:TOKENS.fiber})),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px solid ${TOKENS.border}`,borderRadius:14,padding:"14px 18px",marginBottom:22,display:"flex",alignItems:"center",justifyContent:"space-between",boxShadow:CARD_SHADOW}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,color:TOKENS.muted,fontWeight:500}},"\uD83D\uDCA7 Water"),/*#__PURE__*/React.createElement("div",{style:{fontSize:18,fontWeight:700,color:TOKENS.text}},Math.max(0,Math.min(10,Number(water)||0)).toFixed(1),"L ",/*#__PURE__*/React.createElement("span",{style:{fontSize:13,color:TOKENS.mutedFaint,fontWeight:400}},"/ ",goals.water,"L"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("button",{onClick:()=>setWater(w=>Math.max(0,Math.round(((Number(w)||0)-0.25)*100)/100)),style:waterBtnStyle},"\u2212"),/*#__PURE__*/React.createElement("button",{onClick:()=>setWater(w=>Math.min(10,Math.round(((Number(w)||0)+0.25)*100)/100)),style:waterBtnStyle},"+"))),mealSlots.map(slot=>/*#__PURE__*/React.createElement(MealSection,{key:slot.key,mealKey:slot.key,label:slot.label,items:meals[slot.key]||[],onAdd:item=>addItem(slot.key,item),onRemove:idx=>removeItem(slot.key,idx),onRemoveSlot:mealSlots.length>1?()=>removeMealSlot(slot.key):null})),/*#__PURE__*/React.createElement("div",{style:{background:TOKENS.surface2,backdropFilter:"blur(16px) saturate(180%)",WebkitBackdropFilter:"blur(16px) saturate(180%)",border:`1px dashed ${TOKENS.border}`,borderRadius:14,padding:16,marginTop:4}},/*#__PURE__*/React.createElement("label",{style:{fontSize:11,color:TOKENS.mutedFaint,display:"block",marginBottom:6}},"Add a custom meal"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8}},/*#__PURE__*/React.createElement("input",{ref:addMealInputRef,value:newMealName,onChange:e=>setNewMealName(e.target.value),onKeyDown:e=>e.key==="Enter"&&handleAddSlot(),placeholder:"e.g. Late Night Snack",style:{flex:1,background:TOKENS.bg,border:`1px solid ${TOKENS.border}`,borderRadius:8,padding:"9px 12px",color:TOKENS.text,fontSize:14,boxSizing:"border-box"}}),/*#__PURE__*/React.createElement("button",{onClick:handleAddSlot,style:{background:"#111111",color:"var(--text-primary)",border:"none",borderRadius:8,padding:"0 18px",fontSize:13,fontWeight:700,cursor:"pointer"}},"+ Add"))),/*#__PURE__*/React.createElement("button",{onClick:handleFabClick,"aria-label":"Quick add",style:{position:"fixed",right:20,bottom:"calc(95px + env(safe-area-inset-bottom, 24px))",width:52,height:52,borderRadius:"50%",background:TOKENS.ember,color:"#0B0E13",border:"none",fontSize:26,fontWeight:700,cursor:"pointer",boxShadow:"0 6px 18px rgba(35, 117, 71,0.35)",zIndex:40}},"+")),showBarcodeScanner&&/*#__PURE__*/React.createElement(BarcodeScannerModal,{isOpen:showBarcodeScanner,onClose:()=>setShowBarcodeScanner(false),onAddMeal:addItem}),/*#__PURE__*/React.createElement(MicronutrientsModal,{isOpen:showDailyMicroModal,onClose:()=>setShowDailyMicroModal(false),item:Object.values(meals).flat(),title:"Today's Daily Fuel & Micronutrients"}));}const waterBtnStyle={width:34,height:34,borderRadius:"50%",border:"none",background:"#161616",color:TOKENS.text,fontSize:18,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"4px 4px 8px rgba(0,0,0,0.6), -4px -4px 8px rgba(255,255,255,0.04)"};/* ============================================================
        UPGRADED WORKOUT SCREEN WITH HORIZONTAL SCROLL & PERSONALIZATION
        ============================================================ */ /* ============================================================
        UPGRADED WORKOUT SCREEN WITH HORIZONTAL SCROLL & PERSONALIZATION

@@ -10724,7 +10724,712 @@ const recoveryScore=Math.min(10,Math.max(5,streakDays*2));const total=Math.min(1
        3. LARGE SCAN YOUR MEAL CARD
        ============================================================ */function LargeScanMealCard({onTriggerScan,onTriggerBarcode,onTriggerGallery}){return/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:24,padding:"20px 20px 18px",marginBottom:16,boxShadow:"0 8px 24px rgba(35, 117, 71, 0.08)",position:"relative",overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{position:"absolute",left:0,right:0,height:2,background:"linear-gradient(90deg, transparent 0%, rgba(35, 117, 71, 0.5) 50%, transparent 100%)",boxShadow:"0 0 8px rgba(35, 117, 71, 0.3)",animation:"stokeLaserScan 3.5s infinite ease-in-out",pointerEvents:"none"}}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"flex-start",gap:16}},/*#__PURE__*/React.createElement("div",{style:{width:58,height:58,borderRadius:18,background:"var(--feature-nutrition-bg)",border:"1px solid var(--border-divider)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("svg",{width:"28",height:"28",viewBox:"0 0 24 24",fill:"none",stroke:"var(--feature-nutrition)",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"13",r:"4"}))),/*#__PURE__*/React.createElement("div",{style:{flex:1}},/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:"var(--text-secondary)",fontWeight:700,letterSpacing:0.5,textTransform:"uppercase",marginBottom:2}},"Instant Macros"),/*#__PURE__*/React.createElement("h2",{style:{margin:"2px 0 4px",fontSize:20,fontWeight:900,color:"var(--text-primary)",letterSpacing:-0.4}},"Scan Your Meal"),/*#__PURE__*/React.createElement("p",{style:{margin:0,fontSize:12.5,lineHeight:1.4,color:"var(--text-secondary)"}},"Take a photo to track your meal. Detects portions, estimated calories & all macros."))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8,marginTop:16}},/*#__PURE__*/React.createElement("button",{onClick:onTriggerScan,className:"stoke-btn-primary",style:{flex:1.2,background:"var(--btn-primary-bg)",border:"none",borderRadius:14,padding:"12px 10px",color:"var(--btn-primary-text)",fontSize:13,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:6,boxShadow:"var(--shadow-sm)",transition:"all 0.15s ease"}},/*#__PURE__*/React.createElement("span",null,"📷"),/*#__PURE__*/React.createElement("span",null,"Photo AI")),onTriggerBarcode&&/*#__PURE__*/React.createElement("button",{onClick:onTriggerBarcode,className:"stoke-btn-secondary",style:{flex:1.2,background:"rgba(35, 117, 71, 0.12)",border:"1.5px solid rgba(35, 117, 71, 0.4)",borderRadius:14,padding:"12px 10px",color:"#237547",fontSize:13,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:6,transition:"all 0.15s ease"}},/*#__PURE__*/React.createElement("span",null,"🏷️"),/*#__PURE__*/React.createElement("span",null,"Barcode")),/*#__PURE__*/React.createElement("button",{onClick:onTriggerGallery,className:"stoke-btn-secondary",style:{flex:1,background:"var(--btn-secondary-bg)",border:"1px solid var(--border-divider)",borderRadius:14,padding:"13px 12px",color:"var(--btn-secondary-text)",fontSize:13,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:6,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("svg",{width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("rect",{x:"3",y:"3",width:"18",height:"18",rx:"2",ry:"2"}),/*#__PURE__*/React.createElement("circle",{cx:"8.5",cy:"8.5",r:"1.5"}),/*#__PURE__*/React.createElement("polyline",{points:"21 15 16 10 5 21"})),/*#__PURE__*/React.createElement("span",null,"Gallery"))));}/* ============================================================
        CONFIRM DETECTED MEAL MODAL
-       ============================================================ */function ScanMealConfirmModal({isOpen,onClose,photoPreview,isScanning,scanError,onRetry,onReanalyze,detectedItems=[],onSaveMeal,mealSlots=[]}){if(!isOpen)return null;const defaultSlot=(()=>{const hr=new Date().getHours();if(hr<11)return"breakfast";if(hr<16)return"lunch";if(hr<21)return"dinner";return"snack";})();const[selectedSlot,setSelectedSlot]=useState(defaultSlot);const[items,setItems]=useState(()=>{return(detectedItems||[]).map(it=>{if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(it,it.grams||100);}return{...it,grams:Number(it.grams)||100};});});const[editingIdx,setEditingIdx]=useState(null);const[editingName,setEditingName]=useState("");const[showAddModal,setShowAddModal]=useState(false);const[addSearchQuery,setAddSearchQuery]=useState("");const[customItemGrams,setCustomItemGrams]=useState(100);useEffect(()=>{if(detectedItems&&detectedItems.length>0){setItems(detectedItems.map(it=>{if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(it,it.grams||100);}return{...it,grams:Number(it.grams)||100};}));}else{setItems([]);}},[detectedItems]);const totals=typeof calculateMealTotals==="function"?calculateMealTotals(items):{calories:items.reduce((s,it)=>s+(Number(it.calories)||0),0),protein:items.reduce((s,it)=>s+(Number(it.protein)||0),0),carbs:items.reduce((s,it)=>s+(Number(it.carbs)||0),0),fat:items.reduce((s,it)=>s+(Number(it.fat)||0),0),fiber:items.reduce((s,it)=>s+(Number(it.fiber)||0),0),totalGrams:items.reduce((s,it)=>s+(Number(it.grams)||0),0)};function setItemGrams(idx,rawVal){const val=Math.max(1,Math.min(2500,parseInt(rawVal,10)||0));setItems(prev=>prev.map((it,i)=>{if(i!==idx)return it;if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(it,val);}const ratio=it.grams>0?val/it.grams:1;return{...it,grams:val,calories:Math.round(it.calories*ratio)};}));}function adjustGrams(idx,delta){const cur=items[idx]?.grams||100;setItemGrams(idx,cur+delta);}function removeItem(idx){setItems(prev=>prev.filter((_,i)=>i!==idx));}function startEditingName(idx){setEditingIdx(idx);setEditingName(items[idx]?.name||"");}function saveEditedName(idx){if(editingName.trim()){setItems(prev=>prev.map((it,i)=>{if(i!==idx)return it;const trimmed=editingName.trim();const dbMatch=typeof STOKE_VERIFIED_NUTRITION_DB!=="undefined"?STOKE_VERIFIED_NUTRITION_DB[trimmed]:null;const updated={...it,name:trimmed};if(dbMatch){updated.per100g=dbMatch.per100g;updated.dietType=dbMatch.dietType;if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(updated,it.grams);}}return updated;}));}setEditingIdx(null);}function handleSelectAlternative(idx,altName){const dbMatch=typeof STOKE_VERIFIED_NUTRITION_DB!=="undefined"?STOKE_VERIFIED_NUTRITION_DB[altName]:null;if(dbMatch){setItems(prev=>prev.map((it,i)=>{if(i!==idx)return it;const updated={...it,name:dbMatch.name,dietType:dbMatch.dietType,per100g:dbMatch.per100g,needsConfirmation:false,confidence:90};if(typeof recalculateItemNutrients==="function"){return recalculateItemNutrients(updated,it.grams||dbMatch.defaultGrams);}return updated;}));}}function handleAddFood(foodDbItem){const g=Number(customItemGrams)||foodDbItem.defaultGrams||100;const itemData={name:foodDbItem.name,grams:g,per100g:foodDbItem.per100g,confidence:100,dietType:foodDbItem.dietType,needsConfirmation:false,alternatives:foodDbItem.alternatives||[]};const newItem=typeof recalculateItemNutrients==="function"?recalculateItemNutrients(itemData,g):itemData;setItems(prev=>[...prev,newItem]);setShowAddModal(false);setAddSearchQuery("");}const[serverHasKey,setServerHasKey]=useState(true);useEffect(()=>{try{localStorage.removeItem("stoke_ai_key");localStorage.removeItem("gemini_key");localStorage.removeItem("anthropic_key");localStorage.removeItem("openai_key");}catch(e){}fetch("/api/vision/status").then(res=>res.json()).then(data=>{if(data&&typeof data.hasApiKey==="boolean"){setServerHasKey(data.hasApiKey);}}).catch(()=>{});},[]);const hasApiKey=serverHasKey;const filteredFoods=typeof searchVerifiedFoods==="function"?searchVerifiedFoods(addSearchQuery):[];return/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,zIndex:10000,background:"rgba(0, 0, 0,0.65)",backdropFilter:"blur(20px)",WebkitBackdropFilter:"blur(20px)",display:"flex",alignItems:"center",justifyContent:"center",padding:16}},/*#__PURE__*/React.createElement("div",{className:"glass-modal",style:{width:"100%",maxWidth:440,maxHeight:"90vh",overflowY:"auto",background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:28,padding:"24px 20px",boxShadow:"var(--neu-raised)",color:"var(--text-primary)"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},/*#__PURE__*/React.createElement("div",{style:{width:38,height:38,borderRadius:12,background:"linear-gradient(135deg, rgba(35, 117, 71,0.18) 0%, rgba(35, 117, 71,0.12) 100%)",border:"1.5px solid rgba(35, 117, 71,0.4)",display:"flex",alignItems:"center",justifyContent:"center"}},/*#__PURE__*/React.createElement("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"#237547",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"}),/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"13",r:"4"}))),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement("h2",{style:{margin:0,fontSize:18,fontWeight:900,color:"var(--text-primary)"}},"Meal Vision Analysis"),/*#__PURE__*/React.createElement("span",{style:{fontSize:9.5,fontWeight:800,padding:"3px 8px",borderRadius:999,background:"rgba(35, 117, 71, 0.14)",color:"#237547",border:"1px solid rgba(35, 117, 71, 0.3)",display:"inline-flex",alignItems:"center",gap:4,userSelect:"none"},title:"Vision AI model is secured and managed strictly on the server gateway via Google Gemini Enterprise. User key modification is disabled."},/*#__PURE__*/React.createElement("svg",{width:"10",height:"10",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("rect",{x:"3",y:"11",width:"18",height:"11",rx:"2",ry:"2"}),/*#__PURE__*/React.createElement("path",{d:"M7 11V7a5 5 0 0 1 10 0v4"})),"Server Vision AI Protected")),/*#__PURE__*/React.createElement("div",{style:{fontSize:11.5,color:"var(--text-secondary)"}},"Real-time food identification & certified macros"))),/*#__PURE__*/React.createElement("button",{onClick:onClose,style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",color:"var(--text-secondary)",width:32,height:32,borderRadius:"50%",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"},"aria-label":"Close modal"},/*#__PURE__*/React.createElement("svg",{width:"14",height:"14",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("line",{x1:"18",y1:"6",x2:"6",y2:"18"}),/*#__PURE__*/React.createElement("line",{x1:"6",y1:"6",x2:"18",y2:"18"})))),photoPreview&&/*#__PURE__*/React.createElement("div",{style:{position:"relative",width:"100%",height:140,borderRadius:16,overflow:"hidden",marginBottom:14,border:"1.5px solid var(--border-divider)"}},/*#__PURE__*/React.createElement("img",{src:photoPreview,alt:"Scanned Food",style:{width:"100%",height:"100%",objectFit:"cover"}}),isScanning&&/*#__PURE__*/React.createElement("div",{style:{position:"absolute",inset:0,background:"rgba(255,255,255,0.92)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:8}},/*#__PURE__*/React.createElement("div",{style:{width:32,height:32,border:"3px solid #237547",borderTopColor:"transparent",borderRadius:"50%",animation:"spin 0.8s linear infinite"}}),/*#__PURE__*/React.createElement("span",{style:{fontSize:12.5,fontWeight:800,color:"#237547"}},"Analyzing food with Vision AI model..."))),scanError&&/*#__PURE__*/React.createElement("div",{style:{background:"rgba(209, 67, 67,0.08)",border:"1.5px solid rgba(209, 67, 67,0.25)",borderRadius:14,padding:"12px 14px",marginBottom:14,display:"flex",alignItems:"flex-start",gap:10}},/*#__PURE__*/React.createElement("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"#D14343",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:{flexShrink:0,marginTop:1}},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"10"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"8",x2:"12",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"16",x2:"12.01",y2:"16"})),/*#__PURE__*/React.createElement("div",{style:{flex:1}},/*#__PURE__*/React.createElement("div",{style:{fontSize:12.5,fontWeight:800,color:"#D14343"}},"Vision Analysis Notice"),/*#__PURE__*/React.createElement("div",{style:{fontSize:11.5,color:"var(--text-secondary)",marginTop:2}},scanError),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:8,marginTop:10,flexWrap:"wrap"}},onReanalyze&&/*#__PURE__*/React.createElement("button",{onClick:onReanalyze,style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",color:"var(--text-primary)",borderRadius:8,padding:"6px 12px",fontSize:11,fontWeight:700,cursor:"pointer"}},"\uD83D\uDD04 Retry Analysis"),onRetry&&/*#__PURE__*/React.createElement("button",{onClick:onRetry,style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",color:"var(--text-primary)",borderRadius:8,padding:"6px 12px",fontSize:11,fontWeight:700,cursor:"pointer"}},"\uD83D\uDCF8 Pick Other Photo"),/*#__PURE__*/React.createElement("button",{onClick:()=>setShowAddModal(true),style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",color:"var(--text-primary)",borderRadius:8,padding:"6px 12px",fontSize:11,fontWeight:700,cursor:"pointer"}},"\uD83D\uDD0D Search Nutrition DB")))),/*#__PURE__*/React.createElement("div",{style:{marginBottom:14}},/*#__PURE__*/React.createElement("label",{style:{fontSize:11,fontWeight:700,color:"var(--text-secondary)",textTransform:"uppercase",display:"block",marginBottom:6}},"Target Meal Slot"),/*#__PURE__*/React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(4, 1fr)",gap:6}},["breakfast","lunch","dinner","snack"].map(s=>{const active=selectedSlot===s;return/*#__PURE__*/React.createElement("button",{key:s,onClick:()=>setSelectedSlot(s),style:{background:active?"#237547":"#14171F",border:`1.5px solid ${active?"#237547":"#232936"}`,color:active?"#FFFFFF":"#94A3B8",borderRadius:10,padding:"8px 0",fontSize:12,fontWeight:700,textTransform:"capitalize",cursor:"pointer"}},s);}))),/*#__PURE__*/React.createElement("div",{style:{marginBottom:16}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}},/*#__PURE__*/React.createElement("span",{style:{fontSize:11,fontWeight:700,color:"var(--text-secondary)",textTransform:"uppercase"}},"Identified Food Items (",items.length,")"),/*#__PURE__*/React.createElement("button",{onClick:()=>setShowAddModal(true),style:{background:"transparent",border:"none",color:"#237547",fontSize:12,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",gap:4}},/*#__PURE__*/React.createElement("svg",{width:"14",height:"14",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("line",{x1:"12",y1:"5",x2:"12",y2:"19"}),/*#__PURE__*/React.createElement("line",{x1:"5",y1:"12",x2:"19",y2:"12"})),/*#__PURE__*/React.createElement("span",null,"Add Item"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:10}},items.map((it,idx)=>{const isEditing=editingIdx===idx;const isLowConf=it.needsConfirmation||it.confidence&&it.confidence<60;return/*#__PURE__*/React.createElement("div",{key:idx,style:{background:"var(--surface-primary)",border:`1.5px solid ${isLowConf?"rgba(217,119,6,0.4)":"#232936"}`,borderRadius:14,padding:"12px 14px",boxShadow:"0 2px 6px rgba(0, 0, 0,0.03)"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6,flex:1,minWidth:0,marginRight:8}},isEditing?/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:4,flex:1}},/*#__PURE__*/React.createElement("input",{type:"text",value:editingName,onChange:e=>setEditingName(e.target.value),onKeyDown:e=>{if(e.key==="Enter")saveEditedName(idx);},autoFocus:true,style:{flex:1,background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:8,padding:"4px 8px",fontSize:13,fontWeight:700,color:"var(--text-primary)",outline:"none"}}),/*#__PURE__*/React.createElement("button",{onClick:()=>saveEditedName(idx),style:{background:"#237547",color:"var(--text-primary)",border:"none",borderRadius:8,padding:"4px 8px",fontSize:11,fontWeight:800,cursor:"pointer"}},"Save")):/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6,overflow:"hidden"}},/*#__PURE__*/React.createElement("span",{style:{fontWeight:800,fontSize:14,color:"var(--text-primary)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}},it.name),/*#__PURE__*/React.createElement("button",{onClick:()=>startEditingName(idx),style:{background:"none",border:"none",color:"var(--text-secondary)",cursor:"pointer",padding:2,display:"flex",alignItems:"center"},title:"Edit food name"},/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"})))),!isEditing&&it.confidence&&/*#__PURE__*/React.createElement("span",{style:{fontSize:9.5,fontWeight:800,padding:"2px 6px",borderRadius:999,background:isLowConf?"rgba(217,119,6,0.14)":"rgba(33, 134, 91,0.12)",color:isLowConf?"#D97706":"#21865B",border:`1px solid ${isLowConf?"rgba(217,119,6,0.3)":"rgba(33, 134, 91,0.25)"}`,flexShrink:0}},it.confidence,"% ",isLowConf?"Confirm":"Match")),/*#__PURE__*/React.createElement("button",{onClick:()=>removeItem(idx),style:{background:"transparent",border:"none",color:"#D14343",cursor:"pointer",padding:"2px 4px",display:"flex",alignItems:"center",gap:3,fontSize:11,fontWeight:700},title:"Remove detected item"},/*#__PURE__*/React.createElement("svg",{width:"13",height:"13",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("polyline",{points:"3 6 5 6 21 6"}),/*#__PURE__*/React.createElement("path",{d:"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"})),/*#__PURE__*/React.createElement("span",null,"Remove"))),isLowConf&&it.alternatives&&it.alternatives.length>0&&/*#__PURE__*/React.createElement("div",{style:{background:"rgba(217,119,6,0.08)",border:"1px dashed rgba(217,119,6,0.3)",borderRadius:10,padding:"6px 8px",marginBottom:8}},/*#__PURE__*/React.createElement("div",{style:{fontSize:10.5,fontWeight:700,color:"#D97706",marginBottom:4}},"Low confidence. Did you have one of these?"),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:5,flexWrap:"wrap"}},it.alternatives.map(alt=>/*#__PURE__*/React.createElement("button",{key:alt,onClick:()=>handleSelectAlternative(idx,alt),style:{background:"var(--surface-primary)",border:"1px solid rgba(217,119,6,0.35)",borderRadius:6,padding:"2px 6px",fontSize:10,fontWeight:700,color:"var(--text-primary)",cursor:"pointer"}},alt)))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",gap:10}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:4,background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:10,padding:"3px 6px"}},/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>adjustGrams(idx,-25),style:{background:"none",border:"none",color:"var(--text-primary)",cursor:"pointer",padding:"2px 4px",display:"flex",alignItems:"center",justifyContent:"center"},"aria-label":"Decrease portion by 25g"},/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"3",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("line",{x1:"5",y1:"12",x2:"19",y2:"12"}))),/*#__PURE__*/React.createElement("input",{type:"number",value:it.grams,onChange:e=>setItemGrams(idx,e.target.value),style:{width:44,background:"transparent",border:"none",textAlign:"center",color:"var(--text-primary)",fontSize:13,fontWeight:800,outline:"none"},"aria-label":"Portion grams"}),/*#__PURE__*/React.createElement("span",{style:{fontSize:11,color:"var(--text-secondary)",paddingRight:2}},"g"),/*#__PURE__*/React.createElement("button",{type:"button",onClick:()=>adjustGrams(idx,25),style:{background:"none",border:"none",color:"var(--text-primary)",cursor:"pointer",padding:"2px 4px",display:"flex",alignItems:"center",justifyContent:"center"},"aria-label":"Increase portion by 25g"},/*#__PURE__*/React.createElement("svg",{width:"12",height:"12",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"3",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("line",{x1:"12",y1:"5",x2:"12",y2:"19"}),/*#__PURE__*/React.createElement("line",{x1:"5",y1:"12",x2:"19",y2:"12"})))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:7,fontSize:11.5}},/*#__PURE__*/React.createElement("span",{style:{color:"#237547",fontWeight:800}},it.calories," kcal"),/*#__PURE__*/React.createElement("span",{style:{color:"#E86A33"}},"P:",it.protein,"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#237547"}},"C:",it.carbs,"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#D97706"}},"F:",it.fat,"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#21865B"}},"Fib:",it.fiber,"g"))));}),items.length===0&&!isScanning&&!scanError&&/*#__PURE__*/React.createElement("div",{style:{textAlign:"center",padding:"18px 0",color:"var(--text-secondary)",fontSize:13}},"No food items in this meal yet. Tap \"Add Item\" above to add foods."))),/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1.5px solid rgba(35, 117, 71,0.3)",borderRadius:16,padding:"14px 16px",marginBottom:14}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}},/*#__PURE__*/React.createElement("span",{style:{fontSize:13,fontWeight:800,color:"var(--text-primary)"}},"Meal Total (",totals.totalGrams,"g)"),/*#__PURE__*/React.createElement("span",{style:{fontSize:18,fontWeight:900,color:"#237547"}},totals.calories," kcal")),/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:12,fontWeight:700}},/*#__PURE__*/React.createElement("span",{style:{color:"#E86A33"}},"Protein: ",Math.round(totals.protein),"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#237547"}},"Carbs: ",Math.round(totals.carbs),"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#D97706"}},"Fat: ",Math.round(totals.fat),"g"),/*#__PURE__*/React.createElement("span",{style:{color:"#21865B"}},"Fibre: ",Math.round(totals.fiber),"g"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"flex-start",gap:8,marginBottom:16,background:"rgba(0, 0, 0,0.06)",border:"1px solid var(--border-divider)",borderRadius:12,padding:"10px 12px"}},/*#__PURE__*/React.createElement("svg",{width:"15",height:"15",viewBox:"0 0 24 24",fill:"none",stroke:"#94A3B8",strokeWidth:"2.2",strokeLinecap:"round",strokeLinejoin:"round",style:{flexShrink:0,marginTop:1}},/*#__PURE__*/React.createElement("circle",{cx:"12",cy:"12",r:"10"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"16",x2:"12",y2:"12"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"8",x2:"12.01",y2:"8"})),/*#__PURE__*/React.createElement("div",{style:{fontSize:10.5,color:"var(--text-secondary)",lineHeight:1.35}},"Nutritional values are estimates based on visual portion volume. Camera AI cannot determine exact ingredients, cooking oils, or precise weight from pixels alone.")),/*#__PURE__*/React.createElement("button",{onClick:()=>onSaveMeal&&items.length>0&&onSaveMeal(selectedSlot,items),disabled:items.length===0||isScanning,style:{width:"100%",background:items.length===0||isScanning?"#232936":"linear-gradient(135deg, #237547 0%, #1B5E36 100%)",border:"none",borderRadius:14,padding:"14px 0",color:"var(--text-primary)",fontSize:14.5,fontWeight:800,cursor:items.length===0||isScanning?"not-allowed":"pointer",boxShadow:items.length===0||isScanning?"none":"0 6px 20px rgba(35, 117, 71,0.35)",display:"flex",alignItems:"center",justifyContent:"center",gap:8}},/*#__PURE__*/React.createElement("svg",{width:"18",height:"18",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("polyline",{points:"20 6 9 17 4 12"})),/*#__PURE__*/React.createElement("span",null,"Save Meal & Log to Supabase")),showAddModal&&/*#__PURE__*/React.createElement("div",{style:{position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:10001,display:"flex",alignItems:"flex-end",justifyContent:"center"},onClick:()=>setShowAddModal(false)},/*#__PURE__*/React.createElement("div",{style:{width:"100%",maxWidth:440,maxHeight:"75vh",background:"var(--surface-primary)",borderTopLeftRadius:24,borderTopRightRadius:24,padding:"20px 18px",overflowY:"auto"},onClick:e=>e.stopPropagation()},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},/*#__PURE__*/React.createElement("h3",{style:{margin:0,fontSize:16,fontWeight:800,color:"var(--text-primary)"}},"Add Food to Meal"),/*#__PURE__*/React.createElement("button",{onClick:()=>setShowAddModal(false),style:{background:"none",border:"none",color:"var(--text-secondary)",fontSize:14,fontWeight:700,cursor:"pointer"}},"\u2715")),/*#__PURE__*/React.createElement("input",{type:"text",placeholder:"Search food (biryani, roti, rice, dal, chicken...)",value:addSearchQuery,onChange:e=>setAddSearchQuery(e.target.value),autoFocus:true,style:{width:"100%",boxSizing:"border-box",background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:12,padding:"10px 12px",fontSize:13,color:"var(--text-primary)",outline:"none",marginBottom:12}}),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:14}},/*#__PURE__*/React.createElement("span",{style:{fontSize:12,fontWeight:700,color:"var(--text-secondary)"}},"Portion:"),/*#__PURE__*/React.createElement("input",{type:"number",value:customItemGrams,onChange:e=>setCustomItemGrams(e.target.value),style:{width:60,background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:8,padding:"5px 8px",fontSize:12,fontWeight:700,textAlign:"center"}}),/*#__PURE__*/React.createElement("span",{style:{fontSize:12,color:"var(--text-secondary)"}},"grams")),/*#__PURE__*/React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:8,maxHeight:"40vh",overflowY:"auto"}},filteredFoods.map(f=>/*#__PURE__*/React.createElement("div",{key:f.name,onClick:()=>handleAddFood(f),style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:12,padding:"10px 12px",display:"flex",justifyContent:"space-between",alignItems:"center",cursor:"pointer"}},/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{fontSize:13,fontWeight:800,color:"var(--text-primary)"}},f.name),/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:"var(--text-secondary)"}},"Per 100g: ",f.per100g.calories," kcal \xB7 P:",f.per100g.protein,"g C:",f.per100g.carbs,"g F:",f.per100g.fat,"g")),/*#__PURE__*/React.createElement("span",{style:{fontSize:11,fontWeight:800,color:"#237547",background:"var(--surface-primary)",padding:"4px 8px",borderRadius:8}},"+ Add"))))))));}/* ============================================================
+       ============================================================ */function ScanMealConfirmModal({ isOpen, onClose, photoPreview, isScanning, scanError, onRetry, onReanalyze, detectedItems = [], onSaveMeal, mealSlots = [] }) {
+  if (!isOpen) return null;
+
+  const defaultSlot = (() => {
+    const hr = new Date().getHours();
+    if (hr < 11) return "breakfast";
+    if (hr < 16) return "lunch";
+    if (hr < 21) return "dinner";
+    return "snack";
+  })();
+
+  const [selectedSlot, setSelectedSlot] = useState(defaultSlot);
+  const [items, setItems] = useState(() => {
+    return (detectedItems || []).map(it => {
+      if (typeof recalculateItemNutrients === "function") {
+        return recalculateItemNutrients(it, it.grams || 100);
+      }
+      return { ...it, grams: Number(it.grams) || 100 };
+    });
+  });
+
+  const [editingIdx, setEditingIdx] = useState(null);
+  const [editingName, setEditingName] = useState("");
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [addSearchQuery, setAddSearchQuery] = useState("");
+  const [customItemGrams, setCustomItemGrams] = useState(100);
+  const [showMicroModal, setShowMicroModal] = useState(false);
+
+  useEffect(() => {
+    if (detectedItems && detectedItems.length > 0) {
+      setItems(detectedItems.map(it => {
+        if (typeof recalculateItemNutrients === "function") {
+          return recalculateItemNutrients(it, it.grams || 100);
+        }
+        return { ...it, grams: Number(it.grams) || 100 };
+      }));
+    } else {
+      setItems([]);
+    }
+  }, [detectedItems]);
+
+  const totals = typeof calculateMealTotals === "function"
+    ? calculateMealTotals(items)
+    : {
+        calories: items.reduce((s, it) => s + (Number(it.calories) || 0), 0),
+        protein: items.reduce((s, it) => s + (Number(it.protein) || 0), 0),
+        carbs: items.reduce((s, it) => s + (Number(it.carbs) || 0), 0),
+        fat: items.reduce((s, it) => s + (Number(it.fat) || 0), 0),
+        fiber: items.reduce((s, it) => s + (Number(it.fiber) || 0), 0),
+        totalGrams: items.reduce((s, it) => s + (Number(it.grams) || 0), 0)
+      };
+
+  function setItemGrams(idx, rawVal) {
+    const val = Math.max(1, Math.min(2500, parseInt(rawVal, 10) || 0));
+    setItems(prev => prev.map((it, i) => {
+      if (i !== idx) return it;
+      if (typeof recalculateItemNutrients === "function") {
+        return recalculateItemNutrients(it, val);
+      }
+      const ratio = it.grams > 0 ? val / it.grams : 1;
+      return { ...it, grams: val, calories: Math.round(it.calories * ratio) };
+    }));
+  }
+
+  function adjustGrams(idx, delta) {
+    const cur = items[idx]?.grams || 100;
+    setItemGrams(idx, cur + delta);
+  }
+
+  function removeItem(idx) {
+    setItems(prev => prev.filter((_, i) => i !== idx));
+  }
+
+  function startEditingName(idx) {
+    setEditingIdx(idx);
+    setEditingName(items[idx]?.name || "");
+  }
+
+  function saveEditedName(idx) {
+    if (editingName.trim()) {
+      setItems(prev => prev.map((it, i) => {
+        if (i !== idx) return it;
+        const trimmed = editingName.trim();
+        const dbMatch = typeof STOKE_VERIFIED_NUTRITION_DB !== "undefined" ? STOKE_VERIFIED_NUTRITION_DB[trimmed] : null;
+        const updated = { ...it, name: trimmed };
+        if (dbMatch) {
+          updated.per100g = dbMatch.per100g;
+          updated.dietType = dbMatch.dietType;
+          if (typeof recalculateItemNutrients === "function") {
+            return recalculateItemNutrients(updated, it.grams);
+          }
+        }
+        return updated;
+      }));
+    }
+    setEditingIdx(null);
+  }
+
+  function handleSelectAlternative(idx, altName) {
+    const dbMatch = typeof STOKE_VERIFIED_NUTRITION_DB !== "undefined" ? STOKE_VERIFIED_NUTRITION_DB[altName] : null;
+    if (dbMatch) {
+      setItems(prev => prev.map((it, i) => {
+        if (i !== idx) return it;
+        const updated = {
+          ...it,
+          name: dbMatch.name,
+          dietType: dbMatch.dietType,
+          per100g: dbMatch.per100g,
+          needsConfirmation: false,
+          confidence: 90
+        };
+        if (typeof recalculateItemNutrients === "function") {
+          return recalculateItemNutrients(updated, it.grams || dbMatch.defaultGrams);
+        }
+        return updated;
+      }));
+    }
+  }
+
+  function handleAddFood(foodDbItem) {
+    const g = Number(customItemGrams) || foodDbItem.defaultGrams || 100;
+    const itemData = {
+      name: foodDbItem.name,
+      grams: g,
+      per100g: foodDbItem.per100g,
+      confidence: 100,
+      dietType: foodDbItem.dietType,
+      needsConfirmation: false,
+      alternatives: foodDbItem.alternatives || []
+    };
+    const newItem = typeof recalculateItemNutrients === "function" ? recalculateItemNutrients(itemData, g) : itemData;
+    setItems(prev => [...prev, newItem]);
+    setShowAddModal(false);
+    setAddSearchQuery("");
+  }
+
+  function formatPieceOrGramsLabel(it) {
+    if (!it) return "";
+    const name = (it.name || "").toLowerCase();
+    const g = Number(it.grams) || 100;
+    if (name.includes("paneer") || name.includes("tikka") || name.includes("tofu")) {
+      const pieces = Math.max(1, Math.round(g / 50));
+      return pieces + " pieces";
+    }
+    if (name.includes("broccoli") || name.includes("cauliflower")) {
+      const florets = Math.max(1, Math.round(g / 35));
+      return florets + " florets";
+    }
+    if (name.includes("carrot") || name.includes("cucumber")) {
+      const slices = Math.max(1, Math.round(g / 15));
+      return slices + " slices";
+    }
+    if (name.includes("egg")) {
+      const count = Math.max(1, Math.round(g / 50));
+      return count + " egg" + (count > 1 ? "s" : "");
+    }
+    if (name.includes("roti") || name.includes("chapati")) {
+      const count = Math.max(1, Math.round(g / 40));
+      return count + " roti" + (count > 1 ? "s" : "");
+    }
+    return g + "g";
+  }
+
+  const calPct = Math.min(100, Math.round((totals.calories / 2000) * 100));
+  const carbsPct = Math.min(100, Math.round((totals.carbs / 275) * 100));
+  const proteinPct = Math.min(100, Math.round((totals.protein / 140) * 100));
+  const fatPct = Math.min(100, Math.round((totals.fat / 65) * 100));
+
+  const mealSummaryTitle = items.map(it => it.name + " (" + formatPieceOrGramsLabel(it) + ")").join(", ");
+  const timeFormatted = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+  const filteredFoods = typeof searchVerifiedFoods === "function" ? searchVerifiedFoods(addSearchQuery) : [];
+
+  return React.createElement("div", {
+    style: {
+      position: "fixed",
+      inset: 0,
+      zIndex: 10000,
+      background: "rgba(0, 0, 0, 0.72)",
+      backdropFilter: "blur(20px)",
+      WebkitBackdropFilter: "blur(20px)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 16
+    }
+  },
+    React.createElement("div", {
+      className: "glass-modal",
+      style: {
+        width: "100%",
+        maxWidth: 440,
+        maxHeight: "92vh",
+        overflowY: "auto",
+        background: "var(--bg-app, #EDF5EE)",
+        border: "1.5px solid var(--border-divider, rgba(35, 117, 71, 0.25))",
+        borderRadius: 28,
+        padding: "22px 18px",
+        boxShadow: "0 24px 60px rgba(0, 0, 0, 0.35)",
+        color: "var(--text-primary)"
+      }
+    },
+      // 1. Header: AI-Powered Photo Analysis
+      React.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 14
+        }
+      },
+        React.createElement("div", { style: { textAlign: "left" } },
+          React.createElement("h2", {
+            style: {
+              margin: 0,
+              fontSize: 20,
+              fontWeight: 900,
+              color: "var(--text-primary, #0F172A)",
+              letterSpacing: -0.4
+            }
+          }, "AI-Powered Photo Analysis"),
+          React.createElement("div", {
+            style: { fontSize: 11.5, color: "var(--text-secondary, #64748B)", marginTop: 2, fontWeight: 600 }
+          }, "Visual Plate Recognition & Macro Architecture")
+        ),
+        React.createElement("button", {
+          onClick: onClose,
+          style: {
+            background: "var(--surface-primary)",
+            border: "1px solid var(--border-divider)",
+            color: "var(--text-secondary)",
+            width: 32,
+            height: 32,
+            borderRadius: "50%",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          },
+          "aria-label": "Close modal"
+        }, "✕")
+      ),
+
+      // 2. Scanning / Loading State
+      isScanning && React.createElement("div", {
+        style: {
+          position: "relative",
+          width: "100%",
+          height: 180,
+          borderRadius: 20,
+          overflow: "hidden",
+          marginBottom: 14,
+          background: "var(--surface-primary)",
+          border: "1.5px solid #237547",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 12
+        }
+      },
+        photoPreview && React.createElement("img", {
+          src: photoPreview,
+          alt: "Analyzing food",
+          style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.25 }
+        }),
+        React.createElement("div", {
+          style: {
+            width: 44,
+            height: 44,
+            border: "3.5px solid #237547",
+            borderTopColor: "transparent",
+            borderRadius: "50%",
+            animation: "spin 0.8s linear infinite"
+          }
+        }),
+        React.createElement("div", {
+          style: { fontSize: 14, fontWeight: 900, color: "#237547", letterSpacing: -0.2 }
+        }, "Scanning plate components & certified macros...")
+      ),
+
+      // 3. Scan Error State
+      scanError && React.createElement("div", {
+        style: {
+          background: "rgba(209, 67, 67,0.08)",
+          border: "1.5px solid rgba(209, 67, 67,0.25)",
+          borderRadius: 16,
+          padding: "14px 16px",
+          marginBottom: 14
+        }
+      },
+        React.createElement("div", { style: { fontSize: 13, fontWeight: 800, color: "#D14343", marginBottom: 4 } }, "Vision Analysis Notice"),
+        React.createElement("div", { style: { fontSize: 12, color: "var(--text-secondary)", marginBottom: 12, lineHeight: 1.4 } }, scanError),
+        React.createElement("div", { style: { display: "flex", gap: 8, flexWrap: "wrap" } },
+          onReanalyze && React.createElement("button", {
+            onClick: onReanalyze,
+            style: { background: "var(--surface-primary)", border: "1px solid var(--border-divider)", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 800, cursor: "pointer" }
+          }, "🔄 Retry Analysis"),
+          onRetry && React.createElement("button", {
+            onClick: onRetry,
+            style: { background: "var(--surface-primary)", border: "1px solid var(--border-divider)", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 800, cursor: "pointer" }
+          }, "📷 Pick Other Photo"),
+          React.createElement("button", {
+            onClick: () => setShowAddModal(true),
+            style: { background: "var(--surface-primary)", border: "1px solid var(--border-divider)", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 800, cursor: "pointer" }
+          }, "🔍 Search Food DB")
+        )
+      ),
+
+      // 4. FINAL CARD (MATCHING USER SCREENSHOT EXACTLY)
+      !isScanning && items.length > 0 && React.createElement("div", {
+        style: {
+          background: "var(--surface-primary, #FFFFFF)",
+          border: "1.5px solid #237547",
+          borderRadius: 22,
+          padding: "16px 14px 12px",
+          boxShadow: "0 4px 20px rgba(35, 117, 71, 0.08)",
+          marginBottom: 14
+        }
+      },
+        // Card Top Row: Thumbnail + Summarized Title + Edit Icon
+        React.createElement("div", {
+          style: {
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            marginBottom: 14
+          }
+        },
+          photoPreview ? React.createElement("img", {
+            src: photoPreview,
+            alt: "Meal Thumbnail",
+            style: { width: 50, height: 50, borderRadius: 12, objectFit: "cover", flexShrink: 0, border: "1px solid var(--border-divider)" }
+          }) : React.createElement("div", {
+            style: { width: 50, height: 50, borderRadius: 12, background: "rgba(35, 117, 71, 0.12)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, flexShrink: 0 }
+          }, "🥗"),
+          React.createElement("div", { style: { flex: 1, minWidth: 0 } },
+            React.createElement("div", {
+              style: {
+                fontSize: 13.5,
+                fontWeight: 900,
+                color: "var(--text-primary)",
+                lineHeight: 1.35,
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden"
+              }
+            }, mealSummaryTitle || "AI Analyzed Plate")
+          ),
+          React.createElement("button", {
+            type: "button",
+            onClick: () => setShowAddModal(true),
+            title: "Add or edit components",
+            style: {
+              background: "var(--surface-elevated, #F1F5F9)",
+              border: "1px solid var(--border-divider)",
+              borderRadius: 8,
+              width: 32,
+              height: 32,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              fontSize: 14,
+              flexShrink: 0
+            }
+          }, "✏️")
+        ),
+
+        // Itemized Food Items List
+        React.createElement("div", {
+          style: { display: "flex", flexDirection: "column", gap: 12, marginBottom: 12 }
+        },
+          items.map((it, idx) => {
+            const isEditing = editingIdx === idx;
+            return React.createElement("div", {
+              key: idx,
+              style: { display: "flex", flexDirection: "column", gap: 4 }
+            },
+              // Item Name Row
+              React.createElement("div", {
+                style: { display: "flex", justifyContent: "space-between", alignItems: "center" }
+              },
+                isEditing ? React.createElement("div", { style: { display: "flex", gap: 4, flex: 1 } },
+                  React.createElement("input", {
+                    type: "text",
+                    value: editingName,
+                    onChange: e => setEditingName(e.target.value),
+                    onKeyDown: e => e.key === "Enter" && saveEditedName(idx),
+                    autoFocus: true,
+                    style: { flex: 1, background: "var(--surface-primary)", border: "1px solid var(--border-divider)", borderRadius: 6, padding: "3px 6px", fontSize: 13, fontWeight: 700, color: "var(--text-primary)" }
+                  }),
+                  React.createElement("button", {
+                    onClick: () => saveEditedName(idx),
+                    style: { background: "#237547", color: "#FFFFFF", border: "none", borderRadius: 6, padding: "3px 8px", fontSize: 11, fontWeight: 800, cursor: "pointer" }
+                  }, "Save")
+                ) : React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6 } },
+                  React.createElement("span", {
+                    style: { fontSize: 13.5, fontWeight: 800, color: "var(--text-primary)" }
+                  }, it.name + " (" + formatPieceOrGramsLabel(it) + ")"),
+                  React.createElement("button", {
+                    onClick: () => startEditingName(idx),
+                    style: { background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", padding: 0, fontSize: 11 }
+                  }, "✏️")
+                ),
+                // Portion Adjuster (- / + / Remove)
+                React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 4 } },
+                  React.createElement("button", {
+                    type: "button",
+                    onClick: () => adjustGrams(idx, -25),
+                    style: { width: 22, height: 22, borderRadius: 6, background: "var(--surface-elevated, #F1F5F9)", border: "1px solid var(--border-divider)", color: "var(--text-primary)", fontSize: 12, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }
+                  }, "−"),
+                  React.createElement("button", {
+                    type: "button",
+                    onClick: () => adjustGrams(idx, 25),
+                    style: { width: 22, height: 22, borderRadius: 6, background: "var(--surface-elevated, #F1F5F9)", border: "1px solid var(--border-divider)", color: "var(--text-primary)", fontSize: 12, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }
+                  }, "+"),
+                  React.createElement("button", {
+                    type: "button",
+                    onClick: () => removeItem(idx),
+                    style: { width: 22, height: 22, borderRadius: 6, background: "rgba(209, 67, 67, 0.1)", border: "1px solid rgba(209, 67, 67, 0.2)", color: "#D14343", fontSize: 11, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: 2 }
+                  }, "✕")
+                )
+              ),
+
+              // 4 Soft Pill Badges: Calories, Carbs, Protein, Fat
+              React.createElement("div", {
+                style: { display: "flex", gap: 6, flexWrap: "wrap", marginTop: 2 }
+              },
+                React.createElement("div", {
+                  style: { background: "var(--surface-elevated, #F1F5F9)", border: "1px solid var(--border-divider, #E2E8F0)", borderRadius: 8, padding: "3px 8px", fontSize: 11, fontWeight: 700, color: "var(--text-secondary, #475569)" }
+                }, "Calories: " + it.calories),
+                React.createElement("div", {
+                  style: { background: "var(--surface-elevated, #F1F5F9)", border: "1px solid var(--border-divider, #E2E8F0)", borderRadius: 8, padding: "3px 8px", fontSize: 11, fontWeight: 700, color: "var(--text-secondary, #475569)" }
+                }, "Carbs: " + it.carbs + "g"),
+                React.createElement("div", {
+                  style: { background: "var(--surface-elevated, #F1F5F9)", border: "1px solid var(--border-divider, #E2E8F0)", borderRadius: 8, padding: "3px 8px", fontSize: 11, fontWeight: 700, color: "var(--text-secondary, #475569)" }
+                }, "Protein: " + it.protein + "g"),
+                React.createElement("div", {
+                  style: { background: "var(--surface-elevated, #F1F5F9)", border: "1px solid var(--border-divider, #E2E8F0)", borderRadius: 8, padding: "3px 8px", fontSize: 11, fontWeight: 700, color: "var(--text-secondary, #475569)" }
+                }, "Fat: " + it.fat + "g")
+              )
+            );
+          })
+        ),
+
+        // Divider
+        React.createElement("div", {
+          style: { height: 1, background: "var(--border-divider, #E2E8F0)", margin: "14px 0 10px" }
+        }),
+
+        // 4-Column Macro Architecture
+        React.createElement("div", {
+          style: {
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 8,
+            textAlign: "center",
+            padding: "4px 0"
+          }
+        },
+          // Column 1: Calories
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 10, fontWeight: 800, color: "var(--text-secondary)", textTransform: "uppercase" } }, "CALORIES"),
+            React.createElement("div", { style: { fontSize: 18, fontWeight: 900, color: "#16A34A", margin: "2px 0" } }, totals.calories),
+            React.createElement("div", { style: { height: 3.5, background: "var(--border-divider, #E2E8F0)", borderRadius: 999, overflow: "hidden", margin: "3px auto 4px", maxWidth: 60 } },
+              React.createElement("div", { style: { height: "100%", width: calPct + "%", background: "#16A34A", borderRadius: 999 } })
+            ),
+            React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: "var(--text-secondary)" } }, calPct + "%")
+          ),
+          // Column 2: Carbs
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 10, fontWeight: 800, color: "var(--text-secondary)", textTransform: "uppercase" } }, "CARBS"),
+            React.createElement("div", { style: { fontSize: 18, fontWeight: 900, color: "#2563EB", margin: "2px 0" } }, Math.round(totals.carbs) + "g"),
+            React.createElement("div", { style: { height: 3.5, background: "var(--border-divider, #E2E8F0)", borderRadius: 999, overflow: "hidden", margin: "3px auto 4px", maxWidth: 60 } },
+              React.createElement("div", { style: { height: "100%", width: carbsPct + "%", background: "#2563EB", borderRadius: 999 } })
+            ),
+            React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: "var(--text-secondary)" } }, carbsPct + "%")
+          ),
+          // Column 3: Protein
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 10, fontWeight: 800, color: "var(--text-secondary)", textTransform: "uppercase" } }, "PROTEIN"),
+            React.createElement("div", { style: { fontSize: 18, fontWeight: 900, color: "#991B1B", margin: "2px 0" } }, Math.round(totals.protein) + "g"),
+            React.createElement("div", { style: { height: 3.5, background: "var(--border-divider, #E2E8F0)", borderRadius: 999, overflow: "hidden", margin: "3px auto 4px", maxWidth: 60 } },
+              React.createElement("div", { style: { height: "100%", width: proteinPct + "%", background: "#991B1B", borderRadius: 999 } })
+            ),
+            React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: "var(--text-secondary)" } }, proteinPct + "%")
+          ),
+          // Column 4: Fat
+          React.createElement("div", null,
+            React.createElement("div", { style: { fontSize: 10, fontWeight: 800, color: "var(--text-secondary)", textTransform: "uppercase" } }, "FAT"),
+            React.createElement("div", { style: { fontSize: 18, fontWeight: 900, color: "#D97706", margin: "2px 0" } }, Math.round(totals.fat) + "g"),
+            React.createElement("div", { style: { height: 3.5, background: "var(--border-divider, #E2E8F0)", borderRadius: 999, overflow: "hidden", margin: "3px auto 4px", maxWidth: 60 } },
+              React.createElement("div", { style: { height: "100%", width: fatPct + "%", background: "#D97706", borderRadius: 999 } })
+            ),
+            React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: "var(--text-secondary)" } }, fatPct + "%")
+          )
+        ),
+
+        // Card Footer: Timestamp + Bookmark + Menu
+        React.createElement("div", {
+          style: {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 10,
+            paddingTop: 8,
+            borderTop: "1px solid var(--border-divider, rgba(0,0,0,0.04))"
+          }
+        },
+          React.createElement("span", {
+            style: { fontSize: 11.5, color: "var(--text-secondary)", fontWeight: 700 }
+          }, timeFormatted),
+          React.createElement("div", { style: { display: "flex", gap: 12, alignItems: "center" } },
+            React.createElement("button", {
+              type: "button",
+              style: { background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", padding: 0, fontSize: 15 }
+            }, "🔖"),
+            React.createElement("button", {
+              type: "button",
+              style: { background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", padding: 0, fontSize: 16 }
+            }, "⋮")
+          )
+        )
+      ),
+
+      // 5. Track Micronutrients & Vitamins Button
+      !isScanning && items.length > 0 && React.createElement("button", {
+        type: "button",
+        onClick: () => setShowMicroModal(true),
+        style: {
+          width: "100%",
+          padding: "10px 0",
+          borderRadius: 14,
+          border: "1.5px solid rgba(35, 117, 71, 0.3)",
+          background: "rgba(35, 117, 71, 0.12)",
+          color: "#237547",
+          fontSize: 12.5,
+          fontWeight: 800,
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 6,
+          marginBottom: 12,
+          boxShadow: "0 2px 8px rgba(35, 117, 71, 0.08)"
+        }
+      }, "🔬 Track Micronutrients, Vitamins & Minerals →"),
+
+      // 6. Target Meal Slot Selector
+      !isScanning && items.length > 0 && React.createElement("div", { style: { marginBottom: 12 } },
+        React.createElement("div", {
+          style: { fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", textTransform: "uppercase", marginBottom: 6 }
+        }, "Assign to Meal Window"),
+        React.createElement("div", {
+          style: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }
+        },
+          ["breakfast", "lunch", "dinner", "snack"].map(s => {
+            const active = selectedSlot === s;
+            return React.createElement("button", {
+              key: s,
+              onClick: () => setSelectedSlot(s),
+              style: {
+                background: active ? "#237547" : "var(--surface-primary)",
+                border: active ? "1.5px solid #237547" : "1px solid var(--border-divider)",
+                color: active ? "#FFFFFF" : "var(--text-secondary)",
+                borderRadius: 10,
+                padding: "8px 0",
+                fontSize: 12,
+                fontWeight: 800,
+                textTransform: "capitalize",
+                cursor: "pointer",
+                transition: "all 0.15s ease"
+              }
+            }, s);
+          })
+        )
+      ),
+
+      // 7. Save / Log Action Button
+      !isScanning && items.length > 0 && React.createElement("button", {
+        onClick: () => onSaveMeal && items.length > 0 && onSaveMeal(selectedSlot, items),
+        disabled: items.length === 0,
+        style: {
+          width: "100%",
+          background: "linear-gradient(135deg, #237547 0%, #1B5E36 100%)",
+          border: "none",
+          borderRadius: 14,
+          padding: "13px 0",
+          color: "#FFFFFF",
+          fontSize: 14,
+          fontWeight: 900,
+          cursor: "pointer",
+          boxShadow: "0 4px 16px rgba(35, 117, 71, 0.35)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 8,
+          marginBottom: 10
+        }
+      }, "⚡ Log Meal to " + selectedSlot.toUpperCase() + " & Save"),
+
+      // 8. Bottom Search / Query Pill (From Screenshot)
+      React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          background: "var(--surface-primary, #FFFFFF)",
+          border: "1px solid var(--border-divider, #E2E8F0)",
+          borderRadius: 999,
+          padding: "8px 14px",
+          marginTop: 6,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
+        }
+      },
+        React.createElement("span", {
+          style: { flex: 1, fontSize: 13, color: "var(--text-secondary)", fontWeight: 500 }
+        }, "What did you eat or exercise?"),
+        React.createElement("button", {
+          type: "button",
+          onClick: () => setShowAddModal(true),
+          title: "Search food database",
+          style: { background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", fontSize: 14, padding: "2px" }
+        }, "🔖"),
+        onRetry && React.createElement("button", {
+          type: "button",
+          onClick: onRetry,
+          title: "Select photo from gallery",
+          style: { background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", fontSize: 15, padding: "2px" }
+        }, "🖼️"),
+        onRetry && React.createElement("button", {
+          type: "button",
+          onClick: onRetry,
+          title: "Take photo with camera",
+          style: { background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", fontSize: 15, padding: "2px" }
+        }, "📷")
+      ),
+
+      // 9. Render MicronutrientsModal for this plate
+      React.createElement(MicronutrientsModal, {
+        isOpen: showMicroModal,
+        onClose: () => setShowMicroModal(false),
+        item: items,
+        title: "AI Analyzed Plate"
+      }),
+
+      // 10. Food Database Search Modal
+      showAddModal && React.createElement("div", {
+        style: {
+          position: "fixed",
+          inset: 0,
+          background: "rgba(0,0,0,0.5)",
+          zIndex: 10001,
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "center"
+        },
+        onClick: () => setShowAddModal(false)
+      },
+        React.createElement("div", {
+          style: {
+            width: "100%",
+            maxWidth: 440,
+            maxHeight: "75vh",
+            background: "var(--surface-primary)",
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+            padding: 20,
+            overflowY: "auto"
+          },
+          onClick: e => e.stopPropagation()
+        },
+          React.createElement("div", {
+            style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }
+          },
+            React.createElement("h3", { style: { margin: 0, fontSize: 16, fontWeight: 900 } }, "Add Food Item"),
+            React.createElement("button", { onClick: () => setShowAddModal(false), style: { background: "none", border: "none", fontSize: 16, cursor: "pointer" } }, "✕")
+          ),
+          React.createElement("input", {
+            type: "text",
+            placeholder: "Search verified food database...",
+            value: addSearchQuery,
+            onChange: e => setAddSearchQuery(e.target.value),
+            style: { width: "100%", padding: "10px 12px", borderRadius: 10, border: "1px solid var(--border-divider)", background: "var(--surface-primary)", color: "var(--text-primary)", fontSize: 13, marginBottom: 12, outline: "none", boxSizing: "border-box" }
+          }),
+          React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 6 } },
+            filteredFoods.slice(0, 8).map(f => React.createElement("div", {
+              key: f.name,
+              onClick: () => handleAddFood(f),
+              style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 12px", background: "var(--surface-elevated, #F8FAFC)", borderRadius: 10, cursor: "pointer" }
+            },
+              React.createElement("div", null,
+                React.createElement("div", { style: { fontSize: 13, fontWeight: 800 } }, f.name),
+                React.createElement("div", { style: { fontSize: 11, color: "var(--text-secondary)" } }, f.per100g?.calories + " kcal · P: " + f.per100g?.protein + "g · C: " + f.per100g?.carbs + "g · F: " + f.per100g?.fat + "g")
+              ),
+              React.createElement("span", { style: { color: "#237547", fontWeight: 800, fontSize: 13 } }, "+ Add")
+            ))
+          )
+        )
+      )
+    )
+  );
+}
+/* ============================================================
        4. VOICE COACH CARD & MODAL (Strictly named "Coach")
        ============================================================ */function HomeCoachCard({onOpenCoach,onOpenVoice,athleteName="Athlete",remCal=0,remP=0,coachTip="",onQuickAsk}){const[localInput,setLocalInput]=useState("");const handleSend=e=>{if(e)e.preventDefault();if(!localInput.trim()){onOpenCoach();return;}onQuickAsk(localInput.trim());setLocalInput("");};const chips=[{icon:"salad",label:"What to eat?",q:"What should I eat with my remaining macros?"},{icon:"workout",label:"Today's workout",q:"Give me form cues and tips for today's workout"},{icon:"lightning",label:"Recovery advice",q:"How can I optimize muscle recovery and soreness?"},{icon:"water",label:"Hit protein goal",q:"High-protein quick snack recommendations"}];return/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:22,padding:"16px 18px",marginBottom:14,boxShadow:"0 8px 24px rgba(0, 0, 0,0.06)",position:"relative",overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:8}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},/*#__PURE__*/React.createElement("div",{style:{width:40,height:40,borderRadius:13,background:"var(--feature-nutrition-bg)",color:"var(--feature-nutrition)",border:"1px solid var(--border-divider)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"var(--shadow-sm)",flexShrink:0}},/*#__PURE__*/React.createElement("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.4",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M4.5 5.5h15v10.5H10l-3.5 3.5v-3.5H4.5z"}))),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement("span",{style:{fontSize:14.5,fontWeight:900,color:"var(--text-primary)",letterSpacing:0.3}},"Coach"),/*#__PURE__*/React.createElement("span",{style:{display:"inline-flex",alignItems:"center",gap:4,background:"var(--semantic-success-bg)",border:"1px solid var(--semantic-success)",padding:"2px 7px",borderRadius:999,fontSize:9.5,fontWeight:800,color:"var(--semantic-success)"}},/*#__PURE__*/React.createElement("span",{style:{width:6,height:6,borderRadius:"50%",background:"var(--semantic-success)",display:"inline-block"}}),"ACTIVE")),/*#__PURE__*/React.createElement("div",{style:{fontSize:11,color:"var(--text-secondary)",marginTop:1}},"Personalized nutritionist & training architect"))),/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement("button",{type:"button",onClick:onOpenVoice,title:"Talk to Voice Coach",style:{background:"var(--surface-secondary)",border:"1px solid var(--border-divider)",borderRadius:11,padding:"6px 11px",color:"var(--semantic-success)",fontSize:11.5,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",gap:5,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("span",null,"\uD83C\uDF99\uFE0F"),/*#__PURE__*/React.createElement("span",null,"Voice Coach")),/*#__PURE__*/React.createElement("button",{type:"button",onClick:onOpenCoach,title:"Chat with Coach",style:{background:"var(--btn-primary-bg)",border:"none",borderRadius:11,padding:"6px 11px",color:"var(--btn-primary-text)",fontSize:11.5,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",gap:4,boxShadow:"var(--shadow-sm)"}},/*#__PURE__*/React.createElement("span",null,"Chat"),/*#__PURE__*/React.createElement("svg",{width:"11",height:"11",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("polyline",{points:"9 18 15 12 9 6"}))))),/*#__PURE__*/React.createElement("div",{onClick:onOpenCoach,style:{cursor:"pointer",background:"var(--surface-secondary)",border:"1px solid var(--border-divider)",borderRadius:14,padding:"10px 14px",marginBottom:11,fontSize:12.5,lineHeight:1.45,color:"var(--text-primary)",boxShadow:"var(--shadow-sm)"}},"\uD83D\uDCA1 ",/*#__PURE__*/React.createElement("strong",{style:{color:"var(--btn-primary-bg)"}},"Coach Advice:")," ",coachTip||`You have ${remCal} kcal and ${remP}g protein remaining today. Ask Coach to optimize your meals or workout!`),/*#__PURE__*/React.createElement("div",{style:{display:"flex",gap:6,overflowX:"auto",paddingBottom:4,marginBottom:11,scrollbarWidth:"none"}},chips.map((c,i)=>/*#__PURE__*/React.createElement("button",{key:i,onClick:()=>onQuickAsk(c.q),style:{whiteSpace:"nowrap",background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:20,padding:"5px 11px",fontSize:11,fontWeight:700,color:"var(--text-primary)",cursor:"pointer",transition:"all 0.15s ease"}},c.label))),/*#__PURE__*/React.createElement("form",{onSubmit:handleSend,style:{display:"flex",alignItems:"center",gap:7,background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:14,padding:"5px 7px 5px 12px",boxShadow:"0 2px 8px rgba(0, 0, 0,0.04)"}},/*#__PURE__*/React.createElement("input",{type:"text",value:localInput,onChange:e=>setLocalInput(e.target.value),placeholder:`Ask Coach anything, ${athleteName}...`,style:{flex:1,background:"transparent",border:"none",color:"var(--text-primary)",fontSize:12.5,outline:"none",fontFamily:"inherit"}}),/*#__PURE__*/React.createElement("button",{type:"button",onClick:onOpenVoice,title:"Voice Coach",style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:9,width:30,height:30,display:"flex",alignItems:"center",justifyContent:"center",color:"#21865B",cursor:"pointer",flexShrink:0}},/*#__PURE__*/React.createElement("svg",{width:"14",height:"14",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.4",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"}),/*#__PURE__*/React.createElement("path",{d:"M19 10v2a7 7 0 0 1-14 0v-2"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"19",x2:"12",y2:"23"}),/*#__PURE__*/React.createElement("line",{x1:"8",y1:"23",x2:"16",y2:"23"}))),/*#__PURE__*/React.createElement("button",{type:"submit",style:{background:"linear-gradient(135deg, #237547 0%, #1B5E36 100%)",border:"none",borderRadius:9,width:30,height:30,display:"flex",alignItems:"center",justifyContent:"center",color:"var(--text-primary)",cursor:"pointer",flexShrink:0,boxShadow:"0 2px 8px rgba(35, 117, 71,0.3)"}},/*#__PURE__*/React.createElement("svg",{width:"13",height:"13",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("line",{x1:"22",y1:"2",x2:"11",y2:"13"}),/*#__PURE__*/React.createElement("polygon",{points:"22 2 15 22 11 13 2 9 22 2"})))));}function VoiceCoachCard({onOpenVoiceCoach}){return/*#__PURE__*/React.createElement("div",{onClick:onOpenVoiceCoach,style:{cursor:"pointer",background:"var(--surface-primary)",border:"1.5px solid var(--border-divider)",borderRadius:20,padding:"16px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",boxShadow:"0 8px 24px rgba(0, 0, 0,0.06)",position:"relative",overflow:"hidden"}},/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:14}},/*#__PURE__*/React.createElement("div",{style:{width:44,height:44,borderRadius:14,background:"linear-gradient(135deg, #237547 0%, #1B5E36 100%)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 14px rgba(35, 117, 71,0.35)",flexShrink:0}},/*#__PURE__*/React.createElement("svg",{width:"22",height:"22",viewBox:"0 0 24 24",fill:"none",stroke:"#FFFFFF",strokeWidth:"2.4",strokeLinecap:"round",strokeLinejoin:"round"},/*#__PURE__*/React.createElement("path",{d:"M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"}),/*#__PURE__*/React.createElement("path",{d:"M19 10v2a7 7 0 0 1-14 0v-2"}),/*#__PURE__*/React.createElement("line",{x1:"12",y1:"19",x2:"12",y2:"23"}),/*#__PURE__*/React.createElement("line",{x1:"8",y1:"23",x2:"16",y2:"23"}))),/*#__PURE__*/React.createElement("div",null,/*#__PURE__*/React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6}},/*#__PURE__*/React.createElement("span",{style:{fontSize:14,fontWeight:900,color:"var(--text-primary)"}},"Talk to Coach"),/*#__PURE__*/React.createElement("span",{style:{width:7,height:7,borderRadius:"50%",background:"#21865B",display:"inline-block"}})),/*#__PURE__*/React.createElement("div",{style:{fontSize:11.5,color:"var(--text-secondary)",marginTop:2}},"Live voice answers on workouts, runs, macros & recovery"))),/*#__PURE__*/React.createElement("div",{style:{background:"var(--surface-primary)",border:"1px solid var(--border-divider)",borderRadius:10,padding:"7px 12px",color:"#237547",fontSize:12,fontWeight:800,whiteSpace:"nowrap",boxShadow:"0 2px 6px rgba(0, 0, 0,0.04)"}},"\uD83C\uDF99\uFE0F Speak"));}function VoiceCoachModal({isOpen,onClose,profileName,kcalRemaining,remainingP,water,goals,workoutDay,completedCount,totalExercises,lastRunDist,scoreData}){if(!isOpen)return null;const[isListening,setIsListening]=useState(false);const[transcript,setTranscript]=useState("");const[coachResponse,setCoachResponse]=useState("Hello! I'm your Coach. Tap the microphone and ask me anything about today's workout, runs, nutrition, or your fitness progress!");const[isSpeaking,setIsSpeaking]=useState(false);const recognitionRef=useRef(null);// Initialize Speech Recognition
 useEffect(()=>{const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;if(SpeechRecognition){const recognition=new SpeechRecognition();recognition.continuous=false;recognition.interimResults=true;recognition.lang="en-US";recognition.onstart=()=>{setIsListening(true);};recognition.onresult=e=>{let current="";for(let i=e.resultIndex;i<e.results.length;i++){current+=e.results[i][0].transcript;}setTranscript(current);if(e.results[e.results.length-1].isFinal){handleUserQuery(current);}};recognition.onerror=()=>{setIsListening(false);};recognition.onend=()=>{setIsListening(false);};recognitionRef.current=recognition;}return()=>{if(recognitionRef.current)recognitionRef.current.abort();if(window.speechSynthesis)window.speechSynthesis.cancel();};},[]);function handleUserQuery(query){const q=(query||"").toLowerCase();let reply="";if(q.includes("workout")||q.includes("lift")||q.includes("exercise")){if(workoutDay?.rest){reply="Today is a scheduled rest day! Focus on active recovery, light mobility, and adequate hydration.";}else{reply=`Today's session is ${workoutDay?.label||"your workout"}. You have completed ${completedCount} out of ${totalExercises} exercises so far. Stay explosive and log every set!`;}}else if(q.includes("nutrition")||q.includes("protein")||q.includes("eat")||q.includes("food")||q.includes("calorie")){if(remainingP>25){reply=`You still need ${remainingP} grams of protein today to hit your muscle recovery target. Try Greek yogurt, whey isolate, chicken breast, or tofu! You also have ${kcalRemaining} calories remaining.`;}else{reply=`Your protein intake is in a great spot today! You have ${kcalRemaining} calories remaining. Focus on clean carbs and micronutrients for sustained energy.`;}}else if(q.includes("run")||q.includes("running")||q.includes("pace")||q.includes("gps")){reply=`Your latest recorded run was ${lastRunDist} km. Consistent aerobic volume will boost your VO2 max and cardio score. Remember to warm up your calves and maintain a steady cadence!`;}else if(q.includes("water")||q.includes("hydrate")||q.includes("drink")){reply=`You have logged ${water.toFixed(1)} liters of water today against your ${goals.water||2.6} liter target. Drinking another 500ml right now will keep your cellular hydration optimal!`;}else if(q.includes("score")||q.includes("fitness score")||q.includes("level")){reply=`Your current Fitness Score is ${scoreData?.total||78} out of 100. ${scoreData?.tip||"Keep up your training consistency to unlock higher tiers!"}`;}else{reply=`Got it, ${profileName||"athlete"}! You have ${completedCount}/${totalExercises} exercises logged today, ${kcalRemaining} kcal left, and ${water.toFixed(1)}L water. Keep up the high discipline!`;}setCoachResponse(reply);speakResponse(reply);}function speakResponse(text){if(typeof window!=="undefined"&&window.speechSynthesis){window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.rate=1.0;utterance.pitch=1.0;utterance.onstart=()=>setIsSpeaking(true);utterance.onend=()=>setIsSpeaking(false);utterance.onerror=()=>setIsSpeaking(false);window.speechSynthesis.speak(utterance);}}function startListening(){if(window.speechSynthesis)window.speechSynthesis.cancel();setIsSpeaking(false);setTranscript("");if(recognitionRef.current){try{recognitionRef.current.start();}catch(e){// Recognition might already be running

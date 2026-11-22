@@ -11452,7 +11452,8 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
     return new Date();
   }, [activeDate]);
 
-  const [isExpanded, setIsExpanded] = React.useState(true);
+  // Default isExpanded to FALSE so when opening the app, only compact dates show!
+  const [isExpanded, setIsExpanded] = React.useState(false);
   const [viewYear, setViewYear] = React.useState(() => parsedActive.getFullYear());
   const [viewMonth, setViewMonth] = React.useState(() => parsedActive.getMonth());
   const [isCalDrawerOpen, setIsCalDrawerOpen] = React.useState(false);
@@ -11542,11 +11543,12 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
       fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', Roboto, sans-serif"
     }
   },
-    /*#__PURE__*/React.createElement("div", {
+    isExpanded && /*#__PURE__*/React.createElement("div", {
       style: {
         textAlign: "center",
         marginBottom: 12,
-        marginTop: 4
+        marginTop: 4,
+        animation: "fadeIn 0.2s ease"
       }
     },
       /*#__PURE__*/React.createElement("div", {
@@ -11597,19 +11599,20 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
       /*#__PURE__*/React.createElement("button", {
         type: "button",
         onClick: () => setIsExpanded(!isExpanded),
-        title: isExpanded ? "Collapse Calendar" : "Expand Calendar",
+        title: isExpanded ? "Collapse to week" : "Click to show all dates",
         style: {
-          background: "none",
-          border: "none",
+          background: isExpanded ? "rgba(35, 117, 71, 0.08)" : "transparent",
+          border: isExpanded ? "1px solid rgba(35, 117, 71, 0.2)" : "1px solid transparent",
           color: "#237547",
           fontSize: 15,
           fontWeight: 800,
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
-          gap: 4,
-          padding: "6px 12px",
-          borderRadius: 20
+          gap: 6,
+          padding: "6px 14px",
+          borderRadius: 20,
+          transition: "all 0.15s ease"
         }
       },
         /*#__PURE__*/React.createElement("span", null, formattedHeaderDate),
@@ -11617,7 +11620,8 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
       ),
       /*#__PURE__*/React.createElement("button", {
         type: "button",
-        title: "AI Quick Action",
+        onClick: () => setIsExpanded(!isExpanded),
+        title: isExpanded ? "Collapse" : "Show all dates",
         style: {
           background: "none",
           border: "none",
@@ -11631,13 +11635,13 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
           height: 36,
           padding: 0
         }
-      }, "⚡")
+      }, isExpanded ? "⚡" : "📅")
     ),
     /*#__PURE__*/React.createElement("div", {
       style: {
         background: "#FFFFFF",
         borderRadius: 24,
-        padding: "18px 16px",
+        padding: "16px",
         border: "1px solid rgba(0, 0, 0, 0.06)",
         boxShadow: "0 4px 20px rgba(0, 0, 0, 0.04)",
         marginBottom: 10
@@ -11751,6 +11755,7 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
           })
         )
       ),
+      /* 7-Day Weekly Strip (Always visible) */
       /*#__PURE__*/React.createElement("div", {
         style: {
           display: "grid",
@@ -11796,8 +11801,30 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
             }
           }, item.dayNum)
         ))
+      ),
+      /* Clean toggle button at bottom of card */
+      /*#__PURE__*/React.createElement("div", {
+        onClick: () => setIsExpanded(!isExpanded),
+        style: {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 6,
+          marginTop: 10,
+          paddingTop: 8,
+          borderTop: "1px dashed rgba(0, 0, 0, 0.08)",
+          cursor: "pointer",
+          fontSize: 12,
+          fontWeight: 800,
+          color: "#237547",
+          transition: "all 0.15s ease"
+        }
+      },
+        /*#__PURE__*/React.createElement("span", null, isExpanded ? "⌃ Collapse calendar" : "📅 Show all dates (Full Month)"),
+        /*#__PURE__*/React.createElement("span", { style: { fontSize: 13, fontWeight: 900 } }, isExpanded ? "⌃" : "⌄")
       )
     ),
+    /* Calories Pill */
     /*#__PURE__*/React.createElement("div", {
       onClick: () => setIsCalDrawerOpen(!isCalDrawerOpen),
       style: {
@@ -11902,6 +11929,7 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
         )
       )
     ),
+    /* Macros Pill */
     /*#__PURE__*/React.createElement("div", {
       onClick: () => setIsMacroDrawerOpen(!isMacroDrawerOpen),
       style: {

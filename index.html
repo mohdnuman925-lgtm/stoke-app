@@ -11456,8 +11456,6 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const [viewYear, setViewYear] = React.useState(() => parsedActive.getFullYear());
   const [viewMonth, setViewMonth] = React.useState(() => parsedActive.getMonth());
-  const [isCalDrawerOpen, setIsCalDrawerOpen] = React.useState(false);
-  const [isMacroDrawerOpen, setIsMacroDrawerOpen] = React.useState(false);
 
   React.useEffect(() => {
     setViewYear(parsedActive.getFullYear());
@@ -11479,15 +11477,6 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
     }
   }, [parsedActive, activeDate]);
 
-  const activityDays = React.useMemo(() => {
-    const set = new Set([4, 9, 10, 15, 21, 28]);
-    try {
-      const todayNum = new Date().getDate();
-      set.add(todayNum);
-    } catch(e) {}
-    return set;
-  }, []);
-
   const calendarGrid = React.useMemo(() => {
     const firstDay = new Date(viewYear, viewMonth, 1);
     const startCol = (firstDay.getDay() + 6) % 7;
@@ -11504,12 +11493,11 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
         dateStr: dateStr,
         isSelected: dateStr === activeDate,
         isToday: dateStr === todayStr,
-        hasDot: activityDays.has(d),
         key: dateStr
       });
     }
     return cells;
-  }, [viewYear, viewMonth, activeDate, todayStr, activityDays]);
+  }, [viewYear, viewMonth, activeDate, todayStr]);
 
   const weekStrip = React.useMemo(() => {
     const d = new Date(parsedActive.getTime());
@@ -11530,12 +11518,6 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
     }
     return strip;
   }, [parsedActive, activeDate, todayStr]);
-
-  const effectiveCalories = Math.round(totals && totals.calories ? totals.calories : 0);
-  const effectiveCalGoal = goals && goals.calories ? goals.calories : 2799;
-  const effectiveCarbs = Math.round(totals && totals.carbs ? totals.carbs : 0);
-  const effectiveProtein = Math.round(totals && totals.protein ? totals.protein : 0);
-  const effectiveFat = Math.round(totals && totals.fat ? totals.fat : 0);
 
   return /*#__PURE__*/React.createElement("div", {
     style: {
@@ -11569,33 +11551,16 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
         }
       }, "Any Date")
     ),
+    /* Clean Centered Date Bar (three lines and extra icon removed) */
     /*#__PURE__*/React.createElement("div", {
       style: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         marginBottom: 10,
         padding: "0 6px"
       }
     },
-      /*#__PURE__*/React.createElement("button", {
-        type: "button",
-        title: "Navigation Menu",
-        style: {
-          background: "none",
-          border: "none",
-          color: "#237547",
-          fontSize: 22,
-          fontWeight: 900,
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 36,
-          height: 36,
-          padding: 0
-        }
-      }, "≡"),
       /*#__PURE__*/React.createElement("button", {
         type: "button",
         onClick: () => setIsExpanded(!isExpanded),
@@ -11610,33 +11575,16 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
           display: "flex",
           alignItems: "center",
           gap: 6,
-          padding: "6px 14px",
+          padding: "6px 16px",
           borderRadius: 20,
           transition: "all 0.15s ease"
         }
       },
         /*#__PURE__*/React.createElement("span", null, formattedHeaderDate),
         /*#__PURE__*/React.createElement("span", { style: { fontSize: 13, fontWeight: 900 } }, isExpanded ? "⌃" : "⌄")
-      ),
-      /*#__PURE__*/React.createElement("button", {
-        type: "button",
-        onClick: () => setIsExpanded(!isExpanded),
-        title: isExpanded ? "Collapse" : "Show all dates",
-        style: {
-          background: "none",
-          border: "none",
-          color: "#237547",
-          fontSize: 18,
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 36,
-          height: 36,
-          padding: 0
-        }
-      }, isExpanded ? "⚡" : "📅")
+      )
     ),
+    /* Main Calendar Card */
     /*#__PURE__*/React.createElement("div", {
       style: {
         background: "#FFFFFF",
@@ -11708,17 +11656,7 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
                   boxShadow: c.isSelected ? "0 3px 10px rgba(35, 117, 71, 0.35)" : "none",
                   transition: "all 0.15s ease"
                 }
-              }, c.dayNum),
-              c.hasDot && !c.isSelected && /*#__PURE__*/React.createElement("span", {
-                style: {
-                  width: 4,
-                  height: 4,
-                  borderRadius: "50%",
-                  background: "#237547",
-                  display: "block",
-                  marginTop: 2
-                }
-              })
+              }, c.dayNum)
             );
           })
         ),
@@ -11822,191 +11760,6 @@ function DaySelector({selectedDate, onSelectDate, totals, goals, onNavigate}) {
       },
         /*#__PURE__*/React.createElement("span", null, isExpanded ? "⌃ Collapse calendar" : "📅 Show all dates (Full Month)"),
         /*#__PURE__*/React.createElement("span", { style: { fontSize: 13, fontWeight: 900 } }, isExpanded ? "⌃" : "⌄")
-      )
-    ),
-    /* Calories Pill */
-    /*#__PURE__*/React.createElement("div", {
-      onClick: () => setIsCalDrawerOpen(!isCalDrawerOpen),
-      style: {
-        background: "#FFFFFF",
-        borderRadius: 16,
-        border: "1px solid rgba(0, 0, 0, 0.06)",
-        padding: "13px 16px",
-        marginBottom: 8,
-        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)",
-        cursor: "pointer"
-      }
-    },
-      /*#__PURE__*/React.createElement("div", {
-        style: {
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }
-      },
-        /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            color: "#237547",
-            fontWeight: 800,
-            fontSize: 13.5
-          }
-        },
-          /*#__PURE__*/React.createElement("span", null, "🔥"),
-          /*#__PURE__*/React.createElement("span", null, "Calories")
-        ),
-        /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: 5,
-            color: "#237547",
-            fontWeight: 700,
-            fontSize: 13
-          }
-        },
-          /*#__PURE__*/React.createElement("span", null, effectiveCalories + " / " + effectiveCalGoal.toLocaleString() + " kcal"),
-          /*#__PURE__*/React.createElement("span", { style: { fontSize: 10 } }, isCalDrawerOpen ? "⌃" : "⌄")
-        )
-      ),
-      isCalDrawerOpen && /*#__PURE__*/React.createElement("div", {
-        style: {
-          marginTop: 12,
-          paddingTop: 10,
-          borderTop: "1px solid #F3F4F6"
-        }
-      },
-        /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: "flex",
-            justifyContent: "space-between",
-            fontSize: 11,
-            color: "#6B7280",
-            marginBottom: 6
-          }
-        },
-          /*#__PURE__*/React.createElement("span", null, "Daily Calorie Target"),
-          /*#__PURE__*/React.createElement("span", {
-            style: { fontWeight: 700, color: "#237547" }
-          }, Math.round((effectiveCalories / effectiveCalGoal) * 100) + "%")
-        ),
-        /*#__PURE__*/React.createElement("div", {
-          style: {
-            height: 6,
-            background: "#E5E7EB",
-            borderRadius: 3,
-            overflow: "hidden"
-          }
-        },
-          /*#__PURE__*/React.createElement("div", {
-            style: {
-              height: "100%",
-              width: Math.min(100, Math.round((effectiveCalories / effectiveCalGoal) * 100)) + "%",
-              background: "#237547",
-              borderRadius: 3
-            }
-          })
-        ),
-        /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: 8,
-            fontSize: 11,
-            color: "#6B7280"
-          }
-        },
-          /*#__PURE__*/React.createElement("span", null, "Remaining: ", /*#__PURE__*/React.createElement("strong", { style: { color: "#111827" } }, Math.max(0, effectiveCalGoal - effectiveCalories) + " kcal")),
-          onNavigate && /*#__PURE__*/React.createElement("span", {
-            onClick: e => {
-              e.stopPropagation();
-              onNavigate("nutrition");
-            },
-            style: { color: "#237547", fontWeight: 700, cursor: "pointer" }
-          }, "Fuel Diary →")
-        )
-      )
-    ),
-    /* Macros Pill */
-    /*#__PURE__*/React.createElement("div", {
-      onClick: () => setIsMacroDrawerOpen(!isMacroDrawerOpen),
-      style: {
-        background: "#FFFFFF",
-        borderRadius: 16,
-        border: "1px solid rgba(0, 0, 0, 0.06)",
-        padding: "13px 16px",
-        marginBottom: 12,
-        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)",
-        cursor: "pointer"
-      }
-    },
-      /*#__PURE__*/React.createElement("div", {
-        style: {
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }
-      },
-        /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            color: "#237547",
-            fontWeight: 800,
-            fontSize: 13.5
-          }
-        },
-          /*#__PURE__*/React.createElement("span", null, "📊"),
-          /*#__PURE__*/React.createElement("span", null, "Macros")
-        ),
-        /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            fontSize: 13
-          }
-        },
-          /*#__PURE__*/React.createElement("span", { style: { color: "#2563EB", fontWeight: 800 } }, "C " + effectiveCarbs + "g"),
-          /*#__PURE__*/React.createElement("span", { style: { color: "#DC2626", fontWeight: 800 } }, "P " + effectiveProtein + "g"),
-          /*#__PURE__*/React.createElement("span", { style: { color: "#D97706", fontWeight: 800 } }, "F " + effectiveFat + "g"),
-          /*#__PURE__*/React.createElement("span", { style: { color: "#6B7280", fontSize: 10 } }, isMacroDrawerOpen ? "⌃" : "⌄")
-        )
-      ),
-      isMacroDrawerOpen && /*#__PURE__*/React.createElement("div", {
-        style: {
-          marginTop: 12,
-          paddingTop: 10,
-          borderTop: "1px solid #F3F4F6",
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 10
-        }
-      },
-        /*#__PURE__*/React.createElement("div", {
-          style: { background: "#EFF6FF", borderRadius: 10, padding: 8, textAlign: "center" }
-        },
-          /*#__PURE__*/React.createElement("div", { style: { fontSize: 10, color: "#2563EB", fontWeight: 700 } }, "CARBS"),
-          /*#__PURE__*/React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "#1E40AF" } }, effectiveCarbs + "g"),
-          /*#__PURE__*/React.createElement("div", { style: { fontSize: 9.5, color: "#6B7280" } }, "/ " + ((goals && goals.carbs) || 280) + "g")
-        ),
-        /*#__PURE__*/React.createElement("div", {
-          style: { background: "#FEF2F2", borderRadius: 10, padding: 8, textAlign: "center" }
-        },
-          /*#__PURE__*/React.createElement("div", { style: { fontSize: 10, color: "#DC2626", fontWeight: 700 } }, "PROTEIN"),
-          /*#__PURE__*/React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "#991B1B" } }, effectiveProtein + "g"),
-          /*#__PURE__*/React.createElement("div", { style: { fontSize: 9.5, color: "#6B7280" } }, "/ " + ((goals && goals.protein) || 175) + "g")
-        ),
-        /*#__PURE__*/React.createElement("div", {
-          style: { background: "#FFFBEB", borderRadius: 10, padding: 8, textAlign: "center" }
-        },
-          /*#__PURE__*/React.createElement("div", { style: { fontSize: 10, color: "#D97706", fontWeight: 700 } }, "FAT"),
-          /*#__PURE__*/React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "#92400E" } }, effectiveFat + "g"),
-          /*#__PURE__*/React.createElement("div", { style: { fontSize: 9.5, color: "#6B7280" } }, "/ " + ((goals && goals.fat) || 75) + "g")
-        )
       )
     )
   );
